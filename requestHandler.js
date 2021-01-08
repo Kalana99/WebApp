@@ -6,7 +6,7 @@ module.exports = function(app){
 let getRequests = function(app){
 
     app.get('/home', function(req,res){
-        res.sendFile(__dirname + '/public/test.html');
+        res.sendFile(__dirname + '/public/login.html');
     });
 
     app.get('/', function(req,res){
