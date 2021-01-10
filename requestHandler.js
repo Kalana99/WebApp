@@ -12,7 +12,7 @@ let User = require('./models/User');
 let getRequests = function(app){
 
     app.get('/home', function(req,res){
-        res.render('login');
+        res.render('login', { title: 'Log in' });
     });
 
     app.get('/', function(req,res){
@@ -20,7 +20,7 @@ let getRequests = function(app){
     });
 
     app.get('/signup', function(req,res){
-        res.render('SignUp');
+        res.render('SignUp', { title: 'Sign Up' });
     });
 }
 

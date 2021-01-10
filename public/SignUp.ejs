@@ -1,77 +1,89 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Sign Up</title>
-    </head>
-    <body>
+
+    <%- include('./assets/partials/head.ejs') %> 
+    
+    <body class="content">
         <div>
-            <h1>Sign Up</h1>
+
+            <h1 name="head_1">Sign Up</h1>
+
             <form action="/home" method="POST">
+
                 <b>Full Name :</b>
                 <br/>
-                <input type="text" name="name"  placeholder="Enter your full name">
+                <input type="text" name="name" placeholder="Enter your full name">
                 <br/><br/>
+
                 <b>Index Number : </b>
                 <br/>
                 <input type="text" name="indexNumber" placeholder="Enter your index number">
                 <br/><br/>
+
                 <b>Email Address : </b>
                 <br/>
-                <input type="email" name="email"  placeholder="Enter your email">
+                <input type="email" name="email" placeholder="Enter your email">
                 <br/><br/>
+
                 <b>Birthday : </b>
                 <br/>
   				<input type="date" id="birthday" name="birthday">
-  				<br/><br/>
-  				<b>Gender :</b>
                 <br/>
-  				<input type="radio" name="gender" value="male">
-                    <label for="male">Male</label>
-                <input type="radio" name="gender" value="female">
+                <br/>
+                <section class="gender">
+                    <input type="radio" name="gender" value="male">
+                    <label for="male">Male</lab
+                        el>
+                    <input type="radio" name="gender" value="female">
                     <label for="female">Female</label>
+                </section>
+
                 <br><br>
+
                 <b>Telephone Number : </b>
                 <br/>
-                <input type="text" name="phone" placeholder="Add your Telephone number">
+                <input type="text" name="telephone" placeholder="Add your Telephone number">
                 <br/><br/>
+
                 <b>Password :</b>
                 <br/>
-                <input type="password" name="password"  placeholder="Enter your password">
+                <input type="password" name="password" placeholder="Enter your password">
                 <br/><br/>
+
                 <b>Confirm Password : </b>
                 <br/>
-                <input type="password" name="confirm-password" placeholder="Confirm your password">
+                <input type="password" name="confirmPsw" placeholder="Confirm your password">
                 <br/><br/>
+
                 <b>Student or Staff? :</b>
                 <br/>
-                <input type="radio" name="type" value="student">
+
+                <section class="type">
+                    <input type="radio" name="type" value="student">
                     <label for="Student">Student</label>
-                <input type="radio" name="type" value="staff">
+                    <input type="radio" name="type" value="staff">
                     <label for="Staff">Staff</label>
+                </section>
+
+
                 <br/><br/>
+
                 <b>Faculty : </b>
                 <br/>
-                <select name="Faculties" >
+                <select name="Faculty" >
                     <option value="Engineering">Engineering</option>
                     <option value="IT">IT</option>
                     <option value="archi">Architecture</option>
                     <option value="bsn">Business</option>
                 </select>
-                <br/><br/>
-                <button type="submit">Sign Up</button>
-                    
 
-                    
+                <br/><br/>
+
+                <button type="submit">Sign Up</button>
 
             </form> 
 
         </div>
     </body>
-
-
-
-
-
-
 </html>
