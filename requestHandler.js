@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/testaroo", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/StudentRequestSystemDatabase", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
+const database = require('./database');
 
 module.exports = function(app){
     getRequests(app);
@@ -27,11 +28,7 @@ let getRequests = function(app){
 let postRequests = function(app){
 
     app.post('/home', function(req, res){
-        
-        requestObject = req.body;
-        res.body = requestObject;
-
-        res.redirect('/home');
+        database.addUser(req.body);
     });
 
 }
