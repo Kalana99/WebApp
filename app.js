@@ -7,6 +7,10 @@ let User = require('./models/User');
 //requiring the request controller
 let requestController = require('./requestHandler.js');
 
+//register view engine
+app.set('view engine', 'ejs');
+app.set('views', 'public');
+
 //directing the static file requests
 app.use('/css', express.static(__dirname + '/public/assets/css'));
 app.use('/javascript', express.static(__dirname + '/public/assets/javascript'));

@@ -12,7 +12,7 @@ let User = require('./models/User');
 let getRequests = function(app){
 
     app.get('/home', function(req,res){
-        res.sendFile(__dirname + '/public/login.html');
+        res.render('login');
         
     });
 
@@ -21,7 +21,7 @@ let getRequests = function(app){
     });
 
     app.get('/signup', function(req,res){
-        res.sendFile(__dirname + '/public/SignUp.html');
+        res.render('SignUp');
     });
 }
 
