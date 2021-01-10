@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/StudentRequestSystemDatabase", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://oshi:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 const database = require('./database');
 
@@ -11,6 +11,7 @@ module.exports = function(app){
 let User = require('./models/User');
 
 let getRequests = function(app){
+
 
     app.get('/home', function(req,res){
         res.render('login', { title: 'Log in' });
