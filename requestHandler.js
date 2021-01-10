@@ -13,7 +13,6 @@ let getRequests = function(app){
 
     app.get('/home', function(req,res){
         res.render('login');
-        
     });
 
     app.get('/', function(req,res){
@@ -27,6 +26,12 @@ let getRequests = function(app){
 
 let postRequests = function(app){
 
-    
+    app.post('/home', function(req, res){
+        
+        requestObject = req.body;
+        res.body = requestObject;
+
+        res.redirect('/home');
+    });
 
 }

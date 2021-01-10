@@ -7,23 +7,22 @@
     <body>
         <div>
             <h1>Sign Up</h1>
-            <form>
+            <form action="/home" method="POST">
                 <b>Full Name :</b>
                 <br/>
-                <input type="text"  placeholder="Enter your full name">
+                <input type="text" name="name"  placeholder="Enter your full name">
                 <br/><br/>
                 <b>Index Number : </b>
                 <br/>
-                <input type="text" placeholder="Enter your index number">
+                <input type="text" name="indexNumber" placeholder="Enter your index number">
                 <br/><br/>
                 <b>Email Address : </b>
                 <br/>
-                <input type="email"  placeholder="Enter your email">
+                <input type="email" name="email"  placeholder="Enter your email">
                 <br/><br/>
                 <b>Birthday : </b>
                 <br/>
   				<input type="date" id="birthday" name="birthday">
-  				<input type="submit">
   				<br/><br/>
   				<b>Gender :</b>
                 <br/>
@@ -34,21 +33,21 @@
                 <br><br>
                 <b>Telephone Number : </b>
                 <br/>
-                <input type="text" placeholder="Add your Telephone number">
+                <input type="text" name="phone" placeholder="Add your Telephone number">
                 <br/><br/>
                 <b>Password :</b>
                 <br/>
-                <input type="password"  placeholder="Enter your password">
+                <input type="password" name="password"  placeholder="Enter your password">
                 <br/><br/>
                 <b>Confirm Password : </b>
                 <br/>
-                <input type="password" placeholder="Confirm your password">
+                <input type="password" name="confirm-password" placeholder="Confirm your password">
                 <br/><br/>
                 <b>Student or Staff? :</b>
                 <br/>
-                <input type="radio" name="fac" value="student">
+                <input type="radio" name="type" value="student">
                     <label for="Student">Student</label>
-                <input type="radio" name="fac" value="staff">
+                <input type="radio" name="type" value="staff">
                     <label for="Staff">Staff</label>
                 <br/><br/>
                 <b>Faculty : </b>
@@ -60,7 +59,7 @@
                     <option value="bsn">Business</option>
                 </select>
                 <br/><br/>
-                <button type="button">Sign Up</button>
+                <button type="submit">Sign Up</button>
                     
 
                     
