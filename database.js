@@ -1,7 +1,8 @@
 //Connecting to the database
 let mongoose = require('mongoose');
+const User = require('./models/User');
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/testaroo", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/StudentRequestSystemDatabase", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 let dropCollection = function(collection){
@@ -20,12 +21,18 @@ let find = function(collection, query){
     return db.collection(collection).find(query);
 }
 
+let addUser = function(user){
+    let tempUser = new User(user);
+    tempUser.save();
+};
+
 
 let functions = {
     dropCollection: dropCollection,
     updateOne: updateOne,
     updateMany: updateMany,
-    find: find
+    find: find,
+    addUser: addUser
 };
 
 module.exports = functions;
