@@ -13,22 +13,22 @@
 
                 <b>Full Name :</b>
                 <br/>
-                <input type="text" name="name" placeholder="Enter your full name">
+                <input type="text" name="name" placeholder="Enter your full name" required>
                 <br/><br/>
 
                 <b>Index Number : </b>
                 <br/>
-                <input type="text" name="indexNumber" placeholder="Enter your index number">
+                <input type="text" name="indexNumber" placeholder="Enter your index number" required>
                 <br/><br/>
 
                 <b>Email Address : </b>
                 <br/>
-                <input type="email" name="email" placeholder="Enter your email">
+                <input type="email" name="email" placeholder="Enter your email" required>
                 <br/><br/>
 
                 <b>Birthday : </b>
                 <br/>
-  				<input type="date" id="birthday" name="birthday">
+  				<input type="date" id="birthday" name="birthday" required>
                 <br/>
                 <br/>
                 <section class="gender">
@@ -43,17 +43,17 @@
 
                 <b>Telephone Number : </b>
                 <br/>
-                <input type="text" name="telephone" placeholder="Add your Telephone number">
+                <input type="text" name="telephone" placeholder="Add your Telephone number" required>
                 <br/><br/>
 
                 <b>Password :</b>
                 <br/>
-                <input type="password" name="password" placeholder="Enter your password">
+                <input type="password" name="password" id="psw" placeholder="Enter your password" required>
                 <br/><br/>
 
                 <b>Confirm Password : </b>
                 <br/>
-                <input type="password" name="confirmPsw" placeholder="Confirm your password">
+                <input type="password" name="confirmPsw" id="c_psw" placeholder="Confirm your password" required>
                 <br/><br/>
 
                 <b>Student or Staff? :</b>
@@ -85,5 +85,6 @@
             </form> 
 
         </div>
+        <script src="validation.js"></script>
     </body>
 </html>
