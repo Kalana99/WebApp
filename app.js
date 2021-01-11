@@ -29,11 +29,6 @@ mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentReq
         app.listen(3000); 
         console.log('You are listening to port 3000'); 
         requestController(app);
-        let user = new User({
-            name: 'oshanath', 
-            index: 'asd'
-        });
-        user.save();
     })
     .catch((err) => console.log(err));
 

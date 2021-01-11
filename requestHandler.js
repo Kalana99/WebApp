@@ -19,6 +19,7 @@ let getRequests = function(app){
 
     app.get('/', function(req,res){
         res.redirect('/home');
+        
     });
 
     app.get('/signup', function(req,res){
