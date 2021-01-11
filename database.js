@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 const User = require('./models/User');
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://oshi:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 let dropCollection = function(collection){

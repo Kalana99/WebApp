@@ -24,7 +24,7 @@ let mongoose = require('mongoose');
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 let local = "mongodb://localhost/StudentRequestSystemDatabase";
-mongoose.connect("mongodb+srv://oshi:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
         app.listen(3000); 
         console.log('You are listening to port 3000'); 

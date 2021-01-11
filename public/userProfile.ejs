@@ -1,0 +1,48 @@
+<html lang="en">
+
+<%- include('./assets/partials/head.ejs') %>
+
+<body>
+    <div class="main-content">
+        <div class="nav">
+            <section class="profile">
+                <!-- profile image -->
+                <header>
+                    <img src="" alt="profile_img">
+                    <br>
+                    <a href="">log out</a>
+                </header>
+                <!-- profile name -->
+                <h1>THARUKA E A A</h1>
+                <hr>
+            </section>
+            <nav class="navigation">
+                <!-- navigation -->
+                <a href="/home">Home</a>
+                <a href="/settings">Settings</a>
+                <a href="/notifications">Notifications</a>
+                 
+            </nav>
+            <hr>
+        </div>
+    
+        <!-- main body content -->
+        <div class="content">
+            <button class="open-button" onclick="openForm(0)">ADD/DROP Requests</button>
+            <%- include('./assets/partials/popupForm.ejs') %>
+            <br><br>
+
+            <button class="open-button" onclick="openForm(1)">Submitting Requests</button>
+            <%- include('./assets/partials/popupForm.ejs') %>
+            <br><br>
+
+            <button class="open-button" onclick="openForm(2)">Repeat Exam Requests</button>
+            <%- include('./assets/partials/popupForm.ejs') %>
+            <br><br>
+        </div>
+    </div>
+
+    <%- include('./assets/partials/footer.ejs') %>
+    <script src="/javascript/popupForm.js"></script>
+</body>
+</html>
