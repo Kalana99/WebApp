@@ -30,10 +30,6 @@ let getRequests = function(app){
     app.get('/userprofile', function(req,res){
         res.render('userProfile', { title: 'Sign Up' });
     });
-
-    app.get('/sendmail', function(req,res){
-        mail('oshanath.19@cse.mrt.ac.lk', 'test');
-    });
 }
 
 let postRequests = function(app){
