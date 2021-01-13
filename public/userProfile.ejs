@@ -3,46 +3,61 @@
 <%- include('./assets/partials/head.ejs') %>
 
 <body>
-    <div class="main-content">
-        <div class="nav">
-            <section class="profile">
-                <!-- profile image -->
-                <header>
-                    <img src="" alt="profile_img">
-                    <br>
-                    <a href="">log out</a>
-                </header>
-                <!-- profile name -->
-                <h1>THARUKA E A A</h1>
-                <hr>
-            </section>
-            <nav class="navigation">
-                <!-- navigation -->
-                <a href="/home">Home</a>
-                <a href="/settings">Settings</a>
-                <a href="/notifications">Notifications</a>
-                 
-            </nav>
-            <hr>
-        </div>
-    
-        <!-- main body content -->
-        <div class="content">
-            <button class="open-button" onclick="openForm(0)">ADD/DROP Requests</button>
-            <%- include('./assets/partials/popupForm.ejs') %>
-            <br><br>
+    <div class="container">
+        <header>
+          <div class="home-icon">
+            <!-- <a href="/home" title="switcher">
+                <img src="#" alt="home-logo">
+            </a> -->
+          </div>
+        </header>
+        <main>
+          <div class="row">
+            <div class="profile-div">
+                <div class="photo">
+                    <img class="profile-pic" src="https://images.pexels.com/photos/1804796/pexels-photo-1804796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                </div>
+                <h4 class="name">THARUKA E A A</h4>
+                <p class="info">STUDENT</p>
+                <p class="info">190623V</p>
+                <p class="info">akash.19@cse.mrt.ac.lk</p>
+                <p class="info">071 569 4899</p>
+            </div>
+            <div class="navigation">
+                <ul class="nav">
+                    <li>Settings</li>
+                    <li>Notifications</li>
+                    <li>Log out</li>
+                </ul>
+                <div class="request-tiles">
 
-            <button class="open-button" onclick="openForm(1)">Submitting Requests</button>
-            <%- include('./assets/partials/popupForm.ejs') %>
-            <br><br>
+                    <button class="button" onclick="openForm(0)">
+                        <p class="button__text">Add/Drop Requests</p>
+                    </button>
+                    
+                    <%- include('./assets/partials/popupForm.ejs') %>
 
-            <button class="open-button" onclick="openForm(2)">Repeat Exam Requests</button>
-            <%- include('./assets/partials/popupForm.ejs') %>
-            <br><br>
-        </div>
+                    <button class="button" onclick="openForm(1)">
+                        <p class="button__text">Submission Deadline</p>
+                    </button>
+                    
+                    <%- include('./assets/partials/popupForm.ejs') %>
+
+                    <button class="button" onclick="openForm(2)">
+                        <p class="button__text">Repeat Exams</p>
+                    </button>
+                    
+                    <%- include('./assets/partials/popupForm.ejs') %>
+
+                </div>
+            </div>
+          </div>
+          </main>
+        </main>
     </div>
 
     <%- include('./assets/partials/footer.ejs') %>
+
     <script src="/javascript/popupForm.js"></script>
 </body>
 </html>
