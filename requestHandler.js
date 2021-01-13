@@ -32,7 +32,7 @@ let getRequests = function(app){
     });
 
     app.get('/sendmail', function(req,res){
-        mail('oshanath.19@cse.mrt.ac.lk');
+        mail('oshanath.19@cse.mrt.ac.lk', 'test');
     });
 }
 

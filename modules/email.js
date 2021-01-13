@@ -12,14 +12,18 @@ var transporter = nodemailer.createTransport({
 
   module.exports = function(clientEmail, type){
 
-    let data = {
-        from: serverEmail,
-        to: clientEmail,
-        subject: 'new mail',
-        text: 'That was easy!'
+    let data = {};
+
+    if(type === 'test'){
+      data = {
+          from: serverEmail,
+          to: clientEmail,
+          subject: 'Test',
+          text: 'this is a test email'
+      }
     }
 
-    transporter.sendMail(, function(error, info){
+    transporter.sendMail(data , function(error, info){
         if (error) {
           console.log(error);
         } else {
