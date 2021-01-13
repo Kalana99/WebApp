@@ -9,21 +9,21 @@
 
             <h1 name="head_1">Sign Up</h1>
 
-            <form action="/home" method="POST">
+            <form onsubmit="return validateSubmit()">
 
                 <b>Full Name :</b>
                 <br/>
-                <input type="text" name="name" placeholder="Enter your full name" required>
+                <input type="text" name="name" placeholder="Enter your full name" id="name" required>
                 <br/><br/>
 
                 <b>Index Number : </b>
                 <br/>
-                <input type="text" name="index" placeholder="Enter your index number">
+                <input type="text" name="index" placeholder="Enter your index number" id="index" required>
                 <br/><br/>
 
                 <b>Email Address : </b>
                 <br/>
-                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="email" name="email" placeholder="Enter your email" id="email" required>
                 <br/><br/>
 
                 <b>Birthday : </b>
@@ -32,10 +32,9 @@
                 <br/>
                 <br/>
                 <section class="gender">
-                    <input type="radio" name="gender" value="male">
-                    <label for="male">Male</lab
-                        el>
-                    <input type="radio" name="gender" value="female">
+                    <input type="radio" name="gender" value="male" id="male" required>
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" value="female" id="female" required>
                     <label for="female">Female</label>
                 </section>
 
@@ -43,7 +42,7 @@
 
                 <b>Telephone Number : </b>
                 <br/>
-                <input type="text" name="phone" placeholder="Add your Telephone number" required>
+                <input type="text" name="phone" placeholder="Add your Telephone number" id="phone" required>
                 <br/><br/>
 
                 <b>Password :</b>
@@ -60,9 +59,9 @@
                 <br/>
 
                 <section class="type">
-                    <input type="radio" name="type" value="student">
+                    <input type="radio" name="type" value="student" id="studenet" required>
                     <label for="Student">Student</label>
-                    <input type="radio" name="type" value="staff">
+                    <input type="radio" name="type" value="staff" id="staff" required>
                     <label for="Staff">Staff</label>
                 </section>
 
@@ -71,7 +70,7 @@
 
                 <b>Faculty : </b>
                 <br/>
-                <select name="faculty" >
+                <select name="faculty" id="faculty">
                     <option value="Engineering">Engineering</option>
                     <option value="IT">IT</option>
                     <option value="archi">Architecture</option>
@@ -85,6 +84,6 @@
             </form> 
 
         </div>
-        <script src="validation.js"></script>
+        <script src="/javascript/validation.js"></script>
     </body>
 </html>
