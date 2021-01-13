@@ -9,37 +9,62 @@
 //     }
 //   }
 
-// let validateSubmit = () => {
-//     console.log('success');
-//     let name, index, email, birthday, phone, password, c_password, type;
-//     let gender;
-//     let fac;
-//     if (document.getElementById('male').checked) {
-//         gender = document.getElementById('male').value;
-//     }
-//     else{
-//         gender = document.getElementById('female').value;
-//     }
 
-//     // if (document.getElementById('student').checked) {
-//     //     type = document.getElementById('student').value;
-//     // }
-//     // else{
-//     //     type = document.getElementById('staff').value;
-//     // }
+let validateSubmit = function(){
+    let name = document.getElementById('name').value;
+    let index = document.getElementById('index').value;
+    let email = document.getElementById('email').value;
+    let birthday = document.getElementById('birthday').value;
+    let phone = document.getElementById('phone').value;
+    let password = document.getElementById('password').value;
+    let faculty = document.getElementById('faculty').value;
 
-//     // name = document.getElementById('name').value;
-//     // index = document.getElementById('index').value;
-//     // email = document.getElementById('email').value;
-//     // birthday = document.getElementById('birthday').value;
-//     // phone = document.getElementById('phone').value;
-//     // password = document.getElementById('psw').value;
-//     // // c_password = document.getElementById('c_psw').value;
-//     fac = document.getElementById('fac').value;
-//     console.log(fac);
+    if (document.getElementById('male').checked) {
+        gender = 'male';
+    }
+    else{
+        gender = 'female';
+    }
 
-//     // let object = { name, index, email, birthday, phone, password};
-//     // console.log(object);
+    if (document.getElementById('student').checked) {
+        type = 'student';
+    }
+    else{
+        type = 'staff';
+    }
 
-//     return false;
-// }
+    data = {
+        name: name, index: index, email: email, birthday: birthday, phone: phone,
+        password: password, faculty: faculty, gender: gender, type: type
+    };
+
+    fetch('/signupvalidate', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+    if(data.email === false && data.index === true){
+        alert('email exists');
+    }
+    else if(data.index === false && data.email === true){
+        alert('index exists');
+    }
+    else if(data.email === false && data.index === false){
+        alert('index and exist');
+    }
+    else{
+        alert('saved');
+        window.open('/login');
+    }
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+
+return false;
+
+};

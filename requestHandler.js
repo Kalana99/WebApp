@@ -10,23 +10,27 @@ module.exports = function(app){
     postRequests(app);
 }
 let User = require('./models/User');
+const { response } = require('express');
 
 let getRequests = function(app){
 
-
+    //getting the login html page
     app.get('/login', function(req,res){
         res.render('login', { title: 'Log in' });
     });
 
+    //home (9)same as login)
     app.get('/', function(req,res){
         res.redirect('/login');
         
     });
 
+    //getting the sign up html page
     app.get('/signup', function(req,res){
         res.render('SignUp', { title: 'Sign Up' });
     });
 
+    //getting the user profile html page
     app.get('/userprofile', function(req,res){
         res.render('userProfile', { title: 'Sign Up' });
     });
@@ -34,17 +38,29 @@ let getRequests = function(app){
 
 let postRequests = function(app){
 
-    app.post('/home', function(req, res){
-        database.addUser(req.body);
-        res.redirect('/login');
-        
-    });
+    //validate the sign up form
+    app.post('/signupvalidate', function(req, res){
 
-    app.post('/login', function(req, res){
-        db.collection('users').findOne({"email": req.body.email}).then(user => {
-            res.render('userProfile', user);
+        let response = {email: true, index: true};
+        
+        let result = db.collection('users').findOne({email: req.body.email}).then(function(object){
+            if(object != null){
+                response.email = false;
+            }
+
+            let result2 = db.collection('users').findOne({index: req.body.index}).then(function(object2){
+                if(object2 != null){
+                    response.index = false;
+                }
+
+                if(response.email === true && response.index === true){
+                    database.addUser(req.body);
+                }
+                res.json(response);
+            });
         });
         
     });
+
 
 }
