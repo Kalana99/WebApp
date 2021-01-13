@@ -41,7 +41,7 @@ let postRequests = function(app){
 
     app.post('/login', function(req, res){
         db.collection('users').findOne({"email": req.body.email}).then(user => {
-            res.render('userProfile', {title: 'User Profile', user});
+            res.render('userProfile', user);
         });
         
     });
