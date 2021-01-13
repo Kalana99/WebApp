@@ -35,8 +35,13 @@ let getRequests = function(app){
 let postRequests = function(app){
 
     app.post('/home', function(req, res){
-        database.addUser(req.body);
-        res.redirect('/login');
+        if(egseh){
+            database.addUser(req.body);
+            res.redirect('/login');
+        }
+        else{
+            {ok: false, fault: "index"}
+        }
     });
 
     app.post('/login', function(req, res){
