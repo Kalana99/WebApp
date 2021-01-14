@@ -18,6 +18,14 @@ const setSuccess = (input) => {
     formControl.className = 'form-control success';
 }
 
+const removeError = (input) => {
+    let formControl = input.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    small.innerText = "";
+    formControl.className = 'form-control';
+}
+
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -41,6 +49,7 @@ let serverSideValidateSubmit = function(){
         .then(data => {
             if(data.fault === 'email'){
                 setError(email, 'Email does not exist');
+                removeError(password);
             }
             else if(data.fault === 'password'){
                 setSuccess(email);
@@ -48,6 +57,7 @@ let serverSideValidateSubmit = function(){
             }
             else if(data.fault === 'verify'){
                 setSuccess(password);
+                setError(email, 'Please verify your email');
             }
             else{
                 window.location.href = ('/userprofile/' + email.value);
