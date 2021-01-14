@@ -12,7 +12,8 @@ const userSchema = new Schema({
     "password": String,
     "type": String,
     "faculty": String,
-    "department": String
+    "department": String,
+    "verified": Boolean
 });
 
 const User = mongoose.model('User', userSchema);
