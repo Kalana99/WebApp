@@ -1,14 +1,4 @@
-// var check = function() {
-//     if (document.getElementById('psw').value == document.getElementById('c_psw').value) {
-//         document.getElementById('message').style.color = 'green';
-//         document.getElementById('message').innerHTML = 'matching';   
-//     } 
-//     else {
-//         document.getElementById('message').style.color = 'red';
-//         document.getElementById('message').innerHTML = 'not matching';
-//     }
-//   }
-
+//for clientside signup validation
 let form = document.getElementById('form');
 let username = document.getElementById('username');
 let index = document.getElementById('index');
@@ -16,6 +6,13 @@ let email = document.getElementById('email');
 let phone = document.getElementById('phone');
 let password = document.getElementById('password');
 let c_password = document.getElementById('c_psw');
+let birthday = document.getElementById('birthday');
+let male = document.getElementById('male');
+let female = document.getElementById('female');
+let student = document.getElementById('student')
+let staff = document.getElementById('staff');
+
+
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -23,7 +20,7 @@ form.addEventListener('submit', (event) => {
     checkInputs();
 });
 
-function checkInputs(){
+const checkInputs = () => {
     let isCorrect = true;
     //get the values from the inputs
     let userNameValue = username.value.trim();
@@ -32,6 +29,11 @@ function checkInputs(){
     let phoneValue = phone.value.trim();
     let passwordValue = password.value.trim();
     let confirmPasswordValue = c_password.value.trim();
+    let birthdayValue = birthday.value;
+    let isMale = male.checked;
+    let isFemale = female.checked;
+    let isStudent = student.checked;
+    let isStaff = staff.checked;
 
     if (userNameValue === ''){
         //show error
@@ -41,16 +43,96 @@ function checkInputs(){
     }
     else{
         //add success class
-        // setSuccess(username);
+        setSuccess(username);
     }
 
-    //last line
+    if (indexValue === ''){
+        setError(index, 'index cannot be blank');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(index);
+    }
+
+    if (emailValue === ''){
+        setError(email, 'email cannot be blank');
+        isCorrect = false;
+    }
+    else if (!isEmail(emailValue)){
+        setError(email, 'email is not valid');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(email)
+    }
+
+    if (phoneValue === ''){
+        setError(phone, 'telephone cannot be blank');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(phone);
+    }
+
+    if (passwordValue === ''){
+        setError(password, 'password cannot be blank');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(password);
+    }
+
+    //check if the confirm and psw are the same
+    if (confirmPasswordValue === ''){
+        setError(c_password, 'you must confirm the password');
+        isCorrect = false;
+    }
+    else if (passwordValue !== confirmPasswordValue){
+        setError(c_password, 'password mismatch');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(c_password);
+    }
+
+    if (birthdayValue === ''){
+        setError(birthday, 'birthday cannot be blank');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(birthday);
+    }
+
+    if (!(isMale || isFemale)){
+        setError(male, 'choose a gender');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(male);
+    }
+
+    if (!(isStudent || isStaff)){
+        setError(student, 'choose an occupation');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(student);
+    }
+
+    //last condition in the function
     if (isCorrect){
         validateSubmit();
     }
 }
 
-function setError(input, message){
+const isEmail = (email) => {
+    //RegExr email validation
+    //no need to understand
+    //reference - https://codepen.io/FlorinPop17/pen/OJJKQeK
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
 
@@ -61,15 +143,22 @@ function setError(input, message){
     formControl.className = 'form-control error';
 }
 
+const setSuccess = (input) => {
+    let formControl = input.parentElement; // .form-control
 
-let validateSubmit = function(){
-    let name = document.getElementById('username').value;
-    let index = document.getElementById('index').value;
-    let email = document.getElementById('email').value;
-    let birthday = document.getElementById('birthday').value;
-    let phone = document.getElementById('phone').value;
-    let password = document.getElementById('password').value;
-    let faculty = document.getElementById('faculty').value;
+    //add success class
+    formControl.className = 'form-control success';
+}
+
+//serverside login validation
+let validateSubmit = () => {
+    let name = document.getElementById('username');
+    let index = document.getElementById('index');
+    let email = document.getElementById('email');
+    let birthday = document.getElementById('birthday');
+    let phone = document.getElementById('phone');
+    let password = document.getElementById('password');
+    let faculty = document.getElementById('faculty');
 
     if (document.getElementById('male').checked) {
         gender = 'male';
@@ -86,8 +175,8 @@ let validateSubmit = function(){
     }
 
     data = {
-        name: name, index: index, email: email, birthday: birthday, phone: phone,
-        password: password, faculty: faculty, gender: gender, type: type
+        name: name.value, index: index.value, email: email.value, birthday: birthday.value, phone: phone.value,
+        password: password.value, faculty: faculty.value, gender: gender.value, type: type.value
     };
 
     fetch('/signupvalidate', {
@@ -100,16 +189,17 @@ let validateSubmit = function(){
     .then(response => response.json())
     .then(data => {
     if(data.email === false && data.index === true){
-        alert('email exists');
+        setError(loginEmail, 'email already exists');
     }
     else if(data.index === false && data.email === true){
-        alert('index exists');
+        setError(loginPassword, 'password does not match');
     }
     else if(data.email === false && data.index === false){
-        alert('index and exist');
+        setError(loginPassword, 'Error');
+        setError(loginEmail, 'Error');
     }
     else{
-        alert('saved');
+        alert('logged in')
         window.open('/login');
     }
     })

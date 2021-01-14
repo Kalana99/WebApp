@@ -52,6 +52,11 @@ body{
     width: 100%;
 }
 
+.form-control input[name="gender"], input[name="type"]{
+    display: inline-block;
+    width: 20px;
+}
+
 .form-control.success input{
     border-color: #2ecc71;
 }
