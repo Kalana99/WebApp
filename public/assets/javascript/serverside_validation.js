@@ -9,6 +9,7 @@
 //     }
 //   }
 
+let clientside_validation = require('./clientside_validation'); 
 
 let validateSubmit = function(){
     let name = document.getElementById('name').value;
@@ -47,14 +48,8 @@ let validateSubmit = function(){
     })
     .then(response => response.json())
     .then(data => {
-    if(data.email === false && data.index === true){
-        alert('email exists');
-    }
-    else if(data.index === false && data.email === true){
-        alert('index exists');
-    }
-    else if(data.email === false && data.index === false){
-        alert('index and exist');
+    if(data.email === false || data.index === false){
+        clientside_validation.serverSideValidateSignup(data);
     }
     else{
         alert('saved');

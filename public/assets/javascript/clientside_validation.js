@@ -32,5 +32,17 @@ function checkInputs(){
 }
 
 let serverSideValidateSignup = function(data){
-    
+    if(data.email === false && data.index === true){
+        alert('email exists');
+    }
+    else if(data.index === false && data.email === true){
+        alert('index exists');
+    }
+    else if(data.email === false && data.index === false){
+        alert('index and exist');
+    }
+};
+
+module.exports = {
+    serverSideValidateSignup: serverSideValidateSignup
 };
