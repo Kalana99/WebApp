@@ -31,7 +31,7 @@ let getRequests = function(app){
     });
 
     //getting the user profile html page
-    app.get('/userprofile', function(req,res){
+    app.get('/userprofile/:email', function(req,res){
         res.render('userProfile', { title: 'Sign Up' });
     });
 }
@@ -63,4 +63,21 @@ let postRequests = function(app){
     });
 
 
+    app.post('/loginvalidate', function(req, res){
+
+        let profile = db.collection('users').findOne({email: req.body.email}).then(profile => {
+            if(profile === null){
+                res.json({fault: 'email'});
+            }
+            else{
+                if(req.body.password != profile.password){
+                    res.json({fault: 'password'});
+                }
+                else{
+                    res.render('userProfile', profile);
+                }
+            }
+        });
+
+    });
 }

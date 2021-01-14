@@ -110,7 +110,7 @@ let validateSubmit = function(){
     }
     else{
         alert('saved');
-        window.open('/login');
+        window.location.href = '/login';
     }
     })
     .catch((error) => {
