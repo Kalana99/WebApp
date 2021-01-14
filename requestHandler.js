@@ -19,7 +19,7 @@ let getRequests = function(app){
 
     //getting the login html page
     app.get('/login', function(req,res){
-        res.render('login', { title: 'Log in' });
+        res.render('login');
     });
 
     //home (9)same as login)

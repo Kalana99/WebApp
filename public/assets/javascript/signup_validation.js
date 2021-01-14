@@ -50,9 +50,6 @@ const checkInputs = () => {
         setError(index, 'index cannot be blank');
         isCorrect = false;
     }
-    else{
-        setSuccess(index);
-    }
 
     if (emailValue === ''){
         setError(email, 'email cannot be blank');
@@ -61,9 +58,6 @@ const checkInputs = () => {
     else if (!isEmail(emailValue)){
         setError(email, 'email is not valid');
         isCorrect = false;
-    }
-    else{
-        setSuccess(email)
     }
 
     if (phoneValue === ''){
@@ -188,18 +182,19 @@ let validateSubmit = () => {
     })
     .then(response => response.json())
     .then(data => {
-    if(data.email === false && data.index === true){
-        setError(loginEmail, 'email already exists');
-    }
-    else if(data.index === false && data.email === true){
-        setError(loginPassword, 'password does not match');
-    }
-    else if(data.email === false && data.index === false){
-        setError(loginPassword, 'Error');
-        setError(loginEmail, 'Error');
+    if(data.email === false){
+        setError(email, 'email already exists');
     }
     else{
-        alert('saved');
+        setSuccess(email);
+    }
+    if(data.index === false){
+        setError(index, 'index already exists');
+    }
+    else{
+        setSuccess(index);
+    }
+    if (data.index === true && data.email === true){
         window.location.href = '/login';
     }
     })

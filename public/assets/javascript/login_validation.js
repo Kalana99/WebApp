@@ -1,5 +1,23 @@
 let form = document.getElementById('form');
 
+const setError = (input, message) => {
+    let formControl = input.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    //add error message inside small
+    small.innerText = message;
+
+    //add error class
+    formControl.className = 'form-control error';
+}
+
+const setSuccess = (input) => {
+    let formControl = input.parentElement; // .form-control
+
+    //add success class
+    formControl.className = 'form-control success';
+}
+
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -7,10 +25,10 @@ form.addEventListener('submit', (event) => {
 });
 
 let serverSideValidateSubmit = function(){
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
 
-    data = {email: email, password: password};
+    data = {email: email.value, password: password.value};
 
     fetch('/loginvalidate', {
         method: 'POST',
@@ -22,16 +40,17 @@ let serverSideValidateSubmit = function(){
         .then(response => response.json())
         .then(data => {
             if(data.fault === 'email'){
-                alert('Your email is not in database');
+                setError(email, 'Email does not exist');
             }
             else if(data.fault === 'password'){
-                alert('Your password is incorrect');
+                setSuccess(email);
+                setError(password, 'password mismatch');
             }
             else if(data.fault === 'verify'){
-                alert('Please verify your email');
+                setSuccess(password);
             }
             else{
-                window.location.href = ('/userprofile/' + email);
+                window.location.href = ('/userprofile/' + email.value);
             }
         })
         .catch((error) => {
