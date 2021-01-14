@@ -11,7 +11,7 @@
             </div>
             
 
-            <form onsubmit="return validateSubmit()" class="form" id="form">
+            <form class="form" id="form">
                 <div class="form-control">
                     <label>Full Name :</label>
                     <input type="text" name="username" placeholder="Enter your full name" id="username">
@@ -38,16 +38,16 @@
 
                 <div class="form-control">
                     <label>Birthday : </label>
-                    <input type="date" id="birthday" name="birthday" required>
+                    <input type="date" id="birthday" name="birthday">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-control">
-                    <input type="radio" name="gender" value="male" id="male" required>
+                    <input type="radio" name="gender" value="male" id="male">
                     <label for="male">Male</label>
-                    <input type="radio" name="gender" value="female" id="female" required>
+                    <input type="radio" name="gender" value="female" id="female">
                     <label for="female">Female</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -79,9 +79,9 @@
                 </div>
 
                 <div class="form-control">
-                    <input type="radio" name="type" value="student" id="student" required>
+                    <input type="radio" name="type" value="student" id="student">
                     <label for="Student">Student</label>
-                    <input type="radio" name="type" value="staff" id="staff" required>
+                    <input type="radio" name="type" value="staff" id="staff">
                     <label for="Staff">Staff</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -108,5 +108,6 @@
 
         </div>
         <script src="/javascript/validation.js"></script>
+        <script src="/javascript/clientside_validation.js"></script>
     </body>
 </html>

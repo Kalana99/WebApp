@@ -1,5 +1,5 @@
 let form = document.getElementById('form');
-let name = document.getElementById('name');
+let username = document.getElementById('username');
 let index = document.getElementById('index');
 let email = document.getElementById('email');
 let phone = document.getElementById('phone');
@@ -14,19 +14,31 @@ form.addEventListener('submit', (event) => {
 
 function checkInputs(){
     //get the values from the inputs
-    let nameValue = name.value.trim();
+    let userNameValue = username.value.trim();
     let indexValue = index.value.trim();
     let emailValue = email.value.trim();
     let phoneValue = phone.value.trim();
     let passwordValue = password.value.trim();
     let confirmPasswordValue = c_password.value.trim();
 
-    if (nameValue === ''){
+    if (userNameValue === ''){
         //show error
         //add error class
-        setError(name);
+        setError(username, 'Username cannot be blank');
     }
     else{
         //add success class
+        setSuccess(username);
     }
+}
+
+function setError(input, message){
+    let formControl = input.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    //add error message inside small
+    small.innerText = message;
+
+    //add error class
+    formControl.className = 'form-control error';
 }
