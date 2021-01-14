@@ -4,82 +4,105 @@
 
     <%- include('./assets/partials/head.ejs') %> 
     
-    <body class="content">
-        <div>
+    <body class="main-body">
+        <div class="container">
+            <div class="header">
+                <h2>Sign Up</h2>
+            </div>
+            
 
-            <h1 name="head_1">Sign Up</h1>
+            <form onsubmit="return validateSubmit()" class="form" id="form">
+                <div class="form-control">
+                    <label>Full Name :</label>
+                    <input type="text" name="username" placeholder="Enter your full name" id="username">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-            <form onsubmit="return validateSubmit()">
+                <div class="form-control">
+                    <label>Index Number : </label>
+                    <input type="text" name="index" placeholder="Enter your index number" id="index">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Full Name :</b>
-                <br/>
-                <input type="text" name="name" placeholder="Enter your full name" id="name" required>
-                <br/><br/>
+                <div class="form-control">
+                    <label>Email Address : </label>
+                    <input type="email" name="email" placeholder="Enter your email" id="email">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Index Number : </b>
-                <br/>
-                <input type="text" name="index" placeholder="Enter your index number" id="index" required>
-                <br/><br/>
+                <div class="form-control">
+                    <label>Birthday : </label>
+                    <input type="date" id="birthday" name="birthday" required>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Email Address : </b>
-                <br/>
-                <input type="email" name="email" placeholder="Enter your email" id="email" required>
-                <br/><br/>
-
-                <b>Birthday : </b>
-                <br/>
-  				<input type="date" id="birthday" name="birthday" required>
-                <br/>
-                <br/>
-                <section class="gender">
+                <div class="form-control">
                     <input type="radio" name="gender" value="male" id="male" required>
                     <label for="male">Male</label>
                     <input type="radio" name="gender" value="female" id="female" required>
                     <label for="female">Female</label>
-                </section>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <br><br>
+                <div class="form-control">
+                    <label>Telephone Number : </label>
+                    <input type="text" name="phone" placeholder="Add your Telephone number" id="phone">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Telephone Number : </b>
-                <br/>
-                <input type="text" name="phone" placeholder="Add your Telephone number" id="phone" required>
-                <br/><br/>
+                <div class="form-control">
+                    <label>Password :</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Password :</b>
-                <br/>
-                <input type="password" name="password" id="password" placeholder="Enter your password" required>
-                <br/><br/>
+                <div class="form-control">
+                    <label>Confirm Password : </label>
+                    <input type="password" name="confirmPsw" id="c_psw" placeholder="Confirm your password">
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-                <b>Confirm Password : </b>
-                <br/>
-                <input type="password" name="confirmPsw" id="c_psw" placeholder="Confirm your password" required>
-                <br/><br/>
-
-                <b>Student or Staff? :</b>
-                <br/>
-
-                <section class="type">
+                <div class="form-control">
                     <input type="radio" name="type" value="student" id="student" required>
                     <label for="Student">Student</label>
                     <input type="radio" name="type" value="staff" id="staff" required>
                     <label for="Staff">Staff</label>
-                </section>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
+                <div class="form-control">
+                    <label>Faculty : </label>
+                    <select name="faculty" id="faculty">
+                        <option value="Engineering">Engineering</option>
+                        <option value="IT">IT</option>
+                        <option value="archi">Architecture</option>
+                        <option value="bsn">Business</option>
+                    </select>
+                </div>
 
-                <br/><br/>
+                <div class="form-control">
+                    <button type="submit">Sign Up</button>
+                </div>
 
-                <b>Faculty : </b>
-                <br/>
-                <select name="faculty" id="faculty">
-                    <option value="Engineering">Engineering</option>
-                    <option value="IT">IT</option>
-                    <option value="archi">Architecture</option>
-                    <option value="bsn">Business</option>
-                </select>
-
-                <br/><br/>
-
-                <button type="submit">Sign Up</button>
+                
 
             </form> 
 
