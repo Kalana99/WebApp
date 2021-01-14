@@ -30,3 +30,7 @@ function checkInputs(){
         //add success class
     }
 }
+
+let serverSideValidateSignup = function(data){
+    
+};
