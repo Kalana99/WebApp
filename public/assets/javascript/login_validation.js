@@ -3,8 +3,7 @@ let form = document.getElementById('form');
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    window.location.href = '/userprofile/123';
-    //serverSideValidateSubmit();
+    serverSideValidateSubmit();
 });
 
 let serverSideValidateSubmit = function(){
@@ -29,7 +28,7 @@ let serverSideValidateSubmit = function(){
                 alert('Your password is incorrect');
             }
             else{
-                
+                window.location.href = ('/userprofile/' + email);
             }
         })
         .catch((error) => {
