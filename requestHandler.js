@@ -11,6 +11,7 @@ module.exports = function(app){
 }
 let User = require('./models/User');
 const { response } = require('express');
+const e = require('express');
 
 let getRequests = function(app){
 
@@ -31,8 +32,14 @@ let getRequests = function(app){
     });
 
     //getting the user profile html page
-    app.get('/userprofile', function(req,res){
-        res.render('userProfile', { title: 'Sign Up' });
+    app.get('/userprofile/:email', function(req,res){
+
+        let email = req.params.email;
+        console.log('email = ', email);
+
+        db.collection('users').findOne({email: email}).then(profile => {
+            res.render('userProfile', profile);
+        });
     });
 }
 
@@ -63,4 +70,21 @@ let postRequests = function(app){
     });
 
 
+    app.post('/loginvalidate', function(req, res){
+
+        let profile = db.collection('users').findOne({email: req.body.email}).then(profile => {
+            if(profile === null){
+                res.json({fault: 'email'});
+            }
+            else{
+                if(req.body.password != profile.password){
+                    res.json({fault: 'password'});
+                }
+                else{
+                    res.json({fault: 'none'});
+                }
+            }
+        });
+
+    });
 }

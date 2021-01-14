@@ -199,8 +199,8 @@ let validateSubmit = () => {
         setError(loginEmail, 'Error');
     }
     else{
-        alert('logged in')
-        window.open('/login');
+        alert('saved');
+        window.location.href = '/login';
     }
     })
     .catch((error) => {
