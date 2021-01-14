@@ -11,11 +11,11 @@ let dropCollection = function(collection){
 };
 
 let updateOne = function(collection, criteria, submission){
-    db.collection(collection).users.updateOne(criteria, {$set: submission});
+    db.collection(collection).updateOne(criteria, {$set: submission});
 };
 
 let updateMany = function(collection, criteria, submission){
-    db.collection(collection).users.updateMany(criteria, {$set: submission});
+    db.collection(collection).updateMany(criteria, {$set: submission});
 };
 
 let find = function(collection, query){
@@ -25,6 +25,7 @@ let find = function(collection, query){
 let addUser = function(user){
     let tempUser = new User(user);
     tempUser.save();
+    return tempUser._id;
 };
 
 

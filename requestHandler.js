@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let mongodb = require('mongodb');
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -12,6 +13,7 @@ module.exports = function(app){
 let User = require('./models/User');
 const { response } = require('express');
 const e = require('express');
+const email = require('./modules/email');
 
 let getRequests = function(app){
 
@@ -38,8 +40,16 @@ let getRequests = function(app){
         console.log('email = ', email);
 
         db.collection('users').findOne({email: email}).then(profile => {
+            console.log(profile);
             res.render('userProfile', profile);
         });
+    });
+
+    app.get('/verify/:id', function(req, res){
+        let s_id = req.params.id;
+        let o_id = new mongodb.ObjectID(s_id)
+        database.updateOne('users', {_id: o_id }, {verified: true});
+        
     });
 }
 
@@ -59,9 +69,26 @@ let postRequests = function(app){
                 if(object2 != null){
                     response.index = false;
                 }
-
+                
+                let data = req.body;
+                console.log(data);
+            
                 if(response.email === true && response.index === true){
-                    database.addUser(req.body);
+                    let user = {
+                    name: data.name,
+                    index: data.index,
+                    email: data.email,
+                    birthday: data.birthday,
+                    gender: data.gender,
+                    phone: data.phone,
+                    password: data.password,
+                    type: data.type,
+                    faculty: data.faculty,
+                    department: data.department,
+                    verified: false
+                    };
+                    let id = database.addUser(user);
+                    mail(req.body.email, 'signup', {id: id});
                 }
                 res.json(response);
             });
@@ -79,6 +106,9 @@ let postRequests = function(app){
             else{
                 if(req.body.password != profile.password){
                     res.json({fault: 'password'});
+                }
+                else if(profile.verified === false){
+                    res.json({fault: 'verify'});
                 }
                 else{
                     res.json({fault: 'none'});

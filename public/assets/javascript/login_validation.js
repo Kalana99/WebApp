@@ -27,6 +27,9 @@ let serverSideValidateSubmit = function(){
             else if(data.fault === 'password'){
                 alert('Your password is incorrect');
             }
+            else if(data.fault === 'verify'){
+                alert('Please verify your email');
+            }
             else{
                 window.location.href = ('/userprofile/' + email);
             }
