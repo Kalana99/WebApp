@@ -195,7 +195,7 @@ let validateSubmit = () => {
         setSuccess(index);
     }
     if (data.index === true && data.email === true){
-        window.location.href = '/login';
+        window.location.href = '/verifyemail/' + document.getElementById('email').value;
     }
     })
     .catch((error) => {

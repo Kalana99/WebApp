@@ -20,13 +20,11 @@ let getRequests = function(app){
     //getting the login html page
     app.get('/login', function(req,res){
         res.render('login');
-        // res.render('verified');
     });
 
     //home (9)same as login)
     app.get('/', function(req,res){
         res.redirect('/login');
-        
     });
 
     //getting the sign up html page
@@ -50,8 +48,24 @@ let getRequests = function(app){
         let s_id = req.params.id;
         let o_id = new mongodb.ObjectID(s_id)
         database.updateOne('users', {_id: o_id }, {verified: true});
-        
+        res.render('verified');
     });
+
+    app.get('/verifyemail/:email', function(req, res){
+        let email = req.params.email;
+        res.render('verify', {email});
+    });
+
+    app.get('/sendemailagain/:email', function(req, res){
+        let useremail = req.params.email;
+        console.log(useremail);
+        db.collection('users').findOne({email: useremail}).then(result => {
+            email(useremail, 'signup', {id:result._id});
+            res.redirect('/verifyemail/' + useremail);
+        });
+      
+    });
+
 }
 
 let postRequests = function(app){
@@ -86,7 +100,8 @@ let postRequests = function(app){
                     type: data.type,
                     faculty: data.faculty,
                     department: data.department,
-                    verified: false
+                    verified: false,
+                    loggedin: false
                     };
                     let id = database.addUser(user);
                     mail(req.body.email, 'signup', {id: id});
@@ -113,9 +128,16 @@ let postRequests = function(app){
                 }
                 else{
                     res.json({fault: 'none'});
+                    database.updateOne('users', {email: req.body.email}, {loggedin: true});
                 }
             }
         });
 
+    });
+}
+
+let checkLoginStatus = function(email){
+    db.collection('users').findOne({email: email}).then(profile => {
+        return profile.lo
     });
 }
