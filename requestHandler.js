@@ -36,12 +36,19 @@ let getRequests = function(app){
     app.get('/userprofile/:email', function(req,res){
 
         let email = req.params.email;
-        console.log('email = ', email);
 
         db.collection('users').findOne({email: email}).then(profile => {
-            console.log(profile);
-            res.render('userProfile', profile);
+            if(!profile.loggedin){
+                res.redirect('/login');
+            }
+            else{
+                db.collection('users').findOne({email: email}).then(profile => {
+                    console.log(profile);
+                    res.render('userProfile', profile);
+                });
+            }
         });
+        
     });
 
     app.get('/verify/:id', function(req, res){
@@ -133,11 +140,5 @@ let postRequests = function(app){
             }
         });
 
-    });
-}
-
-let checkLoginStatus = function(email){
-    db.collection('users').findOne({email: email}).then(profile => {
-        return profile.lo
     });
 }
