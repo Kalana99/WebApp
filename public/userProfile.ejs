@@ -31,11 +31,25 @@
             </div>
             <div class="navigation">
                 <ul class="nav">
-                    <li>Threads</li>
-                    <li>Notifications</li>
-                    <li>Settings</li>
-                    <li>Log out</li>
+                    <li><a href="#">Threads</a></li>
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li id="logout-popup">Log out</li>
                 </ul>
+                <!-- popup logout window -->
+                <div class="popup-window" id="popup-window">
+                    <div class="header">
+                        <h2>LOG OUT!</h2>
+                    </div>
+                    <div class="confirm-text">
+                        <h3>Log out wennama oneda?</h3>
+                    </div>
+                    <div class="form-control">
+                        <button type="submit" id="submit_logout">OW YAKO</button>
+                        <button type="submit" id="cancel_logout">NA ITHIN</button>
+                    </div>
+                </div>
+
                 <div class="request-tiles">
 
                     <button class="button" onclick="openForm(0)">
