@@ -4,6 +4,11 @@ let app = express();
 let database = require('./database.js');
 let User = require('./models/User');
 
+app.use(function(req, res, next) {
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    next();
+  });
+
 //requiring the request controller
 let requestController = require('./requestHandler.js');
 
