@@ -73,6 +73,23 @@ let getRequests = function(app){
       
     });
 
+    app.get('/logout/:email', function(req, res){
+        let email = req.params.email;
+        db.collection('users').findOne({email: email}).then(profile => {
+            database.updateOne('users', {email: email}, {loggedin: false});
+            res.redirect('/login');
+        });
+    });
+
+    app.get('/verifyloggedin/:email', function(req, res){
+        let email = req.params.email;
+
+        db.collection('users').findOne({email: email}).then(profile => {
+            console.log(profile);
+            res.json({loggedin: profile.loggedin});
+        });
+    });
+
 }
 
 let postRequests = function(app){
