@@ -7,7 +7,7 @@ function openForm(form_num){
     else{
         document.getElementsByClassName("form-popup")[form_num].style.display = "block";
         //haminena aulak thyenwa yata line eke
-        document.getElementsByTagName("option")[0].innerHTML = form_name_array[form_num];
+        document.getElementsByTagName("option")[form_num].innerHTML = form_name_array[form_num];
         // console.log(document.getElementsByTagName("option")[0].innerHTML = form_name_array[form_num]);
     }
 }
