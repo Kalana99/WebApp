@@ -14,6 +14,7 @@ app.set('views', 'public');
 //directing the static file requests
 app.use('/css', express.static(__dirname + '/public/assets/css'));
 app.use('/javascript', express.static(__dirname + '/public/assets/javascript'));
+app.use('/resources', express.static(__dirname + '/public/resources'));
 
 //form data body parser
 app.use(express.urlencoded({extended: true}));
