@@ -15,16 +15,18 @@ redirectUnauthorizedRequests();
 
 const form_name_array = ["ADD/DROP Requests", "Submitting Requests", "Repeat Exam Requests"];
 
+//popup request form
+let popupRequest = document.querySelector('#popup-request-window');
+let requestSelector = document.getElementById('request-option');
 function openForm(form_num){
-    if (document.getElementsByClassName("form-popup")[form_num].style.display == "block"){
-        document.getElementsByClassName("form-popup")[form_num].style.display = "none";
-    }
-    else{
-        document.getElementsByClassName("form-popup")[form_num].style.display = "block";
-        //haminena aulak thyenwa yata line eke
-        document.getElementsByTagName("option")[form_num].innerHTML = form_name_array[form_num];
-        // console.log(document.getElementsByTagName("option")[0].innerHTML = form_name_array[form_num]);
-    }
+    popupRequest.className = 'popup-request-window visible';
+    requestSelector.innerText = form_name_array[form_num];
+}
+
+function closeForm(){
+    popupRequest.className = 'popup-request-window';
+
+    return false;
 }
 
 //logout popup window
