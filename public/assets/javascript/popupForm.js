@@ -1,4 +1,4 @@
-let a = () => {
+let redirectUnauthorizedRequests = () => {
 
     let email = document.querySelector('body > div > main > div > div.profile-div > p:nth-child(5)').textContent;
     fetch('/verifyloggedin/' + email)
@@ -11,7 +11,7 @@ let a = () => {
   });
 };
 
-a();
+redirectUnauthorizedRequests();
 
 const form_name_array = ["ADD/DROP Requests", "Submitting Requests", "Repeat Exam Requests"];
 
