@@ -110,9 +110,8 @@ let postRequests = function(app){
                 }
                 
                 let data = req.body;
-                console.log(data);
             
-                if(response.email === true && response.index === true){
+                if(response.email === true && response.index === true && data.isCorrect === true){
                     let user = {
                     name: data.name,
                     index: data.index,

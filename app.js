@@ -21,6 +21,7 @@ app.set('views', 'public');
 app.use('/css', express.static(__dirname + '/public/assets/css'));
 app.use('/javascript', express.static(__dirname + '/public/assets/javascript'));
 app.use('/resources', express.static(__dirname + '/public/resources'));
+app.use('/svgsandimages', express.static(__dirname + '/public/assets/svgsandimages'));
 
 //form data body parser
 app.use(express.urlencoded({extended: true}));

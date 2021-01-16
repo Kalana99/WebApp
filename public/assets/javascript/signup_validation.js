@@ -1,26 +1,26 @@
-//for clientside signup validation
-let form = document.getElementById('form');
-let username = document.getElementById('username');
-let index = document.getElementById('index');
-let email = document.getElementById('email');
-let phone = document.getElementById('phone');
-let password = document.getElementById('password');
-let c_password = document.getElementById('c_psw');
-let birthday = document.getElementById('birthday');
-let male = document.getElementById('male');
-let female = document.getElementById('female');
-let student = document.getElementById('student')
-let staff = document.getElementById('staff');
-
-
-
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-
+    console.log('here');
     checkInputs();
 });
 
 const checkInputs = () => {
+
+    //for clientside signup validation
+    let form = document.getElementById('form');
+    let username = document.getElementById('username');
+    let index = document.getElementById('index');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('phone');
+    let password = document.getElementById('password');
+    let c_password = document.getElementById('c_psw');
+    let birthday = document.getElementById('birthday');
+    let male = document.getElementById('male');
+    let female = document.getElementById('female');
+    let student = document.getElementById('student')
+    let staff = document.getElementById('staff');
+    let faculty = document.getElementById('faculty');
+
     let isCorrect = true;
     //get the values from the inputs
     let userNameValue = username.value.trim();
@@ -34,6 +34,21 @@ const checkInputs = () => {
     let isFemale = female.checked;
     let isStudent = student.checked;
     let isStaff = staff.checked;
+    let gender = "";
+    let type = "";
+    if(isMale){
+        gender = "male";
+    }
+    else{
+        gender = "female";
+    }
+
+    if(isStudent){
+        gender = "student";
+    }
+    else{
+        gender = "staff";
+    }
 
     if (userNameValue === ''){
         //show error
@@ -44,20 +59,6 @@ const checkInputs = () => {
     else{
         //add success class
         setSuccess(username);
-    }
-
-    if (indexValue === ''){
-        setError(index, 'index cannot be blank');
-        isCorrect = false;
-    }
-
-    if (emailValue === ''){
-        setError(email, 'email cannot be blank');
-        isCorrect = false;
-    }
-    else if (!isEmail(emailValue)){
-        setError(email, 'email is not valid');
-        isCorrect = false;
     }
 
     if (phoneValue === ''){
@@ -113,10 +114,57 @@ const checkInputs = () => {
         setSuccess(student);
     }
 
-    //last condition in the function
-    if (isCorrect){
-        validateSubmit();
+    
+    data = {
+        name: userNameValue, index: indexValue, email: emailValue, birthday: birthdayValue, phone: phoneValue,
+        password: passwordValue, faculty: faculty.value, gender: gender, type: type, isCorrect: isCorrect
+    };
+
+    fetch('/signupvalidate', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    //Checking the validity of the email provided
+    if(data.email === false){
+        setError(email, 'email already exists');
     }
+    else if (emailValue === ''){
+        setError(email, 'email cannot be blank');
+        isCorrect = false;
+    }
+    else if (!isEmail(emailValue)){
+        setError(email, 'email is not valid');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(email);
+    }
+
+    //checking the index
+    if(data.index === false){
+        setError(index, 'index already exists');
+    }
+    else if (indexValue === ''){
+        setError(index, 'index cannot be blank');
+        isCorrect = false;
+    }
+    else{
+        setSuccess(index);
+    }
+    if (data.index === true && data.email === true && isCorrect){
+        window.location.href = '/verifyemail/' + document.getElementById('email').value;
+    }
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+
 }
 
 const isEmail = (email) => {
@@ -143,65 +191,3 @@ const setSuccess = (input) => {
     //add success class
     formControl.className = 'form-control success';
 }
-
-//serverside login validation
-let validateSubmit = () => {
-    let name = document.getElementById('username');
-    let index = document.getElementById('index');
-    let email = document.getElementById('email');
-    let birthday = document.getElementById('birthday');
-    let phone = document.getElementById('phone');
-    let password = document.getElementById('password');
-    let faculty = document.getElementById('faculty');
-
-    if (document.getElementById('male').checked) {
-        gender = 'male';
-    }
-    else{
-        gender = 'female';
-    }
-
-    if (document.getElementById('student').checked) {
-        type = 'student';
-    }
-    else{
-        type = 'staff';
-    }
-
-    data = {
-        name: name.value, index: index.value, email: email.value, birthday: birthday.value, phone: phone.value,
-        password: password.value, faculty: faculty.value, gender: gender.value, type: type.value
-    };
-
-    fetch('/signupvalidate', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-    if(data.email === false){
-        setError(email, 'email already exists');
-    }
-    else{
-        setSuccess(email);
-    }
-    if(data.index === false){
-        setError(index, 'index already exists');
-    }
-    else{
-        setSuccess(index);
-    }
-    if (data.index === true && data.email === true){
-        window.location.href = '/verifyemail/' + document.getElementById('email').value;
-    }
-    })
-    .catch((error) => {
-    console.error('Error:', error);
-    });
-
-return false;
-
-};
