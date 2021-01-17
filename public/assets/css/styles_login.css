@@ -1,0 +1,11 @@
+body{
+    background-image: url(\resources\photo-1527499320653.jpg);
+    background-size: 1300px;
+}
+
+a{
+    font-size: 15px;
+    font-family:monospace;
+    font-weight: bold;
+    color:rgb(31,54,61);
+}
