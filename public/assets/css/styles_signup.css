@@ -12,12 +12,13 @@ body{
 }
 
 .container{
-    background-color: #cfe0c3;
-    border-radius: 20px;
+    background-color:rgba(207,224,195,0.5);
+    border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     width: 450px;
     max-width: 100%;
-    opacity: 0.9;
+    opacity: 0.6;
+    position: relative;
 }
 
 .header{
@@ -26,7 +27,7 @@ body{
     padding: 20px 40px;
     border-radius: 20px;
     text-align: center;
-    opacity:0.8;
+    opacity:0.95;
 
 }
 
@@ -42,6 +43,8 @@ body{
     margin-bottom: 8px;
     padding-bottom: 20px;
     position: relative;
+    color: white;
+    border-radius: 20px;
 }
 
 .form-control label{
@@ -115,7 +118,7 @@ body{
     opacity: 2;
     color: white;
     outline-style: none;
-
+    position: relative;
 
 }
 
@@ -125,8 +128,13 @@ body{
 }
 
 .main-body{
-    background-image: url(/resources/fog-3622519_1920.jpg);
-    background-size: 1650px;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(/resources/sam-knight-jhpL88kP7Y8-unsplash.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    
+    
+    
 }
 
 #faculty{
@@ -145,5 +153,5 @@ body{
 
 h1{
     text-align: center;
-    color: #1f363d;
+    color:black;
 }
