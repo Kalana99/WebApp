@@ -127,6 +127,9 @@ body{
 .main-body{
     background-image: url(/resources/fog-3622519_1920.jpg);
     background-size: cover;
+    height: 100%;
+    width: 100%;
+    position:absolute; 
 }
 
 #faculty{
