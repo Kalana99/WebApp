@@ -14,8 +14,7 @@ const userSchema = new Schema({
     "type": String,
     "faculty": String,
     "department": String,
-    "verified": Boolean,
-    "loggedin": Boolean
+    "verified": Boolean
 });
 
 userSchema.pre('save', async function(next){
@@ -25,6 +24,21 @@ userSchema.pre('save', async function(next){
 
     next();
 });
+
+userSchema.statics.login = async function(email, password){
+    const user = await this.findOne({email: email});
+
+    if(user!= null){
+        const auth = await bcrypt.compare(password, user.password);
+        if(auth){
+            user.passwordCorrect = true;
+        }
+        else{
+            user.passwordCorrect = false;
+        }
+    }
+    return user;
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

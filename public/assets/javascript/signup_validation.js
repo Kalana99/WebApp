@@ -44,10 +44,10 @@ const checkInputs = () => {
     }
 
     if(isStudent){
-        gender = "student";
+        type = "student";
     }
     else{
-        gender = "staff";
+        type = "staff";
     }
 
     if (userNameValue === ''){
@@ -120,7 +120,7 @@ const checkInputs = () => {
         password: passwordValue, faculty: faculty.value, gender: gender, type: type, isCorrect: isCorrect
     };
 
-    fetch('/signupvalidate', {
+    fetch('/signup', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

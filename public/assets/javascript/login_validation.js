@@ -60,7 +60,7 @@ let serverSideValidateSubmit = function(){
                 setError(email, 'Please verify your email');
             }
             else{
-                window.location.href = ('/userprofile/' + email.value);
+                window.location.href = ('/userprofile');
             }
         })
         .catch((error) => {

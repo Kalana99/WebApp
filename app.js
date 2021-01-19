@@ -1,19 +1,20 @@
 //requiring express and creating the express app
 let express = require('express');
 let app = express();
+
+//requiring the other required files
 let database = require('./database.js');
 let User = require('./models/User');
 let authRoutes = require('./routes/authRoutes');
+let verificationRoutes = require('./routes/verificationRoutes');
 let cookieParser = require('cookie-parser');
+let {requireAuth} = require('./middleware/authMiddleware');
 
 //disabling browser the cache for all web pages
 app.use(function(req, res, next) {
     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     next();
   });
-
-//Request controller
-let requestController = require('./requestHandler.js');
 
 //register view engine
 app.set('view engine', 'ejs');
@@ -29,9 +30,10 @@ app.use('/svgsandimages', express.static(__dirname + '/public/assets/svgsandimag
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-//express router
+//express routers and cookie parser
+app.use(cookieParser());
 app.use(authRoutes);
-//app.use(cookieParser);
+app.use(verificationRoutes);
 
 //Connect to the database
 let mongoose = require('mongoose');
@@ -42,8 +44,5 @@ mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentReq
     .then((result) => {
         app.listen(process.env.PORT || 3000); 
         console.log('You are listening to port 3000'); 
-        requestController(app);
     })
     .catch((err) => console.log(err));
-
-    
