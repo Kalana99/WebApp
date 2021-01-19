@@ -3,6 +3,8 @@ let express = require('express');
 let app = express();
 let database = require('./database.js');
 let User = require('./models/User');
+let authRoutes = require('./routes/authRoutes');
+let cookieParser = require('cookie-parser');
 
 //disabling browser the cache for all web pages
 app.use(function(req, res, next) {
@@ -26,6 +28,10 @@ app.use('/svgsandimages', express.static(__dirname + '/public/assets/svgsandimag
 //form data body parser
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+//express router
+app.use(authRoutes);
+app.user(cookieParser);
 
 //Connect to the database
 let mongoose = require('mongoose');

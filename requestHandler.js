@@ -17,19 +17,9 @@ const email = require('./modules/email');
 
 let getRequests = function(app){
 
-    //getting the login html page
-    app.get('/login', function(req,res){
-        res.render('login');
-    });
-
     //home (9)same as login)
     app.get('/', function(req,res){
         res.redirect('/login');
-    });
-
-    //getting the sign up html page
-    app.get('/signup', function(req,res){
-        res.render('SignUp', { title: 'Sign Up' });
     });
 
     //getting the user profile html page
