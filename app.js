@@ -31,7 +31,7 @@ app.use(express.json());
 
 //express router
 app.use(authRoutes);
-app.user(cookieParser);
+//app.use(cookieParser);
 
 //Connect to the database
 let mongoose = require('mongoose');

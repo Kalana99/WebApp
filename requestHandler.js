@@ -12,14 +12,15 @@ module.exports = function(app){
 }
 let User = require('./models/User');
 const { response } = require('express');
-const e = require('express');
 const email = require('./modules/email');
 
 let getRequests = function(app){
 
+
     //home (9)same as login)
     app.get('/', function(req,res){
-        res.redirect('/login');
+        console.log('here');
+        res.render('login');
     });
 
     //getting the user profile html page
@@ -126,25 +127,4 @@ let postRequests = function(app){
     });
 
 
-    app.post('/loginvalidate', function(req, res){
-
-        let profile = db.collection('users').findOne({email: req.body.email}).then(profile => {
-            if(profile === null){
-                res.json({fault: 'email'});
-            }
-            else{
-                if(req.body.password != profile.password){
-                    res.json({fault: 'password'});
-                }
-                else if(profile.verified === false){
-                    res.json({fault: 'verify'});
-                }
-                else{
-                    res.json({fault: 'none'});
-                    database.updateOne('users', {email: req.body.email}, {loggedin: true});
-                }
-            }
-        });
-
-    });
 }

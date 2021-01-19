@@ -38,7 +38,7 @@ let serverSideValidateSubmit = function(){
 
     data = {email: email.value, password: password.value};
 
-    fetch('/loginvalidate', {
+    fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
