@@ -16,7 +16,7 @@ const createToken = (id) => {
 };
 
 module.exports.home_get = (req, res) => {
-    res.redirect('/login');
+    res.render('threadView');
 };
 
 module.exports.signup_get = (req, res) => {
