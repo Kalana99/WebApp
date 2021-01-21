@@ -158,7 +158,7 @@ const checkInputs = () => {
         setSuccess(index);
     }
     if (data.index === true && data.email === true && isCorrect){
-        window.location.href = '/verifyemail/' + document.getElementById('email').value;
+        window.location.href = '/verifyemail/' + data.id;
     }
     })
     .catch((error) => {

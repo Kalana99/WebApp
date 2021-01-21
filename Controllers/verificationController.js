@@ -15,15 +15,18 @@ module.exports.verifyId_get = (req, res) => {
 };
 
 module.exports.verifyEmail_get = (req, res) => {
-    let email = req.params.email;
-    console.log('verify')
-    res.render('verify', {email});
+    let id = req.params.id;
+    db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(profile => {
+        res.render('verify', {email, id});
+    });
+    
 };
 
 module.exports.sendEmailAgain_get = (req, res) => {
-    let useremail = req.params.email;
-    db.collection('users').findOne({email: useremail}).then(result => {
-        email(useremail, 'signup', {id:result._id});
-        res.redirect('/verifyemail/' + useremail);
+    let id = req.params.id;
+    
+    db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(result => {
+        email(result.email, 'signup', {id:id});
+        res.redirect('/verifyemail/' + id);
     });
 };

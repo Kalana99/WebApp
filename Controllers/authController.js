@@ -54,6 +54,7 @@ module.exports.signup_post = (req, res) => {
                     };
                     let id = database.addUser(user);
                     mail(req.body.email, 'signup', {id: id});
+                    response.id = id;
                 }
                 res.json(response);
             });
