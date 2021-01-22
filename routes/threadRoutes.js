@@ -3,4 +3,6 @@ const router = Router();
 const threadController = require('../Controllers/threadController');
 const {requireAuth} = require('../middleware/authMiddleware');
 
-app.get('/getThreadData', requireAuth, threadController.getThreadData_get);
+router.get('/getThreadData', threadController.getThreadData_get);
+
+module.exports = router;
