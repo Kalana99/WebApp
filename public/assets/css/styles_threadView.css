@@ -98,7 +98,7 @@ footer{
     text-align: center;
 }
 
-.message-div{
+.msg-div{
     display: flex;
     flex-direction: column;
     margin: 3px;
