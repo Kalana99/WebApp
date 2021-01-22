@@ -27,7 +27,7 @@ module.exports.getThreadData_get = (req, res) => {
             
             db.collection('threads').find({"studentID": id}).toArray().then(array => {
                 
-                console.log(array);
+                res.json(array);
             });
 
         });
