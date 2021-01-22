@@ -26,7 +26,11 @@ module.exports.getThreadData_get = (req, res) => {
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
             db.collection('threads').find({"studentID": id}).toArray().then(array => {
-                
+                let name = user.name;
+
+                array.forEach(element => {
+                    element.name = name;
+                })
                 res.json(array);
             });
 
