@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Thread = require('../models/Thread');
 const database = require('../database');
 const mail = require('../modules/email');
 
@@ -107,5 +108,40 @@ module.exports.logout_get = (req, res) => {
 };
 
 module.exports.threads_get = (req, res) => {
-    res.render('threadView');
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            
+            let cursor = db.collection('threads').find({"studentID": id}).toArray().then(array => {
+                res.render('/threadView', {array});
+            });
+
+        });
+    });
+
+    
+};
+
+module.exports.submitRequests_post = (req, res) => {
+    let data = req.body;
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            database.addThread({
+                "description": data.description,
+                 "studentID": id,
+                 "type": data.type
+            });
+        });
+    });
+
+    res.redirect('/userprofile');
 };
