@@ -10,7 +10,8 @@ const threadSchema = new Schema({
     //"time": String,
     "type": String,
     "status": String,
-    "messageID_list": [String]
+    "messageID_list": [String],
+    "description": String
 },
 { timestamps: true });
 

@@ -1,5 +1,5 @@
-let email = document.getElementById('emailp').innerText;
+let id = document.getElementById('id').innerText;
 
 let link = document.getElementById('link');
-let href = '/sendemailagain/' + email;
+let href = '/sendemailagain/' + id;
 link.setAttribute('href',href );

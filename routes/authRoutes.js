@@ -17,5 +17,9 @@ router.get('/userprofile', requireAuth,  authController.userprofile_get);
 
 router.get('/logout',authController.logout_get);
 
+router.get('/threads',authController.threads_get);
+
+router.post('/submitRequest', authController.submitRequests_post);
+
 
 module.exports = router;

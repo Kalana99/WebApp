@@ -7,6 +7,7 @@ let database = require('./database.js');
 let User = require('./models/User');
 let authRoutes = require('./routes/authRoutes');
 let verificationRoutes = require('./routes/verificationRoutes');
+let threadRoutes = require('./routes/threadRoutes');
 let cookieParser = require('cookie-parser');
 let {requireAuth} = require('./middleware/authMiddleware');
 
@@ -34,6 +35,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(authRoutes);
 app.use(verificationRoutes);
+app.use(threadRoutes);
 
 //Connect to the database
 let mongoose = require('mongoose');

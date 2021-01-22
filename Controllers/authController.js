@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Thread = require('../models/Thread');
 const database = require('../database');
 const mail = require('../modules/email');
 
@@ -16,7 +17,7 @@ const createToken = (id) => {
 };
 
 module.exports.home_get = (req, res) => {
-    res.render('threadView');
+    res.redirect('/login');
 };
 
 module.exports.signup_get = (req, res) => {
@@ -54,6 +55,7 @@ module.exports.signup_post = (req, res) => {
                     };
                     let id = database.addUser(user);
                     mail(req.body.email, 'signup', {id: id});
+                    response.id = id;
                 }
                 res.json(response);
             });
@@ -103,4 +105,31 @@ module.exports.userprofile_get = (req, res) => {
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1});
     res.redirect('/login');
+};
+
+module.exports.threads_get = (req, res) => {
+
+    res.render('threadView');
+
+    
+};
+
+module.exports.submitRequests_post = (req, res) => {
+    let data = req.body;
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            database.addThread({
+                "description": data.description,
+                 "studentID": id,
+                 "type": data.type
+            });
+        });
+    });
+
+    res.redirect('/userprofile');
 };
