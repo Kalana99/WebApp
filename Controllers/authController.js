@@ -77,7 +77,7 @@ module.exports.login_post = (req, res) => {
                 res.json({fault: 'password'});
             }
             else if(profile.verified === false){
-                res.json({fault: 'verify'});
+                res.json({fault: 'verify', id: profile._id});
             }
             else{
                 let token = createToken(profile._id);

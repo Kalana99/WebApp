@@ -56,8 +56,11 @@ let serverSideValidateSubmit = function(){
                 setError(password, 'password mismatch');
             }
             else if(data.fault === 'verify'){
-                setSuccess(password);
-                setError(email, 'Please verify your email');
+                // setSuccess(password);
+                // setError(email, 'Please verify your email');
+                console.log(data.id);
+                window.location.href = "/verifyemail/" + data.id;
+            
             }
             else{
                 window.location.href = ('/userprofile');
