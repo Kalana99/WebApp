@@ -16,7 +16,7 @@ const createToken = (id) => {
 };
 
 module.exports.home_get = (req, res) => {
-    res.render('threadView');
+    res.redirect('/login');
 };
 
 module.exports.signup_get = (req, res) => {
@@ -104,4 +104,8 @@ module.exports.userprofile_get = (req, res) => {
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1});
     res.redirect('/login');
+};
+
+module.exports.threads_get = (req, res) => {
+    res.render('threadView');
 };
