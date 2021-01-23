@@ -88,8 +88,7 @@ main {
 
 .nav {
   background-color: rgb(78, 94, 88);
-  float: left;
-  width: 25%;
+  
 }
 
 .nav li {
@@ -114,7 +113,7 @@ main {
 
 .request-tiles  {
   margin-top: 45px;
-  width: 75%;
+  
   /* position: ; */
   
 }
