@@ -87,7 +87,7 @@ main {
 }
 
 .nav {
-  /*display: inline-flex;*/
+  background-color: rgb(78, 94, 88);
   float: left;
   width: 25%;
 }
@@ -114,6 +114,7 @@ main {
 
 .request-tiles  {
   margin-top: 45px;
+  width: 75%;
   /* position: ; */
   
 }
