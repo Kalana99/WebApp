@@ -29,20 +29,21 @@
             </div>
             <div class="navigation">
 
+                <ul class="nav">
+                    <li><a href="/threads">Threads</a></li>
+                    <li><a href="#">Notifications</a></li>
+                    <li class= "dropdown">
+                        <button >Settings</button>
+                        <div class= "dropdown-content">
+                            <a href="#"> Edit profile</a>
+                            <a href="/change_password"> Change password</a>
+                            <a href="/delete_account"> Delete account</a>
+                        </div>
+                    </li>
+                    <li id="logout-popup">Log out</li>
+                </ul>
+                
                 <%- include('./assets/partials/popup_logout.ejs') %>
-                <!-- popup logout window -->
-                <div class="popup-window" id="popup-window">
-                    <div class="header">
-                        <h2>LOG OUT!</h2>
-                    </div>
-                    <div class="confirm-text">
-                        <h3>Log out wennama oneda?</h3>
-                    </div>
-                    <div class="form-control">
-                        <button type="submit" id="submit_logout">OW YAKO</button>
-                        <button type="submit" id="cancel_logout">NA ITHIN</button>
-                    </div>
-                </div>
 
                 <div class="request-tiles">
 
