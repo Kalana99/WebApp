@@ -60,4 +60,26 @@
   border: grey solid thin;
 }
 
+/* suggestions autocomplete part */
+.lecture, .lecturer{
+  margin: 10px;
+  padding: 5px;
+  display: inline-block;
+  width: 300px;
+  border-radius: 5px;
+  border: grey solid thin;
+}
 
+.suggestions > div, .suggestions-lecturer > div{
+  display: absolute;
+  width: 300px;
+  padding: 5px;
+  color: black;
+  border-top: 1px solid #666;
+  cursor: pointer;
+  text-align: left;
+}
+.suggestions > div:hover, .suggestions-lecturer > div:hover {
+  background-color: grey;
+  color: #fff;
+}
