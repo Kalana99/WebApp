@@ -88,6 +88,8 @@ main {
 
 .nav {
   display: inline-flex;
+  float: left;
+  width: 25%;
 }
 
 .nav li {
