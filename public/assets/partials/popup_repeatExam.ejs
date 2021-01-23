@@ -1,0 +1,25 @@
+<div class="popup-request-window 2">
+    <form class="popup-form" action="/submitRequest" method="POST">
+        <header class="header-popup"><h2>Repeat Exam</h2></header>
+        <div class="content">
+            <div class="input-field">
+                <input class="lecture" type="text" placeholder="Module" />
+                <div class="suggestions">
+                </div>
+
+                <!-- change later -->
+                <input class="lecturer" type="text" placeholder="Lecturer" />
+                <div class="suggestions-lecturer">
+                </div>
+
+                <input type="text" class="input" placeholder="snippet">
+
+                
+                <textarea name="description" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                <!-- append child to send evidence if the request type is submission deadline -->
+                <button type="submit">submit</button>
+                <button type="cancel" class="close-button-request">cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
