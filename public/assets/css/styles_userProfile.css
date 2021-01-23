@@ -87,7 +87,7 @@ main {
 }
 
 .nav {
-  display: inline-flex;
+  /*display: inline-flex;*/
   float: left;
   width: 25%;
 }
