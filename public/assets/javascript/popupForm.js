@@ -2,16 +2,15 @@
 
 //popup request form
 let popupRequest = document.querySelector('#popup-request-window');
-let requestSelector = document.getElementById('request-option');
-function openForm(form_num){
+
+document.querySelector('.open-button-request').addEventListener('click', () => {
     popupRequest.className = 'popup-request-window visible';
-}
+});
 
-function closeForm(){
+document.querySelector('.close-button-request').addEventListener('click', () => {
     popupRequest.className = 'popup-request-window';
+});
 
-    return false;
-}
 
 //logout popup window
 let popupWindow = document.getElementById('popup-window');

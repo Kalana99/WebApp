@@ -47,19 +47,42 @@
 
                 <div class="request-tiles">
 
-                    <button class="button" onclick="openForm(0)">
+                    <button class="open-button-request">
                         <p class="button__text">Add/Drop Requests</p>
                     </button>
                     
-                    <%- include('./assets/partials/popupForm.ejs') %>
+                    <div class="popup-request-window" id="popup-request-window">
+                        <form class="popup-form" action="/submitRequest" method="POST">
+                            <header class="header-popup"><h2>title</h2></header>
+                            <div class="content">
+                                <div class="input-field">
+                                    <!-- <input type="text" placeholder="name" class="input" id="name">
+                                    <input type="text" placeholder="index" class="input" id="index"> -->
+                                    <select name="lecture" id="lecture" class="input">
+                                        <option id="lecture-name">Computer Architecture</option>
+                                        <option id="lecture-name">Numberical Methods</option>
+                                        <option id="lecture-name">Theory of Electricity</option>
+                                        <option id="lecture-name">Principles of OOP</option>
+                                    </select>
+                                    <select name="lecturer" id="lecturer">
+                                        <!-- add lecturers relevant to the lecture from js -->
+                                    </select>
+                                    <textarea name="description" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                                    <!-- append child to send evidence if the request type is submission deadline -->
+                                    <button type="submit">submit</button>
+                                    <button type="cancel" name="close-button-request">cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
-                    <button class="button" onclick="openForm(1)">
+                    <button class="open-button-request">
                         <p class="button__text">Submission Deadline</p>
                     </button>
                     
                     <%- include('./assets/partials/popupForm.ejs') %>
 
-                    <button class="button" onclick="openForm(2)">
+                    <button class="open-button-request">
                         <p class="button__text">Repeat Exams</p>
                     </button>
                     
