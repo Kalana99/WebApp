@@ -6,13 +6,13 @@ fetch('/getThreadData')
 });
 
 let initialize = (arr) => {
-    arr.forEach(item => {
-        //button group
-        let btnGroup = document.getElementsByClassName('btn-group')[0];
+    //button group
+    let btnGroup = document.getElementsByClassName('btn-group')[0];
 
+    for (let item = arr.length-1; item >= 0; item--){
         //create and set attributes to the elements
         let msgButton = document.createElement('button');
-        msgButton.setAttribute('id', item._id);
+        msgButton.setAttribute('id', arr[item]._id);
 
         let msgDiv = document.createElement('div');
         msgDiv.setAttribute('class', 'msg-div');
@@ -22,19 +22,19 @@ let initialize = (arr) => {
         divSender.setAttribute('class', 'item sender');
 
         let b = document.createElement('b');
-        b.innerText = item.studentID;
+        b.innerText = arr[item].name;
 
         let divDate = document.createElement('div');
         divDate.setAttribute('class', 'item date');
         
         let smallDate = document.createElement('small');
-        smallDate.innerText = item.createdAt;
+        smallDate.innerText = arr[item].createdAt;
 
         let divSnippet = document.createElement('div');
         divSnippet.setAttribute('class', 'item snippet');
 
         let smallSnippet = document.createElement('small');
-        smallSnippet.innerText = item.description;
+        smallSnippet.innerText = arr[item].description;
 
         //append items in order and create the button group
         btnGroup.appendChild(msgButton);
@@ -45,6 +45,6 @@ let initialize = (arr) => {
         divDate.appendChild(smallDate);
         msgDiv.appendChild(divSnippet);
         divSnippet.appendChild(smallSnippet);
-    });
+    };
 };
 

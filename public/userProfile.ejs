@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_popup.css">
-    <link rel="stylesheet" href="/css/styles_normal.css">
+    <link rel="stylesheet" href="/css/styles_userProfile.css">
+    <link rel="stylesheet" href="/css/styles_logoutPopup.css">
     <title><%=name %></title>
 </head>
 
@@ -27,19 +28,8 @@
                 <p class="info"><%= faculty %> </p>
             </div>
             <div class="navigation">
-                <ul class="nav">
-                    <li><a href="/threads">Threads</a></li>
-                    <li><a href="#">Notifications</a></li>
-                    <li class= "dropdown">
-                        <button >Settings</button>
-                        <div class= "dropdown-content">
-                            <a href="#"> Edit profile</a>
-                            <a href="/change_password"> Change password</a>
-                            <a href="/delete_account"> Delete account</a>
-                        </div>
-                    </li>
-                    <li id="logout-popup">Log out</li>
-                </ul>
+
+                <%- include('./assets/partials/popup_logout.ejs') %>
                 <!-- popup logout window -->
                 <div class="popup-window" id="popup-window">
                     <div class="header">

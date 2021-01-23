@@ -1,0 +1,62 @@
+/* styles for logout popup window */
+/* ------------------------------------------------------------------ */
+.popup-window{
+    box-sizing: border-box;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    margin-left: -200px;
+    margin-top: -150px;
+    z-index: 1;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-width: 100%;
+    left: 50%;
+    top: 50%;
+    padding: 20px;
+    visibility: hidden;
+  }
+  
+  .popup-window.visible{
+    visibility: visible;
+  }
+  
+  .header{
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+  }
+  
+  .confirm-text{
+    color: grey;
+  }
+  
+  .form-control button{
+    border: 2px solid #8e44ad;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .dropdown li {
+    position:relative;
+    display:inline-block;
+  }
+  
+  .dropdown-content{
+    position: absolute;
+    display:none
+  }
+  .dropdown:hover .dropdown-content{
+    display:block;
+  }
+  .dropdown-content a {
+    display:block;
+  }
+  /* ------------------------------------------------------- */

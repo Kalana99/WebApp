@@ -1,11 +1,10 @@
-const form_name_array = ["ADD/DROP Requests", "Submitting Requests", "Repeat Exam Requests"];
+// const form_name_array = ["ADD/DROP Requests", "Submitting Requests", "Repeat Exam Requests"];
 
 //popup request form
 let popupRequest = document.querySelector('#popup-request-window');
 let requestSelector = document.getElementById('request-option');
 function openForm(form_num){
     popupRequest.className = 'popup-request-window visible';
-    requestSelector.innerText = form_name_array[form_num];
 }
 
 function closeForm(){

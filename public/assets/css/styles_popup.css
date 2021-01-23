@@ -1,11 +1,11 @@
 .popup-request-window{
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   align-items: center;
   justify-content: center;
   height: fit-content;
   margin-left: -200px;
-  margin-top: -150px;
+  transform: translate(0, -50%);
   z-index: 1;
   background-color: #fff;
   border-radius: 5px;
