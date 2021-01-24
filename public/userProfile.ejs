@@ -20,16 +20,16 @@
             <div class="row">
             <div class="profile-div">
                 <div class="photo">
-                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>
-                    <button id="logout-popup"><i class="fa fa-sign-out"></i></button>
+                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
                 </div>
-                <%- include('./assets/partials/popup_logout.ejs') %>
+                
                 <h4 class="name"><%= name %> </h4>
                 <p class="info"><%= index %> </p>
                 <p class="info"><%= phone %> </p>
                 <p class="info"><%= email %> </p>
                 <p class="info"><%= faculty %> </p>
             </div>
+            <main>
             <div class="navigation">
                 <ul class="nav">
                     <li><a href="/threads">Threads</a></li>
@@ -42,12 +42,11 @@
                             <a href="/delete_account"> Delete account</a>
                         </div>
                     </li>
-                    <li id="logout-popup">Log out</li>
                 </ul>
-                
-                
+                <button id="logout-popup"><i class="fa fa-sign-out"></i></button>    
+                <%- include('./assets/partials/popup_logout.ejs') %>
             </div>
-            <main>
+            
                 <div class="request-tiles">
 
                     <button class="open-button-request" id="0">
