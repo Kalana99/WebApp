@@ -4,11 +4,11 @@ let popupRequest = document.querySelectorAll('.popup-request-window');
 //add event listeners to all request buttons
 let requestButtons = document.querySelectorAll(".open-button-request");
 
+
 for (let i = 0; i < requestButtons.length; i++){
     requestButtons[i].addEventListener('click', (event) => {
         //grab the id of the clicked button
         let id = parseInt(event.target.id);
-        console.log(popupRequest[0].className);
 
         popupRequest[id].className = 'popup-request-window visible';
     });
