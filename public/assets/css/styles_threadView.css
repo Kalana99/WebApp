@@ -58,7 +58,6 @@ section{
     max-width: 100%;
     overflow: hidden;
     overflow: scroll;
-    overflow-y: hidden;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
