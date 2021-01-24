@@ -158,8 +158,7 @@ main {
 }
 i{
   color:yellowgreen;
-  width:100%;
-  height:100%;
+  size:inherit;
 }
 .photo button{
   width: 50px;
