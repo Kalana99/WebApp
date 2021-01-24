@@ -4,8 +4,10 @@ let popupRequest = document.querySelectorAll('.popup-request-window');
 //add event listeners to all request buttons
 let requestButtons = document.querySelectorAll(".open-button-request");
 
+//keep only one window active at once
 let activePopupWindow = null;
 
+//eventListeners for open request forms buttons
 for (let i = 0; i < requestButtons.length; i++){
     requestButtons[i].addEventListener('click', (event) => {
         //grab the id of the clicked button
@@ -22,6 +24,7 @@ for (let i = 0; i < requestButtons.length; i++){
 
 let cancelButtons = document.querySelectorAll('.close-button-request');
 
+//eventListeners for cancel buttons
 for (let i = 0; i < cancelButtons.length; i++){
     cancelButtons[i].addEventListener('click', (event) => {
         event.preventDefault();
