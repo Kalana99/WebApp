@@ -108,6 +108,7 @@ main {
   font-weight: 500;
   color: #888;
   display:block;
+  position: relative;
 }
 
 .nav li:hover{ 
