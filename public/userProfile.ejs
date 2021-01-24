@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
     <link rel="stylesheet" href="/css/styles_logoutPopup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><%=name %></title>
 </head>
 
@@ -21,6 +22,8 @@
                 <div class="photo">
                     <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>
                 </div>
+                <button id="logout-popup"><i class="fa fa-sign-out"></i></button>
+                <%- include('./assets/partials/popup_logout.ejs') %>
                 <h4 class="name"><%= name %> </h4>
                 <p class="info"><%= index %> </p>
                 <p class="info"><%= phone %> </p>
@@ -42,7 +45,7 @@
                     <li id="logout-popup">Log out</li>
                 </ul>
                 
-                <%- include('./assets/partials/popup_logout.ejs') %>
+                
             </div>
             <main>
                 <div class="request-tiles">

@@ -141,4 +141,21 @@ main {
   cursor:pointer;
   display:block;
 }
+.dropdown li {
+  position:relative;
+  display:inline-block;
+}
 
+.dropdown-content{
+  position: absolute;
+  display:none
+}
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+.dropdown-content a {
+  display:block;
+}
+i{
+  background-color: tomato;
+}
