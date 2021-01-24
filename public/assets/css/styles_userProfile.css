@@ -158,5 +158,10 @@ main {
 }
 i{
   background-color: tomato;
-  font-size: 25px;
+}
+.photo button{
+  background-color: teal;
+  width: 25px;
+  height: 25px;
+  border-radius: 12.5px;
 }
