@@ -98,7 +98,8 @@ main {
   height: 100%;
 }
 .nav ul{
-  padding: 10px;
+  padding-inline-start: 10px;
+  padding-inline-end: 10px;
 }
 .nav li {
   margin: 40px 30px 0 10px;
