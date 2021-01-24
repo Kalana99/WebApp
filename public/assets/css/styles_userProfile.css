@@ -158,7 +158,7 @@ main {
 }
 i{
   background-color: tomato;
-  height: 20px;
+  font-size: 24px;
 }
 .photo button{
   background-color: teal;
