@@ -48,7 +48,7 @@ footer p{
 
 main {
       padding: 20px 20px 0px 20px;
-      background-color: teal;
+      
       margin-left: 350px;
       margin-top: 25px;
 }
@@ -94,7 +94,7 @@ main {
 }
 
 .nav {
-  background-color: rgb(78, 94, 88);
+  
   height: 100%;
 }
 .nav ul{
@@ -160,6 +160,7 @@ main {
   display:block;
 }
 i{
-  color:yellowgreen;
+  
   font-size: 48px;
 }
+
