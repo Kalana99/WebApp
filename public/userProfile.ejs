@@ -15,8 +15,8 @@
           <div class="home-icon">
           </div>
         </header>
-        <main>
-          <div class="row">
+        
+            <div class="row">
             <div class="profile-div">
                 <div class="photo">
                     <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>
@@ -28,7 +28,6 @@
                 <p class="info"><%= faculty %> </p>
             </div>
             <div class="navigation">
-
                 <ul class="nav">
                     <li><a href="/threads">Threads</a></li>
                     <li><a href="#">Notifications</a></li>
@@ -44,7 +43,8 @@
                 </ul>
                 
                 <%- include('./assets/partials/popup_logout.ejs') %>
-
+            </div>
+            <main>
                 <div class="request-tiles">
 
                     <button class="open-button-request" id="0">
@@ -66,13 +66,11 @@
                     <%- include('./assets/partials/popup_repeatExam.ejs') %>
 
                 </div>
-            </div>
-          </div>
-          </main>
-        </main>
-    </div>
+            </main>
+    
 
     <%- include('./assets/partials/footer.ejs') %>
+    </div>
 
     <script src="/javascript/popupForm.js"></script>
 </body>

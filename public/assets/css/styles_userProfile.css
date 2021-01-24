@@ -32,6 +32,7 @@ footer {
   width: 90%;
   background-color: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+  clear: left;
 }  
 
 footer p{
@@ -84,11 +85,17 @@ main {
 .navigation {
   padding: 0 25px 0 25px !important;
   text-align: center;
+  width: 200px;
+  float :left;
+  list-style-type: none;
+  margin: 20px;
 }
 
 .nav {
   background-color: rgb(78, 94, 88);
   display: inline-flex;
+ 
+
 }
 
 .nav li {
@@ -113,9 +120,9 @@ main {
 
 .request-tiles  {
   margin-top: 45px;
+  margin-left: 250px;
   
-  /* position: ; */
-  
+  /* position: ; */  
 }
 
 .open-button-request{
@@ -128,5 +135,6 @@ main {
   background-color:#f4f5f6;
   border-radius: 40px;
   cursor:pointer;
+  display:block;
 }
 
