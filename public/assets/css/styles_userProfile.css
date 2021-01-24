@@ -49,7 +49,7 @@ footer p{
 main {
       padding: 20px 20px 0px 20px;
       background-color: teal;
-      margin-left: 250px;
+      margin-left: 340px;
       margin-top: 25px;
 }
 
@@ -87,7 +87,7 @@ main {
 .navigation {
   padding: 0 25px 0 25px !important;
   text-align: center;
-  width: 200px;
+  width: 300px;
   float :left;
   list-style-type: none;
   margin: 20px;
@@ -112,6 +112,7 @@ main {
   display:block;
   position: relative;
   border-bottom: 2px solid #999;
+  padding: 30px 10px 5px 0px;
 }
 
 .nav li:hover{ 
