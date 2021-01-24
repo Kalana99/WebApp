@@ -159,8 +159,7 @@ main {
 .dropdown-content a {
   display:block;
 }
-i{
-  
-  font-size: 48px;
+i.fa.fa-sign-out {
+  font-size: xxx-large;
 }
 
