@@ -158,10 +158,11 @@ main {
 }
 i{
   background-color: tomato;
+  height: 20px;
 }
 .photo button{
   background-color: teal;
-  width: 25px;
-  height: 25px;
-  border-radius: 12.5px;
+  width: 50px;
+  height:50px;
+  border-radius: 25px;
 }
