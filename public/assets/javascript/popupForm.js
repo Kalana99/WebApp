@@ -4,13 +4,19 @@ let popupRequest = document.querySelectorAll('.popup-request-window');
 //add event listeners to all request buttons
 let requestButtons = document.querySelectorAll(".open-button-request");
 
+let activePopupWindow = null;
 
 for (let i = 0; i < requestButtons.length; i++){
     requestButtons[i].addEventListener('click', (event) => {
         //grab the id of the clicked button
         let id = parseInt(event.target.id);
 
-        popupRequest[id].className = 'popup-request-window visible';
+        if (activePopupWindow === null){
+            //get the active window id
+            activePopupWindow = id;
+            popupRequest[id].className = 'popup-request-window visible';
+        }
+
     });
 };
 
@@ -21,6 +27,7 @@ for (let i = 0; i < cancelButtons.length; i++){
         event.preventDefault();
         //grab the id of the clicked cancel button
         let id = parseInt(event.target.id);
+        activePopupWindow = null;
 
         popupRequest[id].className = 'popup-request-window';
     });
@@ -30,19 +37,25 @@ for (let i = 0; i < cancelButtons.length; i++){
 //logout popup window
 let popupWindow = document.getElementById('popup-window');
 
-document.querySelector('#logout-popup').addEventListener('click', () => {
-    popupWindow.className = 'popup-window visible';
+document.querySelector('#logout-popup').addEventListener('click', (event) => {
+
+    if (activePopupWindow === null){
+        activePopupWindow = event.target.id;
+        popupWindow.className = 'popup-window visible';
+    }
+    
 });
 
 document.querySelector('#cancel_logout').addEventListener('click', (event) => {
     event.preventDefault();
+    activePopupWindow = null;
     popupWindow.className = 'popup-window';
 });
 
 document.querySelector('#submit_logout').addEventListener('click', () => {
-    let email = document.querySelector('body > div > main > div > div.profile-div > p:nth-child(5)').textContent;
     window.location.href = '/logout';
 });
+
 
 //suggestion field
 
