@@ -1,0 +1,87 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+	
+
+}
+
+.main{
+
+	background-image: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url(../resources/dan-rogers-lMIvz5b1vRo-unsplash.jpg);
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+
+}
+
+.box{
+	width: 490px;
+	height: 500px;
+	overflow: hidden;
+	background: white;
+	box-shadow: 0 0 6px black;
+	border-radius: 15px;
+	padding:50px 20px;
+	position: center;
+	text-align: center;
+	box-sizing:border-box;
+	opacity:0.8;
+
+
+	
+}
+
+.center {
+
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+}
+
+.form-control{
+	position: relative;
+	float: right;
+}
+
+a.link1{
+
+	color:#70a9a1;
+	
+	text-align: center;
+	text-decoration:none;
+	font-size: 18px;
+	
+
+}
+
+.re{
+	padding: 4px;
+}
+
+a.log{
+
+	background-color:#70a9a1; 
+	color:white;
+	padding: 14px 20px;
+	text-align: right;
+	text-decoration:none;
+	border-radius: 10px;
+	align-self: right;
+
+}
+
+
+
+
+a.log:hover{
+
+	background-color: #40798c;
+}
+
+a.link1:hover{
+	color: #40798c;
+	cursor: pointer;
+}
+

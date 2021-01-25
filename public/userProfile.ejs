@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
     <link rel="stylesheet" href="/css/styles_logoutPopup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><%=name %></title>
 </head>
 
@@ -15,12 +16,13 @@
           <div class="home-icon">
           </div>
         </header>
-        <main>
-          <div class="row">
+        
+            <div class="row">
             <div class="profile-div">
                 <div class="photo">
-                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>
+                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
                 </div>
+                
                 <h4 class="name"><%= name %> </h4>
                 <p class="info"><%= index %> </p>
                 <p class="info"><%= phone %> </p>
@@ -28,7 +30,6 @@
                 <p class="info"><%= faculty %> </p>
             </div>
             <div class="navigation">
-
                 <ul class="nav">
                     <li><a href="/threads">Threads</a></li>
                     <li><a href="#">Notifications</a></li>
@@ -36,15 +37,19 @@
                         <button >Settings</button>
                         <div class= "dropdown-content">
                             <a href="#"> Edit profile</a>
-                            <a href="/change_password"> Change password</a>
-                            <a href="/delete_account"> Delete account</a>
+                            <a href="/change_password.ejs"> Change password</a>
+                            <a href="/delete_account.ejs"> Delete account</a>
                         </div>
                     </li>
-                    <li id="logout-popup">Log out</li>
+                    <li>
+                        <button id="logout-popup">
+                        <i class="fa fa-sign-out"></i></button>
+                    </li>
                 </ul>
-                
+                    
                 <%- include('./assets/partials/popup_logout.ejs') %>
-
+            </div>
+            <main>
                 <div class="request-tiles">
 
                     <button class="open-button-request" id="0">
@@ -66,13 +71,11 @@
                     <%- include('./assets/partials/popup_repeatExam.ejs') %>
 
                 </div>
-            </div>
-          </div>
-          </main>
-        </main>
-    </div>
+            </main>
+    
 
     <%- include('./assets/partials/footer.ejs') %>
+    </div>
 
     <script src="/javascript/popupForm.js"></script>
 </body>

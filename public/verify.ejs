@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Verify Email</title>
-    </head>
 
-    <body>
+<head>
+    <title>Verify Email</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/styles_verify.css" />
+</head>
+
+<body class="main">
+
+    <div class='box center'>
+
+        <img src="/resources/iconfinder_email_mail__letter__internet__envelope__chat__profile__3244552.png">
         <div>
             <h2>Please Verify Your Email Address</h2>
         </div>
-        
+
         <div>
+            <br><br>
             <span class="">Haven't Received Your Email Yet?</span>
             <br>
-            <a id="link"> click Here to Re-send</a>
-            <p id="id" hidden><%= id %></p>
-            
+            <div class="re">
+                <a class="link1" id="link"> Click Here to Re-send</a>
+            </div>
+            <p id="id" hidden>
+                <%= id %>
+            </p>
+
         </div>
-        <br>
+        <br><br><br><br><br>
         <div class="form-control">
-            <a href="/login"> Login To Your Account</a>
+            <a class="log" href="/login"> Login To Your Account</a>
         </div>
         <script src="/javascript/sendemailagain.js"></script>
-    </body>
+    </div>
+</body>
 
 
 
