@@ -31,11 +31,7 @@ body{
 
 	
 }
-.content{
 
-	padding :20px;
-	font-size: 36px;
-}
 .center {
 
 	position: absolute;
@@ -44,19 +40,48 @@ body{
 	transform:translate(-50%,-50%);
 }
 
+.form-control{
+	position: relative;
+	float: right;
+}
 
-a{
+a.link1{
+
+	color:#70a9a1;
+	
+	text-align: center;
+	text-decoration:none;
+	font-size: 18px;
+	
+
+}
+
+.re{
+	padding: 4px;
+}
+
+a.log{
 
 	background-color:#70a9a1; 
 	color:white;
 	padding: 14px 20px;
-	text-align: center;
+	text-align: right;
 	text-decoration:none;
 	border-radius: 10px;
+	align-self: right;
 
 }
 
-a:hover{
+
+
+
+a.log:hover{
 
 	background-color: #40798c;
 }
+
+a.link1:hover{
+	color: #40798c;
+	cursor: pointer;
+}
+
