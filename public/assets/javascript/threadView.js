@@ -87,6 +87,7 @@ let initialize = (arr) => {
 let msgGroup = document.querySelector('.msg-group');
 
 let display = (arr, msgId) => {
+    console.log(arr);
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
 
