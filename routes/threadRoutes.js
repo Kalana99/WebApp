@@ -7,4 +7,6 @@ router.get('/getThreadData', requireAuth, threadController.getThreadData_get);
 
 router.post('/submitRequest', threadController.submitRequests_post);
 
+router.post('/getMessages', threadController.getMessages_post);
+
 module.exports = router;

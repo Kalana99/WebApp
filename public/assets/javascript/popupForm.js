@@ -11,7 +11,7 @@ let activePopupWindow = null;
 for (let i = 0; i < requestButtons.length; i++){
     requestButtons[i].addEventListener('click', (event) => {
         //grab the id of the clicked button
-        let id = parseInt(event.target.id);
+        let id = parseInt(event.currentTarget.id);
 
         if (activePopupWindow === null){
             //get the active window id
