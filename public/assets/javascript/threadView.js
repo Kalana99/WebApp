@@ -48,6 +48,29 @@ let initialize = (arr) => {
         divDate.appendChild(smallDate);
         msgDiv.appendChild(divSnippet);
         divSnippet.appendChild(smallSnippet);
+
+        //add an event listener
+        msgButton.addEventListener('click', (event) => {
+            
+        });
     };
 };
 
+let display = (arr, msgId) => {
+    for (let i=0; i < arr.length; i++){
+        let person = arr[i]._id;
+
+        let msgContainer = document.createElement('div');
+        let msg = document.createElement('p');
+        msg.innerText = arr[i].text;
+
+        msgContainer.appendChild(msg);
+        
+        if (msgId === id){
+            msgContainer.setAttribute('class', 'sender');
+        }
+        else{
+            msgContainer.setAttribute('class', 'reciever');
+        }
+    }
+};
