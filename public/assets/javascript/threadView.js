@@ -1,7 +1,10 @@
+let threads;
+
 fetch('/getThreadData')
 .then(response => response.json())
 .then(data => {
     // console.log(data);
+    threads = data;
     initialize(data);
 }).catch(err => {
     console.log(err);
@@ -48,6 +51,61 @@ let initialize = (arr) => {
         divDate.appendChild(smallDate);
         msgDiv.appendChild(divSnippet);
         divSnippet.appendChild(smallSnippet);
+
+        //add an event listener
+        msgButton.addEventListener('click', (event) => {
+            threadId = event.currentTarget.id;
+            
+            for(let i = 0; i < threads.length; i++){
+                if(threads[i]._id === threadId){
+                    let messageIdList = threads[i].messageID_list;
+                    let messages = [];
+                    
+                    fetch('/getMessages', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({threadId})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        display(data.messages, threadId);
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
+
+                    break;
+                }
+            }
+            
+        });
     };
 };
 
+let msgGroup = document.querySelector('.msg-group');
+
+let display = (arr, msgId) => {
+
+    msgGroup.innerHTML = '';
+    
+    for (let i=0; i < arr.length; i++){
+        let person = arr[i].from;
+
+        let msgContainer = document.createElement('div');
+        let msg = document.createElement('p');
+        msg.innerText = arr[i].text;
+
+        msgContainer.appendChild(msg);
+
+        if (msgId === person){
+            msgContainer.setAttribute('class', 'sender');
+        }
+        else{
+            msgContainer.setAttribute('class', 'reciever');
+        }
+
+        msgGroup.appendChild(msgContainer);
+    }
+};
