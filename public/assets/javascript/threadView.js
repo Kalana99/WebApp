@@ -56,6 +56,8 @@ let initialize = (arr) => {
     };
 };
 
+let msgGroup = document.querySelector('.msg-group');
+
 let display = (arr, msgId) => {
     for (let i=0; i < arr.length; i++){
         let person = arr[i]._id;
@@ -65,12 +67,14 @@ let display = (arr, msgId) => {
         msg.innerText = arr[i].text;
 
         msgContainer.appendChild(msg);
-        
+
         if (msgId === id){
             msgContainer.setAttribute('class', 'sender');
         }
         else{
             msgContainer.setAttribute('class', 'reciever');
         }
+
+        msgGroup.appendChild(msgContainer);
     }
 };
