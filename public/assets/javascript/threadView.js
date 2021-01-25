@@ -70,7 +70,7 @@ let initialize = (arr) => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        display(messages, threadId);
+                        display(data.messages, threadId);
                     })
                     .catch((error) => {
                     console.error('Error:', error);
