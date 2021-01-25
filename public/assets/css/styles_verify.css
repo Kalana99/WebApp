@@ -68,7 +68,8 @@ a.log{
 	text-align: right;
 	text-decoration:none;
 	border-radius: 10px;
-	align-self: right;
+    align-self: right;
+    position: absolute;
 
 }
 
