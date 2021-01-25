@@ -3,6 +3,9 @@ fetch('/getThreadData')
 .then(data => {
     // console.log(data);
     initialize(data);
+}).catch(err => {
+    console.log(err);
+    window.location.href = '/login';
 });
 
 let initialize = (arr) => {
@@ -34,7 +37,7 @@ let initialize = (arr) => {
         divSnippet.setAttribute('class', 'item snippet');
 
         let smallSnippet = document.createElement('small');
-        smallSnippet.innerText = arr[item].description;
+        smallSnippet.innerText = arr[item].topic;
 
         //append items in order and create the button group
         btnGroup.appendChild(msgButton);

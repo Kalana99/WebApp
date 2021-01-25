@@ -3,22 +3,23 @@
         <header class="header-popup"><h2>Add/Drop Request</h2></header>
         <div class="content">
             <div class="input-field">
-                <input class="lecture" type="text" placeholder="current module" />
+                <input name="module" class="lecture" type="text" placeholder="current module" />
                 <div class="suggestions">
                 </div>
 
-                <input class="lecture" type="text" placeholder="required module" />
+                <input name="requiredModule" class="lecture" type="text" placeholder="required module" />
                 <div class="suggestions">
                 </div>
 
-                <input class="lecturer" type="text" placeholder="Lecturer" />
+                <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
                 <div class="suggestions-lecturer">
                 </div>
 
-                <input type="text" class="input" placeholder="snippet">
+                <input name="topic" type="text" class="input" placeholder="snippet">
 
+                <input type="hidden" id="type" name="type" value="addDrop" />
                 
-                <textarea name="description" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                <textarea name="message" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
                 <!-- append child to send evidence if the request type is submission deadline -->
                 <button type="submit">submit</button>
                 <button type="cancel" class="close-button-request" id="0">cancel</button>

@@ -97,6 +97,7 @@ module.exports.userprofile_get = (req, res) => {
 
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             res.render('userProfile', user);
+        
         });
     });
         
@@ -112,24 +113,4 @@ module.exports.threads_get = (req, res) => {
     res.render('threadView');
 
     
-};
-
-module.exports.submitRequests_post = (req, res) => {
-    let data = req.body;
-
-    const token = req.cookies.jwt;
-
-    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
-        let id = decodedToken.id;
-
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
-            database.addThread({
-                "description": data.description,
-                 "studentID": id,
-                 "type": data.type
-            });
-        });
-    });
-
-    res.redirect('/userprofile');
 };

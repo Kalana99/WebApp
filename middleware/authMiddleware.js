@@ -17,6 +17,7 @@ let requireAuth = (req, res, next) => {
         });
     }
     else{
+        console.log('not token');
         res.redirect('/login');
     }
 

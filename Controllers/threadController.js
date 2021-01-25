@@ -16,6 +16,46 @@ const createToken = (id) => {
     });
 };
 
+module.exports.submitRequests_post = (req, res) => {
+    let data = req.body;
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+
+            let messageId = database.addMessage({
+                "from": user._id,
+                "text": data.message,
+            });
+
+            let additionalData = {}
+
+            if(data.requiredModule != null){
+                additionalData.requiredModule = data.requiredModule;
+            }
+
+            database.addThread({
+                 "studentID": id,
+                 "type": data.type,
+                 "messageID_list": [messageId],
+                 "topic": data.topic,
+                 "StaffID": data.lecturer,
+                 "type": data.type,
+                 "status": true,
+                 "additionalData": additionalData,
+                 "module": data.module
+            });
+
+            console.log(data.currentModule);
+        });
+    });
+
+    res.redirect('/userprofile');
+};
+
 module.exports.getThreadData_get = (req, res) => {
 
     const token = req.cookies.jwt;

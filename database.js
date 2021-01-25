@@ -2,6 +2,7 @@
 let mongoose = require('mongoose');
 const User = require('./models/User');
 const Thread = require('./models/Thread');
+const Message = require('./models/Message');
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -35,6 +36,12 @@ let addThread = function(thread){
     return tempThread._id;
 };
 
+let addMessage = function(message){
+    let tempMessage = new Message(message);
+    tempMessage.save();
+    return tempMessage._id;
+}
+
 
 let functions = {
     dropCollection: dropCollection,
@@ -42,7 +49,8 @@ let functions = {
     updateMany: updateMany,
     find: find,
     addUser: addUser,
-    addThread: addThread
+    addThread: addThread,
+    addMessage: addMessage
 };
 
 module.exports = functions;
