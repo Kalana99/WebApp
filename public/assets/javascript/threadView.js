@@ -1,4 +1,5 @@
 let threads;
+let threadId = null;
 
 fetch('/getThreadData')
 .then(response => response.json())
@@ -117,8 +118,37 @@ replyButton.addEventListener('click', (event) => {
     popup_reply.className = 'popup-request-window visible';
 });
 
-let replyCancelButton = document.querySelector('.close-button-request');
-replyCancelButton.addEventListener('click', (event) => {
+let closePopup = () => {
     popup_reply = document.querySelector('.popup-request-window');
     popup_reply.className = 'popup-request-window';
+}
+
+let replyCancelButton = document.querySelector('.close-button-request');
+replyCancelButton.addEventListener('click', (event) => {
+    closePopup();
+});
+
+//reply submit button
+let replySubmitButton = document.querySelector('#replySubmitButton');
+replySubmitButton.addEventListener('click', (event) => {
+
+    let text = document.getElementById('textArea').value;
+
+    fetch('/reply', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({text, threadId})
+        })
+        .then(response => response.json())
+        .then(data => {
+            display(data.messages, threadId);
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+
+        closePopup();
+
 });

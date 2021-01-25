@@ -108,3 +108,24 @@ module.exports.getMessages_post = (req, res) => {
     
 
 };
+
+module.exports.reply_post = (req, res) => {
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            
+            let messageId = database.addMessage({
+                "from": id,
+                "text": req.body.text,
+            });
+
+            db.collection('threads').updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
+
+        });
+    });
+    
+};
