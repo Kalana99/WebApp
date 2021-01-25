@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Thread = require('../models/Thread');
 const database = require('../database');
 const mail = require('../modules/email');
 
@@ -76,7 +77,7 @@ module.exports.login_post = (req, res) => {
                 res.json({fault: 'password'});
             }
             else if(profile.verified === false){
-                res.json({fault: 'verify'});
+                res.json({fault: 'verify', id: profile._id});
             }
             else{
                 let token = createToken(profile._id);
@@ -96,6 +97,7 @@ module.exports.userprofile_get = (req, res) => {
 
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             res.render('userProfile', user);
+        
         });
     });
         
@@ -107,5 +109,8 @@ module.exports.logout_get = (req, res) => {
 };
 
 module.exports.threads_get = (req, res) => {
+
     res.render('threadView');
+
+    
 };

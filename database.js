@@ -1,6 +1,8 @@
 //Connecting to the database
 let mongoose = require('mongoose');
 const User = require('./models/User');
+const Thread = require('./models/Thread');
+const Message = require('./models/Message');
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -28,13 +30,27 @@ let addUser = function(user){
     return tempUser._id;
 };
 
+let addThread = function(thread){
+    let tempThread = new Thread(thread);
+    tempThread.save();
+    return tempThread._id;
+};
+
+let addMessage = function(message){
+    let tempMessage = new Message(message);
+    tempMessage.save();
+    return tempMessage._id;
+}
+
 
 let functions = {
     dropCollection: dropCollection,
     updateOne: updateOne,
     updateMany: updateMany,
     find: find,
-    addUser: addUser
+    addUser: addUser,
+    addThread: addThread,
+    addMessage: addMessage
 };
 
 module.exports = functions;

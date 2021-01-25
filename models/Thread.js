@@ -3,14 +3,16 @@ const Schema = mongoose.Schema;
 
 //Creating schema and model
 const threadSchema = new Schema({
-    "Topic": String,
+    "topic": String,
     "StaffID": String,
     "studentID": String,
     //"date": String,
     //"time": String,
     "type": String,
-    "status": String,
-    "messageID_list": [String]
+    "status": Boolean,
+    "messageID_list": [String],
+    "additionalData": Object,
+    "module": String
 },
 { timestamps: true });
 

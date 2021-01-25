@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_popup.css">
-    <link rel="stylesheet" href="/css/styles_normal.css">
+    <link rel="stylesheet" href="/css/styles_userProfile.css">
+    <link rel="stylesheet" href="/css/styles_logoutPopup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><%=name %></title>
 </head>
 
@@ -12,17 +14,15 @@
     <div class="container">
         <header class="header-main">
           <div class="home-icon">
-            <!-- <a href="/home" title="switcher">
-                <img src="#" alt="home-logo">
-            </a> -->
           </div>
         </header>
-        <main>
-          <div class="row">
+        
+            <div class="row">
             <div class="profile-div">
                 <div class="photo">
-                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>
+                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
                 </div>
+                
                 <h4 class="name"><%= name %> </h4>
                 <p class="info"><%= index %> </p>
                 <p class="info"><%= phone %> </p>
@@ -41,50 +41,41 @@
                             <a href="/deleteAccount"> Delete account</a>
                         </div>
                     </li>
-                    <li id="logout-popup">Log out</li>
+                    <li>
+                        <button id="logout-popup">
+                        <i class="fa fa-sign-out"></i></button>
+                    </li>
                 </ul>
-                <!-- popup logout window -->
-                <div class="popup-window" id="popup-window">
-                    <div class="header">
-                        <h2>LOG OUT!</h2>
-                    </div>
-                    <div class="confirm-text">
-                        <h3>Log out wennama oneda?</h3>
-                    </div>
-                    <div class="form-control">
-                        <button type="submit" id="submit_logout">OW YAKO</button>
-                        <button type="submit" id="cancel_logout">NA ITHIN</button>
-                    </div>
-                </div>
-
+                    
+                <%- include('./assets/partials/popup_logout.ejs') %>
+            </div>
+            <main>
                 <div class="request-tiles">
 
-                    <button class="button" onclick="openForm(0)">
+                    <button class="open-button-request" id="0">
                         <p class="button__text">Add/Drop Requests</p>
                     </button>
                     
-                    <%- include('./assets/partials/popupForm.ejs') %>
+                    <%- include('./assets/partials/popup_addDrop.ejs') %>
 
-                    <button class="button" onclick="openForm(1)">
+                    <button class="open-button-request" id="1">
                         <p class="button__text">Submission Deadline</p>
                     </button>
                     
-                    <%- include('./assets/partials/popupForm.ejs') %>
+                    <%- include('./assets/partials/popup_submission.ejs') %>
 
-                    <button class="button" onclick="openForm(2)">
+                    <button class="open-button-request" id="2">
                         <p class="button__text">Repeat Exams</p>
                     </button>
                     
-                    <%- include('./assets/partials/popupForm.ejs') %>
+                    <%- include('./assets/partials/popup_repeatExam.ejs') %>
 
                 </div>
-            </div>
-          </div>
-          </main>
-        </main>
-    </div>
+            </main>
+    
 
     <%- include('./assets/partials/footer.ejs') %>
+    </div>
 
     <script src="/javascript/popupForm.js"></script>
 </body>

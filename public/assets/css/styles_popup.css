@@ -1,11 +1,10 @@
 .popup-request-window{
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   align-items: center;
   justify-content: center;
   height: fit-content;
-  margin-left: -200px;
-  margin-top: -150px;
+  transform: translate(-50%, -50%);
   z-index: 1;
   background-color: #fff;
   border-radius: 5px;
@@ -15,7 +14,6 @@
   left: 50%;
   top: 50%;
   visibility: hidden;
-  transition-duration: 500ms;
 }
 
 .popup-request-window.visible{
@@ -61,4 +59,26 @@
   border: grey solid thin;
 }
 
+/* suggestions autocomplete part */
+.lecture, .lecturer{
+  margin: 10px;
+  padding: 5px;
+  display: inline-block;
+  width: 300px;
+  border-radius: 5px;
+  border: grey solid thin;
+}
 
+.suggestions > div, .suggestions-lecturer > div{
+  display: absolute;
+  width: 300px;
+  padding: 5px;
+  color: black;
+  border-top: 1px solid #666;
+  cursor: pointer;
+  text-align: left;
+}
+.suggestions > div:hover, .suggestions-lecturer > div:hover {
+  background-color: grey;
+  color: #fff;
+}

@@ -1,0 +1,25 @@
+<div class="popup-request-window">
+    <form class="popup-form" action="/submitRequest" method="POST">
+        <header class="header-popup"><h2>Submission Deadline</h2></header>
+        <div class="content">
+            <div class="input-field">
+                <input name="module" class="lecture" type="text" placeholder="Module" />
+                <div class="suggestions">
+                </div>
+
+                <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
+                <div class="suggestions-lecturer">
+                </div>
+
+                <input name="topic" type="text" class="input" placeholder="snippet">
+
+                <input type="hidden" id="type" name="type" value="submission" />
+
+                <textarea name="message" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                <!-- append child to send evidence if the request type is submission deadline -->
+                <button type="submit">submit</button>
+                <button type="cancel" class="close-button-request" id="1">cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

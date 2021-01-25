@@ -19,5 +19,4 @@ router.get('/logout',authController.logout_get);
 
 router.get('/threads',authController.threads_get);
 
-
 module.exports = router;
