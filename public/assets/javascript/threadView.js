@@ -87,7 +87,9 @@ let initialize = (arr) => {
 let msgGroup = document.querySelector('.msg-group');
 
 let display = (arr, msgId) => {
-    console.log(arr);
+
+    msgGroup.innerHTML = '';
+    
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
 
@@ -97,7 +99,7 @@ let display = (arr, msgId) => {
 
         msgContainer.appendChild(msg);
 
-        if (msgId === id){
+        if (msgId === person){
             msgContainer.setAttribute('class', 'sender');
         }
         else{
