@@ -73,7 +73,14 @@ a.log{
 
 }
 
+.hide{
+    padding: 50px;
+    position: absolute;
+    background-color: tomato;
+    text-align: center;
 
+
+}
 
 
 a.log:hover{
