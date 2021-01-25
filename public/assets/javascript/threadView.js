@@ -109,3 +109,16 @@ let display = (arr, msgId) => {
         msgGroup.appendChild(msgContainer);
     }
 };
+
+//setting the event listener for the reply button
+let replyButton = document.querySelector('.replyBtn');
+replyButton.addEventListener('click', (event) => {
+    popup_reply = document.querySelector('.popup-request-window');
+    popup_reply.className = 'popup-request-window visible';
+});
+
+let replyCancelButton = document.querySelector('.close-button-request');
+replyCancelButton.addEventListener('click', (event) => {
+    popup_reply = document.querySelector('.popup-request-window');
+    popup_reply.className = 'popup-request-window';
+});
