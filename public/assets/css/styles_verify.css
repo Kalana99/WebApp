@@ -73,7 +73,11 @@ a.log{
 
 }
 
+.hide{
+    padding: 50px;
+    
 
+}
 
 
 a.log:hover{
