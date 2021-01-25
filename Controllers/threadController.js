@@ -77,3 +77,34 @@ module.exports.getThreadData_get = (req, res) => {
         });
     });
 };
+
+module.exports.getMessages_post = (req, res) => {
+
+    let threadId = req.body.threadId;
+
+    let getData = async () => {
+
+        let thread = await db.collection('threads').findOne({_id: mongoose.Types.ObjectId(threadId)});
+
+        let messageIdList = thread.messageID_list;
+        
+            messages = []
+
+            messageIdList.forEach((element) => {
+                
+                
+            });
+
+            for(let i = 0; i < messageIdList.length; i++){
+                let message = await db.collection('messages').findOne({_id: mongoose.Types.ObjectId(messageIdList[i])});
+                messages.push(message);
+            }
+
+            res.json({messages});
+    
+    };
+    getData();
+
+    
+
+};
