@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
     <link rel="stylesheet" href="/css/styles_logoutPopup.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title><%=name %></title>
 </head>
 
@@ -31,19 +31,31 @@
             </div>
             <div class="navigation">
                 <ul class="nav">
-                    <li><a href="/threads">Threads</a></li>
-                    <li><a href="#">Notifications</a></li>
-                    <li class= "dropdown">
-                        <button >Settings</button>
+                    <li class= "nav-tabs"><a href="/threads"><button>
+                        <i class="material-icons">forum</i>
+                        <p>threads</p></button>
+                        </a>
+                    </li>
+                    <li class= "nav-tabs"><a href="#"><button>
+                        <i class="material-icons">notifications_none</i>
+                        <p>Notifications</p>
+                        </button></a>
+                    </li>
+                    <li class= "dropdown nav-tabs">
+                        <button >                         
+                            <i class="material-icons">brightness_low</i>
+                            <p>Settings</p>
+                        </button>
                         <div class= "dropdown-content">
                             <a href="#"> Edit profile</a>
                             <a href="/change_password.ejs"> Change password</a>
                             <a href="/delete_account.ejs"> Delete account</a>
                         </div>
                     </li>
-                    <li>
+                    <li class="logout-button">
                         <button id="logout-popup">
-                        <i class="fa fa-sign-out"></i></button>
+                        <i class="material-icons log">power_settings_new</i>
+                        <p>Logout</p></button>
                     </li>
                 </ul>
                     
