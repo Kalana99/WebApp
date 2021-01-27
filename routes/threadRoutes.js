@@ -9,4 +9,6 @@ router.post('/submitRequest', threadController.submitRequests_post);
 
 router.post('/getMessages', threadController.getMessages_post);
 
+router.post('/reply', threadController.reply_post);
+
 module.exports = router;

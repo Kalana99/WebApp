@@ -40,5 +40,21 @@ userSchema.statics.login = async function(email, password){
     return user;
 };
 
+userSchema.statics.checkPassword = async function(id, current_password){
+    
+    const user = await this.findOne({_id: id});
+    
+    const auth = await bcrypt.compare(current_password, user.password);
+    
+    if(auth){
+        user.passwordCorrect = true;
+    }
+    else{
+        user.passwordCorrect = false;
+    }
+    
+    return user;
+};
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;

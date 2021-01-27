@@ -1,14 +1,15 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="#" method="POST">
+    <form class="popup-form">
         <div class="content">
             <div class="input-field">
 
                 <textarea name="message" rows="10" cols="5" placeholder="description" class="input"></textarea>
                 
+                <input type="hidden" id="threadId" name="threadId" />
                 <!-- append child to send evidence if the request type is submission deadline -->
 
-                <button type="submit">submit</button>
-                <button type="cancel" class="close-button-request">cancel</button>
+                <button type="submit" id=replySubmitButton>submit</button>
+                <button type="button" class="close-button-request">cancel</button>
 
             </div>
         </div>
