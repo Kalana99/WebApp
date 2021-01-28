@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles_threadView_staff.css">
+    <link rel="stylesheet" href="/css/styles_popupReply.css">
+    <title>Thread View</title>
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <ul class="navigation-list">
+                <li><a href="/userprofile">Home</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <h1>REQUESTS</h1>
+        <button id="replyButton" class="replyBtn">Reply</button>
+        <button id="acceptButton" class="acceptBtn">Accept</button>
+        <button id="declineButton" class="declineBtn">Decline</button>
+
+        <%- include('./assets/partials/popup_reply.ejs') %>
+
+    </header>
+    <section>
+        <div class="column left">
+            <!-- <div class="search-bar">
+                search bar
+            </div> -->
+            <div>
+                <div class="message-list-item">
+                    <div class="btn-group">
+                        <!-- <button>
+                            <div class="message-div">
+                                <div class="item sender"><b>sender</b></div>
+                                <div class="item date"><small>date</small></div>
+                                <div class="item snippet"><small>snippet</small></div>
+                            </div>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="message-list">
+                <div class="msg-group">
+                    <!-- <div>
+                        <p>This is not a msg</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/threadView.js"></script>
+    <footer><h2>Copyright</h2></footer>
+</body>
+</html>

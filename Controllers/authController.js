@@ -110,7 +110,7 @@ module.exports.logout_get = (req, res) => {
 
 module.exports.threads_get = (req, res) => {
 
-    res.render('threadView');
+    res.render('threadView_student');
 
     
 };
