@@ -44,7 +44,7 @@ module.exports.submitRequests_post = (req, res) => {
                  "topic": data.topic,
                  "StaffID": data.lecturer,
                  "type": data.type,
-                 "status": true,
+                 "status": 'active',
                  "additionalData": additionalData,
                  "module": data.module
             });
