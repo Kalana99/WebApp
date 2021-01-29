@@ -143,8 +143,15 @@ lecturerInput.addEventListener('keyup', () => {
         .then(response => response.json())
         .then(data => {
 
-            if(data.time < lastSearchTime){
 
+            
+            let dataTime = Date(data.time);
+
+            console.log('lasttime', lastSearchTime);
+            console.log('now', dataTime);
+
+            if(dataTime.valueOf() < lastSearchTime.valueOf){
+                console.log('here');
                 lastSearchTime = data.time;
 
                 suggestionsPanelLecturer.innerHTML = '';
