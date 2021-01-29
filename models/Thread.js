@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 //Creating schema and model
 const threadSchema = new Schema({
-    "topic": String,
     "StaffID": String,
     "studentID": String,
     //"date": String,
