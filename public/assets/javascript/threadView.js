@@ -1,5 +1,6 @@
 let threads;
 let threadId = null;
+let replyButtons = document.querySelector('.reply-btn-group');
 
 fetch('/getThreadData')
 .then(response => response.json())
@@ -82,7 +83,13 @@ let initialize = (arr) => {
             }
             
         });
+
     };
+
+    // if (btnGroup.hasfocus()){
+    //     replyButtons.className = 'reply-btn-group visible';
+    // }
+
 };
 
 let msgGroup = document.querySelector('.msg-group');

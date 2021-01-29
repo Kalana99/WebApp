@@ -92,7 +92,15 @@ section{
     background-color: lightgrey;
 }
 
-.acceptBtn, .declineBtn, .replyBtn{
+/* .reply-btn-group{
+    visibility: hidden;
+}
+
+.reply-btn-group.visible{
+    visibility: visible;
+} */
+
+.reply-btn-group button{
     color: black;
     border: 1px solid #454945;
     border-radius: 5px;
@@ -127,7 +135,6 @@ footer{
     flex-direction: column;
     margin: 3px;
 }
-
 
 
 .item{
