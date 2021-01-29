@@ -8,7 +8,7 @@ body{
 
 .main{
 
-	background-image: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url(../resources/dan-rogers-lMIvz5b1vRo-unsplash.jpg);
+	background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url(../resources/dan-rogers-lMIvz5b1vRo-unsplash.jpg);
     background-size:cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -48,7 +48,7 @@ body{
 .login{
 	position: absolute;
 	bottom:5%;
-	right: 2%;
+	right: 50%;
 }
 
 
