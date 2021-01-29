@@ -90,10 +90,7 @@ let initialize = (arr) => {
                     displayBtn(data.type);
                 }).catch(err => {
                     console.log(err);
-                });
-
-            
-            
+                });          
         });
 
     };
