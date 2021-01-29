@@ -125,6 +125,7 @@ lectureInput.addEventListener('keyup', () => {
 
 let lecturerInput = document.querySelector('.lecturer');
 let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
+let lastSearchTime = new Date();
 
 lecturerInput.addEventListener('keyup', () => {
     let input = lecturerInput.value;
@@ -137,30 +138,37 @@ lecturerInput.addEventListener('keyup', () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({input}),
+        body: JSON.stringify({input, time: new Date()}),
         })
         .then(response => response.json())
         .then(data => {
-            suggestionsPanelLecturer.innerHTML = '';
-            //go through the filtered list of modules
-            data.forEach((suggested) => {
-                let div = document.createElement('div');
-                div.setAttribute('id', suggested.id);
-                div.innerHTML = suggested.name;
-                suggestionsPanelLecturer.appendChild(div);
 
-                //select a suggestion
-                div.addEventListener('click', () => {
-                    lecturerInput.value = suggested.name;
-                    suggestionsPanelLecturer.innerHTML = ''; 
+            if(data.time < lastSearchTime){
+
+                lastSearchTime = data.time;
+
+                suggestionsPanelLecturer.innerHTML = '';
+                //go through the filtered list of modules
+                data.lecturers.forEach((suggested) => {
+                    let div = document.createElement('div');
+                    div.setAttribute('id', suggested.id);
+                    div.innerHTML = suggested.name;
+                    suggestionsPanelLecturer.appendChild(div);
+    
+                    //select a suggestion
+                    div.addEventListener('click', () => {
+                        lecturerInput.value = suggested.name;
+                        suggestionsPanelLecturer.innerHTML = ''; 
+                    });
+    
+                    //make the suggestion panel empty if there's no input
+                    if (input === '') {
+                        suggestionsPanelLecturer.innerHTML = '';  
+                    }
+    
                 });
-
-                //make the suggestion panel empty if there's no input
-                if (input === '') {
-                    suggestionsPanelLecturer.innerHTML = '';  
-                }
-
-            });
+            }
+            
             console.log('Success:', data);
         })
         .catch((error) => {

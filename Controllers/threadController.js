@@ -168,7 +168,7 @@ module.exports.getStaff_post = (req, res) => {
             result.push({name: lecturer.name, id: lecturer._id, index: lecturer.index});
         });
 
-        res.json(result);
+        res.json({lecturers:result, time: req.body.time});
     });
 
     
