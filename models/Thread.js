@@ -9,7 +9,7 @@ const threadSchema = new Schema({
     //"date": String,
     //"time": String,
     "type": String,
-    "status": Boolean,
+    "status": String,
     "messageID_list": [String],
     "additionalData": Object,
     "module": String
