@@ -157,6 +157,21 @@ let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
 lecturerInput.addEventListener('keyup', () => {
     let input = lecturerInput.value;
 
+    fetch('/getStaff', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({input}),
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log('Success:', data);
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+    });
+
     //make the panel empty for every input value
     suggestionsPanelLecturer.innerHTML = '';
 
