@@ -42,7 +42,7 @@ module.exports.submitRequests_post = (req, res) => {
                  "type": data.type,
                  "messageID_list": [messageId],
                  "topic": data.topic,
-                 "StaffID": data.lecturer,
+                 "StaffID": data.staffId,
                  "type": data.type,
                  "status": 'active',
                  "additionalData": additionalData,
@@ -65,7 +65,7 @@ module.exports.getThreadData_get = (req, res) => {
 
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
-            db.collection('threads').find({"studentID": id}).toArray().then(array => {
+            db.collection('threads').find({$or:[{"studentID": id}, {'StaffID': id}]}).toArray().then(array => {
                 let name = user.name;
 
                 array.forEach(element => {

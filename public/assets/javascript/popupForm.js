@@ -157,9 +157,13 @@ lecturerInput.addEventListener('keyup', () => {
                     suggestionsPanelLecturer.appendChild(div);
     
                     //select a suggestion
-                    div.addEventListener('click', () => {
+                    div.addEventListener('click', (event) => {
                         lecturerInput.value = suggested.name;
                         suggestionsPanelLecturer.innerHTML = ''; 
+
+                        //get the hidden staffId input
+                        let staffIdInput = document.getElementById('staffId');
+                        staffIdInput.setAttribute('value', event.currentTarget.id);
                     });
     
                     //make the suggestion panel empty if there's no input
