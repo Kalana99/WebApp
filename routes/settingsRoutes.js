@@ -8,5 +8,6 @@ router.get('/changePassword', settingsController.get_changePassword);
 router.put('/changePassword', settingsController.put_changePassword);
 
 router.get('/deleteAccount', settingsController.get_deleteAccount);
+router.delete('/deleteAccount', settingsController.let_deleteAccount);
 
 module.exports = router;

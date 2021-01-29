@@ -68,7 +68,7 @@ let serverSideValidateSubmit = function(){
                 setError(confirm_password, 'mismatched with the new password');
             }
             else{
-                window.location.href = ('/changePassword');
+                window.location.href = ('/userprofile');
             }
         })
         .catch((error) => {
