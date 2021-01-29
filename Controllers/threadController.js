@@ -162,7 +162,13 @@ module.exports.getStaff_post = (req, res) => {
             return lecturer.name.toLowerCase().includes(searchTerm);
         });
 
-        res.json({suggestions});
+        let result = [];
+
+        suggestions.forEach(lecturer => {
+            result.push({name: lecturer.name, id: lecturer._id, index: lecturer.index});
+        });
+
+        res.json(result);
     });
 
     
