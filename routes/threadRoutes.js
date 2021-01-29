@@ -13,4 +13,6 @@ router.post('/reply', threadController.reply_post);
 
 router.post('/acceptOrDeclineRequest', threadController.acceptOrDeclineRequest_post);
 
+router.get('/getUserType', requireAuth, threadController.getUserType_get);
+
 module.exports = router;

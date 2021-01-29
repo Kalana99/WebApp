@@ -132,7 +132,7 @@ replyCancelButton.addEventListener('click', (event) => {
 let replySubmitButton = document.querySelector('#replySubmitButton');
 replySubmitButton.addEventListener('click', (event) => {
 
-    let text = document.getElementById('textArea').value;
+    let text = document.getElementById('textarea').value;
 
     fetch('/reply', {
         method: 'POST', // or 'PUT'
@@ -155,31 +155,33 @@ replySubmitButton.addEventListener('click', (event) => {
 
 //setting the event listener for the accept button
 let acceptButton = document.getElementById('acceptButton');
-acceptButton.addEventListener('click', (event) => {
+if(acceptButton != null)
+    acceptButton.addEventListener('click', (event) => {
 
-    data = {
-        'threadId': threadId,
-        'status': 'accepted'
-    }
+        data = {
+            'threadId': threadId,
+            'status': 'accepted'
+        }
 
-    fetch('/acceptOrDeclineRequest', {
-    method: 'POST', // or 'PUT'
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-        location.reload();
-    })
-    .catch((error) => {
-    console.error('Error:', error);
+        fetch('/acceptOrDeclineRequest', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            location.reload();
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
     });
-});
 
 let declineButton = document.getElementById('declineButton');
-declineButton.addEventListener('click', (event) => {
+if(declineButton != null)
+    declineButton.addEventListener('click', (event) => {
 
     data = {
         'threadId': threadId,
@@ -200,4 +202,4 @@ declineButton.addEventListener('click', (event) => {
     .catch((error) => {
     console.error('Error:', error);
     });
-});
+    });

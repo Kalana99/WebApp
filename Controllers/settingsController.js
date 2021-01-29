@@ -95,7 +95,8 @@ module.exports.let_deleteAccount = (req, res) => {
                 db.collection('users').deleteOne({_id: mongoose.Types.ObjectId(id)})
                 .then(function(d){
                     console.log(d.deletedCount);
-                    res.redirect('/login')
+                    //res.redirect('/login')
+                    res.json({'message': 'account deletion successful'});
                 });
             }
         });

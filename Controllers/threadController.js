@@ -138,3 +138,17 @@ module.exports.acceptOrDeclineRequest_post = (req, res) => {
 
     res.json({'status': 'success'});
 };
+
+module.exports.getUserType_get = (req, res) => {
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            
+            res.json({type: user.type});
+
+        });
+    });
+};

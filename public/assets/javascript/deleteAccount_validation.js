@@ -67,7 +67,7 @@ let serverSideValidateSubmit = function(){
                 setError(password, 'password mismatch');
             }
             else{
-                window.location.href = ('/login');
+                window.location.href = ('/logout');
             }
         })
         .catch((error) => {
