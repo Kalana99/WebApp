@@ -36,7 +36,9 @@ let initialize = (arr) => {
         divDate.setAttribute('class', 'item date');
         
         let smallDate = document.createElement('small');
-        smallDate.innerText = arr[item].createdAt;
+        let dateAndTime = arr[item].createdAt.split('T');
+        let time = dateAndTime[1].split(':');
+        smallDate.innerText = (dateAndTime[0] + ' at ' + time[0] + ':' + time[1]);
 
         let divType = document.createElement('div');
         divType.setAttribute('class', 'type');
