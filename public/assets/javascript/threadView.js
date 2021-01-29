@@ -152,3 +152,52 @@ replySubmitButton.addEventListener('click', (event) => {
         closePopup();
 
 });
+
+//setting the event listener for the accept button
+let acceptButton = document.getElementById('acceptButton');
+acceptButton.addEventListener('click', (event) => {
+
+    data = {
+        'threadId': threadId,
+        'status': 'accepted'
+    }
+
+    fetch('/acceptOrDeclineRequest', {
+    method: 'POST', // or 'PUT'
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+});
+
+let declineButton = document.getElementById('declineButton');
+declineButton.addEventListener('click', (event) => {
+
+    data = {
+        'threadId': threadId,
+        'status': 'declined'
+    }
+
+    fetch('/acceptOrDeclineRequest', {
+    method: 'POST', // or 'PUT'
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+});

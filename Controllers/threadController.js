@@ -129,3 +129,12 @@ module.exports.reply_post = (req, res) => {
     });
     
 };
+
+module.exports.acceptOrDeclineRequest_post = (req, res) => {
+    data = req.body;
+    console.log(data);
+
+    database.updateOne('threads', {_id: mongoose.Types.ObjectId(data.threadId)}, {status: data.status});
+
+    res.json({'status': 'success'});
+};
