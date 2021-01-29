@@ -1,6 +1,5 @@
 let threads;
 let threadId = null;
-let replyButtons = document.querySelector('.reply-btn-group');
 
 fetch('/getThreadData')
 .then(response => response.json())
@@ -12,6 +11,9 @@ fetch('/getThreadData')
     console.log(err);
     window.location.href = '/login';
 });
+
+//check if a child element in btn group is focused
+let isFocused;
 
 let initialize = (arr) => {
     //button group
@@ -81,14 +83,20 @@ let initialize = (arr) => {
                     break;
                 }
             }
+
+            fetch('/getUserType')
+                .then(response => response.json())
+                .then(data => {
+                    displayBtn(data.type);
+                }).catch(err => {
+                    console.log(err);
+                });
+
+            
             
         });
 
     };
-
-    // if (btnGroup.hasfocus()){
-    //     replyButtons.className = 'reply-btn-group visible';
-    // }
 
 };
 
@@ -116,6 +124,8 @@ let display = (arr, msgId) => {
 
         msgGroup.appendChild(msgContainer);
     }
+
+    
 };
 
 //setting the event listener for the reply button
@@ -208,3 +218,16 @@ declineButton.addEventListener('click', (event) => {
     console.error('Error:', error);
     });
 });
+
+//reply button group
+let replyButtons = document.querySelector('.reply-btn-group');
+
+let displayBtn = (type) => {
+    if (type === 'staff'){
+        replyButtons.className = 'reply-btn-group visible';
+    }
+    else if (type === 'student'){
+        replyButtons.className = 'reply-btn-group';
+        replyButton.className = 'replyBtn visible';
+    }
+};

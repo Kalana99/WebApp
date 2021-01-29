@@ -92,7 +92,7 @@ section{
     background-color: lightgrey;
 }
 
-.acceptBtn, .declineBtn, .replyBtn{
+.reply-btn-group button{
     color: black;
     border: 1px solid #454945;
     border-radius: 5px;
@@ -103,6 +103,7 @@ section{
     width: 100px;
     display: inline-block;
     text-align: center;
+    visibility: hidden;
 }
 
 .acceptBtn{
@@ -113,6 +114,14 @@ section{
 }
 .replyBtn{
     background: #9da19b;
+}
+
+.reply-btn-group.visible button{
+    visibility: visible;
+}
+
+.replyBtn.visible{
+    visibility: visible;
 }
 
 footer{
