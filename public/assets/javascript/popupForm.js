@@ -60,126 +60,127 @@ document.querySelector('#submit_logout').addEventListener('click', () => {
 });
 
 
-//suggestion field
+// suggestion field
 
-//suggestions for lecture modules
-// let modules = [
-//     {name: 'Computer Architecture'},
-//     {name: 'Principles of OOP'},
-//     {name: 'Numerical methods for cse'},
-//     {name: 'Theory of electricity'},
-//     {name: 'Data structures and algorithms'},
-//     {name: 'Communication skills'}
-// ];
+// suggestions for lecture modules
+let modules = [
+    {name: 'Computer Architecture'},
+    {name: 'Principles of OOP'},
+    {name: 'Numerical methods for cse'},
+    {name: 'Theory of electricity'},
+    {name: 'Data structures and algorithms'},
+    {name: 'Communication skills'}
+];
   
-// let lectureInput = document.querySelector('.lecture');
-// let suggestionsPanel = document.querySelector('.suggestions');
+let lectureInput = document.querySelector('.lecture');
+let suggestionsPanel = document.querySelector('.suggestions');
 
-// lectureInput.addEventListener('keyup', () => {
-//     let input = lectureInput.value;
+lectureInput.addEventListener('keyup', () => {
+    let input = lectureInput.value;
 
-//     //make the panel empty for every input value
-//     suggestionsPanel.innerHTML = '';
+    //make the panel empty for every input value
+    suggestionsPanel.innerHTML = '';
 
-//     //.filter() returns a list
-//     let suggestions = modules.filter((module) => {
-//         return module.name.toLowerCase().includes(input);
-//     });
+    //.filter() returns a list
+    let suggestions = modules.filter((module) => {
+        return module.name.toLowerCase().includes(input);
+    });
 
-//     //go through the filtered list of modules
-//     suggestions.forEach((suggested) => {
-//         let div = document.createElement('div');
-//         div.innerHTML = suggested.name;
-//         suggestionsPanel.appendChild(div);
+    //go through the filtered list of modules
+    suggestions.forEach((suggested) => {
+        let div = document.createElement('div');
+        div.innerHTML = suggested.name;
+        suggestionsPanel.appendChild(div);
 
-//         //select a suggestion
-//         div.addEventListener('click', () => {
-//             lectureInput.value = suggested.name;
-//             suggestionsPanel.innerHTML = ''; 
-//         });
+        //select a suggestion
+        div.addEventListener('click', () => {
+            lectureInput.value = suggested.name;
+            suggestionsPanel.innerHTML = ''; 
+        });
 
-//         //function to get the enter key press
-//         lectureInput.addEventListener('keyup', (event) => {
-//             if (event.keyCode === 13){
-//                 //prevent the implicit submit of enter key
-//                 event.preventDefault();
+        //function to get the enter key press
+        lectureInput.addEventListener('keyup', (event) => {
+            if (event.keyCode === 13){
+                //prevent the implicit submit of enter key
+                event.preventDefault();
 
-//                 //if enter is pressed, perform the click event on div
-//                 div.click();
-//             }
-//         });
+                //if enter is pressed, perform the click event on div
+                div.click();
+            }
+        });
 
-//     });
+    });
 
-//     //make the suggestion panel empty if there's no input
-//     if (input === '') {
-//         suggestionsPanel.innerHTML = '';  
-//     }
-// });
+    //make the suggestion panel empty if there's no input
+    if (input === '') {
+        suggestionsPanel.innerHTML = '';  
+    }
+});
 
-//suggestions for lecturers
-// let lecturers = [
-//     {name: "ENG. DR. INDIKA PERERA"},
-//     {name: "ENG. PROF. GIHAN DIAS"},
-//     {name: "ENG. ASSOCIATE PROF. SANATH JAYASENA"},
-//     {name: "DR. CHARITH CHITRARANJAN"},
-//     {name: "ENG. DR. CHATHURA R. DE SILVA"},
-//     {name: "ENG. DR. SHANTHA FERNANDO"},
-//     {name: "ENG. LT. COL. DR. CHANDANA D. GAMAGE"},
-//     {name: "DR. KUTILA GUNASEKERA"},
-//     {name: "DR. DULANI MEEDENIYA"},
-//     {name: "MS. VISHAKA NANAYAKKARA"},
-//     {name: "DR. A. SHEHAN PERERA"},
-//     {name: "DR. SURANGIKA RANATHUNGA"},
-//     {name: "DR. SULOCHANA SOORIYAARACHCHI"},
-//     {name: "DR. UTHAYASANKER THAYASIVAM"},
-//     {name: "DR. ADEESHA WIJAYASIRI"},
-//     {name: "MR. GAYASHAN AMARASINGHE"},
-//     {name: "MR. NISANSA DE SILVA"},
-//     {name: "MS. SADARI JAYAWARDENA"},
-//     {name: "MS. AKILA PEMASIRI"},
-//     {name: "MS. SANDAREKA WICKRAMANAYAKE"},
-//     {name: "DR. AJITH COLONNE"},
-//     {name: "MR. CHAMARA DISANAYAKE"},
-//     {name: "DR. MADHU FERNANDO"},
-//     {name: "MR. MARIO FONSEKA"},
-//     {name: "MS. MENASHA KODITHUWAKKU"},
-//     {name: "DR. RAVEENDRA KOGGALAGE"},
-//     {name: "MR. JANAKA KUMARASINGHE"},
-//     {name: "DR. SRINATH PERERA"},
-//     {name: "ENG. CHANDANA WEERASINGHE"}
-// ];
+// suggestions for lecturers
+//[{name: "", index: "", id: ""}]
+let lecturers = [
+    {name: "ENG. DR. INDIKA PERERA"},
+    {name: "ENG. PROF. GIHAN DIAS"},
+    {name: "ENG. ASSOCIATE PROF. SANATH JAYASENA"},
+    {name: "DR. CHARITH CHITRARANJAN"},
+    {name: "ENG. DR. CHATHURA R. DE SILVA"},
+    {name: "ENG. DR. SHANTHA FERNANDO"},
+    {name: "ENG. LT. COL. DR. CHANDANA D. GAMAGE"},
+    {name: "DR. KUTILA GUNASEKERA"},
+    {name: "DR. DULANI MEEDENIYA"},
+    {name: "MS. VISHAKA NANAYAKKARA"},
+    {name: "DR. A. SHEHAN PERERA"},
+    {name: "DR. SURANGIKA RANATHUNGA"},
+    {name: "DR. SULOCHANA SOORIYAARACHCHI"},
+    {name: "DR. UTHAYASANKER THAYASIVAM"},
+    {name: "DR. ADEESHA WIJAYASIRI"},
+    {name: "MR. GAYASHAN AMARASINGHE"},
+    {name: "MR. NISANSA DE SILVA"},
+    {name: "MS. SADARI JAYAWARDENA"},
+    {name: "MS. AKILA PEMASIRI"},
+    {name: "MS. SANDAREKA WICKRAMANAYAKE"},
+    {name: "DR. AJITH COLONNE"},
+    {name: "MR. CHAMARA DISANAYAKE"},
+    {name: "DR. MADHU FERNANDO"},
+    {name: "MR. MARIO FONSEKA"},
+    {name: "MS. MENASHA KODITHUWAKKU"},
+    {name: "DR. RAVEENDRA KOGGALAGE"},
+    {name: "MR. JANAKA KUMARASINGHE"},
+    {name: "DR. SRINATH PERERA"},
+    {name: "ENG. CHANDANA WEERASINGHE"}
+];
 
-// let lecturerInput = document.querySelector('.lecturer');
-// let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
+let lecturerInput = document.querySelector('.lecturer');
+let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
 
-// lecturerInput.addEventListener('keyup', () => {
-//     let input = lecturerInput.value;
+lecturerInput.addEventListener('keyup', () => {
+    let input = lecturerInput.value;
 
-//     //make the panel empty for every input value
-//     suggestionsPanelLecturer.innerHTML = '';
+    //make the panel empty for every input value
+    suggestionsPanelLecturer.innerHTML = '';
 
-//     //.filter() returns a list
-//     let suggestions = lecturers.filter((lecturer) => {
-//         return lecturer.name.toLowerCase().includes(input);
-//     });
+    //.filter() returns a list
+    let suggestions = lecturers.filter((lecturer) => {
+        return lecturer.name.toLowerCase().includes(input);
+    });
 
-//     //go through the filtered list of modules
-//     suggestions.forEach((suggested) => {
-//         let div = document.createElement('div');
-//         div.innerHTML = suggested.name;
-//         suggestionsPanelLecturer.appendChild(div);
+    //go through the filtered list of modules
+    suggestions.forEach((suggested) => {
+        let div = document.createElement('div');
+        div.innerHTML = suggested.name;
+        suggestionsPanelLecturer.appendChild(div);
 
-//         //select a suggestion
-//         div.addEventListener('click', () => {
-//             lecturerInput.value = suggested.name;
-//             suggestionsPanelLecturer.innerHTML = ''; 
-//         });
+        //select a suggestion
+        div.addEventListener('click', () => {
+            lecturerInput.value = suggested.name;
+            suggestionsPanelLecturer.innerHTML = ''; 
+        });
 
-//     });
+    });
 
-//     //make the suggestion panel empty if there's no input
-//     if (input === '') {
-//         suggestionsPanelLecturer.innerHTML = '';  
-//     }
-// });
+    //make the suggestion panel empty if there's no input
+    if (input === '') {
+        suggestionsPanelLecturer.innerHTML = '';  
+    }
+});
