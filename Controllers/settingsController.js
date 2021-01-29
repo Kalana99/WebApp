@@ -57,6 +57,7 @@ module.exports.put_changePassword = (req, res) => {//coppied from authController
                             }
                             else{
                                 console.log('password updated');
+                                res.redirect('/userprofile')
                             }
                         });
                     })
@@ -71,4 +72,32 @@ module.exports.put_changePassword = (req, res) => {//coppied from authController
 //settings option - delete account
 module.exports.get_deleteAccount = (req, res) => {
     res.render('delete_account');
+};
+
+module.exports.let_deleteAccount = (req, res) => {
+    
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        User.login(req.body.email, req.body.password).then(profile => {//user model method
+            if(profile === null){
+                res.json({fault: 'email'});
+            }
+            else if(profile.passwordCorrect === false){
+                res.json({fault: 'password'});
+            }
+            else if (!req.body.confirmation){
+                res.redirect('/userprofile')
+            }
+            else{
+                db.collection('users').deleteOne({_id: mongoose.Types.ObjectId(id)})
+                .then(function(d){
+                    console.log(d.deletedCount);
+                    res.redirect('/login')
+                });
+            }
+        });
+    });
 };
