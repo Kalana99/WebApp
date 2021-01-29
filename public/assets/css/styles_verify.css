@@ -88,10 +88,6 @@ a.log{
 	right: 2%;
 }
 
-.id{
-	display:none; 
-}
-
 a.log:hover{
 
 	background-color: #40798c;
