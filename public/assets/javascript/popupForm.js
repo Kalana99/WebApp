@@ -151,6 +151,9 @@ let lecturers = [
     {name: "ENG. CHANDANA WEERASINGHE"}
 ];
 
+
+
+
 let lecturerInput = document.querySelector('.lecturer');
 let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
 
