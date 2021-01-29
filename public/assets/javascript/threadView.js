@@ -12,8 +12,6 @@ fetch('/getThreadData')
     window.location.href = '/login';
 });
 
-//check if a child element in btn group is focused
-let isFocused;
 
 let initialize = (arr) => {
     //button group
@@ -40,11 +38,11 @@ let initialize = (arr) => {
         let smallDate = document.createElement('small');
         smallDate.innerText = arr[item].createdAt;
 
-        let divSnippet = document.createElement('div');
-        divSnippet.setAttribute('class', 'item snippet');
+        let divType = document.createElement('div');
+        divType.setAttribute('class', 'type');
 
-        let smallSnippet = document.createElement('small');
-        smallSnippet.innerText = arr[item].topic;
+        let smallType = document.createElement('small');
+        smallType.innerText = arr[item].type;
 
         //append items in order and create the button group
         btnGroup.appendChild(msgButton);
@@ -53,8 +51,8 @@ let initialize = (arr) => {
         divSender.appendChild(b);
         msgDiv.appendChild(divDate);
         divDate.appendChild(smallDate);
-        msgDiv.appendChild(divSnippet);
-        divSnippet.appendChild(smallSnippet);
+        msgDiv.appendChild(divType);
+        divType.appendChild(smallType);
 
         //add an event listener
         msgButton.addEventListener('click', (event) => {
@@ -90,10 +88,7 @@ let initialize = (arr) => {
                     displayBtn(data.type);
                 }).catch(err => {
                     console.log(err);
-                });
-
-            
-            
+                });          
         });
 
     };
