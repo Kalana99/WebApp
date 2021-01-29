@@ -84,7 +84,7 @@ a.log{
 .form-control{
 	position: absolute;
 	bottom:5%;
-	margin: auto;
+	margin:0 auto;
 }
 
 a.log:hover{
