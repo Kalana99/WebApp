@@ -66,12 +66,25 @@ module.exports.getThreadData_get = (req, res) => {
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
             db.collection('threads').find({$or:[{"studentID": id}, {'StaffID': id}]}).toArray().then(array => {
-                let name = user.name;
 
-                array.forEach(element => {
-                    element.name = name;
-                })
-                res.json(array);
+                let addNameToArray = async () => {
+
+                    for(let i = 0; i < array.length; i++){
+                        if(user.type === 'student'){
+                            let staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].StaffID)});
+                            array[i].name = staffUser.name;
+                        }
+                        else if(user.type === 'staff'){
+                            let studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].studentID)});
+                            array[i].name = studentUser.name;
+                        }
+                    }
+
+                    res.json(array);
+                };
+
+                addNameToArray();
+
             });
 
         });
