@@ -11,4 +11,6 @@ router.post('/getMessages', threadController.getMessages_post);
 
 router.post('/reply', threadController.reply_post);
 
+router.post('/acceptOrDeclineRequest', threadController.acceptOrDeclineRequest_post);
+
 module.exports = router;
