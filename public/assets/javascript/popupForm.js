@@ -166,10 +166,10 @@ lecturerInput.addEventListener('keyup', () => {
         })
         .then(response => response.json())
         .then(data => {
-        console.log('Success:', data);
+            console.log('Success:', data);
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
     });
 
     //make the panel empty for every input value

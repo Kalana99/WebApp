@@ -15,4 +15,6 @@ router.post('/acceptOrDeclineRequest', threadController.acceptOrDeclineRequest_p
 
 router.get('/getUserType', requireAuth, threadController.getUserType_get);
 
+router.post('/getStaff', threadController.getStaff_post);
+
 module.exports = router;

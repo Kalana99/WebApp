@@ -154,7 +154,16 @@ module.exports.getUserType_get = (req, res) => {
 };
 
 module.exports.getStaff_post = (req, res) => {
-    let searchTerm = req.body;
+    let searchTerm = req.body.input;
 
-    console.log(searchTerm);
+    db.collection('users').find({type: 'staff'}).toArray().then(lecturers => {
+
+        let suggestions = lecturers.filter((lecturer) => {
+            return lecturer.name.toLowerCase().includes(searchTerm);
+        });
+
+        res.json({suggestions});
+    });
+
+    
 };
