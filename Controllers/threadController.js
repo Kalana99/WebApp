@@ -152,3 +152,9 @@ module.exports.getUserType_get = (req, res) => {
         });
     });
 };
+
+module.exports.getStaff_post = (req, res) => {
+    let searchTerm = req.body;
+
+    console.log(searchTerm);
+};
