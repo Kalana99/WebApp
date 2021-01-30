@@ -19,7 +19,7 @@
 
                 <div class="form-control">
                     <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email" placeholder="Enter your email">
+                    <input type="text" name="email" id="email" class="existingEmail login" placeholder="Enter your email">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -27,7 +27,7 @@
 
                 <div class="form-control">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password">
+                    <input type="password" name="password" id="password" class="existingPassword login" placeholder="Enter your password">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -36,12 +36,13 @@
                 <div class="form-control">
                     <a href="">Forgot your password?</a>
                 </div>
+
                 <div class="form-control">
                     <a href="/signup"> Create a new account</a>
                 </div>
 
                 <div class="form-control">
-                    <button type="submit">Log in</button>
+                    <button type="submit" id="loginSubmit">Log in</button>
                 </div>
 
             </form>
