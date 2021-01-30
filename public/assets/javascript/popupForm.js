@@ -134,18 +134,6 @@ for (let i=0; i<lecturerInput.length; i++){
         //get the value in lecturer input field
         let input = lecturerInput[i].value;
     
-        //make the panel empty for every input value
-        suggestionsPanelLecturer[i].innerHTML = '';
-                    //select a suggestion
-                    div.addEventListener('click', (event) => {
-                        lecturerInput.value = suggested.name;
-                        suggestionsPanelLecturer.innerHTML = ''; 
-
-                        //get the hidden staffId input
-                        let staffIdInput = document.getElementById('staffId');
-                        staffIdInput.setAttribute('value', event.currentTarget.id);
-                    });
-    
         //request suggestions from database staff profiles
         fetch('/getStaff', {
             method: 'POST', // or 'PUT'
@@ -175,7 +163,11 @@ for (let i=0; i<lecturerInput.length; i++){
                         suggestionsPanelLecturer[i].appendChild(option);
         
                         //add an event listener to every suggestion to get the value into the input field when clicked
-                        option.addEventListener('click', () => {
+                        option.addEventListener('click', (event) => {
+
+                            //get the hidden staffId input
+                            let staffIdInput = document.getElementById('staffId');
+                            staffIdInput.setAttribute('value', event.currentTarget.id);
 
                             //change the appearance of the selected suggestion
                             lecturerInput[i].style.visibility = 'hidden';
@@ -208,6 +200,17 @@ for (let i=0; i<lecturerInput.length; i++){
                         }
         
                     });
+
+                    lecturerInput[i].addEventListener('keypress', (event) => {
+                        if (event.keyCode === 13){
+                            //prevent the implicit submit of enter key
+                            event.preventDefault();
+            
+                            //if enter is pressed, perform the click event on div
+                            option.click();
+                        }
+                    });
+
                 }
                 
             })
