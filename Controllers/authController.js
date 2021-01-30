@@ -28,41 +28,10 @@ module.exports.signup_get = (req, res) => {
 };
 
 module.exports.signup_post = (req, res) => {
-    let response = {email: true, index: true};
-        
-        let result = db.collection('users').findOne({email: req.body.email}).then(function(object){
-            if(object != null){
-                response.email = false;
-            }
+    
+    //an object will come here
+    //simply save it to the database
 
-            let result2 = db.collection('users').findOne({index: req.body.index}).then(function(object2){
-                if(object2 != null){
-                    response.index = false;
-                }
-                
-                let data = req.body;
-            
-                if(response.email === true && response.index === true && data.isCorrect === true){
-                    let user = {
-                    name: data.name,
-                    index: data.index,
-                    email: data.email,
-                    birthday: data.birthday,
-                    gender: data.gender,
-                    phone: data.phone,
-                    password: data.password,
-                    type: data.type,
-                    faculty: data.faculty,
-                    department: data.department,
-                    verified: false,
-                    };
-                    let id = database.addUser(user);
-                    mail(req.body.email, 'signup', {id: id});
-                    response.id = id;
-                }
-                res.json(response);
-            });
-        });
 };
 
 module.exports.login_get = (req, res) => {
