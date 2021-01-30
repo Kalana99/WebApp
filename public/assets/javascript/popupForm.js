@@ -136,6 +136,15 @@ for (let i=0; i<lecturerInput.length; i++){
     
         //make the panel empty for every input value
         suggestionsPanelLecturer[i].innerHTML = '';
+                    //select a suggestion
+                    div.addEventListener('click', (event) => {
+                        lecturerInput.value = suggested.name;
+                        suggestionsPanelLecturer.innerHTML = ''; 
+
+                        //get the hidden staffId input
+                        let staffIdInput = document.getElementById('staffId');
+                        staffIdInput.setAttribute('value', event.currentTarget.id);
+                    });
     
         //request suggestions from database staff profiles
         fetch('/getStaff', {
