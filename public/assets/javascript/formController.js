@@ -42,3 +42,65 @@ if(signUpSubmitButton)
 
 
 //validation code
+let checkEmail = (emailInput) => {
+
+    let email = emailInput[0];
+
+    if (email.value === ''){
+        setError(email, 'Email cannot be blank');
+        return false;
+    }
+
+    data = {email: email.value};
+
+    fetch('#', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.emailExists){
+                setSuccess(email);
+                // removeError(password);
+                return true;
+            }
+            else{
+                setError(email, 'Email does not exist');
+                return false;
+            }
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+};
+
+// ---------------------------------------------------------------------------------------
+const setError = (input, message) => {
+    let formControl = input.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    //add error message inside small
+    small.innerText = message;
+
+    //add error class
+    formControl.className = 'form-control error';
+}
+
+const setSuccess = (input) => {
+    let formControl = input.parentElement; // .form-control
+
+    //add success class
+    formControl.className = 'form-control success';
+}
+
+// const removeError = (input) => {
+//     let formControl = input.parentElement; // .form-control
+//     let small = formControl.querySelector('small');
+
+//     small.innerText = "";
+//     formControl.className = 'form-control';
+// }
+// ---------------------------------------------------------------------------------------
