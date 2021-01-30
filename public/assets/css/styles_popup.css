@@ -8,6 +8,7 @@
   z-index: 1;
   background-color: #fff;
   border-radius: 5px;
+  overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   width: 400px;
   max-width: 100%;
@@ -28,7 +29,7 @@
   margin-bottom: 20px;
 }
 
-.popup-request-window button{
+.submit-button-request, .close-button-request{
   border: 2px solid #8e44ad;
   border-radius: 4px;
   display: inline-block;
@@ -39,7 +40,7 @@
   cursor: pointer;
 }
 
-.popup-request-window button:hover{
+.submit-button-request:hover, .close-button-request:hover{
   background: rgb(122, 118, 118);
   color: white;
 }
@@ -69,16 +70,93 @@
   border: grey solid thin;
 }
 
-.suggestions > div, .suggestions-lecturer > div{
-  display: absolute;
+.selected{
+  display: inline-block;
+  position: absolute;
+  font-size: small;
+  margin: 3px;
+  padding: 3px;
+  width: 100px;
+  border-radius: 30px;
+  border: grey solid thin;
+  background-color: whitesmoke;
+  color: black;
+  overflow: hidden;
+  top: 233px;
+  align-self: left;
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.selected:focus{
+  outline: none;
+}
+
+.remove{
+  position: absolute;
+  display: inline;
+  cursor: pointer;
+  height: fit-content;
+  width: fit-content;
+  border: 1px solid lightgrey;
+  border-radius: 50%;
+  right: 3px;
+  bottom: 2px;
+  overflow: hidden;
+}
+
+.remove:focus{
+  outline: none;
+}
+
+.suggestions-lecturer{
+  box-sizing: border-box;
+  position: absolute;
+  width: 300px;
+  margin: 10px;
+  padding: 5px;
+  z-index: 2;
+  display: inline-block;
+}
+
+/* .suggestions.module{
+  top: 150px;
+}
+.suggestions.requiredModule{
+  top: 197px;
+} */
+#addDrop{
+  top: 246px;
+}
+#submission, #repeat{
+  top: 197px;
+}
+
+.suggestions-lecturer option{
+  padding: 5px;
+  color: #858282;
+  border-top: 1px solid #9c9494;
+  cursor: pointer;
+  text-align: left;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.suggestions-lecturer option:last-child{
+  border-bottom: 1px solid #9c9494;
+}
+
+/* .suggestions > div, .suggestions-lecturer > div{
   width: 300px;
   padding: 5px;
   color: black;
-  border-top: 1px solid #666;
+  border: 1px solid #666;
+  border-bottom: none;
   cursor: pointer;
   text-align: left;
-}
-.suggestions > div:hover, .suggestions-lecturer > div:hover {
+  background-color: whitesmoke;
+} */
+.suggestions-lecturer > option:hover{
   background-color: grey;
   color: #fff;
 }
+

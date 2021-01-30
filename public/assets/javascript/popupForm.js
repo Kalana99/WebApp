@@ -62,117 +62,149 @@ document.querySelector('#submit_logout').addEventListener('click', () => {
 
 // suggestion field
 
-// suggestions for lecture modules
-let modules = [
-    {name: 'Computer Architecture'},
-    {name: 'Principles of OOP'},
-    {name: 'Numerical methods for cse'},
-    {name: 'Theory of electricity'},
-    {name: 'Data structures and algorithms'},
-    {name: 'Communication skills'}
-];
+// // suggestions for lecture modules
+// let modules = [
+//     {name: 'Computer Architecture'},
+//     {name: 'Principles of OOP'},
+//     {name: 'Numerical methods for cse'},
+//     {name: 'Theory of electricity'},
+//     {name: 'Data structures and algorithms'},
+//     {name: 'Communication skills'}
+// ];
   
-let lectureInput = document.querySelector('.lecture');
-let suggestionsPanel = document.querySelector('.suggestions');
+// let lectureInput = document.querySelectorAll('.lecture');
+// let suggestionsPanel = document.querySelectorAll('.suggestions');
 
-lectureInput.addEventListener('keyup', () => {
-    let input = lectureInput.value;
+// for (let i = 0; i < lectureInput.length; i++){
+//     lectureInput[i].addEventListener('keyup', () => {
+//         let input = lectureInput[i].value;
+    
+//         //make the panel empty for every input value
+//         suggestionsPanel[i].innerHTML = '';
+    
+//         //.filter() returns a list
+//         let suggestions = modules.filter((module) => {
+//             return module.name.toLowerCase().includes(input);
+//         });
+    
+//         //go through the filtered list of modules
+//         suggestions.forEach((suggested) => {
+//             let option = document.createElement('option');
+//             option.innerHTML = suggested.name;
+//             suggestionsPanel[i].appendChild(option);
+    
+//             //select a suggestion
+//             option.addEventListener('click', () => {
+//                 lectureInput[i].value = suggested.name;
+//                 suggestionsPanel[i].innerHTML = ''; 
+//             });
+    
+//             //function to get the enter key press
+//             lectureInput[i].addEventListener('keyup', (event) => {
+//                 if (event.keyCode === 13){
+//                     //prevent the implicit submit of enter key
+//                     event.preventDefault();
+    
+//                     //if enter is pressed, perform the click event on div
+//                     option.click();option
+//                 }
+//             });
+    
+//         });
+    
+//         //make the suggestion panel empty if there's no input
+//         if (input === '') {
+//             suggestionsPanel[i].innerHTML = '';  
+//         }
+//     });
+// }
 
-    //make the panel empty for every input value
-    suggestionsPanel.innerHTML = '';
 
-    //.filter() returns a list
-    let suggestions = modules.filter((module) => {
-        return module.name.toLowerCase().includes(input);
-    });
-
-    //go through the filtered list of modules
-    suggestions.forEach((suggested) => {
-        let div = document.createElement('div');
-        div.innerHTML = suggested.name;
-        suggestionsPanel.appendChild(div);
-
-        //select a suggestion
-        div.addEventListener('click', () => {
-            lectureInput.value = suggested.name;
-            suggestionsPanel.innerHTML = ''; 
-        });
-
-        //function to get the enter key press
-        lectureInput.addEventListener('keyup', (event) => {
-            if (event.keyCode === 13){
-                //prevent the implicit submit of enter key
-                event.preventDefault();
-
-                //if enter is pressed, perform the click event on div
-                div.click();
-            }
-        });
-
-    });
-
-    //make the suggestion panel empty if there's no input
-    if (input === '') {
-        suggestionsPanel.innerHTML = '';  
-    }
-});
-
-// suggestions for lecturers
 //[{name: "", index: "", id: ""}]
 
-
-
-
-let lecturerInput = document.querySelector('.lecturer');
-let suggestionsPanelLecturer = document.querySelector('.suggestions-lecturer');
+let lecturerInput = document.querySelectorAll('.lecturer');
+let suggestionsPanelLecturer = document.querySelectorAll('.suggestions-lecturer');
+let popupBox = document.querySelector('.input-field');
+//to get the suggestion according to the last input value
 let lastSearchTime = new Date();
 
-lecturerInput.addEventListener('keyup', () => {
-    let input = lecturerInput.value;
-
-    //make the panel empty for every input value
-    suggestionsPanelLecturer.innerHTML = '';
-
-    fetch('/getStaff', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({input, time: new Date()}),
-        })
-        .then(response => response.json())
-        .then(data => {
-            
-            let dataTime = Date(data.time);
-
-            if(dataTime.valueOf() < lastSearchTime.valueOf){
-                lastSearchTime = data.time;
-
-                suggestionsPanelLecturer.innerHTML = '';
-                //go through the filtered list of modules
-                data.lecturers.forEach((suggested) => {
-                    let div = document.createElement('div');
-                    div.setAttribute('id', suggested.id);
-                    div.innerHTML = suggested.name;
-                    suggestionsPanelLecturer.appendChild(div);
+//add an event listener to all lecturer input fields in all three forms
+for (let i=0; i<lecturerInput.length; i++){
+    lecturerInput[i].addEventListener('keyup', () => {
+        //get the value in lecturer input field
+        let input = lecturerInput[i].value;
     
-                    //select a suggestion
-                    div.addEventListener('click', () => {
-                        lecturerInput.value = suggested.name;
-                        suggestionsPanelLecturer.innerHTML = ''; 
+        //make the panel empty for every input value
+        suggestionsPanelLecturer[i].innerHTML = '';
+    
+        //request suggestions from database staff profiles
+        fetch('/getStaff', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            //send the input value in text input field and the time it is entered
+            body: JSON.stringify({input, time: new Date()}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                
+                let dataTime = Date(data.time);
+    
+                //display the suggestions from the last input value
+                if(dataTime.valueOf() < lastSearchTime.valueOf){
+                    lastSearchTime = data.time;
+    
+                    //suggestion panel should be empty at the beginning
+                    suggestionsPanelLecturer[i].innerHTML = '';
+
+                    data.lecturers.forEach((suggested) => {
+                        let option = document.createElement('option');
+
+                        option.setAttribute('id', suggested.id);
+                        option.innerText = suggested.index + " - " + suggested.name;
+                        suggestionsPanelLecturer[i].appendChild(option);
+        
+                        //add an event listener to every suggestion to get the value into the input field when clicked
+                        option.addEventListener('click', () => {
+
+                            //change the appearance of the selected suggestion
+                            lecturerInput[i].style.visibility = 'hidden';
+                            suggestionsPanelLecturer[i].innerHTML = '';
+
+                            let selected = document.createElement('div');
+                            selected.setAttribute('class', 'selected');
+                            
+                            selected.innerHTML = suggested.name;
+                            popupBox.appendChild(selected);
+                            
+                            //a close button
+                            let remove = document.createElement('button');
+                            remove.setAttribute('class', 'remove');
+                            remove.innerHTML = "<small>x</small>";
+                            selected.appendChild(remove);
+
+                            remove.addEventListener('click', (event) => {
+                                event.preventDefault();
+
+                                selected.style.visibility = 'hidden';
+                                lecturerInput[i].style.visibility = 'visible';
+                            });
+
+                        });
+        
+                        //make the suggestion panel empty if there's no input
+                        if (input === '') {
+                            suggestionsPanelLecturer[i].innerHTML = '';  
+                        }
+        
                     });
+                }
+                
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
     
-                    //make the suggestion panel empty if there's no input
-                    if (input === '') {
-                        suggestionsPanelLecturer.innerHTML = '';  
-                    }
-    
-                });
-            }
-            
-        })
-        .catch((error) => {
-            console.error('Error:', error);
     });
-
-});
+}

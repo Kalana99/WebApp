@@ -1,14 +1,13 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="/submitRequest" method="POST">
+    <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off">
+        <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Submission Deadline</h2></header>
         <div class="content">
             <div class="input-field">
                 <input name="module" class="lecture" type="text" placeholder="Module" />
-                <div class="suggestions">
-                </div>
 
                 <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
-                <div class="suggestions-lecturer">
+                <div class="suggestions-lecturer" id="submission">
                 </div>
 
                 <input type="hidden" id="type" name="type" value="submission" />

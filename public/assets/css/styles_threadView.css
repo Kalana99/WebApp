@@ -81,6 +81,7 @@ section{
     width: 100%; /* Set a width if needed */
     display: block; /* Make the buttons appear below each other */
     text-align: left;
+    border-radius: 3px;
 }
 
 .btn-group button:not(:last-child) {

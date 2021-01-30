@@ -5,22 +5,18 @@
         <div class="content">
             <div class="input-field">
                 <input name="module" class="lecture" type="text" placeholder="current module" />
-                <div class="suggestions">
-                </div>
 
                 <input name="requiredModule" class="lecture" type="text" placeholder="required module" />
-                <div class="suggestions">
-                </div>
 
                 <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
-                <div class="suggestions-lecturer">
+                <div class="suggestions-lecturer" id="addDrop">
                 </div>
 
                 <input type="hidden" id="type" name="type" value="addDrop" />
                 
                 <textarea name="message" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
                 <!-- append child to send evidence if the request type is submission deadline -->
-                <button type="submit">submit</button>
+                <button type="submit" class="submit-button-request">submit</button>
                 <button type="cancel" class="close-button-request" id="0">cancel</button>
             </div>
         </div>
