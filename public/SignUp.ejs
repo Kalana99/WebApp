@@ -13,14 +13,12 @@
     <body class="main-body">
         <div class="container">
             
-                <h1>Sign Up</h1>
+            <h1>Sign Up</h1>
             
-            
-
             <form class="form" id="form">
                 <div class="form-control">
                     <label>Full Name :</label>
-                    <input type="text" name="username" placeholder="Enter your full name" id="username">
+                    <input type="text" name="username" class="nonEmpty signUp fullName" placeholder="Enter your full name" id="username">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -28,7 +26,7 @@
 
                 <div class="form-control">
                     <label>Index Number : </label>
-                    <input type="text" name="index" placeholder="Enter your index number" id="index">
+                    <input type="text" name="index" class="index signUp" placeholder="Enter your index number" id="index">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -36,7 +34,7 @@
 
                 <div class="form-control">
                     <label>Email Address : </label>
-                    <input type="email" name="email" placeholder="Enter your email" id="email">
+                    <input type="email" name="email" class="newEmail signUp" placeholder="Enter your email" id="email">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -44,14 +42,14 @@
 
                 <div class="form-control">
                     <label>Birthday : </label>
-                    <input type="date" id="birthday" name="birthday">
+                    <input type="date" id="birthday" class="nonEmpty signUp birthday" name="birthday">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-control">
-                    <input type="radio" name="gender" value="male" id="male">
+                    <input type="radio" name="gender" class="nonEmptyRadio signUp gender" value="male" id="male">
                     <label for="male">Male</label>
                     <input type="radio" name="gender" value="female" id="female">
                     <label for="female">Female</label>
@@ -62,7 +60,7 @@
 
                 <div class="form-control">
                     <label>Telephone Number : </label>
-                    <input type="text" name="phone" placeholder="Add your Telephone number" id="phone">
+                    <input type="text" name="phone" class="nonEmpty signUp phone" placeholder="Add your Telephone number" id="phone">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -70,7 +68,7 @@
 
                 <div class="form-control">
                     <label>Password :</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password">
+                    <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder="Enter your password">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -78,14 +76,14 @@
 
                 <div class="form-control">
                     <label>Confirm Password : </label>
-                    <input type="password" name="confirmPsw" id="c_psw" placeholder="Confirm your password">
+                    <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder="Confirm your password">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-control">
-                    <input type="radio" name="type" value="student" id="student">
+                    <input type="radio" name="type" class="nonEmpty signUp type" value="student" id="student">
                     <label for="Student">Student</label>
                     <input type="radio" name="type" value="staff" id="staff">
                     <label for="Staff">Staff</label>
@@ -96,7 +94,7 @@
 
                 <div class="form-control">
                     <label>Faculty : </label>
-                    <select name="faculty" id="faculty">
+                    <select name="faculty" id="faculty" class="normal signUp faculty">
                         <option value="Engineering">Engineering</option>
                         <option value="IT">IT</option>
                         <option value="archi">Architecture</option>
@@ -105,7 +103,11 @@
                 </div>
 
                 <div class="form-control">
+<<<<<<< HEAD
+                    <button type="submit" id="signUpSubmit">Sign Up</button>
+=======
                     <button id="signUpSubmit" type="submit">Sign Up</button>
+>>>>>>> 844fbb8d2907ba125150207a70a9d2d6afd52bc0
                 </div>
 
                 
@@ -113,6 +115,10 @@
             </form> 
 
         </div>
+<<<<<<< HEAD
+        <script src="#"></script>
+=======
         <script src="/javascript/formController.js"></script>
+>>>>>>> 844fbb8d2907ba125150207a70a9d2d6afd52bc0
     </body>
 </html>

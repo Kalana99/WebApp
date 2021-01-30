@@ -4,18 +4,30 @@
         <header class="header-popup"><h2>Submission Deadline</h2></header>
         <div class="content">
             <div class="input-field">
-                <input name="module" class="lecture" type="text" placeholder="Module" />
 
-                <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
-                <div class="suggestions-lecturer" id="submission">
+                <div>
+                    <!-- lecture -->
+                    <input name="module" class="nonEmpty submission module" type="text" placeholder="Module" />
                 </div>
 
-                <input type="hidden" id="type" name="type" value="submission" />
+                <div>
+                    <!-- lecturer -->
+                    <input name="lecturer" class="selected submission lecturer" type="text" placeholder="Lecturer" />
+                    <div class="suggestions-lecturer" id="submission">
+                    </div>
+                </div>
 
-                <textarea name="message" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                <div>
+                    <!-- input -->
+                    <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty submission description" id="description"></textarea>
+                </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
-                <button type="submit">submit</button>
-                <button type="cancel" class="close-button-request" id="1">cancel</button>
+                <div>
+                    <button type="submit" class="submit-button-request" id="submissionSubmit">submit</button>
+                    <!-- id was "1" -->
+                    <button type="cancel" class="close-button-request" id="submissionCancel">cancel</button>
+                </div>
+
             </div>
         </div>
     </form>
