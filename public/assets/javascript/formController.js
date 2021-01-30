@@ -14,7 +14,7 @@ let main = (page) => {
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
     //validate
-
+    
 
     //submit if correct
     
