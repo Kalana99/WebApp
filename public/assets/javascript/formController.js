@@ -14,7 +14,7 @@ let main = (page) => {
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
     //validate
-    
+
 
     //submit if correct
     
@@ -36,3 +36,9 @@ if(signUpSubmitButton)
     signUpSubmitButton.addEventListener('click', event => {
         main('signUp');
     });
+
+
+
+
+
+//validation code
