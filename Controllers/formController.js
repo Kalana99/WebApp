@@ -19,7 +19,7 @@ const createToken = (id) => {
 module.exports.checkEmailExistence = (req, res) => {
     let email = req.body.email;
 
-    User.findOne({email: email}).then(user => {
+    db.collection('users').findOne({email: email}).then(user => {
         if(user)
             res.json({emailExists: true});
         else
