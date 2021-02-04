@@ -53,7 +53,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         if (email.value === ''){
             setError(email, 'Email cannot be blank');
             correct = false;
-            return false;
+            return;
         }
 
         //object will be sent only with an email if there's no password field
@@ -66,13 +66,11 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             if (password.value === ''){
                 setError(password, 'Password cannot be blank');
             }
-            else{
+            
             //add password to the data object
                 data.password = password.value;
-            }
+            
         }
-   
-        
     
         fetch('/checkEmailAndPassword', {
             method: 'POST',
@@ -94,7 +92,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
                         else{
                             setError(password, "Incorrect password");
                             correct = false;
-                            return false;
+                            return;
                         }
                     }
                     return;
@@ -105,7 +103,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
                         removeError(password);
                     }
                     correct = false;
-                    return false;
+                    return;
                 }
             })
             .catch((error) => {
