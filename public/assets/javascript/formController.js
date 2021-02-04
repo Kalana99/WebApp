@@ -1,6 +1,8 @@
 let correct = true;
 
 let main = (page) => {
+
+    correct = true;
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
 
@@ -16,7 +18,7 @@ let main = (page) => {
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
     //validate
-    validateExistingEmailAndPassword(existingEmail, existingPsw) && correct;
+    validateExistingEmailAndPassword(existingEmail, existingPsw);
     console.log(correct);
     //submit if correct
     
@@ -55,7 +57,6 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         let email = emailInput[i];
         if (email.value === ''){
             emailState = "blank";
-            correct = false;
         }
 
         //object will be sent only with an email if there's no password field
@@ -67,7 +68,6 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             password = pswInput[i];
             if (password.value === ''){
                 passwordState = "blank";
-                correct = false;
             }
             
             //add password to the data object
@@ -95,13 +95,11 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
                             if (password.value != ''){
                                 passwordState = "error";
                             }
-                            correct = false;
                         }
                     }
                 }
                 else{
                     emailState = "error";
-                    correct = false;
                 }
 
                 if (emailState === "blank"){
