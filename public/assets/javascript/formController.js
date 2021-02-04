@@ -13,8 +13,10 @@ let main = (page) => {
     let index           = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
+    let correct = true;
+
     //validate
-    
+    correct = correct && validateExistingEmail(existingEmail);
 
     //submit if correct
     
@@ -42,7 +44,7 @@ if(signUpSubmitButton)
 
 
 //validation code
-let checkEmail = (emailInput) => {
+let validateExistingEmail = (emailInput) => {
 
     let email = emailInput[0];
 
@@ -53,7 +55,7 @@ let checkEmail = (emailInput) => {
 
     data = {email: email.value};
 
-    fetch('#', {
+    fetch('/checkEmailExistence', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
