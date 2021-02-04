@@ -13,8 +13,11 @@ let main = (page) => {
     let index           = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
+    let correct = true;
+
     //validate
-    checkEmail(existingEmail);
+    correct = correct && validateExistingEmail(existingEmail);
+
     //submit if correct
     
     
@@ -41,7 +44,7 @@ if(signUpSubmitButton)
 
 
 //validation code
-let checkEmail = (emailInput) => {
+let validateExistingEmail = (emailInput) => {
 
     let email = emailInput[0];
 
