@@ -28,14 +28,27 @@ module.exports.checkEmailExistence = (req, res) => {
 
 };
 
-module.exports.checkPassword = (req, res) => {
+module.exports.checkEmailAndPassword = (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
     //get user with the email
     User.findOne({email: email}).then(user => {
-        User.checkPassword(user._id, password).then(confirmedUser => {
-            res.json({passwordCorrect: confirmedUser.passwordCorrect});
-        });
+
+        if(user == null){
+            res.json({emailExists: false});
+        }
+        else{
+            let data;
+            data.emailExists = true;
+            if(password != null){
+                User.checkPassword(user._id, password).then(confirmedUser => {
+                    data.passwordCorrect = confirmedUser.passwordCorrect;
+                });
+            }
+            res.json(data);
+        }
+
+        
     });
 };

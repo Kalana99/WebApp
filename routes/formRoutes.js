@@ -3,10 +3,7 @@ const router = Router();
 const formController = require('../Controllers/formController');
 const {requireAuth} = require('../middleware/authMiddleware');
 
-router.post('/checkEmailExistence', formController.checkEmailExistence);
-
-router.post('/checkPassword', formController.checkPassword);
-
+router.post('/checkEmailAndPassword', formController.checkEmailAndPassword);
 
 
 module.exports = router;
