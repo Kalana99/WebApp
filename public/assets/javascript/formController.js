@@ -53,6 +53,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         let email = emailInput[i];
         if (email.value === ''){
             setError(email, 'Email cannot be blank');
+            correct = false;
             return false;
         }
 
@@ -65,7 +66,6 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             password = pswInput[i];
             if (password.value === ''){
                 setError(password, 'Password cannot be blank');
-                return false;
             }
             //add password to the data object
             data.password = password.value;
@@ -88,20 +88,22 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
                     if (data.passwordCorrect != null){
                         if (data.passwordCorrect){
                             setSuccess(password);
-                            return true;
+                            return;
                         }
                         else{
                             setError(password, "Incorrect password");
+                            correct = false;
                             return false;
                         }
                     }
-                    return true;
+                    return;
                 }
                 else{
                     setError(email, 'Email does not exist');
                     if (password != null){
                         removeError(password);
                     }
+                    correct = false;
                     return false;
                 }
             })
@@ -139,7 +141,7 @@ let validateExistingPassword = (emailInput, pswInput) => {
                 if(data.passwordCorrect){
                     setSuccess(psw);
                     removeError(password);
-                    return true;
+                    return;
                 }
                 else{
                     setError(psw, 'Incorrect password');
