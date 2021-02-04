@@ -45,11 +45,11 @@ if(signUpSubmitButton)
 
 
 //validation code
-let validateExistingEmail = (emailInput) => {
+let validateExistingEmail = (emailInput, pswInput) => {
 
     let emailElement = emailInput;
 
-    emailElement.forEach((email) => {
+    for (let i = 0; i < emailInput.length; i++){
         if (email.value === ''){
             setError(email, 'Email cannot be blank');
             return false;
@@ -68,7 +68,9 @@ let validateExistingEmail = (emailInput) => {
             .then(data => {
                 if(data.emailExists){
                     setSuccess(email);
-                    // removeError(password);
+                    if (pswInput != null){
+                        removeError(password);
+                    }
                     return true;
                 }
                 else{
@@ -79,7 +81,7 @@ let validateExistingEmail = (emailInput) => {
             .catch((error) => {
             console.error('Error:', error);
             });
-    });
+    }
 
     
 };
