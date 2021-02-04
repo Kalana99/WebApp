@@ -16,7 +16,8 @@ let main = (page) => {
     let correct = true;
 
     //validate
-    correct = correct && validateExistingEmail(existingEmail);
+    correct = validateExistingEmail(existingEmail) && correct;
+    correct = validateExistingPassword(existingEmail, existingPsw) && correct;
 
     //submit if correct
     
@@ -84,8 +85,9 @@ let validateExistingEmail = (emailInput) => {
 };
 
 let validateExistingPassword = (emailInput, pswInput) => {
-
+    console.log('here');
     for (let i = 0; i < emailInput.length; i++){
+        
         let psw = pswInput[i];
         let email = emailInput[i];
 
