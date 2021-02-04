@@ -21,8 +21,10 @@ let main = async (page) => {
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
     //submit if correct
     
-    
-};
+    if(correct){
+        finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
+        console.log('here');
+    };
 
 //all the eventlisteners come here
 
@@ -159,3 +161,25 @@ const removeError = (input) => {
     formControl.className = 'form-control';
 }
 // ---------------------------------------------------------------------------------------
+
+const finalize = (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio) => {
+    if(page === 'login'){
+        email = existingEmail[0].value;
+
+        fetch('/login', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = '/userProfile';
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    }
+
+}};

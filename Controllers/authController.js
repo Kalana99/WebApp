@@ -36,25 +36,11 @@ module.exports.login_get = (req, res) => {
 };
 
 module.exports.login_post = (req, res) => {
-    User.login(req.body.email, req.body.password).then(profile => {
-        if(profile === null){
-            res.json({fault: 'email'});
-        }
-        else{
 
-            if(!profile.passwordCorrect){
-                res.json({fault: 'password'});
-            }
-            else if(profile.verified === false){
-                res.json({fault: 'verify', id: profile._id});
-            }
-            else{
-                let token = createToken(profile._id);
-                res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
-                res.json({fault: 'none'});
-            }
-        }
-    });
+    User.findOne({email: req.body.email}).then(profile => {
+        let token = createToken(profile._id);
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+    })
 };
 
 module.exports.userprofile_get = (req, res) => {

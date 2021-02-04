@@ -44,6 +44,7 @@ module.exports.checkEmailAndPassword = (req, res) => {
             if(password != null){
                 User.checkPassword(user._id, password).then(confirmedUser => {
                     data['passwordCorrect'] = confirmedUser.passwordCorrect;
+                    data['verified'] = confirmedUser.verified;
                     res.json(data);
                 });
             }
