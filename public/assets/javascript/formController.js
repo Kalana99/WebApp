@@ -77,6 +77,40 @@ let checkEmail = (emailInput) => {
         });
 };
 
+let checkPassword = (pswInput) => {
+    let psw = pswInput[0];
+
+    if (psw.value === ''){
+        setError(psw, 'Password cannot be blank');
+        return false;
+    }
+
+    data = {password: psw.value};
+
+    fetch('#', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.passwordExists){
+                setSuccess(psw);
+                // removeError(password);
+                return true;
+            }
+            else{
+                setError(psw, 'Password does not exist');
+                return false;
+            }
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+};
+
 // ---------------------------------------------------------------------------------------
 const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
