@@ -79,7 +79,7 @@ let validateExistingEmail = (emailInput) => {
         });
 };
 
-let checkPassword = (pswInput) => {
+let validateExistingPassword = (pswInput) => {
     let psw = pswInput[0];
 
     if (psw.value === ''){
