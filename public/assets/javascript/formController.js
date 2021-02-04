@@ -19,7 +19,6 @@ let main = async (page) => {
 
     //validate
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
-    console.log(correct);
     //submit if correct
     
     
@@ -78,7 +77,6 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             },
             body: JSON.stringify(requestData),
             });
-            console.log('here');
 
         let data = await response.json();
         
