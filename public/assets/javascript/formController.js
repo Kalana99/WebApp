@@ -46,71 +46,80 @@ if(signUpSubmitButton)
 //validation code
 let validateExistingEmail = (emailInput) => {
 
-    let email = emailInput[0];
+    let emailElement = emailInput;
 
-    if (email.value === ''){
-        setError(email, 'Email cannot be blank');
-        return false;
-    }
+    emailElement.forEach((email) => {
+        if (email.value === ''){
+            setError(email, 'Email cannot be blank');
+            return false;
+        }
+    
+        data = {email: email.value};
+    
+        fetch('/checkEmailExistence', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.emailExists){
+                    setSuccess(email);
+                    // removeError(password);
+                    return true;
+                }
+                else{
+                    setError(email, 'Email does not exist');
+                    return false;
+                }
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+    });
 
-    data = {email: email.value};
-
-    fetch('/checkEmailExistence', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.emailExists){
-                setSuccess(email);
-                // removeError(password);
-                return true;
-            }
-            else{
-                setError(email, 'Email does not exist');
-                return false;
-            }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+    
 };
 
-let validateExistingPassword = (pswInput) => {
-    let psw = pswInput[0];
+let validateExistingPassword = (emailInput, pswInput) => {
 
-    if (psw.value === ''){
-        setError(psw, 'Password cannot be blank');
-        return false;
+    for (let i = 0; i < emailInput.length; i++){
+        let psw = pswInput[i];
+        let email = emailInput[i];
+
+        if (psw.value === ''){
+            setError(psw, 'Password cannot be blank');
+            return false;
+        }
+
+        data = {email: email.value, password: psw.value};
+
+        fetch('/checkPassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.passwordCorrect){
+                    setSuccess(psw);
+                    // removeError(password);
+                    return true;
+                }
+                else{
+                    setError(psw, 'Password does not exist');
+                    return false;
+                }
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
     }
-
-    data = {password: psw.value};
-
-    fetch('#', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.passwordExists){
-                setSuccess(psw);
-                // removeError(password);
-                return true;
-            }
-            else{
-                setError(psw, 'Password does not exist');
-                return false;
-            }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+    
 };
 
 // ---------------------------------------------------------------------------------------
@@ -132,11 +141,11 @@ const setSuccess = (input) => {
     formControl.className = 'form-control success';
 }
 
-// const removeError = (input) => {
-//     let formControl = input.parentElement; // .form-control
-//     let small = formControl.querySelector('small');
+const removeError = (input) => {
+    let formControl = input.parentElement; // .form-control
+    let small = formControl.querySelector('small');
 
-//     small.innerText = "";
-//     formControl.className = 'form-control';
-// }
+    small.innerText = "";
+    formControl.className = 'form-control';
+}
 // ---------------------------------------------------------------------------------------
