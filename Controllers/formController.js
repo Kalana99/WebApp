@@ -27,3 +27,15 @@ module.exports.checkEmailExistence = (req, res) => {
     });
 
 };
+
+module.exports.checkPassword = (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    //get user with the email
+    User.findOne({email: email}).then(user => {
+        User.checkPassword(user._id, password).then(confirmedUser => {
+            res.json({passwordCorrect: confirmedUser.passwordCorrect});
+        });
+    });
+};
