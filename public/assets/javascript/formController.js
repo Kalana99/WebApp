@@ -15,10 +15,8 @@ let main = (page) => {
     let index           = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
-    let correct = true;
-
     //validate
-    correct = validateExistingEmailAndPassword(existingEmail, existingPsw) && correct;
+    validateExistingEmailAndPassword(existingEmail, existingPsw) && correct;
     console.log(correct);
     //submit if correct
     
