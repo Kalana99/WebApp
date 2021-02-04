@@ -25,6 +25,7 @@ let main = async (page) => {
         finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
         console.log('here');
     };
+};
 
 //all the eventlisteners come here
 
@@ -104,7 +105,14 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             correct = false;
         }
         else if (emailState === "success"){
-            setSuccess(email);
+            if (data.verified){
+                setSuccess(email);
+            }
+            else{
+                setError(email, "Please verify the email");
+                correct = false;
+            }
+            
         }
         else if (emailState === "error"){
             setError(email, "Email does not exist");
@@ -182,4 +190,4 @@ const finalize = (page, nonEmpty, normal, selected, existingPsw, newPsw, existin
         });
     }
 
-}};
+};
