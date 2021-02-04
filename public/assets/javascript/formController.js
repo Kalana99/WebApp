@@ -1,6 +1,6 @@
 let correct = true;
 
-let main = (page) => {
+let main = async (page) => {
 
     correct = true;
     //the page parameter should be something like 'signUp' or 'login'
@@ -18,7 +18,7 @@ let main = (page) => {
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
     //validate
-    validateExistingEmailAndPassword(existingEmail, existingPsw);
+    await validateExistingEmailAndPassword(existingEmail, existingPsw);
     console.log(correct);
     //submit if correct
     
@@ -41,12 +41,8 @@ if(signUpSubmitButton)
         main('signUp');
     });
 
-
-
-
-
 //validation code
-let validateExistingEmailAndPassword = (emailInput, pswInput) => {
+let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
 
     let emailState;
     let passwordState;
@@ -60,7 +56,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         }
 
         //object will be sent only with an email if there's no password field
-        data = {email: email.value};
+        let requestData = {email: email.value};
 
         let password = null;
         //if there is a password field,
@@ -71,65 +67,67 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             }
             
             //add password to the data object
-            data.password = password.value;
+            requestData.password = password.value;
             
         }
-    
-        fetch('/checkEmailAndPassword', {
+
+        let response = await fetch('/checkEmailAndPassword', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                //
-                if(data.emailExists){
-                    emailState = "success";
-                    if (data.passwordCorrect != null){
-                        if (data.passwordCorrect){
-                            passwordState = "success";
-                        }
-                        else{
-                            if (password.value != ''){
-                                passwordState = "error";
-                            }
-                        }
+            body: JSON.stringify(requestData),
+            });
+            console.log('here');
+
+        let data = await response.json();
+        
+        if(data.emailExists){
+            emailState = "success";
+            if (data.passwordCorrect != null){
+                if (data.passwordCorrect){
+                    passwordState = "success";
+                }
+                else{
+                    if (password.value != ''){
+                        passwordState = "error";
                     }
                 }
-                else{
-                    emailState = "error";
-                }
+            }
+        }
+        else{
+            emailState = "error";
+        }
 
-                if (emailState === "blank"){
-                    setError(email, "Email cannot be blank");
-                }
-                else if (emailState === "success"){
-                    setSuccess(email);
-                }
-                else if (emailState === "error"){
-                    setError(email, "Email does not exist");
-                    passwordState = null;
-                }
+        if (emailState === "blank"){
+            setError(email, "Email cannot be blank");
+            correct = false;
+        }
+        else if (emailState === "success"){
+            setSuccess(email);
+        }
+        else if (emailState === "error"){
+            setError(email, "Email does not exist");
+            passwordState = null;
+            correct = false;
+        }
 
-                if (passwordState === "blank"){
-                    setError(password, "Password cannot be blank");
-                }
-                else if (passwordState === "success"){
-                    setSuccess(password);
-                }
-                else if (passwordState === "error"){
-                    setError(password, "Incorrect password");
-                }
-                else{
-                    removeError(password);
-                }
+        if (passwordState === "blank"){
+            setError(password, "Password cannot be blank");
+            correct = false;
+        }
+        else if (passwordState === "success"){
+            setSuccess(password);
+        }
+        else if (passwordState === "error"){
+            setError(password, "Incorrect password");
+            correct = false;
+        }
+        else{
+            removeError(password);
+            correct = false;
+        }
 
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
     }
 
     
