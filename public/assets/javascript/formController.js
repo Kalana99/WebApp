@@ -17,6 +17,7 @@ let main = (page) => {
 
     //validate
     correct = correct && validateExistingEmail(existingEmail);
+    correct = correct && validateExistingPassword(existingEmail, existingPsw);
 
     //submit if correct
     
