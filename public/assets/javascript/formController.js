@@ -64,7 +64,7 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         if (pswInput != null){
             password = pswInput[i];
             if (password.value === ''){
-                setError(email, 'Password cannot be blank');
+                setError(password, 'Password cannot be blank');
                 return false;
             }
             //add password to the data object
