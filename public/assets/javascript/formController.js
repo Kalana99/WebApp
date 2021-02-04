@@ -45,19 +45,35 @@ if(signUpSubmitButton)
 
 
 //validation code
-let validateExistingEmail = (emailInput, pswInput) => {
+let validateExistingEmailAndPassword = (emailInput, pswInput) => {
 
-    let emailElement = emailInput;
-
+    //emailInput always has elements
     for (let i = 0; i < emailInput.length; i++){
+
+        let email = emailInput[i];
         if (email.value === ''){
             setError(email, 'Email cannot be blank');
             return false;
         }
-    
+
+        //object will be sent only with an email if there's no password field
         data = {email: email.value};
+
+        let password = null;
+        //if there is a password field,
+        if (pswInput != null){
+            password = pswInput[i];
+            if (password.value === ''){
+                setError(email, 'Password cannot be blank');
+                return false;
+            }
+            //add password to the data object
+            data.password = password.value;
+        }
+   
+        
     
-        fetch('/checkEmailExistence', {
+        fetch('/checkEmailAndPassword', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,15 +82,26 @@ let validateExistingEmail = (emailInput, pswInput) => {
             })
             .then(response => response.json())
             .then(data => {
+                //
                 if(data.emailExists){
                     setSuccess(email);
-                    if (pswInput != null){
-                        removeError(password);
+                    if (data.passwordCorrect != null){
+                        if (data.passwordCorrect){
+                            setSuccess(password);
+                            return true;
+                        }
+                        else{
+                            setError(password, "Incorrect password");
+                            return false;
+                        }
                     }
                     return true;
                 }
                 else{
                     setError(email, 'Email does not exist');
+                    if (password != null){
+                        removeError(password);
+                    }
                     return false;
                 }
             })
