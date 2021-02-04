@@ -1,3 +1,5 @@
+let correct = true;
+
 let main = (page) => {
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
@@ -17,7 +19,7 @@ let main = (page) => {
 
     //validate
     correct = validateExistingEmailAndPassword(existingEmail, existingPsw) && correct;
-
+    console.log(correct);
     //submit if correct
     
     
@@ -64,10 +66,11 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             password = pswInput[i];
             if (password.value === ''){
                 setError(password, 'Password cannot be blank');
-                return false;
             }
+            else{
             //add password to the data object
-            data.password = password.value;
+                data.password = password.value;
+            }
         }
    
         

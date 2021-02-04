@@ -39,14 +39,17 @@ module.exports.checkEmailAndPassword = (req, res) => {
             res.json({emailExists: false});
         }
         else{
-            let data;
+            let data = {};
             data.emailExists = true;
             if(password != null){
                 User.checkPassword(user._id, password).then(confirmedUser => {
-                    data.passwordCorrect = confirmedUser.passwordCorrect;
+                    console.log(password);
+                    data['passwordCorrect'] = confirmedUser.passwordCorrect;
+                    console.log(data);
+                    res.json(data);
                 });
             }
-            res.json(data);
+            
         }
 
         
