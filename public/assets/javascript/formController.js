@@ -46,14 +46,16 @@ if(signUpSubmitButton)
 //validation code
 let validateExistingEmailAndPassword = (emailInput, pswInput) => {
 
+    let emailState;
+    let passwordState;
+
     //emailInput always has elements
     for (let i = 0; i < emailInput.length; i++){
 
         let email = emailInput[i];
         if (email.value === ''){
-            setError(email, 'Email cannot be blank');
+            emailState = "blank";
             correct = false;
-            return;
         }
 
         //object will be sent only with an email if there's no password field
@@ -64,11 +66,12 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
         if (pswInput != null){
             password = pswInput[i];
             if (password.value === ''){
-                setError(password, 'Password cannot be blank');
+                passwordState = "blank";
+                correct = false;
             }
             
             //add password to the data object
-                data.password = password.value;
+            data.password = password.value;
             
         }
     
@@ -83,28 +86,48 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             .then(data => {
                 //
                 if(data.emailExists){
-                    setSuccess(email);
+                    emailState = "success";
                     if (data.passwordCorrect != null){
                         if (data.passwordCorrect){
-                            setSuccess(password);
-                            return;
+                            passwordState = "success";
                         }
                         else{
-                            setError(password, "Incorrect password");
+                            if (password.value != ''){
+                                passwordState = "error";
+                            }
                             correct = false;
-                            return;
                         }
                     }
-                    return;
                 }
                 else{
-                    setError(email, 'Email does not exist');
-                    if (password != null){
-                        removeError(password);
-                    }
+                    emailState = "error";
                     correct = false;
-                    return;
                 }
+
+                if (emailState === "blank"){
+                    setError(email, "Email cannot be blank");
+                }
+                else if (emailState === "success"){
+                    setSuccess(email);
+                }
+                else if (emailState === "error"){
+                    setError(email, "Email does not exist");
+                    passwordState = null;
+                }
+
+                if (passwordState === "blank"){
+                    setError(password, "Password cannot be blank");
+                }
+                else if (passwordState === "success"){
+                    setSuccess(password);
+                }
+                else if (passwordState === "error"){
+                    setError(password, "Incorrect password");
+                }
+                else{
+                    removeError(password);
+                }
+
             })
             .catch((error) => {
             console.error('Error:', error);
