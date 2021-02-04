@@ -1,3 +1,5 @@
+let correct = true;
+
 let main = (page) => {
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
@@ -16,9 +18,8 @@ let main = (page) => {
     let correct = true;
 
     //validate
-    correct = validateExistingEmail(existingEmail) && correct;
-    correct = validateExistingPassword(existingEmail, existingPsw) && correct;
-
+    correct = validateExistingEmailAndPassword(existingEmail, existingPsw) && correct;
+    console.log(correct);
     //submit if correct
     
     
@@ -67,8 +68,10 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
             if (password.value === ''){
                 setError(password, 'Password cannot be blank');
             }
+            else{
             //add password to the data object
-            data.password = password.value;
+                data.password = password.value;
+            }
         }
    
         
@@ -115,45 +118,6 @@ let validateExistingEmailAndPassword = (emailInput, pswInput) => {
     
 };
 
-let validateExistingPassword = (emailInput, pswInput) => {
-    console.log('here');
-    for (let i = 0; i < emailInput.length; i++){
-        
-        let psw = pswInput[i];
-        let email = emailInput[i];
-
-        if (psw.value === ''){
-            setError(psw, 'Password cannot be blank');
-            return false;
-        }
-
-        data = {email: email.value, password: psw.value};
-
-        fetch('/checkPassword', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.passwordCorrect){
-                    setSuccess(psw);
-                    removeError(password);
-                    return;
-                }
-                else{
-                    setError(psw, 'Incorrect password');
-                    return false;
-                }
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
-    }
-    
-};
 
 // ---------------------------------------------------------------------------------------
 const setError = (input, message) => {
