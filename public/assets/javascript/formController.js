@@ -107,11 +107,11 @@ let validateExistingPassword = (emailInput, pswInput) => {
             .then(data => {
                 if(data.passwordCorrect){
                     setSuccess(psw);
-                    // removeError(password);
+                    removeError(password);
                     return true;
                 }
                 else{
-                    setError(psw, 'Password does not exist');
+                    setError(psw, 'Incorrect password');
                     return false;
                 }
             })
