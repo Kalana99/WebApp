@@ -36,10 +36,11 @@ module.exports.login_get = (req, res) => {
 };
 
 module.exports.login_post = (req, res) => {
-
+console.log('in the backend');
     User.findOne({email: req.body.email}).then(profile => {
         let token = createToken(profile._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+        res.json({});
     })
 };
 

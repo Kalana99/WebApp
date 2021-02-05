@@ -22,7 +22,7 @@ let main = async (page) => {
     //submit if correct
     
     if(correct){
-        finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
         console.log('here');
     };
 };
@@ -170,24 +170,22 @@ const removeError = (input) => {
 }
 // ---------------------------------------------------------------------------------------
 
-const finalize = (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio) => {
     if(page === 'login'){
+        console.log('starting login');
         email = existingEmail[0].value;
 
-        fetch('/login', {
+        let response = await fetch('/login', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({email}),
-        })
-        .then(response => response.json())
-        .then(data => {
-            window.location.href = '/userProfile';
-        })
-        .catch((error) => {
-        console.error('Error:', error);
         });
+        console.log('awaited fetch');
+        let data = await response.json();
+        console.log('fetch worked');
+        window.location.href = '/userProfile';
     }
 
 };
