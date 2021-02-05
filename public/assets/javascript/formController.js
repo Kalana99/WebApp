@@ -159,9 +159,11 @@ let validateNewEmail = async (emailInput) => {
 
         if (emailValue === ''){
             emailState = "blank";
+            console.log('blank');
         }
-        else if (!isEmail(emailValue)){
+        else if (! await (isEmail(emailValue))){
             emailState = 'notAnEmail'
+            console.log('regex');
         }
         else{
             let requestData = {email: emailValue};
@@ -182,27 +184,28 @@ let validateNewEmail = async (emailInput) => {
             else{
                 emailState = 'success';
             }
+        }
 
-            //calling setError and setSuccess according to email state
-            if (emailState === 'blank'){
-                setError(email, 'Email cannot be blank');
-                correct = false;
-            }
-            else if (emailState === 'notAnEmail'){
-                setError(email, 'Surprise MOTHERFUCKER'); //change this later
-                correct = false;
-            }
-            else if (emailState === 'error'){
-                setError(email, 'Email already exists');
-                correct = false;
-            }
-            else if (emailState === 'success'){
-                setSuccess(email);
-            }
+        //calling setError and setSuccess according to email state
+        if (emailState === 'blank'){
+            setError(email, 'Email cannot be blank');
+            console.log(emailState);
+            correct = false;
+        }
+        else if (emailState === 'notAnEmail'){
+            setError(email, 'Surprise MOTHERFUCKER'); //change this later
+            correct = false;
+        }
+        else if (emailState === 'error'){
+            setError(email, 'Email already exists');
+            correct = false;
+        }
+        else if (emailState === 'success'){
+            setSuccess(email);
         }
     }
 
-    let isEmail = (email) => {
+    async function isEmail(email){
         //RegExr email validation
         //no need to understand
         //reference - https://codepen.io/FlorinPop17/pen/OJJKQeK
