@@ -188,4 +188,30 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         window.location.href = '/userProfile';
     }
 
+    else if(page === 'signUp'){
+
+        data = {};
+
+        data['name'] = querySelectorFrom('.fullName', nonEmpty)[0].value;
+        data['index'] = querySelectorFrom('.index', index)[0].value;
+        data['email'] = querySelectorFrom('.newEmail', newEmail)[0].value;
+        data['birthday'] = querySelectorFrom('.birthday', nonEmpty)[0].value;
+        data['gender'] = querySelectorFrom('.gender', nonEmptyRadio)[0].value;
+        data['phone'] = querySelectorFrom('.phone', nonEmpty)[0].value;
+        data['password'] = querySelectorFrom('.psw', newPsw)[0].value;
+        data['type'] = querySelectorFrom('.type', nonEmptyRadio)[0].value;
+        data['faculty'] = querySelectorFrom('.faculty', normal)[0].value;
+        data['verified'] = false;
+
+        //post the data and redirect to verify page
+        
+
+    }
+    
 };
+
+function querySelectorFrom(selector, elements) {
+    return [].filter.call(elements, function(element) {
+        return element.matches(selector);
+    });
+}
