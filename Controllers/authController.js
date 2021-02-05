@@ -26,8 +26,10 @@ module.exports.signup_get = (req, res) => {
 
 module.exports.signup_post = (req, res) => {
     
-    //an object will come here
-    //simply save it to the database
+    //Save the incoming user object to the database
+    let id = database.addUser(req.body);
+    mail(req.body.email, 'signup', {id: id});
+    res.json({id});
 
 };
 
