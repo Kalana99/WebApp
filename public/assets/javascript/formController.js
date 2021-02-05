@@ -17,10 +17,13 @@ let main = async (page) => {
     let index           = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
-    //validate
+    //validate existing email
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
+
+    //validate new email
+    await validateNewEmail(newEmail);
+
     //submit if correct
-    
     if(correct){
         await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
         console.log('here');
