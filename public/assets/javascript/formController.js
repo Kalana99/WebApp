@@ -55,25 +55,28 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
     //emailInput always has elements
     for (let i = 0; i < emailInput.length; i++){
 
-        let email = emailInput[i].value.trim();
+        let email = emailInput[i];
+        let emailValue = email.value.trim();
 
-        if (email === ''){
+        if (emailValue === ''){
             emailState = "blank";
         }
 
         //object will be sent only with an email if there's no password field
-        let requestData = {email: email};
+        let requestData = {email: emailValue};
 
         let password = null;
+        let passwordValue;
         //if there is a password field,
         if (pswInput != null){
-            password = pswInput[i].value.trim();
-            if (password === ''){
+            password = pswInput[i];
+            passwordValue = password.value.trim();
+            if (passwordValue === ''){
                 passwordState = "blank";
             }
             
             //add password to the data object
-            requestData.password = password;
+            requestData.password = passwordValue;
             
         }
 
@@ -94,7 +97,7 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
                     passwordState = "success";
                 }
                 else{
-                    if (password.value != ''){
+                    if (passwordValue != ''){
                         passwordState = "error";
                     }
                 }
@@ -151,16 +154,17 @@ let validateNewEmail = async (emailInput) => {
     let emailState;
 
     for (let i=0; i<emailInput.length; i++){
-        let email = emailInput[i].value.trim();
+        let email = emailInput[i];
+        let emailValue = email.value.trim();
 
-        if (email === ''){
+        if (emailValue === ''){
             emailState = "blank";
         }
-        else if (!isEmail(email)){
+        else if (!isEmail(emailValue)){
             emailState = 'notAnEmail'
         }
         else{
-            let requestData = {email: email};
+            let requestData = {email: emailValue};
 
             let response = await fetch('/checkEmailExistence', {
                 method: 'POST',
