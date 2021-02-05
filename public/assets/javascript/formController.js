@@ -186,9 +186,11 @@ let validateNewEmail = async (emailInput) => {
             }
             else if (emailState === 'notAnEmail'){
                 setError(email, 'Surprise MOTHERFUCKER'); //change this later
+                correct = false;
             }
             else if (emailState === 'error'){
                 setError(email, 'Email already exists');
+                correct = false;
             }
             else if (emailState === 'success'){
                 setSuccess(email);
