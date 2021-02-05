@@ -30,21 +30,7 @@ let main = async (page) => {
     };
 };
 
-//all the eventlisteners come here
-
-//login event listener
-loginSubmitButton = document.getElementById('loginSubmit');
-if(loginSubmitButton)
-    loginSubmitButton.addEventListener('click', event => {
-        main('login');
-    });
-
-//signUp event listener
-signUpSubmitButton = document.getElementById('signUpSubmit');
-if(signUpSubmitButton)
-    signUpSubmitButton.addEventListener('click', event => {
-        main('signUp');
-    });
+//----------------------------------------------------------------------------------------
 
 //login validation front and back
 let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
@@ -308,3 +294,21 @@ function querySelectorFrom(selector, elements) {
         return element.matches(selector);
     });
 }
+
+//----------------------------------------------------------------------------------------
+
+//all the eventlisteners come here
+
+//login event listener
+loginSubmitButton = document.getElementById('loginSubmit');
+if(loginSubmitButton)
+    loginSubmitButton.addEventListener('click', event => {
+        main('login');
+    });
+
+//signUp event listener
+signUpSubmitButton = document.getElementById('signUpSubmit');
+if(signUpSubmitButton)
+    signUpSubmitButton.addEventListener('click', event => {
+        main('signUp');
+    });
