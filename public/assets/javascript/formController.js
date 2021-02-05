@@ -204,7 +204,20 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['verified'] = false;
 
         //post the data and redirect to verify page
-        
+        fetch('/signup', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = '/verifyemail/' + data.id;
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
 
     }
     
