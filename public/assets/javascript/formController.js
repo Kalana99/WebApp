@@ -203,6 +203,7 @@ let validateNewEmail = async (emailInput) => {
         else if (emailState === 'success'){
             setSuccess(email);
         }
+        
     }
 
     async function isEmail(email){
