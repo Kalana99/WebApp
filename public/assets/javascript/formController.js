@@ -57,55 +57,59 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
 
         let email = emailInput[i];
         let emailValue = email.value.trim();
+        let data;
 
         if (emailValue === ''){
             emailState = "blank";
         }
+        else{
 
-        //object will be sent only with an email if there's no password field
-        let requestData = {email: emailValue};
+            //object will be sent only with an email if there's no password field
+            let requestData = {email: emailValue};
 
-        let password = null;
-        let passwordValue;
-        //if there is a password field,
-        if (pswInput != null){
-            password = pswInput[i];
-            passwordValue = password.value.trim();
-            if (passwordValue === ''){
-                passwordState = "blank";
-            }
-            
-            //add password to the data object
-            requestData.password = passwordValue;
-            
-        }
-
-        let response = await fetch('/checkEmailAndPassword', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-            });
-
-        let data = await response.json();
-        
-        if(data.emailExists){
-            emailState = "success";
-            if (data.passwordCorrect != null){
-                if (data.passwordCorrect){
-                    passwordState = "success";
+            let password = null;
+            let passwordValue;
+            //if there is a password field,
+            if (pswInput != null){
+                password = pswInput[i];
+                passwordValue = password.value.trim();
+                if (passwordValue === ''){
+                    passwordState = "blank";
                 }
-                else{
-                    if (passwordValue != ''){
-                        passwordState = "error";
+                
+                //add password to the data object
+                requestData.password = passwordValue;
+                
+            }
+
+            let response = await fetch('/checkEmailAndPassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+                });
+
+            data = await response.json();
+            
+            if(data.emailExists){
+                emailState = "success";
+                if (data.passwordCorrect != null){
+                    if (data.passwordCorrect){
+                        passwordState = "success";
+                    }
+                    else{
+                        if (passwordValue != ''){
+                            passwordState = "error";
+                        }
                     }
                 }
             }
-        }
-        else{
-            emailState = "error";
-        }
+            else{
+                emailState = "error";
+            }
+
+        }   
 
         if (emailState === "blank"){
             setError(email, "Email cannot be blank");
