@@ -1,7 +1,6 @@
 let correct = true;
 
 let main = async (page) => {
-
     correct = true;
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
@@ -17,6 +16,18 @@ let main = async (page) => {
     let index           = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
 
+    //uncomment this block check if the inputs have all been identified
+
+    // console.log(nonEmpty);
+    // console.log(normal);
+    // console.log(selected);
+    // console.log(existingPsw);
+    // console.log(newPsw);
+    // console.log(existingEmail);
+    // console.log(newEmail);
+    // console.log(index);
+    // console.log(nonEmptyRadio);
+
     //validate existing email
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
 
@@ -26,7 +37,6 @@ let main = async (page) => {
     //submit if correct
     if(correct){
         await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
-        console.log('here');
     };
 };
 
@@ -149,11 +159,9 @@ let validateNewEmail = async (emailInput) => {
 
         if (emailValue === ''){
             emailState = "blank";
-            console.log('blank');
         }
         else if (! await (isEmail(emailValue))){
             emailState = 'notAnEmail'
-            console.log('regex');
         }
         else{
             let requestData = {email: emailValue};
@@ -179,7 +187,6 @@ let validateNewEmail = async (emailInput) => {
         //calling setError and setSuccess according to email state
         if (emailState === 'blank'){
             setError(email, 'Email cannot be blank');
-            console.log(emailState);
             correct = false;
         }
         else if (emailState === 'notAnEmail'){
@@ -238,7 +245,6 @@ const removeError = (input) => {
 
 const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio) => {
     if(page === 'login'){
-        console.log('starting login');
         email = existingEmail[0].value;
 
         let response = await fetch('/login', {
@@ -248,9 +254,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         },
         body: JSON.stringify({email}),
         });
-        console.log('awaited fetch');
         let data = await response.json();
-        console.log('fetch worked');
         window.location.href = '/userProfile';
     }
 
@@ -286,6 +290,95 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         });
 
     }
+
+    else if(page === 'addDrop'){
+
+        let selectedElement = document.querySelectorAll('.selectedFinal');
+        console.log(selectedElement);
+
+        data = {};
+
+        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
+        data['type'] = 'addDrop';
+        data['status'] = 'active';
+        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
+        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+
+        fetch('/submitRequest', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
+
+    else if(page === 'repeat'){
+
+        let selectedElement = document.querySelector('.selectedFinal');
+
+        data = {};
+
+        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
+        data['type'] = 'repeat';
+        data['status'] = 'active';
+        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+
+        fetch('/submitRequest', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
+
+    else if(page === 'submission'){
+
+        let selectedElement = document.querySelector('.selectedFinal');
+
+        data = {};
+
+        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
+        data['type'] = 'submission';
+        data['status'] = 'active';
+        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+
+        fetch('/submitRequest', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
     
 };
 
@@ -311,4 +404,23 @@ signUpSubmitButton = document.getElementById('signUpSubmit');
 if(signUpSubmitButton)
     signUpSubmitButton.addEventListener('click', event => {
         main('signUp');
+    });
+
+addDropSubmitButton = document.getElementById('addDropSubmitButton');
+if(addDropSubmitButton)
+    addDropSubmitButton.addEventListener('click', event => {
+        main('addDrop');
+    });
+
+repeatSubmitButton = document.getElementById('repeatSubmitButton');
+if(repeatSubmitButton)
+    repeatSubmitButton.addEventListener('click', event => {
+        console.log('button clicked');
+        main('repeat');
+    });
+
+submissionSubmitButton = document.getElementById('submissionSubmitButton');
+if(submissionSubmitButton)
+    submissionSubmitButton.addEventListener('click', event => {
+        main('submission');
     });

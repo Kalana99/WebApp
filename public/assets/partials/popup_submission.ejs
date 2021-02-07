@@ -1,5 +1,5 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off">
+    <form class="popup-form" autocomplete="off">
         <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Submission Deadline</h2></header>
         <div class="content">
@@ -7,7 +7,7 @@
 
                 <div>
                     <!-- lecture -->
-                    <input name="module" class="nonEmpty submission module" type="text" placeholder="Module" />
+                    <input name="module" class="nonEmpty submission currentModule" type="text" placeholder="Module" />
                 </div>
 
                 <div>
@@ -23,9 +23,9 @@
                 </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
                 <div>
-                    <button type="submit" class="submit-button-request" id="submissionSubmit">submit</button>
+                    <button type="button" class="submit-button-request" id="submissionSubmitButton">submit</button>
                     <!-- id was "1" -->
-                    <button type="cancel" class="close-button-request" id="submissionCancel">cancel</button>
+                    <button type="button" class="close-button-request" id="1">cancel</button>
                 </div>
 
             </div>

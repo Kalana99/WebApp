@@ -1,12 +1,12 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off">
+    <form class="popup-form" autocomplete="off">
         <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Repeat Exam</h2></header>
         <div class="content">
             <div class="input-field">
                 <div>
                     <!-- lecture -->
-                    <input name="module" class="nonEmpty repeat module" type="text" placeholder="Module" />
+                    <input name="module" class="nonEmpty repeat currentModule" type="text" placeholder="Module" />
                 </div>
 
                 <!-- change later -->
@@ -23,9 +23,9 @@
                 </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
                 <div>
-                    <button type="submit" class="submit-button-request" id="repeatSubmit">submit</button>
+                    <button type="button" class="submit-button-request" id="repeatSubmitButton">submit</button>
                     <!-- id was "2" -->
-                    <button type="cancel" class="close-button-request" id="repeatCancel">cancel</button>
+                    <button type="button" class="close-button-request" id="2">cancel</button>
                 </div>
             </div>
         </div>
