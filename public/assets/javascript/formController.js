@@ -379,6 +379,10 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             });
 
     }
+
+    else if(page === 'thread'){
+        
+    }
     
 };
 
@@ -423,4 +427,10 @@ submissionSubmitButton = document.getElementById('submissionSubmitButton');
 if(submissionSubmitButton)
     submissionSubmitButton.addEventListener('click', event => {
         main('submission');
+    });
+
+threadReplySubmitButton = document.getElementById('replySubmitButton');
+if(threadReplySubmitButton)
+    threadReplySubmitButton.addEventListener('click', event => {
+        main('thread');
     });

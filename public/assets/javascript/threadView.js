@@ -142,31 +142,6 @@ replyCancelButton.addEventListener('click', (event) => {
     closePopup();
 });
 
-//reply submit button
-let replySubmitButton = document.querySelector('#replySubmitButton');
-replySubmitButton.addEventListener('click', (event) => {
-
-    let text = document.getElementById('textarea').value;
-
-    fetch('/reply', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({text, threadId})
-        })
-        .then(response => response.json())
-        .then(data => {
-            display(data.messages, threadId);
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
-
-        closePopup();
-
-});
-
 //setting the event listener for the accept button
 let acceptButton = document.getElementById('acceptButton');
 if(acceptButton != null)
