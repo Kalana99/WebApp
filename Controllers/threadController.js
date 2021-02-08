@@ -118,7 +118,7 @@ module.exports.reply_post = (req, res) => {
             });
 
             db.collection('threads').updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
-
+            res.json({});
         });
     });
     

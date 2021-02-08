@@ -536,7 +536,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             })
             .then(response => response.json())
             .then(data => {
-                window.location.reload();
+                window.location.href = '/threads';
             })
             .catch((error) => {
             console.error('Error:', error);
