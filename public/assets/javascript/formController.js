@@ -18,15 +18,15 @@ let main = async (page) => {
 
     //uncomment this block check if the inputs have all been identified
 
-    console.log(nonEmpty);
-    console.log(normal);
-    console.log(selected);
-    console.log(existingPsw);
-    console.log(newPsw);
-    console.log(existingEmail);
-    console.log(newEmail);
-    console.log(index);
-    console.log(nonEmptyRadio);
+    // console.log(nonEmpty);
+    // console.log(normal);
+    // console.log(selected);
+    // console.log(existingPsw);
+    // console.log(newPsw);
+    // console.log(existingEmail);
+    // console.log(newEmail);
+    // console.log(index);
+    // console.log(nonEmptyRadio);
 
     //validate existing email
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
@@ -412,6 +412,26 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             .then(response => response.json())
             .then(data => {
                 window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    else if(page === 'deleteAccount'){
+
+        let data = {};
+
+        fetch('/deleteAccount', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = ('/logout');
             })
             .catch((error) => {
                 console.error('Error:', error);

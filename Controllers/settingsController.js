@@ -60,24 +60,11 @@ module.exports.let_deleteAccount = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        User.login(req.body.email, req.body.password).then(profile => {//user model method
-            if(profile === null){
-                res.json({fault: 'email'});
-            }
-            else if(profile.passwordCorrect === false){
-                res.json({fault: 'password'});
-            }
-            else if (!req.body.confirmation){
-                res.redirect('/userprofile')
-            }
-            else{
-                db.collection('users').deleteOne({_id: mongoose.Types.ObjectId(id)})
-                .then(function(d){
-                    console.log(d.deletedCount);
-                    //res.redirect('/login')
-                    res.json({'message': 'account deletion successful'});
-                });
-            }
+        User.deleteOne({_id: mongoose.Types.ObjectId(id)})
+        .then(function(d){
+            console.log(d.deletedCount);
+            res.json({});
         });
+
     });
 };

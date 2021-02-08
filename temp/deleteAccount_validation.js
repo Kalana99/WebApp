@@ -49,28 +49,5 @@ let serverSideValidateSubmit = function(){
     }
     data = {email: email.value, password: password.value, confirmation: confirm};
 
-    fetch('/deleteAccount', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.fault === 'email'){
-                setError(email, 'Email does not exist');
-                removeError(password);
-            }
-            else if(data.fault === 'password'){
-                setSuccess(email);
-                setError(password, 'password mismatch');
-            }
-            else{
-                window.location.href = ('/logout');
-            }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+    
 };

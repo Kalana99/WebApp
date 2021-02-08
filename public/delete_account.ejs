@@ -11,19 +11,22 @@
         <div class="form-control">
             <label for="email">Enter your email</label><br>
             <input type="email" name="email" class="existingEmail deleteAccount" id="email" placeholder="Enter your email" required>
+            <small>Error message</small>
         </div>
 
         <div class="form-control">
             <label for="password">Enter your password</label><br>
             <input type="password" name="password" class="existingPsw deleteAccount" id="password" placeholder="Enter your password" required>
+            <small>Error message</small>
         </div>
 
         <div class="form-control">
             <p>Confirm deletion</p>
             <label for="option1">Yes</label>
-            <input type="radio" name="confirm" class="nonEmpty deleteAccount" id="yes" value="yes">
+            <input type="radio" name="confirm" class="nonEmptyRadio deleteAccount" id="yes" value="yes">
             <label for="option2">No</label>
             <input type="radio" name="confirm" id="no" value="no">
+            <small>Error message</small>
         </div>
 
         <div class="form-control">
