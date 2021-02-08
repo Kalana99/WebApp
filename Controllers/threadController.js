@@ -17,43 +17,24 @@ const createToken = (id) => {
 };
 
 module.exports.submitRequests_post = (req, res) => {
-    let data = req.body;
-
+    
     const token = req.cookies.jwt;
 
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+        let data = req.body;
+        data['studentID'] = id;
 
-            let messageId = database.addMessage({
-                "from": user._id,
-                "text": data.message,
-            });
+        let message = data.message;
+        delete data.message;
+        let messageId = database.addMessage({'from': id, 'text': message});
+        data['messageID_list'] = [messageId];
 
-            let additionalData = {}
-
-            if(data.requiredModule != null){
-                additionalData.requiredModule = data.requiredModule;
-            }
-
-            database.addThread({
-                 "studentID": id,
-                 "type": data.type,
-                 "messageID_list": [messageId],
-                 "topic": data.topic,
-                 "StaffID": data.staffId,
-                 "type": data.type,
-                 "status": 'active',
-                 "additionalData": additionalData,
-                 "module": data.module
-            });
-
-            console.log(data.currentModule);
-        });
+        database.addThread(data);
+        res.json({});
     });
 
-    res.redirect('/userprofile');
 };
 
 module.exports.getThreadData_get = (req, res) => {
@@ -137,7 +118,7 @@ module.exports.reply_post = (req, res) => {
             });
 
             db.collection('threads').updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
-
+            res.json({});
         });
     });
     

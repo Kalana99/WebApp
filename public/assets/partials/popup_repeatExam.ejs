@@ -1,22 +1,32 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off">
+    <form class="popup-form" autocomplete="off">
         <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Repeat Exam</h2></header>
         <div class="content">
             <div class="input-field">
-                <input name="module" class="lecture" type="text" placeholder="Module" />
-
-                <!-- change later -->
-                <input name="lecturer" class="lecturer" type="text" placeholder="Lecturer" />
-                <div class="suggestions-lecturer" id="repeat">
+                <div>
+                    <!-- lecture -->
+                    <input name="module" class="nonEmpty repeat currentModule" type="text" placeholder="Module" />
                 </div>
 
-                <input type="hidden" id="type" name="type" value="repeat" />
+                <!-- change later -->
+                <div>
+                    <!-- lecturer -->
+                    <input name="lecturer" class="selected repeat lecturer" type="text" placeholder="Lecturer" />
+                    <div class="suggestions-lecturer" id="repeat">
+                    </div>
+                </div>
                 
-                <textarea name="message" rows="10" cols="20" placeholder="description" class="input" id="description"></textarea>
+                <div>
+                    <!-- input -->
+                    <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty repeat description" id="description"></textarea>
+                </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
-                <button type="submit">submit</button>
-                <button type="cancel" class="close-button-request" id="2">cancel</button>
+                <div>
+                    <button type="button" class="submit-button-request" id="repeatSubmitButton">submit</button>
+                    <!-- id was "2" -->
+                    <button type="button" class="close-button-request" id="2">cancel</button>
+                </div>
             </div>
         </div>
     </form>

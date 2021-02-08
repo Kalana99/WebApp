@@ -29,7 +29,7 @@ for (let i = 0; i < cancelButtons.length; i++){
     cancelButtons[i].addEventListener('click', (event) => {
         event.preventDefault();
         //grab the id of the clicked cancel button
-        let id = event.currentTarget.id;
+        let id = parseInt(event.target.id);
         activePopupWindow = null;
 
         popupRequest[id].className = 'popup-request-window';
@@ -165,15 +165,17 @@ for (let i=0; i<lecturerInput.length; i++){
                         //add an event listener to every suggestion to get the value into the input field when clicked
                         option.addEventListener('click', (event) => {
 
+                            //get the hidden staffId input
+                            let staffIdInput = document.getElementById('staffId');
+                            staffIdInput.setAttribute('value', event.currentTarget.id);
+
                             //change the appearance of the selected suggestion
                             lecturerInput[i].style.visibility = 'hidden';
                             suggestionsPanelLecturer[i].innerHTML = '';
 
-                            let requestType = document.getElementById
                             let selected = document.createElement('div');
-                            selected.setAttribute('class', 'selectedFinal');
-                            selected.setAttribute('id', event.currentTarget.id);
-
+                            selected.setAttribute('class', 'selected');
+                            
                             selected.innerHTML = suggested.name;
                             popupBox.appendChild(selected);
                             

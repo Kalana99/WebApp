@@ -116,6 +116,7 @@ const checkInputs = () => {
 
     
     data = {
+        element:email,
         name: userNameValue, index: indexValue, email: emailValue, birthday: birthdayValue, phone: phoneValue,
         password: passwordValue, faculty: faculty.value, gender: gender, type: type, isCorrect: isCorrect
     };

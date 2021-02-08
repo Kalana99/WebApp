@@ -58,19 +58,12 @@ let initialize = (arr) => {
 
         //add an event listener
         msgButton.addEventListener('click', (event) => {
-
-            //get the selected button and deselect it
-            //and select the selected button
-
-            let selectedButton = document.querySelector('.selected');
-            if(selectedButton)
-                selectedButton.setAttribute('class', '');
-
             threadId = event.currentTarget.id;
-            event.currentTarget.setAttribute('class', 'selected');
             
             for(let i = 0; i < threads.length; i++){
                 if(threads[i]._id === threadId){
+                    let messageIdList = threads[i].messageID_list;
+                    let messages = [];
                     
                     fetch('/getMessages', {
                     method: 'POST', // or 'PUT'
@@ -147,6 +140,31 @@ let closePopup = () => {
 let replyCancelButton = document.querySelector('.close-button-request');
 replyCancelButton.addEventListener('click', (event) => {
     closePopup();
+});
+
+//reply submit button
+let replySubmitButton = document.querySelector('#replySubmitButton');
+replySubmitButton.addEventListener('click', (event) => {
+
+    let text = document.getElementById('textarea').value;
+
+    fetch('/reply', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({text, threadId})
+        })
+        .then(response => response.json())
+        .then(data => {
+            display(data.messages, threadId);
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+
+        closePopup();
+
 });
 
 //setting the event listener for the accept button
