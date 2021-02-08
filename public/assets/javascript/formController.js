@@ -398,7 +398,24 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     }
 
     else if(page === 'changePsw'){
-        
+        data = {};
+
+        data['new_password'] = querySelectorFrom('.psw', newPsw)[0].value;
+
+        fetch('/changePassword', {
+            method: 'PUT', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
     
 };

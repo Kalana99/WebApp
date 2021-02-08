@@ -54,3 +54,20 @@ module.exports.checkEmailAndPassword = (req, res) => {
         
     });
 };
+
+module.exports.checkIndexExistence = (req, res) => {
+
+    let index = req.body.index;
+
+    User.findOne({index: index}).then(user => {
+        data = {indexExists: true}
+
+        if(user == null)
+            data['indexExists'] = false;
+
+        res.json(data);
+
+    });
+
+
+};
