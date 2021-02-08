@@ -106,7 +106,7 @@ body{
 }
 
 .form button{
-    border: 1px solid #49798c;
+    border: 1px solid #1f363d;
     border-radius: 10px;
     display: block;
     font-size: 18px;
@@ -124,7 +124,7 @@ body{
 
 .form button:hover{
     
-    background-color: #1f363d;
+    background-color:#49798c;
 }
 
 .main-body{
