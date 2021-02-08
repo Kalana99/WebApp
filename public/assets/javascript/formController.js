@@ -410,12 +410,14 @@ if(signUpSubmitButton)
         main('signUp');
     });
 
+//add drop request event listener
 addDropSubmitButton = document.getElementById('addDropSubmitButton');
 if(addDropSubmitButton)
     addDropSubmitButton.addEventListener('click', event => {
         main('addDrop');
     });
 
+//repeate request event listener
 repeatSubmitButton = document.getElementById('repeatSubmitButton');
 if(repeatSubmitButton)
     repeatSubmitButton.addEventListener('click', event => {
@@ -423,12 +425,14 @@ if(repeatSubmitButton)
         main('repeat');
     });
 
+//submission request event listener
 submissionSubmitButton = document.getElementById('submissionSubmitButton');
 if(submissionSubmitButton)
     submissionSubmitButton.addEventListener('click', event => {
         main('submission');
     });
 
+//reply to thread event listener
 threadReplySubmitButton = document.getElementById('replySubmitButton');
 if(threadReplySubmitButton)
     threadReplySubmitButton.addEventListener('click', event => {
