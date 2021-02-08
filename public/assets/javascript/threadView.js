@@ -58,12 +58,19 @@ let initialize = (arr) => {
 
         //add an event listener
         msgButton.addEventListener('click', (event) => {
+
+            //get the selected button and deselect it
+            //and select the selected button
+
+            let selectedButton = document.querySelector('.selected');
+            if(selectedButton)
+                selectedButton.setAttribute('class', '');
+
             threadId = event.currentTarget.id;
+            event.currentTarget.setAttribute('class', 'selected');
             
             for(let i = 0; i < threads.length; i++){
                 if(threads[i]._id === threadId){
-                    let messageIdList = threads[i].messageID_list;
-                    let messages = [];
                     
                     fetch('/getMessages', {
                     method: 'POST', // or 'PUT'
