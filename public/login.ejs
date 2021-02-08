@@ -5,20 +5,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/styles_login.css">
         <title>User Profile</title>
     </head>
 
     <body>
-        <div class="container">
-            <div class="header">
-                <h2>Log In</h2>
+        <div class="container center">
+            
+            <div class="left">
+            	<img class="profile" src="/resources/user.png">
+            	
             </div>
 
             <form class="form" id="form">
 
+            	<h1>Log In</h1>
                 <div class="form-control">
-                    <label for="email">E-mail</label>
+                    <label for="email" class="l1">E-mail</label>
                     <input type="text" name="email" id="email" placeholder="Enter your email">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -26,21 +31,21 @@
                 </div>
 
                 <div class="form-control">
-                    <label for="password">Password</label>
+                    <label for="password" class="l1">Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter your password">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
                 
-                <div class="form-control">
-                    <a href="">Forgot your password?</a>
+                <div class="form-control links" >
+                    <a href="" class="link1">Forgot your password?</a>
                 </div>
-                <div class="form-control">
-                    <a href="/signup"> Create a new account</a>
+                <div class="form-control links">
+                    <a href="/signup" class="link1"> Create a new account</a>
                 </div>
 
-                <div class="form-control">
+                <div class=" button">
                     <button type="submit">Log in</button>
                 </div>
 
