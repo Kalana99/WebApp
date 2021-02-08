@@ -410,7 +410,6 @@ if(signUpSubmitButton)
         main('signUp');
     });
 
-//add drop request event listener
 addDropSubmitButton = document.getElementById('addDropSubmitButton');
 if(addDropSubmitButton)
     addDropSubmitButton.addEventListener('click', event => {
