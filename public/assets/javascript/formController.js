@@ -333,9 +333,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'addDrop'){
 
-        let selectedElement = document.querySelectorAll('.selectedFinal');
-        console.log(selectedElement);
-
         data = {};
 
         data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
@@ -364,8 +361,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'repeat'){
 
-        let selectedElement = document.querySelector('.selectedFinal');
-
         data = {};
 
         data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
@@ -393,8 +388,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'submission'){
 
-        let selectedElement = document.querySelector('.selectedFinal');
-
         data = {};
 
         data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
@@ -421,11 +414,53 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     }
 
     else if(page === 'thread'){
+
+        let data = {};
+
+        data['text'] = querySelectorFrom('.reply', nonEmpty)[0].value;
+        data['threadId'] = document.querySelector('.selected').getAttribute('id');
         
+        fetch('/reply', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.reload();
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+
+    }
+
+    else if(page === 'changePsw'){
+        data = {};
+
+        data['new_password'] = querySelectorFrom('.psw', newPsw)[0].value;
+
+        fetch('/changePassword', {
+            method: 'PUT', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
     
 };
 
+//function to extract certain elements from a list of elements according to selector
 function querySelectorFrom(selector, elements) {
     return [].filter.call(elements, function(element) {
         return element.matches(selector);
@@ -474,3 +509,11 @@ if(threadReplySubmitButton)
     threadReplySubmitButton.addEventListener('click', event => {
         main('thread');
     });
+
+//change password event listener
+changePasswordSubmitButton = document.getElementById('changePswSubmit');
+if(changePasswordSubmitButton)
+    changePasswordSubmitButton.addEventListener('click', event => {
+        main('changePsw');
+    });
+
