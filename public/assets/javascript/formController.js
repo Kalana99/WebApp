@@ -18,15 +18,15 @@ let main = async (page) => {
 
     //uncomment this block check if the inputs have all been identified
 
-    // console.log(nonEmpty);
-    // console.log(normal);
-    // console.log(selected);
-    // console.log(existingPsw);
-    // console.log(newPsw);
-    // console.log(existingEmail);
-    // console.log(newEmail);
-    // console.log(index);
-    // console.log(nonEmptyRadio);
+    console.log(nonEmpty);
+    console.log(normal);
+    console.log(selected);
+    console.log(existingPsw);
+    console.log(newPsw);
+    console.log(existingEmail);
+    console.log(newEmail);
+    console.log(index);
+    console.log(nonEmptyRadio);
 
     //validate existing email
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
@@ -431,53 +431,65 @@ function querySelectorFrom(selector, elements) {
 
 //all the eventlisteners come here
 
-//login event listener
-loginSubmitButton = document.getElementById('loginSubmit');
-if(loginSubmitButton)
-    loginSubmitButton.addEventListener('click', event => {
-        main('login');
-    });
+let setEventListeners = () => {
 
-//signUp event listener
-signUpSubmitButton = document.getElementById('signUpSubmit');
-if(signUpSubmitButton)
-    signUpSubmitButton.addEventListener('click', event => {
-        main('signUp');
-    });
+    //login event listener
+    loginSubmitButton = document.getElementById('loginSubmit');
+    if(loginSubmitButton)
+        loginSubmitButton.addEventListener('click', event => {
+            main('login');
+        });
 
-//add drop request event listener
-addDropSubmitButton = document.getElementById('addDropSubmitButton');
-if(addDropSubmitButton)
-    addDropSubmitButton.addEventListener('click', event => {
-        main('addDrop');
-    });
+    //signUp event listener
+    signUpSubmitButton = document.getElementById('signUpSubmit');
+    if(signUpSubmitButton)
+        signUpSubmitButton.addEventListener('click', event => {
+            main('signUp');
+        });
 
-//repeate request event listener
-repeatSubmitButton = document.getElementById('repeatSubmitButton');
-if(repeatSubmitButton)
-    repeatSubmitButton.addEventListener('click', event => {
-        console.log('button clicked');
-        main('repeat');
-    });
+    //add drop request event listener
+    addDropSubmitButton = document.getElementById('addDropSubmitButton');
+    if(addDropSubmitButton)
+        addDropSubmitButton.addEventListener('click', event => {
+            main('addDrop');
+        });
 
-//submission request event listener
-submissionSubmitButton = document.getElementById('submissionSubmitButton');
-if(submissionSubmitButton)
-    submissionSubmitButton.addEventListener('click', event => {
-        main('submission');
-    });
+    //repeate request event listener
+    repeatSubmitButton = document.getElementById('repeatSubmitButton');
+    if(repeatSubmitButton)
+        repeatSubmitButton.addEventListener('click', event => {
+            console.log('button clicked');
+            main('repeat');
+        });
 
-//reply to thread event listener
-threadReplySubmitButton = document.getElementById('replySubmitButton');
-if(threadReplySubmitButton)
-    threadReplySubmitButton.addEventListener('click', event => {
-        main('thread');
-    });
+    //submission request event listener
+    submissionSubmitButton = document.getElementById('submissionSubmitButton');
+    if(submissionSubmitButton)
+        submissionSubmitButton.addEventListener('click', event => {
+            main('submission');
+        });
 
-//change password event listener
-changePasswordSubmitButton = document.getElementById('changePswSubmit');
-if(changePasswordSubmitButton)
-    changePasswordSubmitButton.addEventListener('click', event => {
-        main('changePsw');
-    });
+    //reply to thread event listener
+    threadReplySubmitButton = document.getElementById('replySubmitButton');
+    if(threadReplySubmitButton)
+        threadReplySubmitButton.addEventListener('click', event => {
+            main('thread');
+        });
 
+    //change password event listener
+    changePasswordSubmitButton = document.getElementById('changePswSubmit');
+    if(changePasswordSubmitButton)
+        changePasswordSubmitButton.addEventListener('click', event => {
+            main('changePsw');
+        });
+
+    //delete account event listener
+    deleteAccountSubmitButton = document.getElementById('deleteAccountSubmit');
+    if(deleteAccountSubmitButton)
+        deleteAccountSubmitButton.addEventListener('click', event => {
+            main('deleteAccount');
+        });
+
+}
+
+setEventListeners();
