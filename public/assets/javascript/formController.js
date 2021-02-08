@@ -6,15 +6,15 @@ let main = async (page) => {
     //that indicates the place where the event is called
 
     //get the elements
-    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);
-    let normal          = document.querySelectorAll('.normal.' + page);
-    let selected        = document.querySelectorAll('.selected.' + page);
+    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
+    let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
+    let selected        = document.querySelectorAll('.selected.' + page);       //
     let existingPsw     = document.querySelectorAll('.existingPsw.' + page);    //done
-    let newPsw          = document.querySelectorAll('.newPsw.' + page);
+    let newPsw          = document.querySelectorAll('.newPsw.' + page);         //done
     let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
-    let index           = document.querySelectorAll('.index.' + page);
-    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
+    let index           = document.querySelectorAll('.index.' + page);          //done
+    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
 
     //uncomment this block check if the inputs have all been identified
 
@@ -28,11 +28,26 @@ let main = async (page) => {
     // console.log(index);
     // console.log(nonEmptyRadio);
 
+    //validate nonEmpty
+    await validateNonEmpty(nonEmpty);
+
     //validate existing email
     await validateExistingEmailAndPassword(existingEmail, existingPsw);
 
     //validate new email
     await validateNewEmail(newEmail);
+
+    //validate newPsw and confirm Password
+    await validateNewPassword(newPsw);
+
+    //validate index
+    await validateIndex(index);
+
+    //validate nonEmptyRadio
+    await validateNonEmptyRadio(nonEmptyRadio);
+
+    //validate suggestion fields
+    await validateSelected(selected);
 
     //submit if correct
     if(correct){
@@ -213,6 +228,138 @@ let validateNewEmail = async (emailInput) => {
 
 };
 
+//validate input fields that cannot be blank
+let validateNonEmpty = async (nonEmpty) => {
+    for (let i = 0; i < nonEmpty.length; i++){
+        let input = nonEmpty[i];
+
+        //to get the relevant error msg of what cannot be blank
+        let fieldName = input.name;
+        //capitalize the first letter of the fieldName
+        let name = fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
+        let errMsg = name + " cannot be blank";
+
+        if (input.value !== ''){
+            setSuccess(input);
+        }
+        else{
+            setError(input, errMsg);
+            correct = false;
+        }
+    }
+};
+
+//validate new password and confirm password fields
+let validateNewPassword = async (psw) => {
+    if (psw.length !== 0){
+        let newPswField = psw[0];
+        let confirmPswField = psw[1];
+
+        if (newPswField.value === ''){
+            setError(newPswField, 'Password cannot be blank');
+            correct = false;
+        }
+        else{
+            setSuccess(newPswField);
+            if (confirmPswField.value === ''){
+                setError(confirmPswField, 'You must confirm the password');
+                correct = false;
+            }
+            else if (confirmPswField.value.trim() !== newPswField.value.trim()){
+                setError(confirmPswField, 'Password mismatch');
+                correct = false;
+            }
+            else{
+                setSuccess(confirmPswField);
+            }
+        }
+    }
+};
+
+//validate index
+let validateIndex = async (index) => {
+
+    //indexStates --> blank, exists, notValid
+    let indexState;
+
+    for (let i = 0; i < index.length; i++){
+        let indexElement = index[i];
+
+        if (indexElement.value === ''){
+            indexState = 'blank';
+        }
+        else{
+            let requestData = {index: indexElement.value.trim()}
+
+            let response = await fetch('/checkIndexExistence', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+
+            let data = await (response.json());
+
+            if (data.indexExists){
+                indexState = 'exists';
+            }
+            else{
+                indexState = 'success';
+            }
+        }
+
+        if (indexState === 'blank'){
+            setError(indexElement, 'Index cannot be blank');
+            correct = false;
+        }
+        else if (indexState === 'exists'){
+            setError(indexElement, 'Index already exists');
+            correct = false;
+        }
+        else if (indexState === 'success'){
+            setSuccess(indexElement);
+        }
+    }
+};
+
+//validate nonEmptyRadio
+let validateNonEmptyRadio = async (radio) => {
+
+    let radioState = 'unchecked';
+
+    for (let i = 0; i < radio.length; i++){
+        let radioBtn = radio[i]
+        let errMsg = 'Choose a ' + radioBtn.name;
+
+        let parentElement = radioBtn.parentElement;
+        //get all options relevant to radioBtn
+        let radioBtnList = parentElement.querySelectorAll('input');
+
+        //check if at least one radio button is checked from a group
+        for (let j = 0; j < radioBtnList.length; j++){
+            if (radioBtnList[j].checked){
+                radioState = 'checked';
+                break;
+            }
+        }
+
+        if (radioState === 'checked'){
+            setSuccess(radioBtn);
+        }
+        else{
+            setError(radioBtn, errMsg);
+            correct = false;
+        }
+    }
+};
+
+//validate suggestion fields
+let validateSelected = async (selected) => {
+    for (let i = 0; i < selected.length; i++){
+        
+    }
+};
 
 
 // ---------------------------------------------------------------------------------------
