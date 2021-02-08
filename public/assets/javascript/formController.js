@@ -6,15 +6,15 @@ let main = async (page) => {
     //that indicates the place where the event is called
 
     //get the elements
-    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);
-    let normal          = document.querySelectorAll('.normal.' + page);
-    let selected        = document.querySelectorAll('.selected.' + page);
+    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
+    let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
+    let selected        = document.querySelectorAll('.selected.' + page);       //
     let existingPsw     = document.querySelectorAll('.existingPsw.' + page);    //done
-    let newPsw          = document.querySelectorAll('.newPsw.' + page);
+    let newPsw          = document.querySelectorAll('.newPsw.' + page);         //
     let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
-    let index           = document.querySelectorAll('.index.' + page);
-    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);
+    let index           = document.querySelectorAll('.index.' + page);          //
+    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //
 
     //uncomment this block check if the inputs have all been identified
 
@@ -211,6 +211,46 @@ let validateNewEmail = async (emailInput) => {
     }
     
 
+};
+
+//validate input fields that cannot be blank
+let validateNonEmpty = async (nonEmpty) => {
+    for (let i = 0; i < nonEmpty.length; i++){
+        let input = nonEmpty[i];
+
+        //to get the relevant error msg of what cannot be blank
+        let fieldName = input.name;
+        let errMsg = fieldName + " cannot be blank";
+
+        if (input.value !== ''){
+            setSuccess(input);
+        }
+        else{
+            setError(input, errMsg);
+            correct = false;
+        }
+    }
+};
+
+//validate new password and confirm password fields
+let validateNewPassword = async (psw) => {
+    let newPswField = psw[0];
+    let confirmPswField = psw[1];
+
+    if (newPswField.value === ''){
+        setError(newPswField, 'Password cannot be blank');
+        correct = false;
+    }
+    else{
+        setSuccess(newPswField);
+    }
+    if (confirmPswField.value === ''){
+        setError(confirmPswField, 'You must confirm the password');
+        correct = false;
+    }
+    else{
+        setSuccess(confirmPswField);
+    }
 };
 
 
@@ -416,7 +456,6 @@ if(addDropSubmitButton)
         main('addDrop');
     });
 
-//repeate request event listener
 repeatSubmitButton = document.getElementById('repeatSubmitButton');
 if(repeatSubmitButton)
     repeatSubmitButton.addEventListener('click', event => {
@@ -424,14 +463,12 @@ if(repeatSubmitButton)
         main('repeat');
     });
 
-//submission request event listener
 submissionSubmitButton = document.getElementById('submissionSubmitButton');
 if(submissionSubmitButton)
     submissionSubmitButton.addEventListener('click', event => {
         main('submission');
     });
 
-//reply to thread event listener
 threadReplySubmitButton = document.getElementById('replySubmitButton');
 if(threadReplySubmitButton)
     threadReplySubmitButton.addEventListener('click', event => {
