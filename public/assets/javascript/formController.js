@@ -14,19 +14,19 @@ let main = async (page) => {
     let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
-    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //
+    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
 
     //uncomment this block check if the inputs have all been identified
 
-    console.log(nonEmpty);
-    console.log(normal);
-    console.log(selected);
-    console.log(existingPsw);
-    console.log(newPsw);
-    console.log(existingEmail);
-    console.log(newEmail);
-    console.log(index);
-    console.log(nonEmptyRadio);
+    // console.log(nonEmpty);
+    // console.log(normal);
+    // console.log(selected);
+    // console.log(existingPsw);
+    // console.log(newPsw);
+    // console.log(existingEmail);
+    // console.log(newEmail);
+    // console.log(index);
+    // console.log(nonEmptyRadio);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -42,6 +42,12 @@ let main = async (page) => {
 
     //validate index
     await validateIndex(index);
+
+    //validate nonEmptyRadio
+    await validateNonEmptyRadio(nonEmptyRadio);
+
+    //validate suggestion fields
+    await validateSelected(selected);
 
     //submit if correct
     if(correct){
@@ -245,25 +251,27 @@ let validateNonEmpty = async (nonEmpty) => {
 
 //validate new password and confirm password fields
 let validateNewPassword = async (psw) => {
-    let newPswField = psw[0];
-    let confirmPswField = psw[1];
+    if (psw.length !== 0){
+        let newPswField = psw[0];
+        let confirmPswField = psw[1];
 
-    if (newPswField.value === ''){
-        setError(newPswField, 'Password cannot be blank');
-        correct = false;
-    }
-    else{
-        setSuccess(newPswField);
-        if (confirmPswField.value === ''){
-            setError(confirmPswField, 'You must confirm the password');
-            correct = false;
-        }
-        else if (confirmPswField.value.trim() !== newPswField.value.trim()){
-            setError(confirmPswField, 'Password mismatch');
+        if (newPswField.value === ''){
+            setError(newPswField, 'Password cannot be blank');
             correct = false;
         }
         else{
-            setSuccess(confirmPswField);
+            setSuccess(newPswField);
+            if (confirmPswField.value === ''){
+                setError(confirmPswField, 'You must confirm the password');
+                correct = false;
+            }
+            else if (confirmPswField.value.trim() !== newPswField.value.trim()){
+                setError(confirmPswField, 'Password mismatch');
+                correct = false;
+            }
+            else{
+                setSuccess(confirmPswField);
+            }
         }
     }
 };
@@ -281,7 +289,7 @@ let validateIndex = async (index) => {
             indexState = 'blank';
         }
         else{
-            let requestData = {index: index.value.trim()}
+            let requestData = {index: indexElement.value.trim()}
 
             let response = await fetch('/checkIndexExistence', {
                 method: 'POST',
@@ -306,7 +314,7 @@ let validateIndex = async (index) => {
             correct = false;
         }
         else if (indexState === 'exists'){
-            setError(indexElement, 'Index already taken');
+            setError(indexElement, 'Index already exists');
             correct = false;
         }
         else if (indexState === 'success'){
@@ -315,8 +323,43 @@ let validateIndex = async (index) => {
     }
 };
 
+//validate nonEmptyRadio
+let validateNonEmptyRadio = async (radio) => {
 
+    let radioState = 'unchecked';
 
+    for (let i = 0; i < radio.length; i++){
+        let radioBtn = radio[i]
+        let errMsg = 'Choose a ' + radioBtn.name;
+
+        let parentElement = radioBtn.parentElement;
+        //get all options relevant to radioBtn
+        let radioBtnList = parentElement.querySelectorAll('input');
+
+        //check if at least one radio button is checked from a group
+        for (let j = 0; j < radioBtnList.length; j++){
+            if (radioBtnList[j].checked){
+                radioState = 'checked';
+                break;
+            }
+        }
+
+        if (radioState === 'checked'){
+            setSuccess(radioBtn);
+        }
+        else{
+            setError(radioBtn, errMsg);
+            correct = false;
+        }
+    }
+};
+
+//validate suggestion fields
+let validateSelected = async (selected) => {
+    for (let i = 0; i < selected.length; i++){
+        
+    }
+};
 
 
 // ---------------------------------------------------------------------------------------
