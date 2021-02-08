@@ -1,3 +1,4 @@
+
 *{
     box-sizing: border-box;
 }
@@ -8,43 +9,63 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    padding:0;
+    font-family: 'Ubuntu', sans-serif;
+
 
 }
 
 .container{
-    background-color:rgba(207,224,195,0.5);
-    border-radius: 40px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 450px;
+    background-color:rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.3);
+    width: 60%;
     max-width: 100%;
-    opacity: 0.6;
+    height: 500px;
+    padding: 1% 1%;
+    box-sizing: border-box;
+    opacity: 0.9;
     position: relative;
+    background-image: url(../resources/wave.jpg);
 }
+
+
 
 .header{
     background-color: #70a9a1;
     border-bottom: 1px solid #f0f0f0;
     padding: 20px 40px;
-    border-radius: 20px;
+    
     text-align: center;
-    opacity:0.95;
+    opacity:0.8;
 
 }
 
-.header h2{
+h1{
     margin: 0px;
+    text-align: center;
+    padding-bottom: 10%;
+    color: #1f363d;    
 }
 
 .form{
-    padding: 30px 40px;
+
+    
+    background-color:white;
+    padding: 20px 40px;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 20px;
+    float: right;
+    border:8px solid rgba(64,121,140,0.5);
+    position: relative;
 }
 
 .form-control{
     margin-bottom: 8px;
     padding-bottom: 20px;
     position: relative;
-    color: white;
-    border-radius: 20px;
 }
 
 .form-control label{
@@ -106,7 +127,7 @@ body{
 }
 
 .form button{
-    border: 1px solid #49798c;
+    border: none;
     border-radius: 10px;
     display: block;
     font-size: 18px;
@@ -118,7 +139,7 @@ body{
     opacity: 2;
     color: white;
     outline-style: none;
-    position: relative;
+
 
 }
 
@@ -126,32 +147,72 @@ body{
     
     background-color: #1f363d;
 }
-
-.main-body{
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(/resources/sam-knight-jhpL88kP7Y8-unsplash.jpg);
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/hoodh-ahmed-nW1CN5z5hHs-unsplash.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     width: 100%;
     height: 100%;
-    
-    
-    
+
+   
 }
 
-#faculty{
-    
-    
-    border-style: none;
-    border-collapse: collapse;
-    outline: none;
-    font-size: 14px;
-    color: #666666;
-    border-radius: 6px;
-    padding: 10px;
-    width: 100%
+a{
+    font-size: 15px;
+    font-family:'Ubuntu', sans-serif;
+    font-weight: bold;
+    color:rgb(31,54,61);
 
 }
 
-h1{
+.button{
+    position: absolute;
+    bottom: 5%;
+    width: 60%;
+    transform:translate(20%,0%);
+
+}
+
+.links{
+    margin-bottom: 1px;
+    padding-bottom: 10px;
+    top: 3%;
+
+}
+
+a.link1{
+
+    color:#70a9a1;
+    
     text-align: center;
-    color:black;
+    text-decoration:none;
+    font-size: 15px;
+    
 }
+
+a.link1:hover{
+    color: #40798c;
+    cursor: pointer;
+}
+
+.l1{
+    float: left;
+}
+
+.left{
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+
+}
+
+.profile{
+    margin-top: 15%;
+
+}
+
+
