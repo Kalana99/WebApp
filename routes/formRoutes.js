@@ -9,4 +9,6 @@ router.post('/checkEmailExistence', formController.checkEmailExistence);
 
 router.post('/checkIndexExistence', formController.checkIndexExistence);
 
+router.post('/checkPassword', formController.checkPassword);
+
 module.exports = router;
