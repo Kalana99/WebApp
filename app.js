@@ -9,6 +9,7 @@ let authRoutes = require('./routes/authRoutes');
 let settingsRoutes = require('./routes/settingsRoutes');
 let verificationRoutes = require('./routes/verificationRoutes');
 let threadRoutes = require('./routes/threadRoutes');
+let formRoutes = require('./routes/formRoutes');
 let cookieParser = require('cookie-parser');
 let {requireAuth} = require('./middleware/authMiddleware');
 
@@ -38,6 +39,7 @@ app.use(authRoutes);
 app.use(verificationRoutes);
 app.use(settingsRoutes);
 app.use(threadRoutes);
+app.use(formRoutes);
 
 //Connect to the database
 let mongoose = require('mongoose');

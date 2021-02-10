@@ -3,13 +3,16 @@
         <div class="content">
             <div class="input-field">
 
-                <textarea name="message" rows="10" cols="5" placeholder="description" class="input" id="textarea"></textarea>
-                
-                <input type="hidden" id="threadId" name="threadId" />
+                <div>
+                    <!-- id = "textarea" -->
+                    <textarea name="message" rows="10" cols="5" placeholder="description" class="nonEmpty thread reply" id="nonEmpty reply"></textarea>
+                </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
 
-                <button type="submit" id=replySubmitButton>submit</button>
-                <button type="button" class="close-button-request">cancel</button>
+                <div>
+                    <button type="button" class="submit-button-request" id="replySubmitButton">submit</button>
+                    <button type="button" class="close-button-request" id="replyCancekButton">cancel</button>
+                </div>
 
             </div>
         </div>
