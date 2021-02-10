@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 let mongoose = require('mongoose');
+const { updateMany } = require('../models/User');
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -94,8 +95,9 @@ module.exports.let_deleteAccount = (req, res) => {
             else{
                 db.collection('users').deleteOne({_id: mongoose.Types.ObjectId(id)})
                 .then(function(d){
+                    console.log("account deleted");//clear
                     console.log(d.deletedCount);
-                    //res.redirect('/login')
+                    // res.redirect('/login')
                     res.json({'message': 'account deletion successful'});
                 });
             }
