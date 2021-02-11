@@ -4,17 +4,23 @@
         <header class="header-popup"><h2>Add/Drop Request</h2></header>
         <div class="content">
             <div class="input-field">
-                <div>
+                <div class="form-control">
                     <!-- lecture -->
                     <input name="module" class="nonEmpty addDrop currentModule" type="text" placeholder="current module" />
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
-                <div>
+                <div class="form-control">
                     <!-- lecture -->
                     <input name="requiredModule" class="nonEmpty addDrop requiredModule" type="text" placeholder="required module" />
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
                     
-                <div>
+                <div class="form-control">
                     <!-- lecturer -->
                     <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
                     <div class="suggestions-lecturer" id="addDrop">
@@ -22,15 +28,15 @@
                 </div>
 
                 
-                <div>
+                <div class="form-control">
                     <!-- input -->
                     <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty addDrop description" id="description"></textarea>
                 </div>
 
-                <div>
-                    <button type="button" class="submit-button-request" id="addDropSubmitButton">submit</button>
+                <div class="form-control">
+                    <button type="button" class="submit-button-request submit" id="addDropSubmitButton">submit</button>
                     <!-- id was "0" -->
-                    <button type="button" class="close-button-request" id="0">cancel</button>
+                    <button type="button" class="close-button-request cancel" id="0">cancel</button>
                 </div>
                 
                 
