@@ -11,7 +11,8 @@ const threadSchema = new Schema({
     "status": String,
     "messageID_list": [String],
     "additionalData": Object,
-    "module": String
+    "module": String,
+    "deletedID": String
 },
 { timestamps: true });
 

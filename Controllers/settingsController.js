@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 let mongoose = require('mongoose');
 const { updateMany } = require('../models/User');
+const Thread = require('../models/Thread');
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -58,14 +59,26 @@ module.exports.let_deleteAccount = (req, res) => {
     
     const token = req.cookies.jwt;
 
-    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', async (err, decodedToken) => {
         let id = decodedToken.id;
 
-        User.deleteOne({_id: mongoose.Types.ObjectId(id)})
-        .then(function(d){
-            console.log(d.deletedCount);
+        let user = await User.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, {$set: {email: "", index: ""}}, {useFindAndModify: false})
+        
+        if (user.type === "student"){
+            await db.collection("threads").updateMany({studentID: id}, {$set: {deletedID: id, studentID: null}});
+        }
+        else{
+            await db.collection("threads").updateMany({StaffID: id}, {$set: {deletedID: id, StaffID: null}})
+        }
+
+        db.collection("threads").deleteMany({StaffID: null, studentID: null}).then((obj) =>{
+            console.log("thread deleted.");
             res.json({});
         });
+
+        
+
+        
 
     });
 };

@@ -53,10 +53,16 @@ module.exports.getThreadData_get = (req, res) => {
                     for(let i = 0; i < array.length; i++){
                         if(user.type === 'student'){
                             let staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].StaffID)});
+                            if (!staffUser){
+                                staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].deletedID)});
+                            }
                             array[i].name = staffUser.name;
                         }
                         else if(user.type === 'staff'){
                             let studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].studentID)});
+                            if (!studentUser){
+                                studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].deletedID)});
+                            }
                             array[i].name = studentUser.name;
                         }
                     }
