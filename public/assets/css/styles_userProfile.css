@@ -211,3 +211,18 @@ border-color:#f4abc4;
 @media  screen and (max-width: 600px){
 
 }
+body > div > div > main > div.navigation > ul{
+ 
+padding-left: 0px;
+padding-right: 0px;
+position: fixed;
+bottom: 0px;
+left: 0px;
+top: 0px;
+right: 0px;
+margin-top: 0px;
+padding-top: 16px;
+padding-bottom: 20px;
+padding-bottom: 16px;
+margin-bottom: 0px;
+}
