@@ -71,3 +71,19 @@ module.exports.checkIndexExistence = (req, res) => {
 
 
 };
+
+module.exports.checkPassword = (req, res) => {
+
+    const token = req.cookies.jwt;
+    const password = req.body.password;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+        
+        User.checkPassword(id, password).then(user => {
+            res.json({passwordCorrect: user.passwordCorrect});
+        });
+
+    });
+
+};

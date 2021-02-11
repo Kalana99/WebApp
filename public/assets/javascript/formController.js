@@ -31,8 +31,10 @@ let main = async (page) => {
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
 
-    //validate existing email
-    await validateExistingEmailAndPassword(existingEmail, existingPsw);
+    //validate existing password
+    //validating the existing email and password will be called inside this method
+    //if it applies to the current page
+    await validateExistingPassword(existingPsw, existingEmail);
 
     //validate new email
     await validateNewEmail(newEmail);
@@ -161,6 +163,59 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
     }
 
     
+};
+
+let validateExistingPassword = async (pswInput, existingEmail) => {
+
+    // If there is also an existing email input in the page, then go to the validate
+    // existing email and password
+    if(existingEmail.length > 0){
+        console.log('here');
+        await validateExistingEmailAndPassword(existingEmail, pswInput);
+        return;
+    }
+
+    let password = null;
+    let passwordValue;
+    //if there is a password field,
+    if (pswInput[0] != null){
+        password = pswInput[0];
+        passwordValue = password.value.trim();
+        if (passwordValue === ''){
+            passwordState = "blank";
+        }
+        else{
+            let response = await fetch('/checkPassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({password: passwordValue}),
+                });
+        
+            data = await response.json();
+            
+            if(data.passwordCorrect){
+                passwordState = 'success';
+            }
+            else{
+                passwordState = 'wrong';
+            }
+    
+            }
+            if(passwordState === 'success'){
+                setSuccess(password);
+            }
+            else if(passwordState === 'wrong'){
+                setError(password, 'Please enter the correct password');
+                correct = false;
+            }
+            else if(passwordState === 'blank'){
+                setError(password, 'Current password cannot be blank');
+                correct = false;
+        }
+    }
+
 };
 
 //signup validation front and back
@@ -625,7 +680,6 @@ let setEventListeners = () => {
     repeatSubmitButton = document.getElementById('repeatSubmitButton');
     if(repeatSubmitButton)
         repeatSubmitButton.addEventListener('click', event => {
-            console.log('button clicked');
             main('repeat');
         });
 
