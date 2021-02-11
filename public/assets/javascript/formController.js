@@ -31,11 +31,10 @@ let main = async (page) => {
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
 
-    //validate existing email
-    await validateExistingEmailAndPassword(existingEmail, existingPsw);
-
     //validate existing password
-    await validateExistingPassword(existingPsw);
+    //validating the existing email and password will be called inside this method
+    //if it applies to the current page
+    await validateExistingPassword(existingPsw, existingEmail);
 
     //validate new email
     await validateNewEmail(newEmail);
@@ -166,12 +165,20 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
     
 };
 
-let validateExistingPassword = async (pswInput) => {
+let validateExistingPassword = async (pswInput, existingEmail) => {
+
+    // If there is also an existing email input in the page, then go to the validate
+    // existing email and password
+    if(existingEmail.length > 0){
+        console.log('here');
+        await validateExistingEmailAndPassword(existingEmail, pswInput);
+        return;
+    }
 
     let password = null;
     let passwordValue;
     //if there is a password field,
-    if (pswInput != null){
+    if (pswInput[0] != null){
         password = pswInput[0];
         passwordValue = password.value.trim();
         if (passwordValue === ''){
