@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Delete Account</title>
 </head>
 <body>
@@ -11,12 +12,16 @@
         <div class="form-control">
             <label for="email">Enter your email</label><br>
             <input type="email" name="email" class="existingEmail deleteAccount" id="email" placeholder="Enter your email" required>
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
 
         <div class="form-control">
             <label for="password">Enter your password</label><br>
             <input type="password" name="password" class="existingPsw deleteAccount" id="password" placeholder="Enter your password" required>
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
 
@@ -26,6 +31,8 @@
             <input type="radio" name="confirm" class="nonEmptyRadio deleteAccount" id="yes" value="yes">
             <label for="option2">No</label>
             <input type="radio" name="confirm" id="no" value="no">
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
 

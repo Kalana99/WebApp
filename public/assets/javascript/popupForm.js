@@ -122,14 +122,16 @@ document.querySelector('#submit_logout').addEventListener('click', () => {
 
 //[{name: "", index: "", id: ""}]
 
-let lecturerInput = document.querySelectorAll('.lecturer');
-let suggestionsPanelLecturer = document.querySelectorAll('.suggestions-lecturer');
-let popupBox = document.querySelector('.input-field');
+let lecturerInput               = document.querySelectorAll('.lecturer');
+let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');
+let popupBox                    = document.querySelector('.input-field');
+let lecturerDiv                 = document.querySelector('.lecturerDiv');
 //to get the suggestion according to the last input value
 let lastSearchTime = new Date();
 
 //add an event listener to all lecturer input fields in all three forms
 for (let i=0; i<lecturerInput.length; i++){
+    console.log(lecturerInput[i]);
     lecturerInput[i].addEventListener('keyup', () => {
         //get the value in lecturer input field
         let input = lecturerInput[i].value;
@@ -169,7 +171,6 @@ for (let i=0; i<lecturerInput.length; i++){
                             lecturerInput[i].style.visibility = 'hidden';
                             suggestionsPanelLecturer[i].innerHTML = '';
 
-                            let requestType = document.getElementById
                             let selected = document.createElement('div');
                             selected.setAttribute('class', 'selectedFinal');
                             selected.setAttribute('id', event.currentTarget.id);

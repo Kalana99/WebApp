@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_popup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
     <link rel="stylesheet" href="/css/styles_logoutPopup.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -18,50 +19,61 @@
         </header>
         
             <div class="row">
-            <div class="profile-div">
-                <div class="photo">
-                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
-                </div>
-                
-                <h4 class="name"><%= name %> </h4>
-                <p class="info"><%= index %> </p>
-                <p class="info"><%= phone %> </p>
-                <p class="info"><%= email %> </p>
-                <p class="info"><%= faculty %> </p>
-            </div>
-            <main>
-            <div class="navigation">
-                <ul class="nav">
-                    <li class= "nav-tabs"><a href="/threads"><button>
-                        <i class="material-icons">forum</i>
-                        <p>threads</p></button>
-                        </a>
-                    </li>
-                    <li class= "nav-tabs"><a href="#"><button>
-                        <i class="material-icons">notifications_none</i>
-                        <p>Notifications</p>
-                        </button></a>
-                    </li>
-                    <li class= "dropdown nav-tabs">
-                        <button >                         
-                            <i class="material-icons">brightness_low</i>
-                            <p>Settings</p>
-                        </button>
-                        <div class= "dropdown-content">
-                            <a href=""> Edit profile</a>
-                            <a href="/changePassword"> Change password</a>
-                            <a href="/deleteAccount"> Delete account</a>
-                        </div>
-                    </li>
-                    <li class="logout-button">
-                        <button id="logout-popup">
-                        <i class="material-icons log">power_settings_new</i>
-                        <p>Logout</p></button>
-                    </li>
-                </ul>
+                <div class="profile-div">
+                    <div class="photo">
+                        <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
+                    </div>
                     
-                <%- include('./assets/partials/popup_logout.ejs') %>
+                    <div>
+                        <h4 class="name"><%= name %> </h4>
+                        <p class="info"><%= index %> </p>
+                        <p class="info"><%= phone %> </p>
+                        <p class="info"><%= email %> </p>
+                        <p class="info"><%= faculty %> </p>
+                    </div>
+                </div>
             </div>
+
+            <main>
+                <div class="navigation">
+                    <ul class="nav">
+                        <li class= "nav-tabs">
+                            <a href="/threads">
+                                <button>
+                                    <i class="material-icons">forum</i>
+                                    <p>threads</p>
+                                </button>
+                            </a>
+                        </li>
+                        <li class= "nav-tabs">
+                            <a href="#">
+                                <button>
+                                    <i class="material-icons">notifications_none</i>
+                                    <p>Notifications</p>
+                                </button>
+                            </a>
+                        </li>
+                        <li class= "dropdown nav-tabs">
+                            <button >                         
+                                <i class="material-icons">brightness_low</i>
+                                <p>Settings</p>
+                            </button>
+                            <div class= "dropdown-content">
+                                <a href=""> Edit profile</a>
+                                <a href="/changePassword"> Change password</a>
+                                <a href="/deleteAccount"> Delete account</a>
+                            </div>
+                        </li>
+                        <li class="logout-button">
+                            <button id="logout-popup">
+                                <i class="material-icons log">power_settings_new</i>
+                                <p>Logout</p>
+                            </button>
+                        </li>
+                    </ul>
+                        
+                    <%- include('./assets/partials/popup_logout.ejs') %>
+                </div>
             
                 <div class="request-tiles">
 
