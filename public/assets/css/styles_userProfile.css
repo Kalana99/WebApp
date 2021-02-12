@@ -9,7 +9,7 @@ main {
 .container{
   display: relative;
   max-width: 1250px;
-  margin: 30px auto 30px;
+  
   padding: 0 !important;
   width: 100%;
   background-color: #70a9a1;
