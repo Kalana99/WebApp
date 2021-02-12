@@ -48,7 +48,7 @@ module.exports.getThreadData_get = (req, res) => {
             
             db.collection('threads').find({$or:[{"studentID": id}, {'StaffID': id}]}).toArray().then(array => {
 
-                let addNameToArray = async () => {
+                let  addNameToArray = async () => {
 
                     for(let i = 0; i < array.length; i++){
                         if(user.type === 'student'){
