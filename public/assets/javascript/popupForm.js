@@ -29,7 +29,7 @@ for (let i = 0; i < cancelButtons.length; i++){
     cancelButtons[i].addEventListener('click', (event) => {
         event.preventDefault();
         //grab the id of the clicked cancel button
-        let id = event.currentTarget.id;
+        let id = parseInt(event.currentTarget.id);
         activePopupWindow = null;
 
         popupRequest[id].className = 'popup-request-window';
@@ -55,7 +55,7 @@ document.querySelector('#cancel_logout').addEventListener('click', (event) => {
     popupWindow.className = 'popup-window';
 });
 
-document.querySelector('#submit_logout').addEventListener('click', () => {
+document.querySelector('#submit_logout').addEventListener('click', (event) => {
     window.location.href = '/logout';
 });
 
@@ -125,7 +125,6 @@ document.querySelector('#submit_logout').addEventListener('click', () => {
 let lecturerInput               = document.querySelectorAll('.lecturer');
 let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');
 let popupBox                    = document.querySelector('.input-field');
-let lecturerDiv                 = document.querySelector('.lecturerDiv');
 //to get the suggestion according to the last input value
 let lastSearchTime = new Date();
 
@@ -172,12 +171,11 @@ for (let i=0; i<lecturerInput.length; i++){
                             // lecturerInput[i].style.visibility = 'hidden';
                             suggestionsPanelLecturer[i].innerHTML = '';
 
+                            let outerDiv = document.createElement('div');
                             let selected = document.createElement('div');
                             selected.setAttribute('class', 'selectedFinal');
                             selected.setAttribute('id', event.currentTarget.id);
-
-                            selected.innerHTML = suggested.name;
-                            lecturerDiv.innerHTML = "<div class='selectedFinal' id=''></div>";
+                            selected.innerHTML = suggested.index + " - " + suggested.name;
                             
                             //a close button
                             let remove = document.createElement('button');
@@ -185,12 +183,18 @@ for (let i=0; i<lecturerInput.length; i++){
                             remove.innerHTML = "<small>x</small>";
                             selected.appendChild(remove);
 
+                            console.log(remove.innerHTML);
+
                             remove.addEventListener('click', (event) => {
                                 event.preventDefault();
 
                                 selected.style.visibility = 'hidden';
                                 lecturerInput[i].style.visibility = 'visible';
                             });
+
+                            outerDiv.appendChild(selected);
+
+                            lecturerDiv.innerHTML = outerDiv.innerHTML;
 
                         });
         
