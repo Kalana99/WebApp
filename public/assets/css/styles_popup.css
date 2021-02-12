@@ -116,7 +116,7 @@
   align-self: left;
   box-sizing: border-box;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  top: 205px;
+  z-index: 2;
 }
 
 .selectedFinal:focus{
@@ -125,17 +125,20 @@
 
 .remove{
   position: absolute;
-  display: inline;
+  text-align: center;
+  margin: 1px;
+  padding: 1px;
   cursor: pointer;
   height: fit-content;
-  width: fit-content;
+  width: 15px;
   border: 1px solid lightgrey;
   border-radius: 50%;
-  right: 3px;
-  bottom: 2px;
   overflow: hidden;
   z-index: 3;
-}
+  right: 2px;
+  top: 1px;
+  bottom: 2px;
+} 
 
 .remove:focus{
   outline: none;

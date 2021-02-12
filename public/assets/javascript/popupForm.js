@@ -32,6 +32,8 @@ for (let i = 0; i < cancelButtons.length; i++){
         let id = parseInt(event.currentTarget.id);
         activePopupWindow = null;
 
+        // clear the popup form when canceled
+
         popupRequest[id].className = 'popup-request-window';
     });
 };
@@ -176,18 +178,20 @@ for (let i=0; i<lecturerInput.length; i++){
                             selected.setAttribute('class', 'selectedFinal');
                             selected.setAttribute('id', event.currentTarget.id);
                             selected.innerHTML = suggested.index + " - " + suggested.name;
+
+                            console.log(selected);
                             
-                            //a close button
-                            let remove = document.createElement('button');
+                            // a close button
+                            let remove = document.createElement('div');
                             remove.setAttribute('class', 'remove');
-                            remove.innerHTML = "<small>x</small>";
+                            remove.innerText = 'x';
                             selected.appendChild(remove);
 
-                            console.log(remove.innerHTML);
-
                             remove.addEventListener('click', (event) => {
-                                event.preventDefault();
+                                
+                                console.log("here");
 
+                                outerDiv.innerHTML = '';
                                 selected.style.visibility = 'hidden';
                                 lecturerInput[i].style.visibility = 'visible';
                             });
