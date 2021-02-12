@@ -37,7 +37,7 @@ module.exports.submitRequests_post = (req, res) => {
 
 };
 
-module.exports.getThreadData_get = (req, res) => {
+module.exports.getThreadData_post = (req, res) => {
 
     const token = req.cookies.jwt;
 
@@ -47,6 +47,10 @@ module.exports.getThreadData_get = (req, res) => {
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
             db.collection('threads').find({$or:[{"studentID": id}, {'StaffID': id}]}).toArray().then(array => {
+
+
+                //select the threads according to filter
+
 
                 let  addNameToArray = async () => {
 
