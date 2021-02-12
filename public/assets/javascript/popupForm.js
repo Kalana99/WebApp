@@ -182,20 +182,21 @@ for (let i=0; i<lecturerInput.length; i++){
                             console.log(selected);
                             
                             // a close button
-                            let remove = document.createElement('div');
+                            let remove = document.createElement('button');
                             remove.setAttribute('class', 'remove');
+                            remove.setAttribute('type', 'button');
                             remove.innerText = 'x';
-                            selected.appendChild(remove);
 
                             remove.addEventListener('click', (event) => {
                                 
                                 console.log("here");
 
-                                outerDiv.innerHTML = '';
-                                selected.style.visibility = 'hidden';
-                                lecturerInput[i].style.visibility = 'visible';
+                                // outerDiv.innerHTML = '';
+                                // selected.style.visibility = 'hidden';
+                                // lecturerInput[i].style.visibility = 'visible';
                             });
 
+                            selected.appendChild(remove);
                             outerDiv.appendChild(selected);
 
                             lecturerDiv.innerHTML = outerDiv.innerHTML;

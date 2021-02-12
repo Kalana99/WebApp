@@ -74,10 +74,7 @@ section{
     display: inline;
     padding: 6px;
     border: none;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-right: 0px;
-    margin-left: 0;
+    margin: 2px 0 8px 0;
     font-size: 15px;
     width: 80%;
 }
