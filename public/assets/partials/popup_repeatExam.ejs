@@ -7,6 +7,9 @@
                 <div class="form-control">
                     <!-- lecture -->
                     <input name="module" class="nonEmpty repeat currentModule" type="text" placeholder="Module" />
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
                 <!-- change later -->
@@ -15,11 +18,17 @@
                     <input name="lecturer" class="selected repeat lecturer" type="text" placeholder="Lecturer" />
                     <div class="suggestions-lecturer" id="repeat">
                     </div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
                 
                 <div class="form-control">
                     <!-- input -->
                     <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty repeat description" id="description"></textarea>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
                 <!-- append child to send evidence if the request type is submission deadline -->
                 <div class="form-control">

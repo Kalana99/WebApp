@@ -8,6 +8,9 @@
                 <div class="form-control">
                     <!-- lecture -->
                     <input name="module" class="nonEmpty submission currentModule" type="text" placeholder="Module" />
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
                 <div class="form-control">
@@ -15,11 +18,17 @@
                     <input name="lecturer" class="selected submission lecturer" type="text" placeholder="Lecturer" />
                     <div class="suggestions-lecturer" id="submission">
                     </div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
                 <div class="form-control">
                     <!-- input -->
                     <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty submission description" id="description"></textarea>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
                 <!-- append child to send evidence if the request type is submission deadline -->
