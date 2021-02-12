@@ -131,10 +131,10 @@ let lastSearchTime = new Date();
 
 //add an event listener to all lecturer input fields in all three forms
 for (let i=0; i<lecturerInput.length; i++){
-    console.log(lecturerInput[i]);
     lecturerInput[i].addEventListener('keyup', () => {
         //get the value in lecturer input field
         let input = lecturerInput[i].value;
+        let lecturerDiv = lecturerInput[i].parentElement;
     
         //request suggestions from database staff profiles
         fetch('/getStaff', {
@@ -168,7 +168,8 @@ for (let i=0; i<lecturerInput.length; i++){
                         option.addEventListener('click', (event) => {
 
                             //change the appearance of the selected suggestion
-                            lecturerInput[i].style.visibility = 'hidden';
+                            lecturerDiv.innerHTML = '';
+                            // lecturerInput[i].style.visibility = 'hidden';
                             suggestionsPanelLecturer[i].innerHTML = '';
 
                             let selected = document.createElement('div');
@@ -176,7 +177,7 @@ for (let i=0; i<lecturerInput.length; i++){
                             selected.setAttribute('id', event.currentTarget.id);
 
                             selected.innerHTML = suggested.name;
-                            popupBox.appendChild(selected);
+                            lecturerDiv.innerHTML = <div class='selectedFinal' id=''></div>;
                             
                             //a close button
                             let remove = document.createElement('button');
