@@ -498,6 +498,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data = {};
 
         data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
+        console.log(document.querySelector('.selectedFinal').getAttribute('id'));
         data['type'] = 'addDrop';
         data['status'] = 'active';
         data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
