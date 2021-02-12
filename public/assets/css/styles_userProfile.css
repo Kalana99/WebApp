@@ -1,6 +1,7 @@
 
 body{
   background-color: #40798c;
+  margin: 0px;
   font-family: Arial, Helvetica, sans-serif;
 }
 main {
@@ -9,9 +10,9 @@ main {
 .container{
   display: relative;
   max-width: 1250px;
-  margin: 30px auto 30px;
+  
   padding: 0 !important;
-  width: 90%;
+  width: 100%;
   background-color: #70a9a1;
   box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
 }
@@ -124,6 +125,7 @@ float :left;
 margin: 20px;
 position: relative;
 
+
 }
 
 .nav {
@@ -209,4 +211,19 @@ border-color:#f4abc4;
 }
 @media  screen and (max-width: 600px){
 
+}
+body > div > div > main > div.navigation >ul{
+ 
+padding-left: 0px;
+padding-right: 0px;
+position: fixed;
+bottom: 0px;
+left: 0px;
+top: 0px;
+right: 0px;
+margin-top: 0px;
+padding-top: 16px;
+padding-bottom: 20px;
+padding-bottom: 16px;
+margin-bottom: 0px;
 }

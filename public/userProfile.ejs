@@ -35,45 +35,38 @@
             </div>
 
             <main>
-                <div class="navigation">
-                    <ul class="nav">
-                        <li class= "nav-tabs">
-                            <a href="/threads">
-                                <button>
-                                    <i class="material-icons">forum</i>
-                                    <p>threads</p>
-                                </button>
-                            </a>
-                        </li>
-                        <li class= "nav-tabs">
-                            <a href="#">
-                                <button>
-                                    <i class="material-icons">notifications_none</i>
-                                    <p>Notifications</p>
-                                </button>
-                            </a>
-                        </li>
-                        <li class= "dropdown nav-tabs">
-                            <button >                         
-                                <i class="material-icons">brightness_low</i>
-                                <p>Settings</p>
-                            </button>
-                            <div class= "dropdown-content">
-                                <a href=""> Edit profile</a>
-                                <a href="/changePassword"> Change password</a>
-                                <a href="/deleteAccount"> Delete account</a>
-                            </div>
-                        </li>
-                        <li class="logout-button">
-                            <button id="logout-popup">
-                                <i class="material-icons log">power_settings_new</i>
-                                <p>Logout</p>
-                            </button>
-                        </li>
-                    </ul>
-                        
-                    <%- include('./assets/partials/popup_logout.ejs') %>
-                </div>
+            <div class="navigation">
+                <ul class="nav">
+                    <li class= "nav-tabs"><a href="/threads"><button>
+                        <i class="material-icons">forum</i>
+                        <p>threads</p></button>
+                        </a>
+                    </li>
+                    <li class= "nav-tabs"><a href="#"><button>
+                        <i class="material-icons">notifications_none</i>
+                        <p>Notifications</p>
+                        </button></a>
+                    </li>
+                    <li class= "dropdown nav-tabs">
+                        <button >                         
+                            <i class="material-icons">brightness_low</i>
+                            <p>Settings</p>
+                        </button>
+                        <div class= "dropdown-content">
+                            <a href="/EditProfile"> Edit profile</a>
+                            <a href="/changePassword"> Change password</a>
+                            <a href="/deleteAccount"> Delete account</a>
+                        </div>
+                    </li>
+                    <li class="logout-button">
+                        <button id="logout-popup">
+                        <i class="material-icons log">power_settings_new</i>
+                        <p>Logout</p></button>
+                    </li>
+                </ul>
+                    
+                <%- include('./assets/partials/popup_logout.ejs') %>
+            </div>
             
                 <div class="request-tiles">
 
