@@ -44,37 +44,104 @@ module.exports.submitRequests_post = (req, res) => {
 
 };
 
-module.exports.getThreadData_get = (req, res) => {
+module.exports.getThreadData_post = (req, res) => {
 
     const token = req.cookies.jwt;
 
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(async user => {
+
+            //select the threads according to filter by editing the searchquery object
+            filter = req.body.filter;
+            pageNumber = req.body.pageNumber;
+
+            let searchQuery = {
+                $or:[{"studentID": id}, {'StaffID': id}]
+            }
+
+            if(filter.status != 'all')
+                searchQuery['status'] = filter.status;
+
+            if(filter.type != 'all')
+                searchQuery['type'] = filter.type;
+
+            let searchPeople = async (thread, string) => {
+
+                string = string.toLowerCase();
+                let searchWords = string.split(' ');
+
+                let student = await User.findOne({_id: mongoose.Types.ObjectId(thread.studentID)});
+                let staff = await User.findOne({_id: mongoose.Types.ObjectId(thread.StaffID)});
+                let flag = false;
+
+                for(let j = 0; j < searchWords.length; j++){
+
+                    if(student){
+                        if(student.name.includes(searchWords[j])
+                            || student.index.includes(searchWords[j])
+                            || student.email.includes(searchWords[j])
+                            || student.faculty.includes(searchWords[j])
+                            //|| student.department.includes(searchWords[j])
+                            ){
+                                flag = true;
+                                break;
+                            }
+                    }
+
+                    if(staff){
+                        if(staff.name.includes(searchWords[j])
+                            || staff.index.includes(searchWords[j])
+                            || staff.email.includes(searchWords[j])
+                            || staff.faculty.includes(searchWords[j])
+                            //|| staff.department.includes(searchWords[j])
+                            ){
+                                flag = true;
+                                break;
+                            }
+                    }
+
+                }
+
+                return flag;
+
+            };
             
-            db.collection('threads').find({$or:[{"studentID": id}, {'StaffID': id}]}).toArray().then(array => {
+            db.collection('threads').find(searchQuery).toArray().then(async array => {
+
+                let searchedArray = [];
+                
+                for(let i = 0; i < array.length; i++){
+
+                    let contains = await searchPeople(array[i], filter.string);
+
+                    if(contains){
+                        searchedArray.push(array[i]);
+                    }
+
+                }
 
                 let  addNameToArray = async () => {
 
-                    for(let i = 0; i < array.length; i++){
+                    for(let i = 0; i < searchedArray.length; i++){
                         if(user.type === 'student'){
-                            let staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].StaffID)});
+                            let staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].StaffID)});
                             if (!staffUser){
-                                staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].deletedID)});
+                                staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
                             }
-                            array[i].name = staffUser.name;
+                            searchedArray[i].name = staffUser.name;
                         }
                         else if(user.type === 'staff'){
-                            let studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].studentID)});
+                            let studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].studentID)});
                             if (!studentUser){
-                                studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(array[i].deletedID)});
+                                studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
                             }
-                            array[i].name = studentUser.name;
+                            searchedArray[i].name = studentUser.name;
                         }
                     }
 
-                    res.json(array);
+                    res.json(searchedArray);
                 };
 
                 addNameToArray();

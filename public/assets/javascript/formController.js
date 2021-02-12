@@ -583,7 +583,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         let data = {};
 
         data['text'] = querySelectorFrom('.reply', nonEmpty)[0].value;
-        data['threadId'] = document.querySelector('.selected').getAttribute('id');
+        data['threadId'] = document.querySelector('.selected.threads').getAttribute('id');
         
         fetch('/reply', {
             method: 'POST', // or 'PUT'
