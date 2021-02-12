@@ -1,3 +1,4 @@
+let print = console.log;
 let threads;
 let threadId = null;
 let pageNumber = 1;
@@ -8,6 +9,9 @@ let filter = {
 };
 
 let getThreads = () => {
+
+    let btnGroup = document.getElementsByClassName('btn-group')[0];
+    btnGroup.innerHTML = '';
 
     fetch('/getThreadData', {
         method: 'POST', // or 'PUT'
@@ -73,12 +77,12 @@ let createThreadElement = (thread) => {
         //get the selected button and deselect it
         //and select the selected button
 
-        let selectedButton = document.querySelector('.selected');
+        let selectedButton = document.querySelector('.selected.threads');
         if(selectedButton)
             selectedButton.setAttribute('class', '');
 
         threadId = event.currentTarget.id;
-        event.currentTarget.setAttribute('class', 'selected');
+        event.currentTarget.setAttribute('class', 'selected threads');
         
         for(let i = 0; i < threads.length; i++){
             if(threads[i]._id === threadId){
@@ -249,6 +253,25 @@ let initializePage = () => {
         console.error('Error:', error);
         });
     });
+
+    //  setting the keypress event listener for the search bar and a click listener
+    // for the search icon button
+    let searchButton = document.querySelector('.searchButton');
+    let searchText = document.querySelector('.searchText');
+    searchButton.addEventListener('click', (event) => {
+        
+        filter.string = searchText.value;
+        getThreads();
+        
+        
+    });
+
+    searchText.addEventListener("keydown", event => {
+        if (event.isComposing || event.keyCode === 13) {
+          searchButton.click();
+        }
+        // do something
+      });   
 
 };
 
