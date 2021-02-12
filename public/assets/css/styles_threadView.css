@@ -66,6 +66,7 @@ section{
     width: 35%;
     background: whitesmoke;
     margin-left: 20px;
+    position: relative;
 }
 
 .search-bar input[type=text]{
@@ -179,6 +180,37 @@ section{
 .replyBtn.visible{
     visibility: visible;
 }
+/* ------------------page navigation next, previous buttons--------------------- */
+/* .pageNav{
+    position: relative;
+    top: 0px;
+}
+
+.pageNav a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+.pageNav a:hover {
+background-color: #ddd;
+color: black;
+}
+
+.previous {
+background-color: #697769;
+color: white;
+}
+
+.next {
+background-color: #697769;
+color: black;
+}
+
+.round {
+border-radius: 50%;
+} */
+  /* --------------------------------------------- */
 
 footer{
     background-color: whitesmoke;
