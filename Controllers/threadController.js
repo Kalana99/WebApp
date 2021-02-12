@@ -28,9 +28,9 @@ module.exports.submitRequests_post = (req, res) => {
         let data = req.body;
         data['studentID'] = id;
         
-        console.log(req.body.evidance);
+        // console.log(req.body.evidance);
         let evidance = req.body.evidance;
-        // let evidanceID = evidance._id;
+        console.log(req.body);
         delete req.body.evidance;
         database.addFile({ name: evidance.name, file: binary(evidance.data) });
 

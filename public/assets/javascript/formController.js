@@ -500,7 +500,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data = {};
 
         data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
-        console.log(document.querySelector('.selectedFinal').getAttribute('id'));
         data['type'] = 'addDrop';
         data['status'] = 'active';
         data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
@@ -509,16 +508,11 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         // {name: evidance.name, file: binary(req.files.uploadedFile.data)}
         let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
+        
+        let formData = new FormData();
+        formData.append("evidance", Evidance)
 
-        var newEvidance  = {
-            'lastModified'     : Evidance.lastModified,
-            'lastModifiedDate' : Evidance.lastModifiedDate,
-            'name'             : Evidance.name,
-            'size'             : Evidance.size,
-            'type'             : Evidance.type
-         };
-
-        data['evidance'] = newEvidance;
+        data['evidance'] = formData;
  
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
@@ -556,7 +550,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             })
             .then(response => response.json())
             .then(data => {
-                // window.location.href = '/userProfile';
+                window.location.href = '/userProfile';
             })
             .catch((error) => {
                 console.error('Error:', error);
