@@ -27,15 +27,16 @@ module.exports.submitRequests_post = (req, res) => {
 
         let data = req.body;
         data['studentID'] = id;
-
-        let evidance = data.evidance;
-        let evidanceID = evidance._id;
-        delete data.evidance;
-        database.addEvidance({name: evidance.name, file: binary(req.files.uploadedFile.data)});
+        
+        console.log(req.body.evidance);
+        let evidance = req.body.evidance;
+        // let evidanceID = evidance._id;
+        delete req.body.evidance;
+        database.addFile({ name: evidance.name, file: binary(evidance.data) });
 
         let message = data.message;
         delete data.message;
-        let messageId = database.addMessage({'from': id, 'text': message, 'evidanceID': evidanceID});//'evidanceID': evidanceID --> add as a property
+        let messageId = database.addMessage({'from': id, 'text': message});//'evidanceID': evidanceID --> add as a property
         data['messageID_list'] = [messageId];
 
         database.addThread(data);

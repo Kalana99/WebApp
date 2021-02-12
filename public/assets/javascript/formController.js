@@ -28,7 +28,7 @@ let main = async (page) => {
     // console.log(newEmail);
     // console.log(index);
     // console.log(nonEmptyRadio);
-    // console.log(uploadingFile[i].value);
+    // console.log(uploadingFile[0].files[0]);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -505,8 +505,20 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
         data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
         data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
-        data['evidance'] = querySelectorFrom('.addDrop', uploadingFile)[0].file;//test
 
+        // {name: evidance.name, file: binary(req.files.uploadedFile.data)}
+        let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
+
+        var newEvidance  = {
+            'lastModified'     : Evidance.lastModified,
+            'lastModifiedDate' : Evidance.lastModifiedDate,
+            'name'             : Evidance.name,
+            'size'             : Evidance.size,
+            'type'             : Evidance.type
+         };
+
+        data['evidance'] = newEvidance;
+ 
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -676,7 +688,7 @@ let setEventListeners = () => {
     addDropSubmitButton = document.getElementById('addDropSubmitButton');
     if(addDropSubmitButton)
         addDropSubmitButton.addEventListener('click', event => {
-            event.preventDefault();
+            event.preventDefault();//remove
             main('addDrop');
         });
 

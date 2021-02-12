@@ -42,9 +42,13 @@ let addMessage = function(message){
     return tempMessage._id;
 }
 
-let addEvidance = function(evidance){
-    db.collection('files').insertOne(evidance, (err) => {
-        console.log(err);
+let addFile = function(file){
+    db.collection('files').insertOne(file, (err) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log("file inserted");
+        }
     });
 }
 
@@ -57,7 +61,7 @@ let functions = {
     addUser: addUser,
     addThread: addThread,
     addMessage: addMessage,
-    addEvidance: addEvidance
+    addFile: addFile
 };
 
 module.exports = functions;
