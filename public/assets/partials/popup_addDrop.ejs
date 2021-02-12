@@ -1,5 +1,5 @@
 <div class="popup-request-window">
-    <form class="popup-form" autocomplete="off">
+    <form class="popup-form" autocomplete="off" enctype="multipart/form-data">
         <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Add/Drop Request</h2></header>
         <div class="content">
@@ -22,8 +22,10 @@
                     
                 <div class="form-control">
                     <!-- lecturer -->
-                    <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
-                    <div class="suggestions-lecturer" id="addDrop">
+                    <div class="lecturerDiv">
+                        <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
+                        <div class="suggestions-lecturer" id="addDrop">
+                        </div>
                     </div>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -40,13 +42,14 @@
                 </div>
 
                 <div class="form-control">
+                    <input type="file" name="uploadedFile" class="file addDrop" id="fileItem"/> 
+                </div>
+
+                <div class="form-control">
                     <button type="button" class="submit-button-request submit" id="addDropSubmitButton">submit</button>
                     <!-- id was "0" -->
                     <button type="button" class="close-button-request cancel" id="0">cancel</button>
                 </div>
-                
-                
-                <!-- append child to send evidence if the request type is submission deadline -->
                 
             </div>
         </div>

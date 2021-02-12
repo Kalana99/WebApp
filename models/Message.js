@@ -7,7 +7,7 @@ const messageSchema = new Schema({
     //"date": String,
     //"time": String,
     "text": String,
-    "attachments": {}
+    "evidanceID": String
 },
 { timestamps: true });
 

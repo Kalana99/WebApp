@@ -42,6 +42,16 @@ let addMessage = function(message){
     return tempMessage._id;
 }
 
+let addFile = function(file){
+    db.collection('files').insertOne(file, (err) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log("file inserted");
+        }
+    });
+}
+
 
 let functions = {
     dropCollection: dropCollection,
@@ -50,7 +60,8 @@ let functions = {
     find: find,
     addUser: addUser,
     addThread: addThread,
-    addMessage: addMessage
+    addMessage: addMessage,
+    addFile: addFile
 };
 
 module.exports = functions;

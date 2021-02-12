@@ -4,7 +4,7 @@ let main = async (page) => {
     correct = true;
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
-
+    
     //get the elements
     let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
     let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
@@ -15,6 +15,7 @@ let main = async (page) => {
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
+    let uploadingFile   = document.querySelectorAll('.file.' + page);
 
     //uncomment this block check if the inputs have all been identified
 
@@ -27,6 +28,7 @@ let main = async (page) => {
     // console.log(newEmail);
     // console.log(index);
     // console.log(nonEmptyRadio);
+    // console.log(uploadingFile[0].files[0]);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -53,7 +55,7 @@ let main = async (page) => {
 
     //submit if correct
     if(correct){
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile);
     };
 };
 
@@ -445,7 +447,7 @@ const removeError = (input) => {
 }
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -505,6 +507,14 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
         data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
+        // {name: evidance.name, file: binary(req.files.uploadedFile.data)}
+        let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
+        
+        let formData = new FormData();
+        formData.append("evidance", Evidance)
+
+        data['evidance'] = formData;
+ 
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -674,6 +684,7 @@ let setEventListeners = () => {
     addDropSubmitButton = document.getElementById('addDropSubmitButton');
     if(addDropSubmitButton)
         addDropSubmitButton.addEventListener('click', event => {
+            event.preventDefault();//remove
             main('addDrop');
         });
 
