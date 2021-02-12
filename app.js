@@ -12,6 +12,7 @@ let threadRoutes = require('./routes/threadRoutes');
 let formRoutes = require('./routes/formRoutes');
 let cookieParser = require('cookie-parser');
 let {requireAuth} = require('./middleware/authMiddleware');
+let fileUpload = require('express-fileupload');
 
 //disabling browser the cache for all web pages
 app.use(function(req, res, next) {
@@ -40,6 +41,9 @@ app.use(verificationRoutes);
 app.use(settingsRoutes);
 app.use(threadRoutes);
 app.use(formRoutes);
+
+//express file uploader
+app.use(fileUpload());
 
 //Connect to the database
 let mongoose = require('mongoose');

@@ -1,27 +1,38 @@
+/* main popup form */
 .popup-request-window{
   box-sizing: border-box;
   position: fixed;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   height: fit-content;
+  /* set the window in the middle of the current display */
   transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
   z-index: 1;
   background-color: #fff;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  width: 400px;
+  width: 420px;
   max-width: 100%;
-  left: 50%;
-  top: 50%;
-  visibility: hidden;
+  /* hidden until a button clicked */
+  visibility: hidden; 
 }
 
+/* when a button is clicked, visible class name is added */
 .popup-request-window.visible{
   visibility: visible;
-  
 }
 
+/* .input-field{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+/* header of the popup form */
 .header-popup{
   background-color: #f7f7f7;
   border-bottom: 1px solid #f0f0f0;
@@ -29,66 +40,92 @@
   margin-bottom: 20px;
 }
 
-.submit-button-request, .close-button-request{
+/* submit and cancel buttons */
+.submit, .cancel{
   border: 2px solid #8e44ad;
   border-radius: 4px;
   display: inline-block;
   font-size: 16px;
   margin: 2px;
   padding: 10px;
-  width: 75%;
+  width: 400px;
   cursor: pointer;
 }
 
-.submit-button-request:hover, .close-button-request:hover{
+.submit:hover, .cancel:hover{
   background: rgb(122, 118, 118);
   color: white;
 }
 
-.input-field{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.input{
-  margin: 10px;
+/* input fields */
+.nonEmpty, .lecturer{
+  margin: 2px;
   padding: 5px;
   display: inline-block;
-  width: 300px;
+  width: 400px;
   border-radius: 5px;
   border: grey solid thin;
 }
 
-/* suggestions autocomplete part */
-.lecture, .lecturer{
-  margin: 10px;
-  padding: 5px;
-  display: inline-block;
-  width: 300px;
-  border-radius: 5px;
-  border: grey solid thin;
+.nonEmpty:focus, .lecturer:focus{
+  outline: none;
 }
 
-.selected{
+/* lecture suggestions panel */
+.suggestions-lecturer{
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  margin: none;
+  padding: 5px;
+  z-index: 3;
+  display: inline-block;
+}
+
+/* lecturer names */
+.suggestions-lecturer option{
+  padding: 5px;
+  color: #858282;
+  border-top: 1px solid #9c9494;
+  cursor: pointer;
+  text-align: left;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  width: 385px;
+}
+
+/* add a bottom border only to the last option */
+.suggestions-lecturer option:last-child{
+  border-bottom: 1px solid #9c9494;
+  border-radius: 0 0 5px 5px;
+}
+
+.suggestions-lecturer option:hover{
+  background-color: grey;
+  color: #fff;
+}
+
+/* styles when a lecturer is selected */
+.selectedFinal{
   display: inline-block;
   position: absolute;
   font-size: small;
   margin: 3px;
   padding: 3px;
-  width: 100px;
+  width: 200px;
   border-radius: 30px;
   border: grey solid thin;
   background-color: whitesmoke;
   color: black;
   overflow: hidden;
-  top: 233px;
   align-self: left;
   box-sizing: border-box;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  top: 205px;
 }
 
-.selected:focus{
+.selectedFinal:focus{
   outline: none;
 }
 
@@ -108,55 +145,3 @@
 .remove:focus{
   outline: none;
 }
-
-.suggestions-lecturer{
-  box-sizing: border-box;
-  position: absolute;
-  width: 300px;
-  margin: 10px;
-  padding: 5px;
-  z-index: 2;
-  display: inline-block;
-}
-
-/* .suggestions.module{
-  top: 150px;
-}
-.suggestions.requiredModule{
-  top: 197px;
-} */
-#addDrop{
-  top: 246px;
-}
-#submission, #repeat{
-  top: 197px;
-}
-
-.suggestions-lecturer option{
-  padding: 5px;
-  color: #858282;
-  border-top: 1px solid #9c9494;
-  cursor: pointer;
-  text-align: left;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-.suggestions-lecturer option:last-child{
-  border-bottom: 1px solid #9c9494;
-}
-
-/* .suggestions > div, .suggestions-lecturer > div{
-  width: 300px;
-  padding: 5px;
-  color: black;
-  border: 1px solid #666;
-  border-bottom: none;
-  cursor: pointer;
-  text-align: left;
-  background-color: whitesmoke;
-} */
-.suggestions-lecturer > option:hover{
-  background-color: grey;
-  color: #fff;
-}
-

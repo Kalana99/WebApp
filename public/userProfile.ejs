@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_popup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
     <link rel="stylesheet" href="/css/styles_logoutPopup.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -18,17 +19,21 @@
         </header>
         
             <div class="row">
-            <div class="profile-div">
-                <div class="photo">
-                    <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
+                <div class="profile-div">
+                    <div class="photo">
+                        <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
+                    </div>
+                    
+                    <div>
+                        <h4 class="name"><%= name %> </h4>
+                        <p class="info"><%= index %> </p>
+                        <p class="info"><%= phone %> </p>
+                        <p class="info"><%= email %> </p>
+                        <p class="info"><%= faculty %> </p>
+                    </div>
                 </div>
-                
-                <h4 class="name"><%= name %> </h4>
-                <p class="info"><%= index %> </p>
-                <p class="info"><%= phone %> </p>
-                <p class="info"><%= email %> </p>
-                <p class="info"><%= faculty %> </p>
             </div>
+
             <main>
             <div class="navigation">
                 <ul class="nav">
@@ -48,7 +53,7 @@
                             <p>Settings</p>
                         </button>
                         <div class= "dropdown-content">
-                            <a href=""> Edit profile</a>
+                            <a href="/EditProfile"> Edit profile</a>
                             <a href="/changePassword"> Change password</a>
                             <a href="/deleteAccount"> Delete account</a>
                         </div>

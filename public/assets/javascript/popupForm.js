@@ -122,9 +122,10 @@ document.querySelector('#submit_logout').addEventListener('click', () => {
 
 //[{name: "", index: "", id: ""}]
 
-let lecturerInput = document.querySelectorAll('.lecturer');
-let suggestionsPanelLecturer = document.querySelectorAll('.suggestions-lecturer');
-let popupBox = document.querySelector('.input-field');
+let lecturerInput               = document.querySelectorAll('.lecturer');
+let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');
+let popupBox                    = document.querySelector('.input-field');
+let lecturerDiv                 = document.querySelector('.lecturerDiv');
 //to get the suggestion according to the last input value
 let lastSearchTime = new Date();
 
@@ -133,6 +134,7 @@ for (let i=0; i<lecturerInput.length; i++){
     lecturerInput[i].addEventListener('keyup', () => {
         //get the value in lecturer input field
         let input = lecturerInput[i].value;
+        let lecturerDiv = lecturerInput[i].parentElement;
     
         //request suggestions from database staff profiles
         fetch('/getStaff', {
@@ -166,16 +168,16 @@ for (let i=0; i<lecturerInput.length; i++){
                         option.addEventListener('click', (event) => {
 
                             //change the appearance of the selected suggestion
-                            lecturerInput[i].style.visibility = 'hidden';
+                            lecturerDiv.innerHTML = '';
+                            // lecturerInput[i].style.visibility = 'hidden';
                             suggestionsPanelLecturer[i].innerHTML = '';
 
-                            let requestType = document.getElementById
                             let selected = document.createElement('div');
                             selected.setAttribute('class', 'selectedFinal');
                             selected.setAttribute('id', event.currentTarget.id);
 
                             selected.innerHTML = suggested.name;
-                            popupBox.appendChild(selected);
+                            lecturerDiv.innerHTML = "<div class='selectedFinal' id=''></div>";
                             
                             //a close button
                             let remove = document.createElement('button');

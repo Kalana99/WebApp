@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_threadView.css">
     <link rel="stylesheet" href="/css/styles_popupReply.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Thread View</title>
 </head>
 <body>
@@ -26,10 +27,19 @@
 
     </header>
     <section>
+        <div class="tab">
+            <button class="tablinks">All</button>
+            <button class="tablinks">Accepted</button>
+            <button class="tablinks">Declined</button>
+            <button class="tablinks">Not read</button>
+        </div>
         <div class="column left">
-            <!-- <div class="search-bar">
-                search bar
-            </div> -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search..">
+                <button type="button" class="search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
             <div>
                 <div class="message-list-item">
                     <div class="btn-group">

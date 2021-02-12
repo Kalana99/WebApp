@@ -42,6 +42,12 @@ let addMessage = function(message){
     return tempMessage._id;
 }
 
+let addEvidance = function(evidance){
+    db.collection('files').insertOne(evidance, (err) => {
+        console.log(err);
+    });
+}
+
 
 let functions = {
     dropCollection: dropCollection,
@@ -50,7 +56,8 @@ let functions = {
     find: find,
     addUser: addUser,
     addThread: addThread,
-    addMessage: addMessage
+    addMessage: addMessage,
+    addEvidance: addEvidance
 };
 
 module.exports = functions;

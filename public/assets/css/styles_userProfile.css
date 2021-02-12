@@ -1,6 +1,7 @@
 
 body{
   background-color: #40798c;
+  margin: 0px;
   font-family: Arial, Helvetica, sans-serif;
 }
 main {
@@ -8,11 +9,9 @@ main {
 }
 .container{
   display: relative;
-  max-width: 1250px;
-  margin: 30px auto 30px;
   padding: 0 !important;
-  width: 90%;
-  background-color: #70a9a1;
+  width: 100%;
+  background-color: #40798c;
   box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
 }
 .header-main{
@@ -65,7 +64,7 @@ footer p{
   font-family: "Open Sans";
   font-weight: 600;
   font-size: 18pt;
-  color: #1f363d;
+  color: black;
 }
 
 p.info {
@@ -74,17 +73,18 @@ p.info {
   font-family: 'Montserrat', sans-serif;
   font-size: 12pt;
   font-weight: bold;
-  color:#40798c;
+  color:#1f363d;
 }
 
 .request-tiles{
   margin: 20px 70px 20px 100px;
   padding: 60px;
+  width: 50%;
   
 }
 button.open-button-request {
   height: 100px;
-  width:75%;
+  width:100%;
   padding: 10px 75px 10px 75px;
   margin-top:50px;
   margin-bottom:50px;
@@ -124,13 +124,13 @@ float :left;
 margin: 20px;
 position: relative;
 
+
 }
 
 .nav {
 color: black;
 list-style-type: none;
 width: 100px;
-height: 100%;
 background-color:#1f363d;
 
 }
@@ -209,4 +209,19 @@ border-color:#f4abc4;
 }
 @media  screen and (max-width: 600px){
 
+}
+body > div > div > main > div.navigation >ul{
+ 
+padding-left: 0px;
+padding-right: 0px;
+position: fixed;
+bottom: 0px;
+left: 0px;
+top: 0px;
+right: 0px;
+margin-top: 0px;
+padding-top: 16px;
+padding-bottom: 20px;
+padding-bottom: 16px;
+margin-bottom: 0px;
 }
