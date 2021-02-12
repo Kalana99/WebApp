@@ -79,11 +79,12 @@ p.info {
 .request-tiles{
   margin: 20px 70px 20px 100px;
   padding: 60px;
+  width: 50%;
   
 }
 button.open-button-request {
   height: 100px;
-  width:75%;
+  width:100%;
   padding: 10px 75px 10px 75px;
   margin-top:50px;
   margin-bottom:50px;
