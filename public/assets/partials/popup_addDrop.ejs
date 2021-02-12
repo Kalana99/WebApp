@@ -1,5 +1,5 @@
 <div class="popup-request-window">
-    <form class="popup-form" autocomplete="off">
+    <form class="popup-form" autocomplete="off" enctype="multipart/form-data">
         <input type="text" autocomplete="false" hidden>
         <header class="header-popup"><h2>Add/Drop Request</h2></header>
         <div class="content">
@@ -28,13 +28,16 @@
                 </div>
 
                 <div>
+                    <br/>
+                    <input type="file" name="uploadedFile" class="file addDrop"/> 
+                    <br /><br />
+                </div>
+
+                <div>
                     <button type="button" class="submit-button-request" id="addDropSubmitButton">submit</button>
                     <!-- id was "0" -->
                     <button type="button" class="close-button-request" id="0">cancel</button>
                 </div>
-                
-                
-                <!-- append child to send evidence if the request type is submission deadline -->
                 
             </div>
         </div>

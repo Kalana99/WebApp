@@ -4,7 +4,7 @@ let main = async (page) => {
     correct = true;
     //the page parameter should be something like 'signUp' or 'login'
     //that indicates the place where the event is called
-
+    
     //get the elements
     let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
     let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
@@ -15,6 +15,7 @@ let main = async (page) => {
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
+    let uploadingFile   = document.querySelectorAll('.file.' + page);
 
     //uncomment this block check if the inputs have all been identified
 
@@ -27,6 +28,8 @@ let main = async (page) => {
     // console.log(newEmail);
     // console.log(index);
     // console.log(nonEmptyRadio);
+    //check
+    // console.log(uploadingFile);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
