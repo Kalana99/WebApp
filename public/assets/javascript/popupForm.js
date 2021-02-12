@@ -177,7 +177,7 @@ for (let i=0; i<lecturerInput.length; i++){
                             selected.setAttribute('id', event.currentTarget.id);
 
                             selected.innerHTML = suggested.name;
-                            lecturerDiv.innerHTML = <div class='selectedFinal' id=''></div>;
+                            lecturerDiv.innerHTML = "<div class='selectedFinal' id=''></div>";
                             
                             //a close button
                             let remove = document.createElement('button');
