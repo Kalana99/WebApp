@@ -26,12 +26,6 @@
   visibility: visible;
 }
 
-/* .input-field{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 /* header of the popup form */
 .header-popup{
   background-color: #f7f7f7;
@@ -109,7 +103,7 @@
 /* styles when a lecturer is selected */
 .selectedFinal{
   display: inline-block;
-  position: absolute;
+  position: relative;
   font-size: small;
   margin: 3px;
   padding: 3px;
@@ -140,8 +134,46 @@
   right: 3px;
   bottom: 2px;
   overflow: hidden;
+  z-index: 3;
 }
 
 .remove:focus{
   outline: none;
+}
+
+/* --------validation styles------------- */
+
+.form-control{
+  margin-bottom: 8px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-control i{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  visibility: hidden;
+}
+
+.form-control.success i.fa-check-circle{
+  visibility: visible;
+  color: #2ecc71;
+}
+
+.form-control.error i.fa-exclamation-circle{
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-control small{
+  visibility: hidden;
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+}
+
+.form-control.error small{
+  color: #e74c3c;
+  visibility: visible;
 }
