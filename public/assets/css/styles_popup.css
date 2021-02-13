@@ -59,6 +59,7 @@
   width: 400px;
   border-radius: 5px;
   border: grey solid thin;
+  position: relative;
 }
 
 .nonEmpty:focus, .lecturer:focus{

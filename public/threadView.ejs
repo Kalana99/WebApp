@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_threadView.css">
-    <link rel="stylesheet" href="/css/styles_popupReply.css">
+    <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Thread View</title>
 </head>
@@ -40,7 +40,7 @@
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <div>
+            <div class="buttonContainer">
                 <div class="message-list-item">
                     <div class="btn-group">
                         <!-- <button>
@@ -53,10 +53,13 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="pageNav">
+            <div class="pageNav">
                 <a href="#" class="previous round">&#8249;</a>
+                <input type="text" id="pageSelector">
+                <span id="divider">/</span>
+                <span id="numOfPages">5</span>
                 <a href="#" class="next round">&#8250;</a>
-            </div> -->
+            </div>
         </div>
         <div class="column right">
             <div class="message-list">

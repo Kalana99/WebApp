@@ -170,6 +170,8 @@ let displayMessages = (arr, msgId) => {
 };
 
 let closePopup = () => {
+    //remove the error msg when canceled
+    document.querySelector('.form-control').className = 'form-control';
     popup_reply = document.querySelector('.popup-request-window');
     popup_reply.className = 'popup-request-window';
 }
