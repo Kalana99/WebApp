@@ -26,17 +26,20 @@ module.exports.submitRequests_post = (req, res) => {
         let id = decodedToken.id;
 
         let data = req.body;
+
+        console.log(data);
+
         data['studentID'] = id;
         
-        // console.log(req.body.evidance);
-        let evidance = req.body.evidance;
-        console.log(req.body);
-        delete req.body.evidance;
-        database.addFile({ name: evidance.name, file: binary(evidance.data) });
+        // console.log(req.body.Evidence);
+        // let Evidence = req.body.Evidence;
+        // console.log(req.body);
+        // delete req.body.Evidence;
+        // database.addFile({ name: Evidence.name, file: binary(Evidence.data) });
 
         let message = data.message;
         delete data.message;
-        let messageId = database.addMessage({'from': id, 'text': message});//'evidanceID': evidanceID --> add as a property
+        let messageId = database.addMessage({'from': id, 'text': message});//'EvidenceID': EvidenceID --> add as a property
         data['messageID_list'] = [messageId];
 
         database.addThread(data);
