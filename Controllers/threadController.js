@@ -3,6 +3,8 @@ const User = require('../models/User');
 const Thread = require('../models/Thread');
 const database = require('../database');
 const mail = require('../modules/email');
+const mongodb = require('mongodb');
+const binary = mongodb.Binary;
 
 let mongoose = require('mongoose');
 const db = mongoose.connection;
@@ -25,10 +27,16 @@ module.exports.submitRequests_post = (req, res) => {
 
         let data = req.body;
         data['studentID'] = id;
+        
+        // console.log(req.body.evidance);
+        let evidance = req.body.evidance;
+        console.log(req.body);
+        delete req.body.evidance;
+        database.addFile({ name: evidance.name, file: binary(evidance.data) });
 
         let message = data.message;
         delete data.message;
-        let messageId = database.addMessage({'from': id, 'text': message});
+        let messageId = database.addMessage({'from': id, 'text': message});//'evidanceID': evidanceID --> add as a property
         data['messageID_list'] = [messageId];
 
         database.addThread(data);
