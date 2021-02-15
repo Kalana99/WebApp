@@ -6,6 +6,7 @@ const mail = require('../modules/email');
 const mongodb = require('mongodb');
 const binary = mongodb.Binary;
 
+
 let mongoose = require('mongoose');
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
@@ -19,18 +20,17 @@ const createToken = (id) => {
 };
 
 module.exports.submitRequests_post = (req, res) => {
-    
+
     const token = req.cookies.jwt;
 
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        
         let id = decodedToken.id;
 
         let data = req.body;
-
-        console.log(data);
+        let file = req.file;
 
         data['studentID'] = id;
-        
         // console.log(req.body.Evidence);
         // let Evidence = req.body.Evidence;
         // console.log(req.body);

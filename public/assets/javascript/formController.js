@@ -508,28 +508,8 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
         data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
-        // {name: evidence.name, file: binary(req.files.uploadedFile.data)}
-        let evidence = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
-        
-        let formData = new FormData();
-        formData.append("evidence", evidence)
-        print(formData);
-        data['evidence'] = formData;
- 
-        fetch('/submitRequest', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({data}),
-            })
-            .then(response => response.json())
-            .then(data => {
-                //window.location.href = '/userProfile';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        let formElement = document.querySelector('#addDropForm');
+        formElement.submit();
 
     }
 
