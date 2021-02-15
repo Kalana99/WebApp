@@ -167,6 +167,7 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
     
 };
 
+//validate only existing password
 let validateExistingPassword = async (pswInput, existingEmail) => {
 
     // If there is also an existing email input in the page, then go to the validate
@@ -288,6 +289,7 @@ let validateNewEmail = async (emailInput) => {
 //validate input fields that cannot be blank
 let validateNonEmpty = async (nonEmpty) => {
     for (let i = 0; i < nonEmpty.length; i++){
+        console.log('nonempty thread reply');
         let input = nonEmpty[i];
 
         //to get the relevant error msg of what cannot be blank
@@ -413,8 +415,18 @@ let validateNonEmptyRadio = async (radio) => {
 
 //validate suggestion fields
 let validateSelected = async (selected) => {
+    // console.log(selected);
+    // console.log(selected.length);
     for (let i = 0; i < selected.length; i++){
-        
+        let numOfChildElements = selected[i].parentElement.childElementCount;
+        let input = selected[i].parentElement;
+        if (numOfChildElements === 2){
+            setError(input, 'You need to choose a lecturer');
+            correct = false;
+        }
+        else{
+            setSuccess(input);
+        }
     }
 };
 
@@ -466,16 +478,16 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
-        data['name'] = querySelectorFrom('.fullName', nonEmpty)[0].value;
-        data['index'] = querySelectorFrom('.index', index)[0].value;
-        data['email'] = querySelectorFrom('.newEmail', newEmail)[0].value;
-        data['birthday'] = querySelectorFrom('.birthday', nonEmpty)[0].value;
-        data['gender'] = querySelectorFrom('.gender', nonEmptyRadio)[0].value;
-        data['phone'] = querySelectorFrom('.phone', nonEmpty)[0].value;
-        data['password'] = querySelectorFrom('.psw', newPsw)[0].value;
-        data['type'] = querySelectorFrom('.type', nonEmptyRadio)[0].value;
-        data['faculty'] = querySelectorFrom('.faculty', normal)[0].value;
-        data['verified'] = false;
+        data['name']        = querySelectorFrom('.fullName', nonEmpty)[0].value;
+        data['index']       = querySelectorFrom('.index', index)[0].value;
+        data['email']       = querySelectorFrom('.newEmail', newEmail)[0].value;
+        data['birthday']    = querySelectorFrom('.birthday', nonEmpty)[0].value;
+        data['gender']      = querySelectorFrom('.gender', nonEmptyRadio)[0].value;
+        data['phone']       = querySelectorFrom('.phone', nonEmpty)[0].value;
+        data['password']    = querySelectorFrom('.psw', newPsw)[0].value;
+        data['type']        = querySelectorFrom('.type', nonEmptyRadio)[0].value;
+        data['faculty']     = querySelectorFrom('.faculty', normal)[0].value;
+        data['verified']    = false;
 
         //post the data and redirect to verify page
         fetch('/signup', {
@@ -499,12 +511,13 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
-        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
-        data['type'] = 'addDrop';
-        data['status'] = 'active';
-        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
-        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+        data['StaffID']         = document.querySelector('.selectedFinal').getAttribute('id');
+        console.log(document.querySelector('.selectedFinal').getAttribute('id'));
+        data['type']            = 'addDrop';
+        data['status']          = 'active';
+        data['message']         = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['additionalData']  = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
+        data['module']          = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
         // {name: evidance.name, file: binary(req.files.uploadedFile.data)}
         // let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
@@ -537,11 +550,11 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
-        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
-        data['type'] = 'repeat';
-        data['status'] = 'active';
-        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+        data['StaffID']     = document.querySelector('.selectedFinal').getAttribute('id');
+        data['type']        = 'repeat';
+        data['status']      = 'active';
+        data['message']     = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['module']      = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
@@ -564,11 +577,11 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
-        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
-        data['type'] = 'submission';
-        data['status'] = 'active';
-        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+        data['StaffID']     = document.querySelector('.selectedFinal').getAttribute('id');
+        data['type']        = 'submission';
+        data['status']      = 'active';
+        data['message']     = querySelectorFrom('.description', nonEmpty)[0].value;
+        data['module']      = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
@@ -591,8 +604,8 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         let data = {};
 
-        data['text'] = querySelectorFrom('.reply', nonEmpty)[0].value;
-        data['threadId'] = document.querySelector('.selected.threads').getAttribute('id');
+        data['text']        = querySelectorFrom('.reply', nonEmpty)[0].value;
+        data['threadId']    = document.querySelector('.selected.threads').getAttribute('id');
         
         fetch('/reply', {
             method: 'POST', // or 'PUT'
@@ -688,7 +701,6 @@ function querySelectorFrom(selector, elements) {
 //----------------------------------------------------------------------------------------
 
 //all the eventlisteners come here
-
 let setEventListeners = () => {
 
     //login event listener
