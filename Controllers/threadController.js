@@ -28,11 +28,9 @@ module.exports.submitRequests_post = (req, res) => {
         let data = req.body;
         data['studentID'] = id;
         
-        // console.log(req.body.evidance);
-        let evidance = req.body.evidance;
-        console.log(req.body);
-        delete req.body.evidance;
-        database.addFile({ name: evidance.name, file: binary(evidance.data) });
+        // let evidance = req.body.evidance;
+        // delete req.body.evidance;
+        // database.addFile({ name: evidance.name, file: binary(evidance.data) });
 
         let message = data.message;
         delete data.message;
@@ -40,10 +38,14 @@ module.exports.submitRequests_post = (req, res) => {
         data['messageID_list'] = [messageId];
 
         database.addThread(data);
-        res.json({});
+        res.json({'messageId': messageId});
     });
 
 };
+
+module.exports.upload_post = (req, res) => {
+    console.log(req.body);
+}
 
 module.exports.getThreadData_post = (req, res) => {
 

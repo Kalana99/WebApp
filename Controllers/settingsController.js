@@ -12,7 +12,27 @@ mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentReq
 
 //settings option - edit profile
 module.exports.get_editProfile = (req, res) => {
-    res.render('edit_profile');
+    res.render('EditProfile');
+};
+
+module.exports.put_editProfile = (req, res) => {
+
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+        
+        db.collection('users').findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
+        {$set: {name: req.body.name, index: req.body.index, phone: req.body.phone}}, function(err){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("user data changed.");
+                res.json({});
+            }
+        })
+    });
 };
 
 //settings option - change password
