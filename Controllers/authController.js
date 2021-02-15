@@ -69,3 +69,14 @@ module.exports.logout_get = (req, res) => {
 module.exports.threads_get = (req, res) => {
     res.render('threadView');
 };
+
+module.exports.getUserId_get = (req, res) => {
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        res.json({id});
+    });
+
+};

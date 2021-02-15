@@ -241,13 +241,12 @@ footer{
     text-align: center;
 }
 
-.msg-div{
+.msg-group{
     display: flex;
     flex-direction: column;
     margin: 3px;
+    padding: 4px;
 }
-
-
 
 .item{
     margin: 1px;
@@ -260,7 +259,7 @@ footer{
     margin: 5px;
     padding: 5px;
     height: fit-content;
-    width: 60%;
+    width: 100%;
     max-height: 150px;
     background-color: #91aafc85;
     border-radius: 10px;
@@ -275,7 +274,7 @@ footer{
     margin: 5px;
     padding: 5px;
     height: fit-content;
-    width: 60%;
+    width: 100%;
     max-height: 150px;
     background-color: #88eb7ba2;
     border-radius: 10px;
@@ -286,6 +285,7 @@ footer{
     text-align: left;
 }
 
+/* displayed msg container is a p tag inside a div */
 p{
     margin: 0px;
 }
