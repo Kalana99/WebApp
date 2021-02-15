@@ -718,13 +718,38 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     }
 
     else if(page === 'editProfile'){
-        console.log(nonEmpty);
-        console.log(querySelectorFrom('.index', index)[0]);
+
         data = {};
 
-        data['name'] = querySelectorFrom('.userName', nonEmpty)[0].value;
-        data['index'] = querySelectorFrom('.index', index)[0].value;
-        data['phone'] = querySelectorFrom('.phone', nonEmpty)[0].value;
+        let nameNodes = querySelectorFrom('.userName', nonEmpty);
+        let indexNodes = querySelectorFrom('.index', index);
+        let phoneNodes = querySelectorFrom('.phone', nonEmpty);
+        let birthdayNodes = querySelectorFrom('.birthday', nonEmpty);
+        let genderNodes = querySelectorFrom('.gender', nonEmpty);
+
+        if (nameNodes.length > 0){
+            data['name'] = nameNodes[0].value;
+        }
+
+        if (indexNodes.length > 0){
+            data['index'] = indexNodes[0].value;
+        }
+
+        if (phoneNodes.length > 0){
+            data['phone'] = phoneNodes[0].value;
+        }
+
+        if (birthdayNodes.length > 0){
+            data['birthday'] = birthdayNodes[0].value;
+        }
+
+        if (genderNodes.length > 0){
+            if (genderNodes[0].checked){
+                data['gender'] = 'male';
+            }else{
+                data['gender'] = 'female';
+            }
+        }
         
         fetch('/EditProfile', {
         method: 'PUT', // or 'POST'
@@ -844,7 +869,6 @@ let setEventListeners = () => {
     editProfileSubmitButton = document.getElementById('editProfileSubmit');
     if(editProfileSubmitButton)
         editProfileSubmitButton.addEventListener('click', event => {
-            console.log("listening");
             main('editProfile');
         });
 

@@ -21,9 +21,9 @@ module.exports.put_editProfile = (req, res) => {
 
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
-        
+
         db.collection('users').findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
-        {$set: {name: req.body.name, index: req.body.index, phone: req.body.phone}}, function(err){
+        {$set: req.body}, function(err){
             if(err){
                 console.log(err);
             }
