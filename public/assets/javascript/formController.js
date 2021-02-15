@@ -15,7 +15,7 @@ let main = async (page) => {
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
-    let uploadingFile   = document.querySelectorAll('.file.' + page);
+    let uploadingFile   = document.querySelectorAll('.file.' + page);//not done
 
     //uncomment this block check if the inputs have all been identified
 
@@ -520,12 +520,12 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['module']          = querySelectorFrom('.currentModule', nonEmpty)[0].value;
 
         // {name: evidance.name, file: binary(req.files.uploadedFile.data)}
-        let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
+        // let Evidance = querySelectorFrom('.addDrop', uploadingFile)[0].files[0];
         
-        let formData = new FormData();
-        formData.append("evidance", Evidance)
+        // let formData = new FormData();
+        // formData.append("evidance", Evidance)
 
-        data['evidance'] = formData;
+        // data['evidance'] = formData;
  
         fetch('/submitRequest', {
             method: 'POST', // or 'PUT'
@@ -534,13 +534,15 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             },
             body: JSON.stringify(data),
             })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/userProfile';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.uploadMsg').setAttribute('id', data.messageId);
+            document.querySelector('.popup-form').submit();
+            // window.location.href = '/userProfile';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
     }
 
@@ -620,6 +622,30 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             console.error('Error:', error);
             });
 
+    }
+
+    else if(page === 'editProfile'){
+
+        data = {};
+
+        data['name'] = querySelectorFrom('.fullName', nonEmpty)[0].value;
+        data['index'] = querySelectorFrom('.index', index)[0].value;
+        data['phone'] = querySelectorFrom('.phone', nonEmpty)[0].value;
+        
+        fetch('/EditProfile', {
+        method: 'PUT', // or 'POST'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = '/userProfile';
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
     }
 
     else if(page === 'changePsw'){
@@ -718,6 +744,15 @@ let setEventListeners = () => {
     if(threadReplySubmitButton)
         threadReplySubmitButton.addEventListener('click', event => {
             main('thread');
+        });
+    
+    //edit profile event listener
+    editProfileSubmitButton = document.getElementById('editProfileSubmit');
+    console.log("ready to listen");
+    if(editProfileSubmitButton)
+        editProfileSubmitButton.addEventListener('click', event => {
+            console.log("listening");
+            main('editProfile');
         });
 
     //change password event listener

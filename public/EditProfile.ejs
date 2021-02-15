@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/styles_editProfile.css">
+    <!-- <link rel="stylesheet" href="/css/styles_editProfile.css"> -->
     <title>Edit profile</title>
 </head>
 <body>
@@ -15,43 +15,71 @@
         
         <form class="form" id="form">
 
-            <div class="form-control">
-                <div class="container">
-                    <label for="username">User Name</label>
-                    <button>Edit</button>
+            <div class="content">
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="username" class="username">Username</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
-            </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="index" class="index">Index</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="phone" class="phone">Telephone</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="birthday" class="birthday">Birthday</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="gender" class="gender">Gender</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
 
-            <div class="form-control">
-                <div class="container">
-                    <label for="index">Index</label>
-                    <button>Edit</button>
+                <div>
+                    <button type="button" class="editProfileSubmit" id="editProfileSubmit">Confirm</button>
                 </div>
-            </div>
 
-            <div class="form-control">
-                <div class="container">
-                    <label for="phone">Telephone</label>
-                    <button>Edit</button>
-                </div>
-            </div>
-
-            <div class="form-control">
-                <div class="container">
-                    <label for="birthday">Birthday</label>
-                    <button>Edit</button>
-                </div>
-            </div>
-
-            <div class="form-control">
-                <div class="container">
-                    <label for="gender">Gender</label>
-                    <button>Edit</button>
-                </div>
             </div>
 
         </form> 
 
+        <script src="/javascript/formController.js"></script>
     </div>
 </body>
 </html>

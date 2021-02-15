@@ -7,6 +7,8 @@ router.post('/getThreadData', requireAuth, threadController.getThreadData_post);
 
 router.post('/submitRequest', threadController.submitRequests_post);
 
+router.post('/upload', threadController.upload_post);
+
 router.post('/getMessages', threadController.getMessages_post);
 
 router.post('/reply', threadController.reply_post);

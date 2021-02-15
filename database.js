@@ -43,13 +43,13 @@ let addMessage = function(message){
 }
 
 let addFile = function(file){
-    db.collection('files').insertOne(file, (err) => {
-        if (err){
-            console.log(err);
-        }else{
-            console.log("file inserted");
-        }
-    });
+//     db.collection('files').insertOne(file, (err) => {
+//         if (err){
+//             console.log(err);
+//         }else{
+//             console.log("file inserted");
+//         }
+//     });
 }
 
 
