@@ -1,11 +1,15 @@
 <div class="popup-request-window">
-    <form class="popup-form">
+    <form class="popup-form" autocomplete="off">
+        <header class="header-popup"><h2>Add/Drop Request</h2></header>
         <div class="content">
             <div class="input-field">
 
-                <div>
+                <div class="form-control">
                     <!-- id = "textarea" -->
                     <textarea name="message" rows="10" cols="5" placeholder="description" class="nonEmpty thread reply" id="nonEmpty reply"></textarea>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
                 </div>
 
                 <!-- append child to send evidence if the request type is submission deadline -->
@@ -15,9 +19,9 @@
                     <br /><br />
                 </div>
 
-                <div>
-                    <button type="button" class="submit-button-request" id="replySubmitButton">submit</button>
-                    <button type="button" class="close-button-request" id="replyCancekButton">cancel</button>
+                <div class="form-control">
+                    <button type="button" class="submit-button-request submit" id="replySubmitButton">submit</button>
+                    <button type="button" class="close-button-request cancel" id="replyCancelButton">cancel</button>
                 </div>
 
             </div>
