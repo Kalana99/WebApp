@@ -15,7 +15,7 @@ let main = async (page) => {
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
-    let uploadingFile   = document.querySelectorAll('.file.' + page);//not done
+    let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
 
     //uncomment this block check if the inputs have all been identified
 
@@ -289,7 +289,6 @@ let validateNewEmail = async (emailInput) => {
 //validate input fields that cannot be blank
 let validateNonEmpty = async (nonEmpty) => {
     for (let i = 0; i < nonEmpty.length; i++){
-        console.log('nonempty thread reply');
         let input = nonEmpty[i];
 
         //to get the relevant error msg of what cannot be blank
@@ -459,6 +458,100 @@ const removeError = (input) => {
 }
 // ---------------------------------------------------------------------------------------
 
+//-----------------------edit profile buttons---------------------------------------------
+
+let editButtons = document.querySelectorAll('.edit');
+
+//add event listeners to edit buttons in editProfile
+let addEditListeners = (editButtons) => {
+    for (let i = 0; i < editButtons.length; i++){
+
+        let editBtn = editButtons[i];
+
+        //edit button container
+        let container   = editBtn.parentElement;
+        let formControl = container.parentElement;
+        //input field container
+        let inputDiv    = formControl.querySelector('.inputDiv');
+        //name for the input field
+        let fieldName   = container.querySelector('label').className;
+        
+        editBtn.addEventListener('click', (event) => {
+
+            //toggle button functionality as edit and cancel
+            if (editBtn.innerText === 'Edit'){
+
+                //create common input field and set some common attributes
+                let input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('name', fieldName);
+
+                //set unique attributes
+                if (fieldName === 'username'){
+                    input.setAttribute('class', 'nonEmpty editProfile userName');   
+                }
+                else if (fieldName === 'index'){
+                    input.setAttribute('class', 'index editProfile ');
+                }
+                else if (fieldName === 'phone'){
+                    input.setAttribute('class', 'nonEmpty editProfile phone');
+                }
+                else if (fieldName === 'birthday'){
+                    input.setAttribute('class', 'nonEmpty editProfile birthday');
+                    input.setAttribute('type', 'date');
+
+                }
+                //create a different input field for gender and append child
+                else if (fieldName === 'gender'){
+                    //radio buttons
+                    let radioInputMale = document.createElement('input');
+                    let radioInputFemale = document.createElement('input');
+
+                    //labels
+                    let labelMale = document.createElement('label');
+                    let labelFemale = document.createElement('label');
+
+                    radioInputMale.setAttribute('class', 'nonEmpty editProfile gender');
+                    radioInputMale.setAttribute('type', 'radio');
+                    radioInputMale.setAttribute('name', 'gender');
+                    radioInputMale.setAttribute('value', 'male');
+
+                    radioInputFemale.setAttribute('type', 'radio');
+                    radioInputFemale.setAttribute('name', 'gender');
+                    radioInputFemale.setAttribute('value', 'female');
+
+                    labelMale.setAttribute('for', 'male');
+                    labelMale.innerText = 'Male';
+                    labelFemale.setAttribute('for', 'female');
+                    labelFemale.innerText = 'Female';
+
+                    inputDiv.appendChild(radioInputMale);
+                    inputDiv.appendChild(labelMale);
+                    inputDiv.appendChild(radioInputFemale);
+                    inputDiv.appendChild(labelFemale);
+                }
+
+                //append children that is not gender
+                if (fieldName !== 'gender'){
+                    inputDiv.appendChild(input);
+                }
+
+                //change the edit button as cancel
+                editBtn.innerText = 'Cancel';
+            }
+            else{
+                //remove the input fields when canceled
+                inputDiv.innerHTML = null;
+                editBtn.innerText = 'Edit';
+            }
+        });
+    }
+};
+
+addEditListeners(editButtons);
+
+// ---------------------------------------------------------------------------------------
+
 const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile) => {
     if(page === 'login'){
         email = existingEmail[0].value;
@@ -625,10 +718,11 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     }
 
     else if(page === 'editProfile'){
-
+        console.log(nonEmpty);
+        console.log(querySelectorFrom('.index', index)[0]);
         data = {};
 
-        data['name'] = querySelectorFrom('.fullName', nonEmpty)[0].value;
+        data['name'] = querySelectorFrom('.userName', nonEmpty)[0].value;
         data['index'] = querySelectorFrom('.index', index)[0].value;
         data['phone'] = querySelectorFrom('.phone', nonEmpty)[0].value;
         
@@ -748,7 +842,6 @@ let setEventListeners = () => {
     
     //edit profile event listener
     editProfileSubmitButton = document.getElementById('editProfileSubmit');
-    console.log("ready to listen");
     if(editProfileSubmitButton)
         editProfileSubmitButton.addEventListener('click', event => {
             console.log("listening");
