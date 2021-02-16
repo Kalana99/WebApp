@@ -15,7 +15,7 @@ let main = async (page) => {
     let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
-    let uploadingFile   = document.querySelectorAll('.file.' + page);
+    let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
 
     //uncomment this block check if the inputs have all been identified
 
@@ -457,6 +457,100 @@ const removeError = (input) => {
 }
 // ---------------------------------------------------------------------------------------
 
+//-----------------------edit profile buttons---------------------------------------------
+
+let editButtons = document.querySelectorAll('.edit');
+
+//add event listeners to edit buttons in editProfile
+let addEditListeners = (editButtons) => {
+    for (let i = 0; i < editButtons.length; i++){
+
+        let editBtn = editButtons[i];
+
+        //edit button container
+        let container   = editBtn.parentElement;
+        let formControl = container.parentElement;
+        //input field container
+        let inputDiv    = formControl.querySelector('.inputDiv');
+        //name for the input field
+        let fieldName   = container.querySelector('label').className;
+        
+        editBtn.addEventListener('click', (event) => {
+
+            //toggle button functionality as edit and cancel
+            if (editBtn.innerText === 'Edit'){
+
+                //create common input field and set some common attributes
+                let input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('name', fieldName);
+
+                //set unique attributes
+                if (fieldName === 'username'){
+                    input.setAttribute('class', 'nonEmpty editProfile userName');   
+                }
+                else if (fieldName === 'index'){
+                    input.setAttribute('class', 'index editProfile ');
+                }
+                else if (fieldName === 'phone'){
+                    input.setAttribute('class', 'nonEmpty editProfile phone');
+                }
+                else if (fieldName === 'birthday'){
+                    input.setAttribute('class', 'nonEmpty editProfile birthday');
+                    input.setAttribute('type', 'date');
+
+                }
+                //create a different input field for gender and append child
+                else if (fieldName === 'gender'){
+                    //radio buttons
+                    let radioInputMale = document.createElement('input');
+                    let radioInputFemale = document.createElement('input');
+
+                    //labels
+                    let labelMale = document.createElement('label');
+                    let labelFemale = document.createElement('label');
+
+                    radioInputMale.setAttribute('class', 'nonEmpty editProfile gender');
+                    radioInputMale.setAttribute('type', 'radio');
+                    radioInputMale.setAttribute('name', 'gender');
+                    radioInputMale.setAttribute('value', 'male');
+
+                    radioInputFemale.setAttribute('type', 'radio');
+                    radioInputFemale.setAttribute('name', 'gender');
+                    radioInputFemale.setAttribute('value', 'female');
+
+                    labelMale.setAttribute('for', 'male');
+                    labelMale.innerText = 'Male';
+                    labelFemale.setAttribute('for', 'female');
+                    labelFemale.innerText = 'Female';
+
+                    inputDiv.appendChild(radioInputMale);
+                    inputDiv.appendChild(labelMale);
+                    inputDiv.appendChild(radioInputFemale);
+                    inputDiv.appendChild(labelFemale);
+                }
+
+                //append children that is not gender
+                if (fieldName !== 'gender'){
+                    inputDiv.appendChild(input);
+                }
+
+                //change the edit button as cancel
+                editBtn.innerText = 'Cancel';
+            }
+            else{
+                //remove the input fields when canceled
+                inputDiv.innerHTML = null;
+                editBtn.innerText = 'Edit';
+            }
+        });
+    }
+};
+
+addEditListeners(editButtons);
+
+// ---------------------------------------------------------------------------------------
+
 const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile) => {
     if(page === 'login'){
         email = existingEmail[0].value;
@@ -569,6 +663,56 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     }
 
+    else if(page === 'editProfile'){
+
+        data = {};
+
+        let nameNodes = querySelectorFrom('.userName', nonEmpty);
+        let indexNodes = querySelectorFrom('.index', index);
+        let phoneNodes = querySelectorFrom('.phone', nonEmpty);
+        let birthdayNodes = querySelectorFrom('.birthday', nonEmpty);
+        let genderNodes = querySelectorFrom('.gender', nonEmpty);
+
+        if (nameNodes.length > 0){
+            data['name'] = nameNodes[0].value;
+        }
+
+        if (indexNodes.length > 0){
+            data['index'] = indexNodes[0].value;
+        }
+
+        if (phoneNodes.length > 0){
+            data['phone'] = phoneNodes[0].value;
+        }
+
+        if (birthdayNodes.length > 0){
+            data['birthday'] = birthdayNodes[0].value;
+        }
+
+        if (genderNodes.length > 0){
+            if (genderNodes[0].checked){
+                data['gender'] = 'male';
+            }else{
+                data['gender'] = 'female';
+            }
+        }
+        
+        fetch('/EditProfile', {
+        method: 'PUT', // or 'POST'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = '/userProfile';
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    }
+
     else if(page === 'changePsw'){
         data = {};
 
@@ -665,6 +809,13 @@ let setEventListeners = () => {
     if(threadReplySubmitButton)
         threadReplySubmitButton.addEventListener('click', event => {
             main('thread');
+        });
+    
+    //edit profile event listener
+    editProfileSubmitButton = document.getElementById('editProfileSubmit');
+    if(editProfileSubmitButton)
+        editProfileSubmitButton.addEventListener('click', event => {
+            main('editProfile');
         });
 
     //change password event listener

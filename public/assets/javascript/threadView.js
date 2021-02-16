@@ -143,9 +143,15 @@ let msgGroup = document.querySelector('.msg-group');
 let replyButtons = document.querySelector('.reply-btn-group');
 
 // function to display the messages of the selected thread
-let displayMessages = (arr, msgId) => {
+let displayMessages = async (arr, msgId) => {
 
     msgGroup.innerHTML = '';
+
+    let response = await fetch('/getUserId');
+
+    let userId = await response.json();
+
+    console.log(userId);
     
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
@@ -156,11 +162,13 @@ let displayMessages = (arr, msgId) => {
 
         msgContainer.appendChild(msg);
 
-        if (msgId === person){
-            msgContainer.setAttribute('class', 'sender');
+        if (userId.id === person){
+            console.log('reciever');
+            msgContainer.setAttribute('class', 'reciever');
         }
         else{
-            msgContainer.setAttribute('class', 'reciever');
+            console.log('sender');
+            msgContainer.setAttribute('class', 'sender');
         }
 
         msgGroup.appendChild(msgContainer);

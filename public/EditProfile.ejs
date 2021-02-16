@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/styles_editProfile.css">
+    <!-- <link rel="stylesheet" href="/css/styles_editProfile.css"> -->
     <title>Edit profile</title>
 </head>
 <body>
@@ -14,47 +14,72 @@
         <h1>Edit Profile</h1>
         
         <form class="form" id="form">
-            <div class="form-control">
-                <label>Full Name :</label>
-                <input type="text" name="username" class="nonEmpty signUp fullName"  id="username">
-                <i class="fa fa-check-circle"></i>
-                <i class="fa fa-exclamation-circle"></i>
-                <small>Error message</small>
+
+            <div class="content">
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="username" class="username">Username</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="index" class="index">Index</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="phone" class="phone">Telephone</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="birthday" class="birthday">Birthday</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+    
+                <div class="form-control">
+                    <div class="btnContainer">
+                        <label for="gender" class="gender">Gender</label>
+                        <button type="button" class="edit">Edit</button>
+                    </div>
+                    <div class="inputDiv"></div>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+
+                <div>
+                    <button type="button" class="editProfileSubmit" id="editProfileSubmit">Confirm</button>
+                </div>
+
             </div>
-
-            <div class="form-control">
-                <label>Index Number : </label>
-                <input type="text" name="index" class="index signUp"  id="index">
-                <i class="fa fa-check-circle"></i>
-                <i class="fa fa-exclamation-circle"></i>
-                <small>Error message</small>
-            </div>
-
-            <div class="form-control">
-                <label>Email Address : </label>
-                <input type="email" name="email" class="newEmail signUp"  id="email">
-                <i class="fa fa-check-circle"></i>
-                <i class="fa fa-exclamation-circle"></i>
-                <small>Error message</small>
-            </div>
-
-
-            <div class="form-control">
-                <label>Telephone Number : </label>
-                <input type="text" name="phone" class="nonEmpty signUp phone"  id="phone">
-                <i class="fa fa-check-circle"></i>
-                <i class="fa fa-exclamation-circle"></i>
-                <small>Error message</small>
-            </div>
-
-            <div class="form-control">
-                <button id="signUpSubmit" type="button">Confirm</button>
-            </div>
-
-            
 
         </form> 
 
+        <script src="/javascript/formController.js"></script>
     </div>
 </body>
 </html>

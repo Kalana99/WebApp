@@ -15,8 +15,10 @@ router.post('/login', authController.login_post);
 
 router.get('/userprofile', requireAuth,  authController.userprofile_get);
 
-router.get('/logout',authController.logout_get);
+router.get('/logout', authController.logout_get);
 
-router.get('/threads',requireAuth, authController.threads_get);
+router.get('/threads', requireAuth, authController.threads_get);
+
+router.get('/getUserId', requireAuth, authController.getUserId_get);
 
 module.exports = router;
