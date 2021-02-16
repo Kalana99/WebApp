@@ -12,18 +12,21 @@ const storage = multer.diskStorage({
         const {originalname } = file;
         let fileName = uuid() + '-' + originalname;
         callback(null, fileName);
-        req.body['fileName'] = fileName;
+        if(!req.body['fileName'])
+            req.body['fileName'] = [fileName];
+        else
+            req.body['fileName'].push(fileName);
     }
 });
 const upload = multer({storage});
 
 router.post('/getThreadData', requireAuth, threadController.getThreadData_post);
 
-router.post('/submitRequest', upload.single('uploadedFile'), threadController.submitRequests_post);
+router.post('/submitRequest', upload.array('uploadedFile'), threadController.submitRequests_post);
 
 router.post('/getMessages', threadController.getMessages_post);
 
-router.post('/reply', upload.single('uploadedFile'), threadController.reply_post);
+router.post('/reply', upload.array('uploadedFile'), threadController.reply_post);
 
 router.post('/acceptOrDeclineRequest', threadController.acceptOrDeclineRequest_post);
 

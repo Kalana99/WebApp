@@ -46,7 +46,7 @@ module.exports.submitRequests_post = (req, res) => {
 
         let messageObject = {'from': id, 'text': message};
         if(bodyData.fileName)
-            messageObject['files'] = [bodyData.fileName];
+            messageObject['files'] = bodyData.fileName;
         else
             messageObject['files'] = [];
 
