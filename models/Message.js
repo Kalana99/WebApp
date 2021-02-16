@@ -4,10 +4,8 @@ const Schema = mongoose.Schema;
 //Creating schema and model
 const messageSchema = new Schema({
     "from": String,
-    //"date": String,
-    //"time": String,
     "text": String,
-    "evidanceID": String
+    "files": [String]
 },
 { timestamps: true });
 

@@ -5,6 +5,8 @@ const database = require('../database');
 const mail = require('../modules/email');
 const mongodb = require('mongodb');
 const binary = mongodb.Binary;
+const http = require('http');
+const fs = require('fs');
 
 
 let mongoose = require('mongoose');
@@ -27,26 +29,44 @@ module.exports.submitRequests_post = (req, res) => {
         
         let id = decodedToken.id;
 
-        let data = req.body;
-        let file = req.file;
+        let bodyData = req.body;
+        data = {};
 
         data['studentID'] = id;
-        // console.log(req.body.Evidence);
-        // let Evidence = req.body.Evidence;
-        // console.log(req.body);
-        // delete req.body.Evidence;
-        // database.addFile({ name: Evidence.name, file: binary(Evidence.data) });
+        data['StaffID'] = bodyData.staffId;
+        data['type'] = bodyData.type;
+        data['status'] = 'active';
+        data['message'] = bodyData.message;
+        if(bodyData.requiredModule)
+            data['additionalData'] = {'requiredModule': bodyData.requiredModule};
+        data['module'] = bodyData.module;
 
         let message = data.message;
         delete data.message;
-        let messageId = database.addMessage({'from': id, 'text': message});//'EvidenceID': EvidenceID --> add as a property
+
+        let messageObject = {'from': id, 'text': message};
+        if(bodyData.fileName)
+            messageObject['files'] = [bodyData.fileName];
+        else
+            messageObject['files'] = [];
+
+        let messageId = database.addMessage(messageObject);
         data['messageID_list'] = [messageId];
 
         database.addThread(data);
-        res.json({});
+        res.redirect('/userProfile');
     });
 
 };
+
+module.exports.download_get = async (req, res) => {
+
+
+    let fileName = req.params.fileName;
+
+    res.download('uploads/' + fileName);
+
+}
 
 module.exports.getThreadData_post = (req, res) => {
 
@@ -196,13 +216,19 @@ module.exports.reply_post = (req, res) => {
 
         db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
-            let messageId = database.addMessage({
+            let message = {
                 "from": id,
-                "text": req.body.text,
-            });
+                "text": req.body.message,
+            };
+
+            if(req.body.fileName)
+                message['files'] = [req.body.fileName];
+
+
+            let messageId = database.addMessage(message);
 
             db.collection('threads').updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
-            res.json({});
+            res.redirect('/threads');
         });
     });
     
@@ -210,7 +236,6 @@ module.exports.reply_post = (req, res) => {
 
 module.exports.acceptOrDeclineRequest_post = (req, res) => {
     data = req.body;
-    console.log(data);
 
     database.updateOne('threads', {_id: mongoose.Types.ObjectId(data.threadId)}, {status: data.status});
 

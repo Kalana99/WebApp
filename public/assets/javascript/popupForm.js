@@ -134,6 +134,15 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
             
                             //add an event listener to every suggestion to get the value into the input field when clicked
                             option.addEventListener('click', (event) => {
+
+                                //hidden input to store the lecturers id
+                                let form = event.currentTarget.closest('.popup-form');
+                                let hiddenIdInput = document.createElement('input');
+                                hiddenIdInput.setAttribute('type', 'hidden');
+                                hiddenIdInput.setAttribute('name', 'staffId');
+                                hiddenIdInput.setAttribute('value', event.currentTarget.id);
+                                form.appendChild(hiddenIdInput);
+
     
                                 lecturerInput[i].style.visibility = 'hidden';   //hide the lecturer input field
                                 lecturerInput[i].style.position = 'absolute';
@@ -152,6 +161,7 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
     
                                 selected.appendChild(remove);
                                 lecturerDiv.appendChild(selected);
+
 
                                 //event listener to the remove button
                                 document.querySelector('.remove').addEventListener('click', (event) => {

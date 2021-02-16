@@ -1,5 +1,4 @@
 let correct = true;
-let print = console.log;
 
 let main = async (page) => {
     correct = true;
@@ -174,7 +173,6 @@ let validateExistingPassword = async (pswInput, existingEmail) => {
     // If there is also an existing email input in the page, then go to the validate
     // existing email and password
     if(existingEmail.length > 0){
-        console.log('here');
         await validateExistingEmailAndPassword(existingEmail, pswInput);
         return;
     }
@@ -290,7 +288,6 @@ let validateNewEmail = async (emailInput) => {
 //validate input fields that cannot be blank
 let validateNonEmpty = async (nonEmpty) => {
     for (let i = 0; i < nonEmpty.length; i++){
-        console.log('nonempty thread reply');
         let input = nonEmpty[i];
 
         //to get the relevant error msg of what cannot be blank
@@ -510,96 +507,65 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'addDrop'){
 
-        data = {};
-
-        data['StaffID'] = document.querySelector('.selectedFinal').getAttribute('id');
-        console.log(document.querySelector('.selectedFinal').getAttribute('id'));
-        data['type'] = 'addDrop';
-        data['status'] = 'active';
-        data['message'] = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['additionalData'] = {'requiredModule': querySelectorFrom('.requiredModule', nonEmpty)[0].value};
-        data['module'] = querySelectorFrom('.currentModule', nonEmpty)[0].value;
-
         let formElement = document.querySelector('#addDropForm');
+
+        //creating hidden element for request type
+
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'type');
+        hiddenIdInput.setAttribute('value', 'addDrop');
+        formElement.appendChild(hiddenIdInput);
+
         formElement.submit();
 
     }
 
     else if(page === 'repeat'){
 
-        data = {};
+        let formElement = document.querySelector('#repeatForm');
 
-        data['StaffID']     = document.querySelector('.selectedFinal').getAttribute('id');
-        data['type']        = 'repeat';
-        data['status']      = 'active';
-        data['message']     = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['module']      = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+        //creating hidden element for request type
 
-        fetch('/submitRequest', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/userProfile';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'type');
+        hiddenIdInput.setAttribute('value', 'repeat');
+        formElement.appendChild(hiddenIdInput);
+
+        formElement.submit();
 
     }
 
     else if(page === 'submission'){
 
-        data = {};
+        let formElement = document.querySelector('#submissionForm');
 
-        data['StaffID']     = document.querySelector('.selectedFinal').getAttribute('id');
-        data['type']        = 'submission';
-        data['status']      = 'active';
-        data['message']     = querySelectorFrom('.description', nonEmpty)[0].value;
-        data['module']      = querySelectorFrom('.currentModule', nonEmpty)[0].value;
+        //creating hidden element for request type
 
-        fetch('/submitRequest', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/userProfile';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'type');
+        hiddenIdInput.setAttribute('value', 'submission');
+        formElement.appendChild(hiddenIdInput);
+
+        formElement.submit();
 
     }
 
     else if(page === 'thread'){
 
-        let data = {};
+        //creating hidden element for thread id
 
-        data['text']        = querySelectorFrom('.reply', nonEmpty)[0].value;
-        data['threadId']    = document.querySelector('.selected.threads').getAttribute('id');
-        
-        fetch('/reply', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/threads';
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
+        let formElement = document.querySelector('#replyForm');
+
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'threadId');
+        hiddenIdInput.setAttribute('value', document.querySelector('.selected.threads').getAttribute('id'));
+        formElement.appendChild(hiddenIdInput);
+
+        formElement.submit();
 
     }
 
