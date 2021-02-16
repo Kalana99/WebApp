@@ -21,8 +21,6 @@ router.post('/getThreadData', requireAuth, threadController.getThreadData_post);
 
 router.post('/submitRequest', upload.single('uploadedFile'), threadController.submitRequests_post);
 
-router.post('/upload', threadController.upload_post);
-
 router.post('/getMessages', threadController.getMessages_post);
 
 router.post('/reply', upload.single('uploadedFile'), threadController.reply_post);

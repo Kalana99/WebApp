@@ -150,8 +150,6 @@ let displayMessages = async (arr, msgId) => {
     let response = await fetch('/getUserId');
 
     let userId = await response.json();
-
-    console.log(userId);
     
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
@@ -163,11 +161,9 @@ let displayMessages = async (arr, msgId) => {
         msgContainer.appendChild(msg);
 
         if (userId.id === person){
-            console.log('reciever');
             msgContainer.setAttribute('class', 'reciever');
         }
         else{
-            console.log('sender');
             msgContainer.setAttribute('class', 'sender');
         }
 
