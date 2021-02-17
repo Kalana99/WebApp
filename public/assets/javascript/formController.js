@@ -18,8 +18,9 @@ let main = async (page) => {
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
     let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
-    let question        = document.querySelectorAll('.question.' + page);       //not done
+    let question        = document.querySelectorAll('.question.' + page);       //done
 
+    //buttons that needs loading animation
     let button     = document.querySelector('.button.' + page);
 
     //uncomment this block check if the inputs have all been identified
