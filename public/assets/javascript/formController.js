@@ -570,14 +570,17 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
+        let isMale = querySelectorFrom('.type', nonEmptyRadio)[0].checked;
+        let isStudent = querySelectorFrom('.gender', nonEmptyRadio)[0].checked;
+
         data['name']        = querySelectorFrom('.fullName', nonEmpty)[0].value;
         data['index']       = querySelectorFrom('.index', index)[0].value;
         data['email']       = querySelectorFrom('.newEmail', newEmail)[0].value;
         data['birthday']    = querySelectorFrom('.birthday', nonEmpty)[0].value;
-        data['gender']      = querySelectorFrom('.gender', nonEmptyRadio)[0].value;
+        data['gender']      = isMale ? 'male' : 'female';
         data['phone']       = querySelectorFrom('.phone', nonEmpty)[0].value;
         data['password']    = querySelectorFrom('.psw', newPsw)[0].value;
-        data['type']        = querySelectorFrom('.type', nonEmptyRadio)[0].value;
+        data['type']        = isStudent ? 'student' : 'staff';
         data['faculty']     = querySelectorFrom('.faculty', normal)[0].value;
         data['verified']    = false;
 
@@ -594,7 +597,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             window.location.href = '/verifyemail/' + data.id;
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         });
 
     }

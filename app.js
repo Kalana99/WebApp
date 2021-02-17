@@ -47,10 +47,10 @@ app.use(fileUpload());
 
 //Connect to the database
 let mongoose = require('mongoose');
-const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 let local = "mongodb://localhost/StudentRequestSystemDatabase";
-mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
+let atlas = 'mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority';
+mongoose.connect(atlas, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
         app.listen(process.env.PORT || 3000); 
         console.log('You are listening to port 3000'); 

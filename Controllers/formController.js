@@ -1,13 +1,7 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User');
-const Thread = require('../models/Thread');
-const database = require('../database');
-const mail = require('../modules/email');
-
-let mongoose = require('mongoose');
 const db = mongoose.connection;
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {
@@ -19,7 +13,7 @@ const createToken = (id) => {
 module.exports.checkEmailExistence = (req, res) => {
     let email = req.body.email;
 
-    db.collection('users').findOne({email: email}).then(user => {
+    db.collections.users.findOne({email: email}).then(user => {
         if(user)
             res.json({emailExists: true});
         else
@@ -33,7 +27,7 @@ module.exports.checkEmailAndPassword = (req, res) => {
     let password = req.body.password;
 
     //get user with the email
-    User.findOne({email: email}).then(user => {
+    db.collections.users.findOne({email: email}).then(user => {
 
         if(user == null){
             res.json({emailExists: false});
@@ -59,7 +53,7 @@ module.exports.checkIndexExistence = (req, res) => {
 
     let index = req.body.index;
 
-    User.findOne({index: index}).then(user => {
+    db.collections.users.findOne({index: index}).then(user => {
         data = {indexExists: true}
 
         if(user == null)
