@@ -1,3 +1,5 @@
+// const { set } = require("mongoose");
+
 let correct = true;
 
 let main = async (page) => {
@@ -16,6 +18,9 @@ let main = async (page) => {
     let index           = document.querySelectorAll('.index.' + page);          //done
     let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
     let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
+    let question        = document.querySelectorAll('.question.' + page);       //not done
+
+    let button     = document.querySelector('.button.' + page);
 
     //uncomment this block check if the inputs have all been identified
 
@@ -53,8 +58,16 @@ let main = async (page) => {
     //validate suggestion fields
     await validateSelected(selected);
 
+    //validate secret question
+    await validateQuestion(question);
+
     //submit if correct
     if(correct){
+        //loading animation for buttons
+        if (button !== null){
+            button.classList.toggle('loading');
+        }
+
         await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile);
     };
 };
@@ -64,6 +77,7 @@ let main = async (page) => {
 //login validation front and back
 let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
 
+    // let loginButton = document.querySelector('.loginButton');
     let emailState;
     let passwordState;
 
@@ -161,6 +175,11 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             removeError(password);
             correct = false;
         }
+
+        //login loading animation if input values are correct
+        // if (loginButton !== null && correct === true){
+        //     loginButton.classList.toggle('loading');
+        // }
 
     }
 
@@ -428,6 +447,28 @@ let validateSelected = async (selected) => {
     }
 };
 
+//validate secret question
+let validateQuestion = async (question) => {
+    if (question.length !== 0){
+        let secretQuestion = question[0];
+        let secretAnswer = question[1];
+
+        if (secretQuestion.value === ''){
+            setError(secretQuestion, 'Select a question');
+            correct = false;
+        }
+        else{
+            setSuccess(secretQuestion);
+            if (secretAnswer.value === ''){
+                setError(secretAnswer, 'Answer the question');
+                correct = false;
+            }
+            else{
+                setSuccess(secretAnswer);
+            }
+        }
+    }
+}
 
 // ---------------------------------------------------------------------------------------
 const setError = (input, message) => {
@@ -460,7 +501,6 @@ const removeError = (input) => {
 //-----------------------edit profile buttons---------------------------------------------
 
 let editButtons = document.querySelectorAll('.edit');
-
 //add event listeners to edit buttons in editProfile
 let addEditListeners = (editButtons) => {
     for (let i = 0; i < editButtons.length; i++){
@@ -546,7 +586,6 @@ let addEditListeners = (editButtons) => {
         });
     }
 };
-
 addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
