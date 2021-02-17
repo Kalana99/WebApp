@@ -61,7 +61,7 @@ body{
     color: #1f363d;    
 }
 
-.form button{
+.button.login{
     border: none;
     border-radius: 10px;
     display: block;
@@ -74,10 +74,45 @@ body{
     opacity: 2;
     color: white;
     outline-style: none;
+    position: relative;
 }
 
-.form button:hover{    
+.button.login:hover{
+    background-color: #60918a;
+}
+
+.button.login:active{    
     background-color: #1f363d;
+}
+
+.buttonText{
+    transition: all 0.2s;
+}
+
+.loading .buttonText{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.loading::after{
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 5px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: buttonLoadingSpinner 1s ease infinite;
+}
+
+@keyframes buttonLoadingSpinner{
+    from{transform: rotate(0turn);}
+    to{transform: rotate(1turn);}
 }
 
 .form-control{
@@ -151,12 +186,12 @@ a{
     color:rgb(31,54,61);
 }
 
-.button{
+/* .button{
     position: absolute;
     bottom: 5%;
     width: 60%;
     transform:translate(20%,0%);
-}
+} */
 
 .links{
     margin-bottom: 1px;

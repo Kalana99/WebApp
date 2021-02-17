@@ -104,7 +104,7 @@ body{
     visibility: visible;
 }
 
-.form button{
+.button.signUp{
     border: 1px solid #49798c;
     border-radius: 10px;
     display: block;
@@ -121,8 +121,42 @@ body{
 
 }
 
-.form button:hover{   
-    background-color: #70a9a1 ;
+.button.signUp:hover{
+    background-color: #70a9a1;
+}
+
+.button.signUp:active{   
+    background-color: #2d4642 ;
+}
+
+.signUpText{
+    transition: all 0.2s;
+}
+
+.loading .signUpText{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.loading::after{
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 5px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: buttonLoadingSpinner 1s ease infinite;
+}
+
+@keyframes buttonLoadingSpinner{
+    from{transform: rotate(0turn);}
+    to{transform: rotate(1turn);}
 }
 
 .main-body{
@@ -132,7 +166,7 @@ body{
     height: 100%; 
 }
 
-#faculty{
+.faculty, .question{
     border-style: none;
     border-collapse: collapse;
     outline: none;
