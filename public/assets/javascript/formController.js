@@ -570,8 +570,8 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         data = {};
 
-        let isMale = querySelectorFrom('.type', nonEmptyRadio)[0].checked;
-        let isStudent = querySelectorFrom('.gender', nonEmptyRadio)[0].checked;
+        let isMale = querySelectorFrom('.gender', nonEmptyRadio)[0].checked;
+        let isStudent = querySelectorFrom('.type', nonEmptyRadio)[0].checked;
 
         data['name']        = querySelectorFrom('.fullName', nonEmpty)[0].value;
         data['index']       = querySelectorFrom('.index', index)[0].value;
