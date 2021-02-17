@@ -1,14 +1,12 @@
 const User = require('../models/User');
-const database = require('../database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Message = require('../models/Message');
+let database = require('../database');
 
-let mongoose = require('mongoose');
-const { updateMany } = require('../models/User');
-const Thread = require('../models/Thread');
+const mongoose = require('mongoose');
 const db = mongoose.connection;
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+const Thread = require('../models/Thread');
 
 //settings option - edit profile
 module.exports.get_editProfile = (req, res) => {
@@ -22,7 +20,7 @@ module.exports.put_editProfile = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
+        db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
         {$set: req.body}, function(err){
             if(err){
                 console.log(err);
@@ -56,7 +54,7 @@ module.exports.put_changePassword = (req, res) => {//coppied from authController
 
         password_encrypt()
         .then((hashedPassword) => {
-            db.collection('users').findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, 
+            db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, 
             {$set: {password: hashedPassword}}, function(err){
                 if (err){
                     console.log(err);
@@ -75,6 +73,8 @@ module.exports.get_deleteAccount = (req, res) => {
     res.render('delete_account');
 };
 
+let fs = require('fs');
+
 module.exports.let_deleteAccount = (req, res) => {
     
     const token = req.cookies.jwt;
@@ -82,23 +82,29 @@ module.exports.let_deleteAccount = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', async (err, decodedToken) => {
         let id = decodedToken.id;
 
-        let user = await User.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, {$set: {email: "", index: ""}}, {useFindAndModify: false})
-        
+        let user = (await db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, {$set: {email: "", index: ""}}, {useFindAndModify: false})).value;
+
         if (user.type === "student"){
-            await db.collection("threads").updateMany({studentID: id}, {$set: {deletedID: id, studentID: null}});
+            console.log('deleting student');
+            await db.collections.threads.updateMany({studentID: id}, {$set: {deletedID: id, studentID: null}});
         }
         else{
-            await db.collection("threads").updateMany({StaffID: id}, {$set: {deletedID: id, StaffID: null}})
+            console.log('deleting staff');
+            await db.collections.threads.updateMany({StaffID: id}, {$set: {deletedID: id, StaffID: null}})
         }
 
-        db.collection("threads").deleteMany({StaffID: null, studentID: null}).then((obj) =>{
-            console.log("thread deleted.");
+        let deleteThreads = await db.collections.threads.find({StaffID: null, studentID: null}).toArray();
+        console.log('delete threads', deleteThreads);
+
+        for(let i = 0; i < deleteThreads.length; i++){
+
+            database.deleteThread(deleteThreads[i]._id);
+
+        }
+
+        db.collections.threads.deleteMany({StaffID: null, studentID: null}).then((obj) =>{
             res.json({});
         });
-
-        
-
-        
 
     });
 };

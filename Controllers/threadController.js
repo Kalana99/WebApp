@@ -1,18 +1,8 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const Thread = require('../models/Thread');
 const database = require('../database');
-const mail = require('../modules/email');
-const mongodb = require('mongodb');
-const binary = mongodb.Binary;
-const http = require('http');
-const fs = require('fs');
-
-
-let mongoose = require('mongoose');
+const User = require('../models/User');
+const mongoose = require('mongoose');
 const db = mongoose.connection;
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {
@@ -75,7 +65,7 @@ module.exports.getThreadData_post = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(async user => {
+        db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(async user => {
 
             //select the threads according to filter by editing the searchquery object
             filter = req.body.filter;
@@ -96,8 +86,8 @@ module.exports.getThreadData_post = (req, res) => {
                 string = string.toLowerCase();
                 let searchWords = string.split(' ');
 
-                let student = await User.findOne({_id: mongoose.Types.ObjectId(thread.studentID)});
-                let staff = await User.findOne({_id: mongoose.Types.ObjectId(thread.StaffID)});
+                let student = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.studentID)});
+                let staff = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.StaffID)});
                 let flag = false;
 
                 for(let j = 0; j < searchWords.length; j++){
@@ -132,7 +122,7 @@ module.exports.getThreadData_post = (req, res) => {
 
             };
             
-            db.collection('threads').find(searchQuery).toArray().then(async array => {
+            db.collections.threads.find(searchQuery).toArray().then(async array => {
 
                 let searchedArray = [];
                 
@@ -150,16 +140,16 @@ module.exports.getThreadData_post = (req, res) => {
 
                     for(let i = 0; i < searchedArray.length; i++){
                         if(user.type === 'student'){
-                            let staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].StaffID)});
+                            let staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].StaffID)});
                             if (!staffUser){
-                                staffUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
+                                staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
                             }
                             searchedArray[i].name = staffUser.name;
                         }
                         else if(user.type === 'staff'){
-                            let studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].studentID)});
+                            let studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].studentID)});
                             if (!studentUser){
-                                studentUser = await db.collection('users').findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
+                                studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
                             }
                             searchedArray[i].name = studentUser.name;
                         }
@@ -182,7 +172,7 @@ module.exports.getMessages_post = (req, res) => {
 
     let getData = async () => {
 
-        let thread = await db.collection('threads').findOne({_id: mongoose.Types.ObjectId(threadId)});
+        let thread = await db.collections.threads.findOne({_id: mongoose.Types.ObjectId(threadId)});
 
         let messageIdList = thread.messageID_list;
         
@@ -194,7 +184,7 @@ module.exports.getMessages_post = (req, res) => {
             });
 
             for(let i = 0; i < messageIdList.length; i++){
-                let message = await db.collection('messages').findOne({_id: mongoose.Types.ObjectId(messageIdList[i])});
+                let message = await db.collections.messages.findOne({_id: mongoose.Types.ObjectId(messageIdList[i])});
                 messages.push(message);
             }
 
@@ -214,7 +204,7 @@ module.exports.reply_post = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+        db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
             let message = {
                 "from": id,
@@ -222,12 +212,11 @@ module.exports.reply_post = (req, res) => {
             };
 
             if(req.body.fileName)
-                message['files'] = [req.body.fileName];
-
+                message['files'] = req.body.fileName;
 
             let messageId = database.addMessage(message);
 
-            db.collection('threads').updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
+            db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
             res.redirect('/threads');
         });
     });
@@ -237,7 +226,7 @@ module.exports.reply_post = (req, res) => {
 module.exports.acceptOrDeclineRequest_post = (req, res) => {
     data = req.body;
 
-    database.updateOne('threads', {_id: mongoose.Types.ObjectId(data.threadId)}, {status: data.status});
+    db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(data.threadId)}, {$set:{status: data.status}});
 
     res.json({'status': 'success'});
 };
@@ -248,7 +237,7 @@ module.exports.getUserType_get = (req, res) => {
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
         let id = decodedToken.id;
 
-        db.collection('users').findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+        db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             
             res.json({type: user.type});
 
@@ -259,7 +248,7 @@ module.exports.getUserType_get = (req, res) => {
 module.exports.getStaff_post = (req, res) => {
     let searchTerm = req.body.input;
 
-    db.collection('users').find({type: 'staff'}).toArray().then(lecturers => {
+    db.collections.users.find({type: 'staff'}).toArray().then(lecturers => {
 
         let suggestions = lecturers.filter((lecturer) => {
             return lecturer.name.toLowerCase().includes(searchTerm);

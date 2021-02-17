@@ -9,5 +9,14 @@ const messageSchema = new Schema({
 },
 { timestamps: true });
 
+const removeMessage = (id) => {
+    this.remove({_id: mongoose.Types.ObjectId(id)});
+}
+
+messageSchema.pre('deleteOne', async (next) => {
+    console.log('pre remove hook fired');
+    next();
+})
+
 const Message = mongoose.model('Message', messageSchema);
 module.exports = Message;
