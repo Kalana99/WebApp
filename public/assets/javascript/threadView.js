@@ -124,6 +124,9 @@ let createThreadElement = (thread) => {
 
 };
 
+//loading animation overlay
+let loadingOverlay = document.querySelector('.overlay');
+
 //initialize button group
 let initialize = (arr) => {
     //button group
@@ -135,6 +138,9 @@ let initialize = (arr) => {
         btnGroup.appendChild(createThreadElement(arr[item]));
 
     };
+
+    //remove loading animation after all the threads are loaded
+    loadingOverlay.style.display = 'none';
 
 };
 
@@ -280,5 +286,12 @@ let initializePage = () => {
       });   
 
 };
+
+//page loading animation
+// let loadingOverlay = document.querySelector('.overlay');
+// let displayLoadingScreen = () => {
+//     loadingOverlay.style.display = 'none';
+// };
+// window.addEventListener('load', displayLoadingScreen);
 
 initializePage();
