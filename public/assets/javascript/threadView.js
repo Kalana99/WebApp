@@ -1,7 +1,9 @@
 let print = console.log;
 let threads;
 let threadId = null;
-let pageNumber = 1;
+let pageNumber = 3;
+let threadsPerPage = 4;
+
 let filter = {
     string: '',
     status: 'all',

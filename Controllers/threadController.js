@@ -4,6 +4,8 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
+let threadsPerPage = 4;
+
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {
     return jwt.sign({id}, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', {
@@ -122,7 +124,11 @@ module.exports.getThreadData_post = (req, res) => {
 
             };
             
-            db.collections.threads.find(searchQuery).toArray().then(async array => {
+            //calculate the skip value and the limit value to determine which 
+            //documents gets returned
+            let skipValue = (req.body.pageNumber - 1) * threadsPerPage;
+
+            db.collections.threads.find(searchQuery).skip(skipValue).limit(threadsPerPage).toArray().then(async array => {
 
                 let searchedArray = [];
                 
