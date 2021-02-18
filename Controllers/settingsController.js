@@ -75,6 +75,47 @@ module.exports.get_deleteAccount = (req, res) => {
 
 let fs = require('fs');
 
+let deleteUnneededAccounts = async () => {
+
+    //find the user accounts that don't correspond to any remaining threads and delete them
+
+    let users = db.collections.users.find();
+    let deleteAccounts = [];
+
+    while(await users.hasNext()){
+        let iterateUsers = async (user) => {
+
+            if (user.email === '') {
+
+                let found = false;
+                let threads = db.collections.threads.find();
+
+                while(await threads.hasNext()){
+                    let iterateThreads = async (thread) => {
+
+                        if (thread.studentID == user._id || thread.StaffID == user._id || thread.deletedID == user._id) {
+                            found = true;
+                            return false;
+                        }
+                    };
+
+                    await iterateThreads(await threads.next());
+                }
+
+                if (!found) {
+                    deleteAccounts.push(mongoose.Types.ObjectId(user._id));
+                }
+            }
+
+        };
+
+        await iterateUsers(await users.next());
+    }
+
+    db.collections.users.deleteMany({_id: {$in: deleteAccounts}});
+
+};
+
 module.exports.let_deleteAccount = (req, res) => {
     
     const token = req.cookies.jwt;
@@ -84,27 +125,29 @@ module.exports.let_deleteAccount = (req, res) => {
 
         let user = (await db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, {$set: {email: "", index: ""}}, {useFindAndModify: false})).value;
 
+        //get if the account is student or staff and make it obsolete
+        // by changing the email and the index to empty strings
+
         if (user.type === "student"){
-            console.log('deleting student');
             await db.collections.threads.updateMany({studentID: id}, {$set: {deletedID: id, studentID: null}});
         }
         else{
-            console.log('deleting staff');
             await db.collections.threads.updateMany({StaffID: id}, {$set: {deletedID: id, StaffID: null}})
         }
 
+        //find all the threads of which both the account ids are null, and delete them
         let deleteThreads = await db.collections.threads.find({StaffID: null, studentID: null}).toArray();
-        console.log('delete threads', deleteThreads);
 
         for(let i = 0; i < deleteThreads.length; i++){
 
-            database.deleteThread(deleteThreads[i]._id);
+            await database.deleteThread(deleteThreads[i]._id);
 
         }
 
-        db.collections.threads.deleteMany({StaffID: null, studentID: null}).then((obj) =>{
-            res.json({});
-        });
+        //find the user accounts that don't correspond to any remaining threads and delete them
+        deleteUnneededAccounts();
+
+        res.json({});
 
     });
 };
