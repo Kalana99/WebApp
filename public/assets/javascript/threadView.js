@@ -2,13 +2,63 @@ let print = console.log;
 let threads;
 let threadId = null;
 let pageNumber = 1;
+let threadsPerPage = 4;
+let numberOfPages = 0;
+
 let filter = {
     string: '',
     status: 'all',
     type: 'all'
 };
 
+let msgGroup = document.querySelector('.msg-group');
+
+let initNav = () => {
+
+    let numberOfPagesElement = document.querySelector('#numOfPages');
+    numberOfPagesElement.textContent = numberOfPages != 0 ? numberOfPages : 1;
+
+    let currentPageElement = document.querySelector('#pageSelector');
+    currentPageElement.value = pageNumber;
+
+    //add an event listener for the currentPage element
+    currentPageElement.addEventListener("keydown", event => {
+        if (event.isComposing || event.keyCode === 13) {
+            if(pageNumber != currentPageElement.value){
+                pageNumber = currentPageElement.value;
+                getThreads();
+            }
+        }
+    }); 
+
+};
+
+let leftRightInit = () => {
+//add eventListeners for the left and right buttons
+    let leftButton = document.querySelector('#leftButton');
+    let rightButton = document.querySelector('#rightButton');
+
+    leftButton.addEventListener('click', event => {
+        if(pageNumber > 1){
+            pageNumber -= 1;
+            getThreads();
+        }
+
+    });
+
+    rightButton.addEventListener('click', event => {
+        if(pageNumber < numberOfPages){
+            pageNumber += 1;
+            getThreads();
+        }
+
+    });
+};
+
 let getThreads = () => {
+
+
+    msgGroup.innerHTML = '';
 
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
@@ -22,8 +72,10 @@ let getThreads = () => {
       })
       .then(response => response.json())
       .then(data => {
-        threads = data;
-        initialize(data);
+        threads = data.array;
+        numberOfPages = data.numberOfPages;
+        initNav();
+        initialize(threads);
       })
       .catch((error) => {
         console.log(err);
@@ -144,7 +196,6 @@ let initialize = (arr) => {
 
 };
 
-let msgGroup = document.querySelector('.msg-group');
 //reply button group (reply, accept and decline)
 let replyButtons = document.querySelector('.reply-btn-group');
 
@@ -197,9 +248,28 @@ let displayBtn = (type) => {
 };
 
 
+let initTablinkButtons = () => {
+    //add eventlisteners to tablink buttons
+    let tablinks = document.querySelectorAll('.tablinks');
+
+    tablinks.forEach(tablinkButton => {
+        
+        tablinkButton.addEventListener('click', event => {
+            pageNumber = 1;
+            filter.status = event.currentTarget.getAttribute('id');
+            getThreads();
+        });
+
+    });
+
+};
+
+
 let initializePage = () => {
 
     getThreads();
+    leftRightInit();
+    initTablinkButtons();
 
     //setting the event listener for the reply button
     let replyButton = document.querySelector('.replyBtn');

@@ -28,12 +28,8 @@ let addMessage = function(message){
 
 let deleteMessage = async function(messageId){
 
-    console.log('deleting message');
-
     let message = await db.collections.messages.findOne({_id: mongoose.Types.ObjectId(messageId)});
     let files = message.files;
-
-    console.log(message);
 
     for(let i = 0; i < files.length; i++){
         fs.unlink('uploads/' + files[i], (err) => {});
@@ -45,19 +41,18 @@ let deleteMessage = async function(messageId){
 
 let deleteThread = async function(threadId){
 
-    console.log('deleting a thread', threadId);
-
     let thread = await db.collections.threads.findOne({_id: mongoose.Types.ObjectId(threadId)});
-    console.log(thread);
 
     for(let i = 0; i < thread.messageID_list.length; i++){
-
         deleteMessage(thread.messageID_list[i]);
-
     }
 
     db.collections.threads.deleteOne({_id: mongoose.Types.ObjectId(threadId)});
 
+}
+
+let deleteUser = async function(userId){
+    db.collections.users.deleteOne({_id: mongoose.Types.ObjectId(userId)});
 }
 
 let functions = {
@@ -65,7 +60,8 @@ let functions = {
     addThread,
     addMessage,
     deleteMessage,
-    deleteThread
+    deleteThread,
+    deleteUser
 };
 
 module.exports = functions;

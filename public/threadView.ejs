@@ -28,10 +28,11 @@
     </header>
     <section>
         <div class="tab">
-            <button class="tablinks">All</button>
-            <button class="tablinks">Accepted</button>
-            <button class="tablinks">Declined</button>
-            <button class="tablinks">Not read</button>
+            <button class="tablinks" id="all">All</button>
+            <button class="tablinks" id="active">Active</button>
+            <button class="tablinks" id="accepted">Accepted</button>
+            <button class="tablinks" id="declined">Declined</button>
+            <button class="tablinks" id="unread">Unread</button>
         </div>
         <div class="column left">
             <div class="search-bar">
@@ -56,11 +57,11 @@
                 </div>
             </div>
             <div class="pageNav">
-                <a href="#" class="previous round">&#8249;</a>
+                <button id="leftButton"><</button>
                 <input type="text" id="pageSelector">
                 <span id="divider">/</span>
-                <span id="numOfPages">5</span>
-                <a href="#" class="next round">&#8250;</a>
+                <span id="numOfPages">1</span>
+                <button id="rightButton">></button>
             </div>
         </div>
         <div class="column right">
