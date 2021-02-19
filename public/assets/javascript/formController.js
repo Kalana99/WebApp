@@ -511,7 +511,7 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             });
     
             data = await response.json();
-    
+            
             if (data.emailExists){
                 emailState = "success";
                 if (data.questionState){

@@ -44,6 +44,38 @@ module.exports.forgotPassword_get = (req, res) => {
     res.render('forgotPassword');
 }
 
+module.exports.forgotPassword_post = (req, res) => {
+
+    let states = {};
+
+    states['emailExists']    = null;
+    states['questionState'] = null;
+    states['answerState']   = null;
+
+    db.collections.users.findOne({email: req.body.email}).then(user => {
+        
+        if(user){
+            states['emailExists'] = true;
+            if(user.question === req.body.question){
+                states['questionState'] = true;
+                if(user.answer === req.body.answer){
+                    states['answerState'] = true;
+                }
+                else{
+                    states['answerState'] = false;
+                }
+            }
+            else{
+                states['questionState'] = false;
+            }
+        }
+        else{
+            states['emailExists'] = false;
+        }
+        res.json(states);
+    });
+}
+
 module.exports.ForgotPassword_change_get = (req, res) => {
     res.render('ForgotPassword_change');
 }
