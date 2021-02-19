@@ -12,7 +12,9 @@ const threadSchema = new Schema({
     "messageID_list": [String],
     "additionalData": Object,
     "module": String,
-    "deletedID": String
+    "deletedID": String,
+    "studentUnread": Boolean,
+    "staffUnread": Boolean
 },
 { timestamps: true });
 

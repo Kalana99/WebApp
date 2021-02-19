@@ -144,7 +144,7 @@ let createThreadElement = (thread) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({threadId})
+                    body: JSON.stringify({threadId})
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -153,9 +153,9 @@ let createThreadElement = (thread) => {
                     //after that displat the message and the buttons together
                     fetch('/getUserType')
                     .then(response => response.json())
-                    .then(typeData => {
+                    .then(typeData => { 
                         //display the buttons and messages together to dispose of the delay
-                        displayBtn(typeData.type);
+                        displayBtn(typeData.type, data.status);
                         displayMessages(data.messages, threadId);
                     }).catch(err => {
                         console.log(err);
@@ -231,8 +231,13 @@ let closePopup = () => {
     popup_reply.className = 'popup-request-window';
 }
 
-let displayBtn = (type) => {
-    if (type === 'staff'){
+let displayBtn = (type, status) => {
+
+    if(status == 'accepted' || status == 'declined'){
+        replyButtons.className = 'reply-btn-group';
+    }
+
+    else if (type === 'staff'){
         replyButtons.className = 'reply-btn-group visible';
     }
     else if (type === 'student'){
@@ -249,6 +254,7 @@ let initTablinkButtons = () => {
     tablinks.forEach(tablinkButton => {
         
         tablinkButton.addEventListener('click', event => {
+            replyButtons.className = 'reply-btn-group';
             pageNumber = 1;
             filter.status = event.currentTarget.getAttribute('id');
             getThreads();
@@ -342,10 +348,10 @@ let initializePage = () => {
         
     });
 
-    searchText.addEventListener("keydown", event => {
-        if (event.isComposing || event.keyCode === 13) {
+    searchText.addEventListener("keyup", event => {
+        // if (event.isComposing || event.keyCode === 13) {
           searchButton.click();
-        }
+        // }
         // do something
       });   
 
