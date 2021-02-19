@@ -21,7 +21,7 @@ let main = async (page) => {
     let question        = document.querySelectorAll('.question.' + page);       //done
 
     //buttons that needs loading animation
-    let button     = document.querySelector('.button.' + page);
+    let button          = document.querySelector('.button.' + page);
 
     //uncomment this block check if the inputs have all been identified
 
@@ -471,6 +471,25 @@ let validateQuestion = async (question) => {
     }
 }
 
+//toggle password view
+let toggleView      = document.querySelectorAll('.far');
+
+let togglePasswordView = async (toggleView) => {
+    for (let i = 0; i < toggleView.length; i++){
+        let pswField = toggleView[i].parentElement.querySelector('input');
+
+        toggleView[i].addEventListener('click', (event) => {
+            // toggle the type attribute
+            let type = pswField.getAttribute('type') === 'password' ? 'text' : 'password';
+            pswField.setAttribute('type', type);
+            // toggle the eye slash icon
+            toggleView[i].classList.toggle('fa-eye-slash');
+        });
+    }
+};
+
+togglePasswordView(toggleView);
+
 // ---------------------------------------------------------------------------------------
 const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
@@ -829,7 +848,7 @@ let setEventListeners = () => {
     addDropSubmitButton = document.getElementById('addDropSubmitButton');
     if(addDropSubmitButton)
         addDropSubmitButton.addEventListener('click', event => {
-            event.preventDefault();//remove
+            event.preventDefault();//remove        
             main('addDrop');
         });
 

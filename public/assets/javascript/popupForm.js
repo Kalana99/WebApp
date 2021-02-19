@@ -90,6 +90,8 @@ let closeLogoutWindow = (logoutCancelButton, popupWindow) => {
 let submitLogout = (logoutSubmitButton) => {
     if (logoutSubmitButton !== null){
         logoutSubmitButton.addEventListener('click', (event) => {
+            // loading animation
+            logoutSubmitButton.classList.toggle('loading');
             window.location.href = '/logout';
         });
     }

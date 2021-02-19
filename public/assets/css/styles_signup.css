@@ -77,19 +77,30 @@ body{
 
 .form-control i{
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 30px;
+    right: 5px;
     visibility: hidden;
 }
 
 .form-control.success i.fa-check-circle{
+    bottom: 0;
+    left: 0;
     visibility: visible;
     color: #2ecc71;
 }
 
 .form-control.error i.fa-exclamation-circle{
+    bottom: 0;
+    left: 0;
     visibility: visible;
     color: #e74c3c;
+}
+
+.form-control i.far{
+    z-index: 10;
+    color: black;
+    cursor: pointer;
+    visibility: visible;
 }
 
 .form-control small{
@@ -129,34 +140,8 @@ body{
     background-color: #2d4642 ;
 }
 
-.signUpText{
+.buttonText{
     transition: all 0.2s;
-}
-
-.loading .signUpText{
-    visibility: hidden;
-    opacity: 0;
-}
-
-.loading::after{
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    border: 5px solid transparent;
-    border-top-color: white;
-    border-radius: 50%;
-    animation: buttonLoadingSpinner 1s ease infinite;
-}
-
-@keyframes buttonLoadingSpinner{
-    from{transform: rotate(0turn);}
-    to{transform: rotate(1turn);}
 }
 
 .main-body{
