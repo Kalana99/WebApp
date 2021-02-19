@@ -8,18 +8,18 @@ let main = async (page) => {
     //that indicates the place where the event is called
     
     //get the elements
-    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
-    let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
-    let selected        = document.querySelectorAll('.selected.' + page);       //done
-    let existingPsw     = document.querySelectorAll('.existingPsw.' + page);    //done
-    let newPsw          = document.querySelectorAll('.newPsw.' + page);         //done
-    let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
-    let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
-    let index           = document.querySelectorAll('.index.' + page);          //done
-    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
-    let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
-    let question        = document.querySelectorAll('.question.' + page);       //done
-    let forgotPswEmail  = document.querySelectorAll('.forgotPswEmail.' + page); //not done
+    let nonEmpty            = document.querySelectorAll('.nonEmpty.' + page);
+    let normal              = document.querySelectorAll('.normal.' + page);
+    let selected            = document.querySelectorAll('.selected.' + page);
+    let existingPsw         = document.querySelectorAll('.existingPsw.' + page);
+    let newPsw              = document.querySelectorAll('.newPsw.' + page);
+    let existingEmail       = document.querySelectorAll('.existingEmail.' + page);
+    let newEmail            = document.querySelectorAll('.newEmail.' + page);
+    let index               = document.querySelectorAll('.index.' + page);
+    let nonEmptyRadio       = document.querySelectorAll('.nonEmptyRadio.' + page);
+    let question            = document.querySelectorAll('.question.' + page);
+    let forgotPswEmail      = document.querySelectorAll('.forgotPswEmail.' + page);
+    let forgotPswQuestion   = document.querySelectorAll('.forgotPswQuestion.' + page);
 
     //buttons that needs loading animation
     let button          = document.querySelector('.button.' + page);
@@ -35,8 +35,9 @@ let main = async (page) => {
     // console.log(newEmail);
     // console.log(index);
     // console.log(nonEmptyRadio);
-    // console.log(uploadingFile[0].files[0]);
     // console.log(question);
+    // console.log(forgotPswEmail);
+    // console.log(forgotPswQuestion);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -65,7 +66,7 @@ let main = async (page) => {
     await validateQuestion(question);
 
     //validate forgot password page
-    await validateForgotPassword(question, forgotPswEmail);
+    await validateForgotPassword(forgotPswQuestion, forgotPswEmail);
 
     //submit if correct
     if(correct){
@@ -74,7 +75,7 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, forgotPswQuestion);
     };
 };
 
@@ -104,7 +105,7 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
         if (emailValue === ''){
             emailState = "blank";
         }
-        else if (!isEmail(emailValue)){
+        else if (! await (isEmail(emailValue))){
             emailState = "invalid";
         }
         else{
@@ -474,24 +475,24 @@ let validateQuestion = async (question) => {
     }
 }
 
-let validateForgotPassword = async (question, forgotPswEmail) => {
+let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
 
     let emailState = null;
     let questionState = null;
     let answerState = null;
 
-    for (let i = 0; forgotPswEmail.length; i++){
+    for (let i = 0; i < forgotPswEmail.length; i++){
 
-        let email = forgotPswEmail[i];
-        let emailValue = email.value.trim();
-        let questionElement = question[0];
-        let answer = question[1];
-        let answerValue = answer.value.trim();
+        let email           = forgotPswEmail[i];
+        let emailValue      = email.value.trim();
+        let questionElement = forgotPswQuestion[0];
+        let answer          = forgotPswQuestion[1];
+        let answerValue     = answer.value.trim();
 
         if (emailValue === ''){
             emailState = "blank";
         }
-        else if (!isEmail(emailValue)){
+        else if (! await (isEmail(emailValue))){
             emailState = "invalid";
         }
         else{
@@ -500,35 +501,36 @@ let validateForgotPassword = async (question, forgotPswEmail) => {
             requestData['email'] = emailValue;
             requestData['question'] = questionElement.value;
             requestData['answer'] = answerValue;
-        }
 
-        let response = await fetch('/getEmailAndQuestion', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringyfy(requestData),
-        });
-
-        data = await response.json();
-
-        if (data.emailExists){
-            emailState = "success";
-            if (data.questionState){
-                questionState = "success";
-                if (data.answerState){
-                    answerState = "success";
+            let response = await fetch('/getEmailAndQuestion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+    
+            data = await response.json();
+    
+            if (data.emailExists){
+                emailState = "success";
+                if (data.questionState){
+                    questionState = "success";
+                    if (data.answerState){
+                        answerState = "success";
+                    }
+                    else{
+                        answerState = "error";
+                    }
                 }
                 else{
-                    answerState = "error";
+                    questionState = "error";
                 }
             }
             else{
-                questionState = "error";
+                emailState = "error";
             }
-        }
-        else{
-            emailState = "error";
+    
         }
 
         if (emailState === 'blank'){
@@ -1008,6 +1010,13 @@ let setEventListeners = () => {
     if(deleteAccountSubmitButton)
         deleteAccountSubmitButton.addEventListener('click', event => {
             main('deleteAccount');
+        });
+
+    //forgot password event listener
+    forgotPasswordSubmitButton = document.getElementById('forgotPasswordSubmit');
+    if(forgotPasswordSubmitButton)
+        forgotPasswordSubmitButton.addEventListener('click', event => {
+            main('forgotPassword');
         });
 
 }
