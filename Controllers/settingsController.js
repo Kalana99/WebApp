@@ -15,22 +15,28 @@ module.exports.get_editProfile = (req, res) => {
 
 module.exports.put_editProfile = (req, res) => {
 
-    const token = req.cookies.jwt;
+    if (JSON.stringify(req.body) === JSON.stringify({})){
+        console.log("cannot find any data to change");
+        res.json({});
+    }
+    else{
+        const token = req.cookies.jwt;
 
-    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
-        let id = decodedToken.id;
+        jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+            let id = decodedToken.id;
 
-        db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
-        {$set: req.body}, function(err){
-            if(err){
-                console.log(err);
-            }
-            else{
-                console.log("user data changed.");
-                res.json({});
-            }
-        })
-    });
+            db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
+            {$set: req.body}, function(err){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("user data changed");
+                    res.json({});
+                }
+            })
+        });
+    }
 };
 
 //settings option - change password
