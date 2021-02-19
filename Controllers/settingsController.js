@@ -15,6 +15,7 @@ module.exports.get_editProfile = (req, res) => {
 
 module.exports.put_editProfile = (req, res) => {
 
+    console.log(req.body);
     const token = req.cookies.jwt;
 
     jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {

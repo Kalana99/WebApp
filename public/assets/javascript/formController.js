@@ -10,7 +10,7 @@ let main = async (page) => {
     //get the elements
     let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
     let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
-    let selected        = document.querySelectorAll('.selected.' + page);       //
+    let selected        = document.querySelectorAll('.selected.' + page);       //done
     let existingPsw     = document.querySelectorAll('.existingPsw.' + page);    //done
     let newPsw          = document.querySelectorAll('.newPsw.' + page);         //done
     let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
@@ -25,7 +25,7 @@ let main = async (page) => {
 
     //uncomment this block check if the inputs have all been identified
 
-    // console.log(nonEmpty);
+    console.log(nonEmpty);
     // console.log(normal);
     // console.log(selected);
     // console.log(existingPsw);
@@ -35,6 +35,7 @@ let main = async (page) => {
     // console.log(index);
     // console.log(nonEmptyRadio);
     // console.log(uploadingFile[0].files[0]);
+    // console.log(question);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -518,6 +519,15 @@ const removeError = (input) => {
     formControl.className = 'form-control';
 }
 
+//in edit profile page
+const deepRemoveError = (input) => {
+    let formControl = input.parentElement.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    small.innerText = "";
+    formControl.className = 'form-control';
+}
+
 //-----------------------edit profile buttons---------------------------------------------
 
 let editButtons = document.querySelectorAll('.edit');
@@ -531,14 +541,16 @@ let addEditListeners = (editButtons) => {
         let container   = editBtn.parentElement;
         let formControl = container.parentElement;
         //input field container
-        let inputDiv    = formControl.querySelector('.inputDiv');
+        // let inputDiv    = formControl.querySelector('.inputDiv');
         //name for the input field
         let fieldName   = container.querySelector('label').className;
         
         editBtn.addEventListener('click', (event) => {
 
             //toggle button functionality as edit and cancel
-            if (editBtn.innerText === 'Edit'){
+            let text = editBtn.querySelector('.buttonText').innerText;
+
+            if (text === 'Edit'){
 
                 //create common input field and set some common attributes
                 let input = document.createElement('input');
@@ -550,7 +562,7 @@ let addEditListeners = (editButtons) => {
                     input.setAttribute('class', 'nonEmpty editProfile userName');   
                 }
                 else if (fieldName === 'index'){
-                    input.setAttribute('class', 'index editProfile ');
+                    input.setAttribute('class', 'index editProfile');
                 }
                 else if (fieldName === 'phone'){
                     input.setAttribute('class', 'nonEmpty editProfile phone');
@@ -570,7 +582,7 @@ let addEditListeners = (editButtons) => {
                     let labelMale = document.createElement('label');
                     let labelFemale = document.createElement('label');
 
-                    radioInputMale.setAttribute('class', 'nonEmpty editProfile gender');
+                    radioInputMale.setAttribute('class', 'nonEmptyRadio editProfile gender');
                     radioInputMale.setAttribute('type', 'radio');
                     radioInputMale.setAttribute('name', 'gender');
                     radioInputMale.setAttribute('value', 'male');
@@ -584,24 +596,34 @@ let addEditListeners = (editButtons) => {
                     labelFemale.setAttribute('for', 'female');
                     labelFemale.innerText = 'Female';
 
-                    inputDiv.appendChild(radioInputMale);
-                    inputDiv.appendChild(labelMale);
-                    inputDiv.appendChild(radioInputFemale);
-                    inputDiv.appendChild(labelFemale);
+                    formControl.insertBefore(labelFemale, formControl.childNodes[2]);
+                    formControl.insertBefore(radioInputFemale, formControl.childNodes[2]);
+                    formControl.insertBefore(labelMale, formControl.childNodes[2]);
+                    formControl.insertBefore(radioInputMale, formControl.childNodes[2]);
+
                 }
 
                 //append children that is not gender
                 if (fieldName !== 'gender'){
-                    inputDiv.appendChild(input);
+                    formControl.insertBefore(input, formControl.childNodes[2]);
                 }
 
                 //change the edit button as cancel
-                editBtn.innerText = 'Cancel';
+                editBtn.innerHTML = '<span class="buttonText">Cancel</span>';
             }
             else{
                 //remove the input fields when canceled
-                inputDiv.innerHTML = null;
-                editBtn.innerText = 'Edit';
+                if (fieldName !== 'gender'){
+                    formControl.removeChild(formControl.childNodes[2]);
+                }
+                else{
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                }
+                editBtn.innerHTML = '<span class="buttonText">Edit</span>';
+                deepRemoveError(editBtn);
             }
         });
     }
