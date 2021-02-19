@@ -471,7 +471,7 @@ let validateQuestion = async (question) => {
     }
 }
 
-//toggle password view
+//-----------------------toggle password view------------------------------------------
 let toggleView      = document.querySelectorAll('.far');
 
 let togglePasswordView = async (toggleView) => {
@@ -490,7 +490,8 @@ let togglePasswordView = async (toggleView) => {
 
 togglePasswordView(toggleView);
 
-// ---------------------------------------------------------------------------------------
+// ----------------------validation messages--------------------------------------------
+
 const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -516,7 +517,6 @@ const removeError = (input) => {
     small.innerText = "";
     formControl.className = 'form-control';
 }
-// ---------------------------------------------------------------------------------------
 
 //-----------------------edit profile buttons---------------------------------------------
 
