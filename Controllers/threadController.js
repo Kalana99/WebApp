@@ -4,6 +4,8 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
+let threadsPerPage = 4;
+
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {
     return jwt.sign({id}, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', {
@@ -30,6 +32,11 @@ module.exports.submitRequests_post = (req, res) => {
         if(bodyData.requiredModule)
             data['additionalData'] = {'requiredModule': bodyData.requiredModule};
         data['module'] = bodyData.module;
+
+        //set unread 
+        data['staffUnread'] = true;
+        data['studentUnread'] = false;
+        
 
         let message = data.message;
         delete data.message;
@@ -75,40 +82,73 @@ module.exports.getThreadData_post = (req, res) => {
                 $or:[{"studentID": id}, {'StaffID': id}]
             }
 
-            if(filter.status != 'all')
+            if(filter.status == 'unread'){
+
+            }
+            else if(filter.status != 'all')
                 searchQuery['status'] = filter.status;
 
             if(filter.type != 'all')
                 searchQuery['type'] = filter.type;
 
-            let searchPeople = async (thread, string) => {
+            let filterThreads = async (thread, filter) => {
 
-                string = string.toLowerCase();
+                let string = filter.string.toLowerCase();
                 let searchWords = string.split(' ');
 
                 let student = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.studentID)});
                 let staff = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.StaffID)});
+                let deleted = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.deletedID)});
                 let flag = false;
 
+                if(filter.status == 'unread'){
+                    if(user.type == 'student' && !thread.studentUnread){
+                        return false;
+                    }
+                    if(user.type == 'staff' && !thread.staffUnread){
+                        return false;
+                    }
+                    filter.status = 'all';
+                }
+
+                if(filter.type != 'all' && thread.type != filter.type){
+                    return false;
+                }
+
+                if(filter.status != 'all' && thread.status != filter.status){
+                    return false;
+                }
+                //if we come here, that means the thread is inside the filters
+                // now the string filters
                 for(let j = 0; j < searchWords.length; j++){
 
                     if(student){
-                        if(student.name.includes(searchWords[j])
-                            || student.index.includes(searchWords[j])
-                            || student.email.includes(searchWords[j])
-                            || student.faculty.includes(searchWords[j])
+                        if(student.name.toLowerCase().includes(searchWords[j])
+                            || student.index.toLowerCase().includes(searchWords[j])
+                            || student.email.toLowerCase().includes(searchWords[j])
+                            || student.faculty.toLowerCase().includes(searchWords[j])
                             //|| student.department.includes(searchWords[j])
                             ){
                                 flag = true;
                                 break;
                             }
                     }
-
                     if(staff){
-                        if(staff.name.includes(searchWords[j])
-                            || staff.index.includes(searchWords[j])
-                            || staff.email.includes(searchWords[j])
-                            || staff.faculty.includes(searchWords[j])
+                        if(staff.name.toLowerCase().includes(searchWords[j])
+                            || staff.index.toLowerCase().includes(searchWords[j])
+                            || staff.email.toLowerCase().includes(searchWords[j])
+                            || staff.faculty.toLowerCase().includes(searchWords[j])
+                            //|| staff.department.includes(searchWords[j])
+                            ){
+                                flag = true;
+                                break;
+                            }
+                    }
+                    if(deleted){
+                        if(deleted.name.toLowerCase().includes(searchWords[j])
+                            || deleted.index.toLowerCase().includes(searchWords[j])
+                            || deleted.email.toLowerCase().includes(searchWords[j])
+                            || deleted.faculty.toLowerCase().includes(searchWords[j])
                             //|| staff.department.includes(searchWords[j])
                             ){
                                 flag = true;
@@ -116,51 +156,71 @@ module.exports.getThreadData_post = (req, res) => {
                             }
                     }
 
-                }
+                    //check the messages
+                    let messageIdList = thread.messageID_list;
+                    
+                    for(let i = 0; i < messageIdList.length; i++){
+                        let message = await db.collections.messages.findOne({_id: mongoose.Types.ObjectId(messageIdList[i])});
+                        
+                        for(let j = 0; j < searchWords.length; j++){
+                            if(message.text.toLowerCase().includes(searchWords[j])){
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
 
+                }
                 return flag;
 
             };
             
-            db.collections.threads.find(searchQuery).toArray().then(async array => {
+            //calculate the skip value and the limit value to determine which 
+            //documents gets returned
+            let skipValue = (req.body.pageNumber - 1) * threadsPerPage;
 
-                let searchedArray = [];
+            let cursor = db.collections.threads.find();
+
+            let searchedArray = [];
                 
-                for(let i = 0; i < array.length; i++){
+            //do the string based searches
+            while(await cursor.hasNext()){
 
-                    let contains = await searchPeople(array[i], filter.string);
+                let thread = await cursor.next();
 
-                    if(contains){
-                        searchedArray.push(array[i]);
+                let contains = await filterThreads(thread, filter);
+
+                if(contains){
+                    searchedArray.push(thread);
+                }
+            }
+
+            let numberOfPages = Math.ceil(searchedArray.length / threadsPerPage);
+            searchedArray = searchedArray.slice(skipValue, skipValue + threadsPerPage);
+
+            let  addNameToArray = async () => {
+
+                for(let i = 0; i < searchedArray.length; i++){
+                    if(user.type === 'student'){
+                        let staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].StaffID)});
+                        if (!staffUser){
+                            staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
+                        }
+                        searchedArray[i].name = staffUser.name;
                     }
-
+                    else if(user.type === 'staff'){
+                        let studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].studentID)});
+                        if (!studentUser){
+                            studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
+                        }
+                        searchedArray[i].name = studentUser.name;
+                    }
                 }
 
-                let  addNameToArray = async () => {
+                res.json({array: searchedArray, numberOfPages});
+            };
 
-                    for(let i = 0; i < searchedArray.length; i++){
-                        if(user.type === 'student'){
-                            let staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].StaffID)});
-                            if (!staffUser){
-                                staffUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
-                            }
-                            searchedArray[i].name = staffUser.name;
-                        }
-                        else if(user.type === 'staff'){
-                            let studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].studentID)});
-                            if (!studentUser){
-                                studentUser = await User.findOne({_id: mongoose.Types.ObjectId(searchedArray[i].deletedID)});
-                            }
-                            searchedArray[i].name = studentUser.name;
-                        }
-                    }
-
-                    res.json(searchedArray);
-                };
-
-                addNameToArray();
-
-            });
+            addNameToArray();
 
         });
     });
@@ -169,10 +229,23 @@ module.exports.getThreadData_post = (req, res) => {
 module.exports.getMessages_post = (req, res) => {
 
     let threadId = req.body.threadId;
-
+    
     let getData = async () => {
 
         let thread = await db.collections.threads.findOne({_id: mongoose.Types.ObjectId(threadId)});
+        const token = req.cookies.jwt;
+
+        let decodedToken = await jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4');
+        let userId = decodedToken.id;
+        let user = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(userId)});
+        let setObject = {};
+        if(user.type == 'student'){
+            setObject['studentUnread'] = false;
+        }
+        else{
+            setObject['staffUnread'] = false;
+        }
+        db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(threadId)}, {$set: setObject});
 
         let messageIdList = thread.messageID_list;
         
@@ -188,7 +261,7 @@ module.exports.getMessages_post = (req, res) => {
                 messages.push(message);
             }
 
-            res.json({messages});
+            res.json({messages, status:thread.status});
     
     };
     getData();
@@ -215,6 +288,18 @@ module.exports.reply_post = (req, res) => {
                 message['files'] = req.body.fileName;
 
             let messageId = database.addMessage(message);
+
+            //set unread according to account type
+            let setObject = {};
+
+            if(user.type == 'student'){
+                setObject['staffUnread'] = true;
+            }
+            else if(user.type == 'staff'){
+                console.log('here');
+                setObject['studentUnread'] = true;
+            }
+            db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$set: setObject});
 
             db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
             res.redirect('/threads');

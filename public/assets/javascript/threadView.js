@@ -2,13 +2,63 @@ let print = console.log;
 let threads;
 let threadId = null;
 let pageNumber = 1;
+let threadsPerPage = 4;
+let numberOfPages = 0;
+
 let filter = {
     string: '',
     status: 'all',
     type: 'all'
 };
 
+let msgGroup = document.querySelector('.msg-group');
+
+let initNav = () => {
+
+    let numberOfPagesElement = document.querySelector('#numOfPages');
+    numberOfPagesElement.textContent = numberOfPages != 0 ? numberOfPages : 1;
+
+    let currentPageElement = document.querySelector('#pageSelector');
+    currentPageElement.value = pageNumber;
+
+    //add an event listener for the currentPage element
+    currentPageElement.addEventListener("keydown", event => {
+        if (event.isComposing || event.keyCode === 13) {
+            if(pageNumber != currentPageElement.value){
+                pageNumber = currentPageElement.value;
+                getThreads();
+            }
+        }
+    }); 
+
+};
+
+let leftRightInit = () => {
+//add eventListeners for the left and right buttons
+    let leftButton = document.querySelector('#leftButton');
+    let rightButton = document.querySelector('#rightButton');
+
+    leftButton.addEventListener('click', event => {
+        if(pageNumber > 1){
+            pageNumber -= 1;
+            getThreads();
+        }
+
+    });
+
+    rightButton.addEventListener('click', event => {
+        if(pageNumber < numberOfPages){
+            pageNumber += 1;
+            getThreads();
+        }
+
+    });
+};
+
 let getThreads = () => {
+
+
+    msgGroup.innerHTML = '';
 
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
@@ -22,8 +72,10 @@ let getThreads = () => {
       })
       .then(response => response.json())
       .then(data => {
-        threads = data;
-        initialize(data);
+        threads = data.array;
+        numberOfPages = data.numberOfPages;
+        initNav();
+        initialize(threads);
       })
       .catch((error) => {
         console.log(err);
@@ -92,7 +144,7 @@ let createThreadElement = (thread) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({threadId})
+                    body: JSON.stringify({threadId})
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -101,9 +153,9 @@ let createThreadElement = (thread) => {
                     //after that displat the message and the buttons together
                     fetch('/getUserType')
                     .then(response => response.json())
-                    .then(typeData => {
+                    .then(typeData => { 
                         //display the buttons and messages together to dispose of the delay
-                        displayBtn(typeData.type);
+                        displayBtn(typeData.type, data.status);
                         displayMessages(data.messages, threadId);
                     }).catch(err => {
                         console.log(err);
@@ -124,6 +176,9 @@ let createThreadElement = (thread) => {
 
 };
 
+//loading animation overlay
+let loadingOverlay = document.querySelector('.overlay');
+
 //initialize button group
 let initialize = (arr) => {
     //button group
@@ -136,9 +191,11 @@ let initialize = (arr) => {
 
     };
 
+    //remove loading animation after all the threads are loaded
+    loadingOverlay.style.display = 'none';
+
 };
 
-let msgGroup = document.querySelector('.msg-group');
 //reply button group (reply, accept and decline)
 let replyButtons = document.querySelector('.reply-btn-group');
 
@@ -180,8 +237,13 @@ let closePopup = () => {
     popup_reply.className = 'popup-request-window';
 }
 
-let displayBtn = (type) => {
-    if (type === 'staff'){
+let displayBtn = (type, status) => {
+
+    if(status == 'accepted' || status == 'declined'){
+        replyButtons.className = 'reply-btn-group';
+    }
+
+    else if (type === 'staff'){
         replyButtons.className = 'reply-btn-group visible';
     }
     else if (type === 'student'){
@@ -191,9 +253,29 @@ let displayBtn = (type) => {
 };
 
 
+let initTablinkButtons = () => {
+    //add eventlisteners to tablink buttons
+    let tablinks = document.querySelectorAll('.tablinks');
+
+    tablinks.forEach(tablinkButton => {
+        
+        tablinkButton.addEventListener('click', event => {
+            replyButtons.className = 'reply-btn-group';
+            pageNumber = 1;
+            filter.status = event.currentTarget.getAttribute('id');
+            getThreads();
+        });
+
+    });
+
+};
+
+
 let initializePage = () => {
 
     getThreads();
+    leftRightInit();
+    initTablinkButtons();
 
     //setting the event listener for the reply button
     let replyButton = document.querySelector('.replyBtn');
@@ -272,13 +354,20 @@ let initializePage = () => {
         
     });
 
-    searchText.addEventListener("keydown", event => {
-        if (event.isComposing || event.keyCode === 13) {
+    searchText.addEventListener("keyup", event => {
+        // if (event.isComposing || event.keyCode === 13) {
           searchButton.click();
-        }
+        // }
         // do something
       });   
 
 };
+
+//page loading animation
+// let loadingOverlay = document.querySelector('.overlay');
+// let displayLoadingScreen = () => {
+//     loadingOverlay.style.display = 'none';
+// };
+// window.addEventListener('load', displayLoadingScreen);
 
 initializePage();

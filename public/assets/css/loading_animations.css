@@ -1,0 +1,77 @@
+/* loading animation for a button click */
+.loading .buttonText{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.loading::after{
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 5px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: buttonLoadingSpinner 1s ease infinite;
+}
+
+@keyframes buttonLoadingSpinner{
+    from{transform: rotate(0turn);}
+    to{transform: rotate(1turn);}
+}
+
+/* loading animation for a page*/
+.overlay{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+.square {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    perspective: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: inherit;
+    display: inline-block;
+}
+
+.square div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 30px;
+    width: 30px;
+    background: #32c03e;
+    animation: flip 2s linear infinite;
+    transform-origin: right bottom;
+    z-index: inherit;
+}
+
+.square div:nth-child(2) {
+    animation-delay: 1s;
+    opacity: 0.5;
+    background: #25772c;
+}
+
+@keyframes flip {
+    0% { transform: rotateX(0) rotateY(0); }
+    25% { transform: rotateX(0) rotateY(180deg); }
+    50% { transform: rotateX(180deg) rotateY(180deg); }
+    75% { transform: rotateX(180deg) rotateY(0deg); }
+    100% { transform: rotateX(0) rotateY(0); }
+}

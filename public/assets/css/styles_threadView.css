@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: 0 !important;
+}
+
 body{
     background-color: #f5f5f5;
     margin: 0px;
@@ -135,6 +139,10 @@ section{
     max-height: 85%;
 }
 
+.message-list-item{
+    position: relative;
+}
+
 .btn-group button {
     background-color: #f3eeeaa8; /* Green background */
     border: 1px solid #454945; /* Green border */
@@ -144,7 +152,14 @@ section{
     width: 100%; /* Set a width if needed */
     display: block; /* Make the buttons appear below each other */
     text-align: left;
-    border-radius: 3px;
+}
+
+.btn-group button:first-child{
+    border-radius: 10px 10px 0 0;
+}
+
+.btn-group button:last-child{
+    border-radius: 0 0 10px 10px;
 }
 
 .btn-group button:not(:last-child) {
@@ -156,10 +171,15 @@ section{
     background-color: lightgrey;
 }
 
+.btn-group button:active{
+    background-color: #443e3e;
+    color: white;
+}
+
 .reply-btn-group button{
     color: black;
     border: 1px solid #454945;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     padding: 10px;
     margin: 5px;
@@ -219,7 +239,7 @@ section{
 }
 
 .round {
-    border-radius: 30%;
+    border-radius: 10;
 }
 
 #pageSelector{
