@@ -75,7 +75,7 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, forgotPswQuestion);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail, forgotPswQuestion);
     };
 };
 
@@ -728,7 +728,7 @@ addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -757,6 +757,8 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['gender']      = isMale ? 'male' : 'female';
         data['phone']       = querySelectorFrom('.phone', nonEmpty)[0].value;
         data['password']    = querySelectorFrom('.psw', newPsw)[0].value;
+        data['question']    = question[0].value;
+        data['answer']      = question[1].value;
         data['type']        = isStudent ? 'student' : 'staff';
         data['faculty']     = querySelectorFrom('.faculty', normal)[0].value;
         data['verified']    = false;
