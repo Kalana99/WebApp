@@ -25,7 +25,7 @@ let main = async (page) => {
 
     //uncomment this block check if the inputs have all been identified
 
-    console.log(nonEmpty);
+    // console.log(nonEmpty);
     // console.log(normal);
     // console.log(selected);
     // console.log(existingPsw);
