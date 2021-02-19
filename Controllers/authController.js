@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const database = require('../database');
 const mail = require('../modules/email');
 const mongoose = require('mongoose');
@@ -44,8 +45,7 @@ module.exports.forgotPassword_get = (req, res) => {
     res.render('forgotPassword');
 }
 
-module.exports.forgotPassword_post = (req, res) => {
-    // console.log(req.body);
+module.exports.forgotPassword_checkPost = (req, res) => {
 
     let states = {};
 
@@ -80,6 +80,30 @@ module.exports.forgotPassword_post = (req, res) => {
 module.exports.ForgotPassword_change_get = (req, res) => {
     res.render('ForgotPassword_change');
 }
+
+module.exports.ForgotPassword_change_put = (req, res) => {
+
+    let password_encrypt = async function(){
+
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.new_password, salt);
+        return hashedPassword;
+    }
+
+    password_encrypt()
+    .then((hashedPassword) => {
+        db.collections.users.findOneAndUpdate({email: req.body.email}, 
+        {$set: {password: hashedPassword}}, function(err){
+            if (err){
+                console.log(err);
+            }
+            else{
+                console.log('password updated');
+                res.json({});
+            }
+        });
+    })
+};
 
 module.exports.userprofile_get = (req, res) => {
 

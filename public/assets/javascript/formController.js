@@ -511,7 +511,6 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             });
     
             data = await response.json();
-            // console.log(data);
             
             if (data.emailExists){
                 emailState = "success";
@@ -747,7 +746,7 @@ addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -954,6 +953,36 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
                 console.error('Error:', error);
             });
     }
+
+    else if(page === 'forgotPassword'){
+        
+        email = forgotPswEmail[0].value;
+        localStorage.setItem('email', email);
+        window.location.href = '/forgotChangePsw';
+    }
+
+    else if(page === 'forgotChangePsw'){
+
+        data = {};
+
+        data['new_password'] = newPsw[0].value;
+        data['email']        = localStorage.getItem("email");
+
+        fetch('/forgotChangePsw', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/login';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     
 };
 
@@ -1038,6 +1067,13 @@ let setEventListeners = () => {
     if(forgotPasswordSubmitButton)
         forgotPasswordSubmitButton.addEventListener('click', event => {
             main('forgotPassword');
+        });
+
+    //forgot password change event listener
+    forgotChangePswSubmitButton = document.getElementById('forgotChangePswSubmit');
+    if(forgotChangePswSubmitButton)
+        forgotChangePswSubmitButton.addEventListener('click', event => {
+            main('forgotChangePsw');
         });
 
 }

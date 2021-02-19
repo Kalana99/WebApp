@@ -44,7 +44,7 @@ module.exports.get_changePassword = (req, res) => {
     res.render('change_password');
 };
 
-module.exports.put_changePassword = (req, res) => {//coppied from authController
+module.exports.put_changePassword = (req, res) => {
 
     const token = req.cookies.jwt;
 
