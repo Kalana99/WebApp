@@ -33,6 +33,11 @@ module.exports.submitRequests_post = (req, res) => {
             data['additionalData'] = {'requiredModule': bodyData.requiredModule};
         data['module'] = bodyData.module;
 
+        //set unread 
+        data['staffUnread'] = true;
+        data['studentUnread'] = false;
+        
+
         let message = data.message;
         delete data.message;
 
@@ -95,6 +100,16 @@ module.exports.getThreadData_post = (req, res) => {
                 let staff = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.StaffID)});
                 let deleted = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(thread.deletedID)});
                 let flag = false;
+
+                if(filter.status == 'unread'){
+                    if(user.type == 'student' && !thread.studentUnread){
+                        return false;
+                    }
+                    if(user.type == 'staff' && !thread.staffUnread){
+                        return false;
+                    }
+                    filter.status = 'all';
+                }
 
                 if(filter.type != 'all' && thread.type != filter.type){
                     return false;
@@ -214,10 +229,23 @@ module.exports.getThreadData_post = (req, res) => {
 module.exports.getMessages_post = (req, res) => {
 
     let threadId = req.body.threadId;
-
+    
     let getData = async () => {
 
         let thread = await db.collections.threads.findOne({_id: mongoose.Types.ObjectId(threadId)});
+        const token = req.cookies.jwt;
+
+        let decodedToken = await jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4');
+        let userId = decodedToken.id;
+        let user = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(userId)});
+        let setObject = {};
+        if(user.type == 'student'){
+            setObject['studentUnread'] = false;
+        }
+        else{
+            setObject['staffUnread'] = false;
+        }
+        db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(threadId)}, {$set: setObject});
 
         let messageIdList = thread.messageID_list;
         
@@ -233,7 +261,7 @@ module.exports.getMessages_post = (req, res) => {
                 messages.push(message);
             }
 
-            res.json({messages});
+            res.json({messages, status:thread.status});
     
     };
     getData();
@@ -260,6 +288,18 @@ module.exports.reply_post = (req, res) => {
                 message['files'] = req.body.fileName;
 
             let messageId = database.addMessage(message);
+
+            //set unread according to account type
+            let setObject = {};
+
+            if(user.type == 'student'){
+                setObject['staffUnread'] = true;
+            }
+            else if(user.type == 'staff'){
+                console.log('here');
+                setObject['studentUnread'] = true;
+            }
+            db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$set: setObject});
 
             db.collections.threads.updateOne({_id: mongoose.Types.ObjectId(req.body.threadId)}, {$push: {messageID_list: messageId.toString()}});
             res.redirect('/threads');
