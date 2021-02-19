@@ -515,17 +515,27 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             
             if (data.emailExists){
                 emailState = "success";
-                if (data.questionState){
-                    questionState = "success";
-                    if (data.answerState){
-                        answerState = "success";
-                    }
-                    else{
-                        answerState = "error";
-                    }
+                if (data.questionState === null){
+                    questionState = "none";
                 }
                 else{
-                    questionState = "error";
+                    if (data.questionState){
+                        questionState = "success";
+                        if (data.answerState === null){
+                            answerState = "none";
+                        }
+                        else{
+                            if (data.answerState){
+                                answerState = "success";
+                            }
+                            else{
+                                answerState = "error";
+                            }
+                        }
+                    }
+                    else{
+                        questionState = "error";
+                    }
                 }
             }
             else{
@@ -548,13 +558,21 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
         }
         else if (emailState === 'success'){
             setSuccess(forgotPswEmail[i]);
-            if (questionState === 'error'){
+            if (questionState === 'none'){
+                setError(forgotPswQuestion[0], 'Select a question');
+                correct = false;
+            }
+            else if (questionState === 'error'){
                 setError(forgotPswQuestion[0], 'Wrong question');
                 correct = false;
             }
             else if (questionState === 'success'){
                 setSuccess(forgotPswQuestion[0]);
-                if (answerState === 'error'){
+                if (answerState === 'none'){
+                    setError(forgotPswQuestion[1], 'Answer the question');
+                    correct = false;
+                }
+                else if (answerState === 'error'){
                     setError(forgotPswQuestion[1], 'Wrong answer');
                     correct = false;
                 }
