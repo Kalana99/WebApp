@@ -624,6 +624,7 @@ const deepRemoveError = (input) => {
 //-----------------------edit profile buttons---------------------------------------------
 
 let editButtons = document.querySelectorAll('.edit');
+
 //add event listeners to edit buttons in editProfile
 let addEditListeners = (editButtons) => {
     for (let i = 0; i < editButtons.length; i++){
@@ -875,19 +876,19 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         }
         
         fetch('/EditProfile', {
-        method: 'PUT', // or 'POST'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            window.location.href = '/userProfile';
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+            method: 'PUT', // or 'POST'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });  
     }
 
     else if(page === 'changePsw'){

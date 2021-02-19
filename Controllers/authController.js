@@ -40,6 +40,14 @@ module.exports.login_post = (req, res) => {
     })
 };
 
+module.exports.forgotPassword_get = (req, res) => {
+    res.render('forgotPassword');
+}
+
+module.exports.ForgotPassword_change_get = (req, res) => {
+    res.render('ForgotPassword_change');
+}
+
 module.exports.userprofile_get = (req, res) => {
 
     const token = req.cookies.jwt;

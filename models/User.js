@@ -11,6 +11,8 @@ const userSchema = new Schema({
     "gender": String,
     "phone": String,
     "password": String,
+    "question": String,
+    "answer": String,
     "type": String,
     "faculty": String,
     "department": String,

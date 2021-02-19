@@ -13,6 +13,8 @@ router.get('/login', authController.login_get);
 
 router.post('/login', authController.login_post);
 
+router.get('/forgotPassword', authController.forgotPassword_get);
+
 router.get('/userprofile', requireAuth,  authController.userprofile_get);
 
 router.get('/logout', authController.logout_get);
