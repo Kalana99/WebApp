@@ -3,44 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles_login.css">
+    <link rel="stylesheet" href="/css/deleteAcc_styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Delete Account</title>
 </head>
 <body>
-    <form action="deleteAccount" class="form" id="form">
-        <div class="form-control">
-            <label for="email">Enter your email</label><br>
-            <input type="email" name="email" class="existingEmail deleteAccount" id="email" placeholder="Enter your email" required>
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div>
-
-        <div class="form-control">
-            <label for="password">Enter your password</label><br>
-            <input type="password" name="password" class="existingPsw deleteAccount" id="password" placeholder="Enter your password" required>
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div>
-
-        <!--<div class="form-control">
-            <p>Confirm deletion</p>
-            <label for="option1">Yes</label>
-            <input type="checkbox" name="confirm" class="nonEmptyRadio deleteAccount" id="yes" value="yes">
-            <label for="option2">No</label>
-            <input type="radio" name="confirm" id="no" value="no">
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div> -->
-
-        <div class="form-control">
-            <button type="button" id="deleteAccountSubmit">Confirm</button>
-        </div>
-
-    </form>
+    <div class="container">
+        <header class="header">
+            <h1>Delete Account</h1>
+        </header>
+        
+        <form action="deleteAccount" class="form" id="form">
+            <div class="form-control">
+                <label for="email">Enter your email</label>
+                <input type="email" name="email" class="existingEmail deleteAccount" id="email" placeholder="Enter your email" required>
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+    
+            <div class="form-control">
+                <label for="password">Enter your password</label>
+                <input type="password" name="password" class="existingPsw deleteAccount" id="password" placeholder="Enter your password" required>
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+    
+            <div class="form-control">
+                <button type="button" id="deleteAccountSubmit" class="button deleteAccountSubmit">
+                    <span class="buttonText">Confirm</span>
+                </button>
+            </div>
+    
+        </form>
+    </div>
     <script src="/javascript/formController.js"></script>
 </body>
 </html>
