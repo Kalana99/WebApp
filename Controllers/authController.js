@@ -62,11 +62,11 @@ module.exports.forgotPassword_post = (req, res) => {
                 if(user.answer === req.body.answer){
                     states['answerState'] = true;
                 }
-                else{
+                else if(req.body.answer.length > 0){
                     states['answerState'] = false;
                 }
             }
-            else{
+            else if(req.body.question !== "0"){
                 states['questionState'] = false;
             }
         }
