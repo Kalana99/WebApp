@@ -511,6 +511,7 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             });
     
             data = await response.json();
+            // console.log(data);
             
             if (data.emailExists){
                 emailState = "success";
@@ -548,17 +549,17 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
         else if (emailState === 'success'){
             setSuccess(forgotPswEmail[i]);
             if (questionState === 'error'){
-                setError(question[0], 'Wrong question');
+                setError(forgotPswQuestion[0], 'Wrong question');
                 correct = false;
             }
             else if (questionState === 'success'){
-                setSuccess(question[0]);
+                setSuccess(forgotPswQuestion[0]);
                 if (answerState === 'error'){
-                    setError(question[1], 'Wrong answer');
+                    setError(forgotPswQuestion[1], 'Wrong answer');
                     correct = false;
                 }
                 else{
-                    setSuccess(question[1]);
+                    setSuccess(forgotPswQuestion[1]);
                 }
             }
             

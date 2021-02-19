@@ -45,6 +45,7 @@ module.exports.forgotPassword_get = (req, res) => {
 }
 
 module.exports.forgotPassword_post = (req, res) => {
+    // console.log(req.body);
 
     let states = {};
 
