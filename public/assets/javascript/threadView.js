@@ -208,8 +208,13 @@ let displayMessages = async (arr, msgId) => {
         let msgContainer = document.createElement('div');
         let msg = document.createElement('p');
         msg.innerText = arr[i].text;
-
         msgContainer.appendChild(msg);
+
+        //evidence
+        let documents = document.createElement('a');
+        documents.innerHTML = 'Download documents';
+        documents.href = '/downloadDocuments/' + arr[i]._id;
+        msgContainer.appendChild(documents);
 
         if (userId.id === person){
             msgContainer.setAttribute('class', 'reciever');
