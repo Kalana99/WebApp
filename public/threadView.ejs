@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/css/styles_threadView.css">
     <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/loading_animations.css">
     <title>Thread View</title>
 </head>
 <body>
@@ -42,15 +43,17 @@
                 </button>
             </div>
             <div class="buttonContainer">
+                <!-- loading animation -->
+                <div class="overlay">
+                    <div class="square">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
                 <div class="message-list-item">
                     <div class="btn-group">
-                        <!-- <button>
-                            <div class="message-div">
-                                <div class="item sender"><b>sender</b></div>
-                                <div class="item date"><small>date</small></div>
-                                <div class="item snippet"><small>snippet</small></div>
-                            </div>
-                        </button> -->
+                        <!-- threads will be added here via js-->
                     </div>
                 </div>
             </div>
@@ -65,9 +68,7 @@
         <div class="column right">
             <div class="message-list">
                 <div class="msg-group">
-                    <!-- <div>
-                        <p>This is not a msg</p>
-                    </div> -->
+                    <!-- messages in threads will appear here via js-->
                 </div>
             </div>
         </div>

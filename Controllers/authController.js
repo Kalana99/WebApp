@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const database = require('../database');
 const mail = require('../modules/email');
 const mongoose = require('mongoose');
@@ -37,6 +38,70 @@ module.exports.login_post = (req, res) => {
         let token = createToken(profile._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
         res.json({});
+    })
+};
+
+module.exports.forgotPassword_get = (req, res) => {
+    res.render('forgotPassword');
+}
+
+module.exports.forgotPassword_checkPost = (req, res) => {
+
+    let states = {};
+
+    states['emailExists']    = null;
+    states['questionState'] = null;
+    states['answerState']   = null;
+
+    db.collections.users.findOne({email: req.body.email}).then(user => {
+        
+        if(user){
+            states['emailExists'] = true;
+            if(user.question === req.body.question){
+                states['questionState'] = true;
+                if(user.answer === req.body.answer){
+                    states['answerState'] = true;
+                }
+                else if(req.body.answer.length > 0){
+                    states['answerState'] = false;
+                }
+            }
+            else if(req.body.question !== "0"){
+                states['questionState'] = false;
+            }
+        }
+        else{
+            states['emailExists'] = false;
+        }
+        res.json(states);
+    });
+}
+
+module.exports.ForgotPassword_change_get = (req, res) => {
+    res.render('ForgotPassword_change');
+}
+
+module.exports.ForgotPassword_change_put = (req, res) => {
+
+    let password_encrypt = async function(){
+
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.new_password, salt);
+        return hashedPassword;
+    }
+
+    password_encrypt()
+    .then((hashedPassword) => {
+        db.collections.users.findOneAndUpdate({email: req.body.email}, 
+        {$set: {password: hashedPassword}}, function(err){
+            if (err){
+                console.log(err);
+            }
+            else{
+                console.log('password updated');
+                res.json({});
+            }
+        });
     })
 };
 

@@ -6,7 +6,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!-- fa-eye and fa-eye-slash -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <link rel="stylesheet" href="/css/styles_signup.css">
+        <link rel="stylesheet" href="/css/loading_animations.css">
         <title>User Profile</title>
     </head>
     
@@ -69,6 +72,7 @@
                 <div class="form-control">
                     <label>Password :</label>
                     <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder="Enter your password">
+                    <i class="far fa-eye" id="togglePassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -77,6 +81,7 @@
                 <div class="form-control">
                     <label>Confirm Password : </label>
                     <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder="Confirm your password">
+                    <i class="far fa-eye" id="toggleConfirmPassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -126,11 +131,9 @@
 
                 <div class="form-control">
                     <button id="signUpSubmit" type="button" class="button signUp">
-                        <span class="signUpText">Sign Up</span>
+                        <span class="buttonText">Sign Up</span>
                     </button>
                 </div>
-
-                
 
             </form> 
 

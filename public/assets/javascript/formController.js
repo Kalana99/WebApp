@@ -8,20 +8,21 @@ let main = async (page) => {
     //that indicates the place where the event is called
     
     //get the elements
-    let nonEmpty        = document.querySelectorAll('.nonEmpty.' + page);       //done
-    let normal          = document.querySelectorAll('.normal.' + page);         //nothing to validate
-    let selected        = document.querySelectorAll('.selected.' + page);       //
-    let existingPsw     = document.querySelectorAll('.existingPsw.' + page);    //done
-    let newPsw          = document.querySelectorAll('.newPsw.' + page);         //done
-    let existingEmail   = document.querySelectorAll('.existingEmail.' + page);  //done
-    let newEmail        = document.querySelectorAll('.newEmail.' + page);       //done
-    let index           = document.querySelectorAll('.index.' + page);          //done
-    let nonEmptyRadio   = document.querySelectorAll('.nonEmptyRadio.' + page);  //done
-    let uploadingFile   = document.querySelectorAll('.file.' + page);           //not done
-    let question        = document.querySelectorAll('.question.' + page);       //done
+    let nonEmpty            = document.querySelectorAll('.nonEmpty.' + page);
+    let normal              = document.querySelectorAll('.normal.' + page);
+    let selected            = document.querySelectorAll('.selected.' + page);
+    let existingPsw         = document.querySelectorAll('.existingPsw.' + page);
+    let newPsw              = document.querySelectorAll('.newPsw.' + page);
+    let existingEmail       = document.querySelectorAll('.existingEmail.' + page);
+    let newEmail            = document.querySelectorAll('.newEmail.' + page);
+    let index               = document.querySelectorAll('.index.' + page);
+    let nonEmptyRadio       = document.querySelectorAll('.nonEmptyRadio.' + page);
+    let question            = document.querySelectorAll('.question.' + page);
+    let forgotPswEmail      = document.querySelectorAll('.forgotPswEmail.' + page);
+    let forgotPswQuestion   = document.querySelectorAll('.forgotPswQuestion.' + page);
 
     //buttons that needs loading animation
-    let button     = document.querySelector('.button.' + page);
+    let button          = document.querySelector('.button.' + page);
 
     //uncomment this block check if the inputs have all been identified
 
@@ -34,7 +35,9 @@ let main = async (page) => {
     // console.log(newEmail);
     // console.log(index);
     // console.log(nonEmptyRadio);
-    // console.log(uploadingFile[0].files[0]);
+    // console.log(question);
+    // console.log(forgotPswEmail);
+    // console.log(forgotPswQuestion);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -48,7 +51,7 @@ let main = async (page) => {
     await validateNewEmail(newEmail);
 
     //validate newPsw and confirm Password
-    await validateNewPassword(newPsw);
+    await validateNewPassword(existingPsw, newPsw);
 
     //validate index
     await validateIndex(index);
@@ -62,6 +65,9 @@ let main = async (page) => {
     //validate secret question
     await validateQuestion(question);
 
+    //validate forgot password page
+    await validateForgotPassword(forgotPswQuestion, forgotPswEmail);
+
     //submit if correct
     if(correct){
         //loading animation for buttons
@@ -69,11 +75,19 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail, forgotPswQuestion);
     };
 };
 
 //----------------------------------------------------------------------------------------
+
+//email validation regExr
+async function isEmail(email){
+    //RegExr email validation
+    //no need to understand
+    //reference - https://codepen.io/FlorinPop17/pen/OJJKQeK
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
 
 //login validation front and back
 let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
@@ -91,6 +105,9 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
 
         if (emailValue === ''){
             emailState = "blank";
+        }
+        else if (! await (isEmail(emailValue))){
+            emailState = "invalid";
         }
         else{
 
@@ -145,6 +162,10 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             setError(email, "Email cannot be blank");
             correct = false;
         }
+        else if (emailState === "invalid"){
+            setError(email, "Invalid email");
+            correct = false;
+        }
         else if (emailState === "success"){
             if (data.verified){
                 setSuccess(email);
@@ -152,8 +173,7 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             else{
                 setError(email, "Please verify the email");
                 correct = false;
-            }
-            
+            }  
         }
         else if (emailState === "error"){
             setError(email, "Email does not exist");
@@ -176,12 +196,6 @@ let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
             removeError(password);
             correct = false;
         }
-
-        //login loading animation if input values are correct
-        // if (loginButton !== null && correct === true){
-        //     loginButton.classList.toggle('loading');
-        // }
-
     }
 
     
@@ -282,7 +296,7 @@ let validateNewEmail = async (emailInput) => {
             correct = false;
         }
         else if (emailState === 'notAnEmail'){
-            setError(email, 'Surprise MOTHERFUCKER'); //change this later
+            setError(email, 'Not a valid Email');
             correct = false;
         }
         else if (emailState === 'error'){
@@ -294,15 +308,6 @@ let validateNewEmail = async (emailInput) => {
         }
         
     }
-
-    async function isEmail(email){
-        //RegExr email validation
-        //no need to understand
-        //reference - https://codepen.io/FlorinPop17/pen/OJJKQeK
-        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-    }
-    
-
 };
 
 //validate input fields that cannot be blank
@@ -327,13 +332,19 @@ let validateNonEmpty = async (nonEmpty) => {
 };
 
 //validate new password and confirm password fields
-let validateNewPassword = async (psw) => {
+let validateNewPassword = async (oldPsw, psw) => {
     if (psw.length !== 0){
         let newPswField = psw[0];
         let confirmPswField = psw[1];
 
         if (newPswField.value === ''){
             setError(newPswField, 'Password cannot be blank');
+            correct = false;
+        }
+        //check if there is an old password field
+        //and if the old password is equal to the new password
+        else if ((oldPsw.length > 0) && (oldPsw[0].value === newPswField.value)){
+            setError(newPswField, 'Cannot use the same password as before');
             correct = false;
         }
         else{
@@ -448,11 +459,13 @@ let validateSelected = async (selected) => {
     }
 };
 
-//validate secret question
+//validate nonEmpty secret question
 let validateQuestion = async (question) => {
     if (question.length !== 0){
         let secretQuestion = question[0];
         let secretAnswer = question[1];
+
+        //only check if the question and answer fields are blank
 
         if (secretQuestion.value === ''){
             setError(secretQuestion, 'Select a question');
@@ -471,7 +484,144 @@ let validateQuestion = async (question) => {
     }
 }
 
-// ---------------------------------------------------------------------------------------
+//validate everything in forgot password
+let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
+
+    //backend validation
+    //get the email and send it to server to check is the relevant question and answer are correct
+    //and other normal frontend validations
+
+    let emailState = null;
+    let questionState = null;
+    let answerState = null;
+
+    for (let i = 0; i < forgotPswEmail.length; i++){
+
+        let email           = forgotPswEmail[i];
+        let emailValue      = email.value.trim();
+        let questionElement = forgotPswQuestion[0];
+        let answer          = forgotPswQuestion[1];
+        let answerValue     = answer.value.trim();
+
+        if (emailValue === ''){
+            emailState = "blank";
+        }
+        else if (! await (isEmail(emailValue))){
+            emailState = "invalid";
+        }
+        else{
+            let requestData = {};
+
+            requestData['email'] = emailValue;
+            requestData['question'] = questionElement.value;
+            requestData['answer'] = answerValue;
+
+            let response = await fetch('/getEmailAndQuestion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+    
+            data = await response.json();
+            
+            if (data.emailExists){
+                emailState = "success";
+                if (data.questionState === null){
+                    questionState = "none";
+                }
+                else{
+                    if (data.questionState){
+                        questionState = "success";
+                        if (data.answerState === null){
+                            answerState = "none";
+                        }
+                        else{
+                            if (data.answerState){
+                                answerState = "success";
+                            }
+                            else{
+                                answerState = "error";
+                            }
+                        }
+                    }
+                    else{
+                        questionState = "error";
+                    }
+                }
+            }
+            else{
+                emailState = "error";
+            }
+    
+        }
+
+        //set error messages according to the field states
+        if (emailState === 'blank'){
+            setError(forgotPswEmail[i], 'Email cannot be blank');
+            correct = false;
+        }
+        else if (emailState === 'invalid'){
+            setError(forgotPswEmail[i], 'Invalid email');
+            correct = false;
+        }
+        else if (emailState === 'error'){
+            setError(forgotPswEmail[i], 'Email does not exist');
+            correct = false;
+        }
+        else if (emailState === 'success'){
+            setSuccess(forgotPswEmail[i]);
+            if (questionState === 'none'){
+                setError(forgotPswQuestion[0], 'Select a question');
+                correct = false;
+            }
+            else if (questionState === 'error'){
+                setError(forgotPswQuestion[0], 'Wrong question');
+                correct = false;
+            }
+            else if (questionState === 'success'){
+                setSuccess(forgotPswQuestion[0]);
+                if (answerState === 'none'){
+                    setError(forgotPswQuestion[1], 'Answer the question');
+                    correct = false;
+                }
+                else if (answerState === 'error'){
+                    setError(forgotPswQuestion[1], 'Wrong answer');
+                    correct = false;
+                }
+                else{
+                    setSuccess(forgotPswQuestion[1]);
+                }
+            }
+            
+        }
+
+    }
+};
+
+//-----------------------toggle password view------------------------------------------
+let toggleView      = document.querySelectorAll('.far');
+
+let togglePasswordView = async (toggleView) => {
+    for (let i = 0; i < toggleView.length; i++){
+        let pswField = toggleView[i].parentElement.querySelector('input');
+
+        toggleView[i].addEventListener('click', (event) => {
+            // toggle the type attribute
+            let type = pswField.getAttribute('type') === 'password' ? 'text' : 'password';
+            pswField.setAttribute('type', type);
+            // toggle the eye slash icon
+            toggleView[i].classList.toggle('fa-eye-slash');
+        });
+    }
+};
+
+togglePasswordView(toggleView);
+
+// ----------------------validation messages--------------------------------------------
+
+//set error message and icon
 const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -483,6 +633,7 @@ const setError = (input, message) => {
     formControl.className = 'form-control error';
 }
 
+//set success icon
 const setSuccess = (input) => {
     let formControl = input.parentElement; // .form-control
 
@@ -490,6 +641,7 @@ const setSuccess = (input) => {
     formControl.className = 'form-control success';
 }
 
+//remove any error message and icon
 const removeError = (input) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -497,11 +649,20 @@ const removeError = (input) => {
     small.innerText = "";
     formControl.className = 'form-control';
 }
-// ---------------------------------------------------------------------------------------
+
+//only used in edit profile page
+const deepRemoveError = (input) => {
+    let formControl = input.parentElement.parentElement; // .form-control
+    let small = formControl.querySelector('small');
+
+    small.innerText = "";
+    formControl.className = 'form-control';
+}
 
 //-----------------------edit profile buttons---------------------------------------------
 
 let editButtons = document.querySelectorAll('.edit');
+
 //add event listeners to edit buttons in editProfile
 let addEditListeners = (editButtons) => {
     for (let i = 0; i < editButtons.length; i++){
@@ -512,14 +673,16 @@ let addEditListeners = (editButtons) => {
         let container   = editBtn.parentElement;
         let formControl = container.parentElement;
         //input field container
-        let inputDiv    = formControl.querySelector('.inputDiv');
+        // let inputDiv    = formControl.querySelector('.inputDiv');
         //name for the input field
         let fieldName   = container.querySelector('label').className;
         
         editBtn.addEventListener('click', (event) => {
 
             //toggle button functionality as edit and cancel
-            if (editBtn.innerText === 'Edit'){
+            let text = editBtn.querySelector('.buttonText').innerText;
+
+            if (text === 'Edit'){
 
                 //create common input field and set some common attributes
                 let input = document.createElement('input');
@@ -531,7 +694,7 @@ let addEditListeners = (editButtons) => {
                     input.setAttribute('class', 'nonEmpty editProfile userName');   
                 }
                 else if (fieldName === 'index'){
-                    input.setAttribute('class', 'index editProfile ');
+                    input.setAttribute('class', 'index editProfile');
                 }
                 else if (fieldName === 'phone'){
                     input.setAttribute('class', 'nonEmpty editProfile phone');
@@ -551,7 +714,7 @@ let addEditListeners = (editButtons) => {
                     let labelMale = document.createElement('label');
                     let labelFemale = document.createElement('label');
 
-                    radioInputMale.setAttribute('class', 'nonEmpty editProfile gender');
+                    radioInputMale.setAttribute('class', 'nonEmptyRadio editProfile gender');
                     radioInputMale.setAttribute('type', 'radio');
                     radioInputMale.setAttribute('name', 'gender');
                     radioInputMale.setAttribute('value', 'male');
@@ -565,33 +728,44 @@ let addEditListeners = (editButtons) => {
                     labelFemale.setAttribute('for', 'female');
                     labelFemale.innerText = 'Female';
 
-                    inputDiv.appendChild(radioInputMale);
-                    inputDiv.appendChild(labelMale);
-                    inputDiv.appendChild(radioInputFemale);
-                    inputDiv.appendChild(labelFemale);
+                    formControl.insertBefore(labelFemale, formControl.childNodes[2]);
+                    formControl.insertBefore(radioInputFemale, formControl.childNodes[2]);
+                    formControl.insertBefore(labelMale, formControl.childNodes[2]);
+                    formControl.insertBefore(radioInputMale, formControl.childNodes[2]);
+
                 }
 
                 //append children that is not gender
                 if (fieldName !== 'gender'){
-                    inputDiv.appendChild(input);
+                    formControl.insertBefore(input, formControl.childNodes[2]);
                 }
 
                 //change the edit button as cancel
-                editBtn.innerText = 'Cancel';
+                editBtn.innerHTML = '<span class="buttonText">Cancel</span>';
             }
             else{
                 //remove the input fields when canceled
-                inputDiv.innerHTML = null;
-                editBtn.innerText = 'Edit';
+                if (fieldName !== 'gender'){
+                    formControl.removeChild(formControl.childNodes[2]);
+                }
+                else{
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                    formControl.removeChild(formControl.childNodes[2]);
+                }
+                editBtn.innerHTML = '<span class="buttonText">Edit</span>';
+                deepRemoveError(editBtn);
             }
         });
     }
 };
+
 addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, uploadingFile) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -620,6 +794,8 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         data['gender']      = isMale ? 'male' : 'female';
         data['phone']       = querySelectorFrom('.phone', nonEmpty)[0].value;
         data['password']    = querySelectorFrom('.psw', newPsw)[0].value;
+        data['question']    = question[0].value;
+        data['answer']      = question[1].value;
         data['type']        = isStudent ? 'student' : 'staff';
         data['faculty']     = querySelectorFrom('.faculty', normal)[0].value;
         data['verified']    = false;
@@ -741,19 +917,19 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         }
         
         fetch('/EditProfile', {
-        method: 'PUT', // or 'POST'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            window.location.href = '/userProfile';
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+            method: 'PUT', // or 'POST'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/userProfile';
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });  
     }
 
     else if(page === 'changePsw'){
@@ -796,6 +972,36 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
                 console.error('Error:', error);
             });
     }
+
+    else if(page === 'forgotPassword'){
+        
+        email = forgotPswEmail[0].value;
+        localStorage.setItem('email', email);
+        window.location.href = '/forgotChangePsw';
+    }
+
+    else if(page === 'forgotChangePsw'){
+
+        data = {};
+
+        data['new_password'] = newPsw[0].value;
+        data['email']        = localStorage.getItem("email");
+
+        fetch('/forgotChangePsw', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/login';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     
 };
 
@@ -829,7 +1035,7 @@ let setEventListeners = () => {
     addDropSubmitButton = document.getElementById('addDropSubmitButton');
     if(addDropSubmitButton)
         addDropSubmitButton.addEventListener('click', event => {
-            event.preventDefault();//remove
+            event.preventDefault();//remove        
             main('addDrop');
         });
 
@@ -873,6 +1079,20 @@ let setEventListeners = () => {
     if(deleteAccountSubmitButton)
         deleteAccountSubmitButton.addEventListener('click', event => {
             main('deleteAccount');
+        });
+
+    //forgot password event listener
+    forgotPasswordSubmitButton = document.getElementById('forgotPasswordSubmit');
+    if(forgotPasswordSubmitButton)
+        forgotPasswordSubmitButton.addEventListener('click', event => {
+            main('forgotPassword');
+        });
+
+    //forgot password change event listener
+    forgotChangePswSubmitButton = document.getElementById('forgotChangePswSubmit');
+    if(forgotChangePswSubmitButton)
+        forgotChangePswSubmitButton.addEventListener('click', event => {
+            main('forgotChangePsw');
         });
 
 }

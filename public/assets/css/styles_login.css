@@ -45,7 +45,6 @@ body{
 .form{   
     background-color:white;
     padding: 20px 40px;
-    text-align: center;
     width: 50%;
     height: 100%;
     border-radius: 20px;
@@ -89,32 +88,6 @@ body{
     transition: all 0.2s;
 }
 
-.loading .buttonText{
-    visibility: hidden;
-    opacity: 0;
-}
-
-.loading::after{
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    border: 5px solid transparent;
-    border-top-color: white;
-    border-radius: 50%;
-    animation: buttonLoadingSpinner 1s ease infinite;
-}
-
-@keyframes buttonLoadingSpinner{
-    from{transform: rotate(0turn);}
-    to{transform: rotate(1turn);}
-}
-
 .form-control{
     margin-bottom: 8px;
     padding-bottom: 20px;
@@ -122,6 +95,7 @@ body{
 }
 
 .form-control label{
+    text-align: center;
     display: inline-block;
     margin-bottom: 10px;
 }
@@ -152,8 +126,8 @@ body{
 
 .form-control i{
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 30px;
+    right: 5px;
     visibility: hidden;
 }
 
@@ -165,13 +139,25 @@ body{
 }
 
 .form-control.success i.fa-check-circle{
+    bottom: 0;
+    left: 0;
     visibility: visible;
     color: #2ecc71;
 }
 
 .form-control.error i.fa-exclamation-circle{
+    bottom: 0;
+    left: 0;
     visibility: visible;
     color: #e74c3c;
+}
+
+.form-control i.far{
+    z-index: 10;
+    bottom: 30px;
+    color: black;
+    cursor: pointer;
+    visibility: visible;
 }
 
 .form-control.error small{
