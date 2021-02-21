@@ -4,7 +4,7 @@
 
     <div class="content">
 
-        <h2>Submission Deadline</h2>
+        <h1>Submission Deadline</h1>
 
         <div class="close-btn" onclick="toggleSubmission()">&times;</div>
 
@@ -27,8 +27,6 @@
                         <!-- lecturer -->
                         <div class="lecturerDiv">
                             <input name="lecturer" class="selected submission lecturer" type="text" placeholder="Lecturer" />
-                            <div class="suggestions-lecturer" id="submission">
-                            </div>
                         </div>
                         <i class="fa fa-check-circle"></i>
                         <i class="fa fa-exclamation-circle"></i>
@@ -46,12 +44,14 @@
                         <i class="fa fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
+
+                    <div class="inputFileDiv">
+                        <input type="file" name="uploadedFile" class="file submission" multiple/> 
+                        <label for="file"><span>Choose a file</span></label>
+                    </div>
+                    
                 </div>
     
-            </div>
-    
-            <div class="form-control">
-                <input type="file" name="uploadedFile" class="file submission" multiple/> 
             </div>
     
             <div class="form-control">

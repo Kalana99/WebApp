@@ -4,7 +4,7 @@
 
     <div class="content">
 
-        <h2>Repeat Exam</h2>
+        <h1>Repeat Exam</h1>
 
         <div class="close-btn" onclick="toggleRepeat()">&times;</div>
 
@@ -27,8 +27,6 @@
                         <!-- lecturer -->
                         <div class="lecturerDiv">
                             <input name="lecturer" class="selected repeat lecturer" type="text" placeholder="Lecturer" />
-                            <div class="suggestions-lecturer" id="submission">
-                            </div>
                         </div>
                         <i class="fa fa-check-circle"></i>
                         <i class="fa fa-exclamation-circle"></i>
@@ -39,6 +37,7 @@
                 <div class="divider"></div>
     
                 <div class="col col-2">
+                    
                     <div class="form-control">
                         <!-- input -->
                         <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty repeat description" id="description"></textarea>
@@ -46,12 +45,14 @@
                         <i class="fa fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
+
+                    <div class="inputFileDiv">
+                        <input type="file" name="uploadedFile" class="file repeat" multiple/> 
+                        <label for="file"><span>Choose a file</span></label>
+                    </div>
+
                 </div>
     
-            </div>
-    
-            <div class="form-control">
-                <input type="file" name="uploadedFile" class="file repeat" multiple/> 
             </div>
     
             <div class="form-control">

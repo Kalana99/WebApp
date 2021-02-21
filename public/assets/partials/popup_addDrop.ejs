@@ -4,7 +4,7 @@
 
     <div class="content">
 
-        <h2>Add/Drop Request</h2>
+        <h1>Add/Drop Request</h1>
 
         <div class="close-btn" onclick="toggleAddDrop()">&times;</div>
 
@@ -36,8 +36,6 @@
                         <!-- lecturer -->
                         <div class="lecturerDiv">
                             <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
-                            <div class="suggestions-lecturer" id="addDrop">
-                            </div>
                         </div>
                         <i class="fa fa-check-circle"></i>
                         <i class="fa fa-exclamation-circle"></i>
@@ -56,13 +54,14 @@
                         <i class="fa fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
+
+                    <div class="inputFileDiv">
+                        <input type="file" name="uploadedFile" class="file addDrop" id="fileItem" data-multiple-caption="{count} files selected" multiple/>
+                        <label for="file"><span>Choose a file</span></label>
+                    </div>
     
                 </div>
     
-            </div>
-
-            <div class="form-control">
-                <input type="file" name="uploadedFile" class="file addDrop" id="fileItem" multiple/> 
             </div>
 
             <div class="form-control">

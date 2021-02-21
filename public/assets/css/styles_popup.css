@@ -1,3 +1,17 @@
+/* body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid orange;
+} */
+
 .popup-request-window .overlay {
   position:fixed;
   top:0px;
@@ -9,12 +23,14 @@
   display: none;
 }
 
-.popup-request-window h2{
+.popup-request-window h1{
   margin: 0;
   margin-bottom: 20px;
   padding: 0;
   top: 0;
   left: 0;
+  font-family: monospace;
+  color: grey;
 }
 
 .popup-request-window .input-field{
@@ -28,8 +44,8 @@
   width: 50%;
 }
 
-.popup-request-window .col input, textarea{
-  border: 1px thin lightgrey;
+.popup-request-window .col input, .popup-request-window .col textarea{
+  border: 1px solid lightgrey;
   border-radius: 6px;
   display: block;
   font-size: 14px;
@@ -38,9 +54,9 @@
   outline: none;
 }
 
-.popup-request-window .divider{
+/* .popup-request-window .divider{
   border-right: 1px solid lightgrey;
-}
+} */
 
 .popup-request-window .content {
   position:absolute;
@@ -49,7 +65,7 @@
   transform:translate(-50%,-50%) scale(0);  
   background:#fff;
   width: 600px;
-  height: 400px;
+  height: 410px;
   z-index:2;
   text-align:center;
   padding:20px;
@@ -102,7 +118,7 @@
 }
 
 .form-control small{
-  visibility: visible;
+  visibility: hidden;
   position: absolute;
   bottom: 0px;
   left: 20px;
@@ -121,12 +137,15 @@
   padding: 15px;
   width: 80%;
   cursor: pointer;
-  margin: auto;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(to right, #84d9d2, #07cdae) !important;
   opacity: 2;
   color: white;
   outline-style: none;
   position: relative;
+  bottom: 10px;
 }
 
 .submit:hover{
@@ -144,4 +163,123 @@
 .popup-request-window.active .content {
   transition:all 300ms ease-in-out;
   transform:translate(-50%,-50%) scale(1);
+}
+
+.suggestions-lecturer{
+  box-sizing: border-box;
+  box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: inherit;
+  min-width: 260px;
+  max-height: 145px;
+  margin: 0;
+  padding: 5px;
+  display: inline-block;
+  top: 40px;
+  left: 0;
+  color: black;
+  z-index: 10;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.suggestions-lecturer::-webkit-scrollbar{
+  width: 10px;
+  background: whitesmoke;
+}
+
+.suggestions-lecturer option{
+  padding: 3px;
+  margin: 0;
+  background: white;
+}
+
+.suggestions-lecturer option:hover{
+  background: lightgrey;
+  border-radius: 10px;
+}
+
+.selectedFinal{
+  font-family: monospace;
+  color: #222;
+  font-size: inherit;
+  cursor: default;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: fit-content;
+  width: fit-content;
+  line-height: 20px;
+  margin: 2px 0;
+  padding-left: 8px;
+  padding-right: 4px;
+  position: relative;
+}
+
+.popup-request-window .closeBtn {
+  cursor: pointer;
+  position: relative;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: inherit;
+  background: white;
+  color: black;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align:center;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inputFileDiv{
+  position: relative;
+  cursor: pointer;
+}
+
+.file{
+	opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+	overflow: hidden;
+	position: absolute;
+  cursor: pointer;
+}
+
+.file + label {
+  font-family: monospace;
+  text-align: center;
+  box-sizing: border-box;
+  max-width: 260px;
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 5px;
+  color: black;
+  background-color: transparent;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.file + label * {
+  pointer-events: none;
 }
