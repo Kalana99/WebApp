@@ -73,7 +73,7 @@ module.exports.post_editProfile = async (req, res) => {
                 }
                 else{
                     console.log("user data changed");
-                    res.render('userProfile', user.value);
+                    res.redirect('/userProfile');
                 }
             })
         });
