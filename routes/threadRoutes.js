@@ -36,4 +36,6 @@ router.post('/getStaff', threadController.getStaff_post);
 
 router.get('/download/:fileName', threadController.download_get);
 
+router.get('/downloadDocuments/:id', threadController.downloadDocuments);
+
 module.exports = router;

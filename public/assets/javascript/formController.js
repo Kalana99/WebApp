@@ -51,7 +51,7 @@ let main = async (page) => {
     await validateNewEmail(newEmail);
 
     //validate newPsw and confirm Password
-    await validateNewPassword(newPsw);
+    await validateNewPassword(existingPsw, newPsw);
 
     //validate index
     await validateIndex(index);
@@ -81,6 +81,7 @@ let main = async (page) => {
 
 //----------------------------------------------------------------------------------------
 
+//email validation regExr
 async function isEmail(email){
     //RegExr email validation
     //no need to understand
@@ -331,13 +332,19 @@ let validateNonEmpty = async (nonEmpty) => {
 };
 
 //validate new password and confirm password fields
-let validateNewPassword = async (psw) => {
+let validateNewPassword = async (oldPsw, psw) => {
     if (psw.length !== 0){
         let newPswField = psw[0];
         let confirmPswField = psw[1];
 
         if (newPswField.value === ''){
             setError(newPswField, 'Password cannot be blank');
+            correct = false;
+        }
+        //check if there is an old password field
+        //and if the old password is equal to the new password
+        else if ((oldPsw.length > 0) && (oldPsw[0].value === newPswField.value)){
+            setError(newPswField, 'Cannot use the same password as before');
             correct = false;
         }
         else{
@@ -458,6 +465,8 @@ let validateQuestion = async (question) => {
         let secretQuestion = question[0];
         let secretAnswer = question[1];
 
+        //only check if the question and answer fields are blank
+
         if (secretQuestion.value === ''){
             setError(secretQuestion, 'Select a question');
             correct = false;
@@ -475,7 +484,12 @@ let validateQuestion = async (question) => {
     }
 }
 
+//validate everything in forgot password
 let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
+
+    //backend validation
+    //get the email and send it to server to check is the relevant question and answer are correct
+    //and other normal frontend validations
 
     let emailState = null;
     let questionState = null;
@@ -543,6 +557,7 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
     
         }
 
+        //set error messages according to the field states
         if (emailState === 'blank'){
             setError(forgotPswEmail[i], 'Email cannot be blank');
             correct = false;
@@ -606,6 +621,7 @@ togglePasswordView(toggleView);
 
 // ----------------------validation messages--------------------------------------------
 
+//set error message and icon
 const setError = (input, message) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -617,6 +633,7 @@ const setError = (input, message) => {
     formControl.className = 'form-control error';
 }
 
+//set success icon
 const setSuccess = (input) => {
     let formControl = input.parentElement; // .form-control
 
@@ -624,6 +641,7 @@ const setSuccess = (input) => {
     formControl.className = 'form-control success';
 }
 
+//remove any error message and icon
 const removeError = (input) => {
     let formControl = input.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -632,7 +650,7 @@ const removeError = (input) => {
     formControl.className = 'form-control';
 }
 
-//for edit profile page
+//only used in edit profile page
 const deepRemoveError = (input) => {
     let formControl = input.parentElement.parentElement; // .form-control
     let small = formControl.querySelector('small');
@@ -742,6 +760,7 @@ let addEditListeners = (editButtons) => {
         });
     }
 };
+
 addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
