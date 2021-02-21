@@ -1,62 +1,78 @@
 <div class="popup-request-window">
-    <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off" enctype="multipart/form-data" id="addDropForm">
-        <input type="text" autocomplete="false" hidden>
-        <input type="text" autocomplete="false" class="uploadMsg" hidden>
-        <header class="header-popup"><h2>Add/Drop Request</h2></header>
-        <div class="content">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+
+        <h2>Add/Drop Request</h2>
+
+        <div class="close-btn" onclick="toggleAddDrop()">&times;</div>
+
+        <form class="popup-form" action="/submitRequest" method="POST" autocomplete="off" enctype="multipart/form-data" id="addDropForm">
+            <input type="text" autocomplete="false" hidden>
+            <input type="text" autocomplete="false" class="uploadMsg" hidden>
+            
             <div class="input-field">
-                <div class="form-control">
-                    <!-- lecture -->
-                    <input name="module" class="nonEmpty addDrop currentModule" type="text" placeholder="current module" />
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
+    
+                <div class="col col-1">
 
-                <div class="form-control">
-                    <!-- lecture -->
-                    <input name="requiredModule" class="nonEmpty addDrop requiredModule" type="text" placeholder="required module" />
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
-                    
-                <div class="form-control">
-                    <!-- lecturer -->
-                    <div class="lecturerDiv">
-                        <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
-                        <div class="suggestions-lecturer" id="addDrop">
-                        </div>
+                    <div class="form-control">
+                        <!-- lecture -->
+                        <input name="module" class="nonEmpty addDrop currentModule" type="text" placeholder="current module" />
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
                     </div>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
+    
+                    <div class="form-control">
+                        <!-- lecture -->
+                        <input name="requiredModule" class="nonEmpty addDrop requiredModule" type="text" placeholder="required module" />
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+                        
+                    <div class="form-control">
+                        <!-- lecturer -->
+                        <div class="lecturerDiv">
+                            <input name="lecturer" class="selected addDrop lecturer" type="text" placeholder="Lecturer" />
+                            <div class="suggestions-lecturer" id="addDrop">
+                            </div>
+                        </div>
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
                 </div>
 
-                
-                <div class="form-control">
-                    <!-- input -->
-                    <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty addDrop description" id="description"></textarea>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
+                <div class="divider"></div>
+    
+                <div class="col col-2">
 
-                <div class="form-control">
-                    <input type="file" name="uploadedFile" class="file addDrop" id="fileItem" multiple/> 
+                    <div class="form-control">
+                        <!-- input -->
+                        <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty addDrop description" id="description"></textarea>
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+    
                 </div>
-
-                <div class="form-control">
-                    <button type="button" class="submit-button-request submit" id="addDropSubmitButton">
-                        <span class="buttonText">submit</span>
-                    </button>
-                    <!-- id was "0" -->
-                    <button type="button" class="close-button-request cancel" id="0">
-                        <span class="buttonText">cancel</span>
-                    </button>
-                </div>
-                
+    
             </div>
-        </div>
-    </form>
+
+            <div class="form-control">
+                <input type="file" name="uploadedFile" class="file addDrop" id="fileItem" multiple/> 
+            </div>
+
+            <div class="form-control">
+                <button type="button" class="submit-button-request submit" id="addDropSubmitButton">
+                    <span class="buttonText">submit</span>
+                </button>
+            </div>
+            
+        </form>
+        
+    </div>
+
 </div>

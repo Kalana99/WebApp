@@ -1,49 +1,67 @@
 <div class="popup-request-window">
-    <form class="popup-form" autocomplete="off" enctype="multipart/form-data" action="/submitRequest" method="POST" id="repeatForm">
-        <input type="text" autocomplete="false" hidden>
-        <header class="header-popup"><h2>Repeat Exam</h2></header>
-        <div class="content">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+
+        <h2>Repeat Exam</h2>
+
+        <div class="close-btn" onclick="toggleRepeat()">&times;</div>
+
+        <form class="popup-form" autocomplete="off" action="/submitRequest" method="POST" enctype="multipart/form-data" id="repeatForm">
+
+            <input type="text" autocomplete="false" hidden>
+        
             <div class="input-field">
-                <div class="form-control">
-                    <!-- lecture -->
-                    <input name="module" class="nonEmpty repeat currentModule" type="text" placeholder="Module" />
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
-
-                <!-- change later -->
-                <div class="form-control">
-                    <!-- lecturer -->
-                    <div class="lecturerDiv">
-                        <input name="lecturer" class="selected repeat lecturer" type="text" placeholder="Lecturer" />
-                        <div class="suggestions-lecturer" id="repeat">
-                        </div>
-                    </div>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
                 
-                <div class="form-control">
-                    <!-- input -->
-                    <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty repeat description" id="description"></textarea>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
+                <div class="col col-1">
+                    <div class="form-control">
+                        <!-- lecture -->
+                        <input name="module" class="nonEmpty repeat currentModule" type="text" placeholder="Module" />
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+    
+                    <div class="form-control">
+                        <!-- lecturer -->
+                        <div class="lecturerDiv">
+                            <input name="lecturer" class="selected repeat lecturer" type="text" placeholder="Lecturer" />
+                            <div class="suggestions-lecturer" id="submission">
+                            </div>
+                        </div>
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
                 </div>
-
-                <!-- append child to send evidence if the request type is submission deadline -->
-                <div class="form-control">
-                    <input type="file" name="uploadedFile" class="file repeat" multiple/> 
+    
+                <div class="divider"></div>
+    
+                <div class="col col-2">
+                    <div class="form-control">
+                        <!-- input -->
+                        <textarea name="message" rows="10" cols="20" placeholder="description" class="nonEmpty repeat description" id="description"></textarea>
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
                 </div>
-
-                <div class="form-control">
-                    <button type="button" class="submit-button-request submit" id="repeatSubmitButton">submit</button>
-                    <!-- id was "2" -->
-                    <button type="button" class="close-button-request cancel" id="2">cancel</button>
-                </div>
+    
             </div>
-        </div>
-    </form>
+    
+            <div class="form-control">
+                <input type="file" name="uploadedFile" class="file repeat" multiple/> 
+            </div>
+    
+            <div class="form-control">
+                <button type="button" class="submit-button-request submit" id="repeatSubmitButton">
+                    <span class="buttonText">submit</span>
+                </button>
+            </div>
+    
+        </form>
+
+    </div>
+
 </div>

@@ -1,101 +1,33 @@
 let activePopupWindow           = null;             //to store the id of the currenly active window
 let lastSearchTime              = new Date();       //get the current date and time
+let popupRequestWindow          = document.querySelectorAll('.popup-request-window');
+let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
+let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
 
-let popupMain = () => {
+function dropSettings(){
+    document.querySelector('.dropdown-content').classList.toggle('drop');
+}
 
-    let popupRequest                = document.querySelectorAll('.popup-request-window');   //get popup request forms
-    let requestButtons              = document.querySelectorAll(".open-button-request");    //get request buttons
-    let cancelButtons               = document.querySelectorAll('.close-button-request');   //get cancel buttons
-    let popupWindow                 = document.querySelector('#popup-window');              //get the button to open logout window
-    let logoutWindow                = document.querySelector('#logout-popup');              //get the logout window
-    let logoutCancelButton          = document.querySelector('#cancel_logout');             //get logout cancel button
-    let logoutSubmitButton          = document.querySelector('#submit_logout');             //get logout submit button
-    let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
-    let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
+function togglePopup(){
+    document.querySelector('.popup').classList.toggle('active');
+}
 
-    //uncomment and insert correct name to check if the elements are captured correctly
-    // console.log();
+function submitLogout(){
+    document.querySelector('.submit-logout').classList.toggle('loading');
+    window.location.href = '/logout';
+}
 
-    openRequestForm(requestButtons, popupRequest);
-    closeRequestForm(cancelButtons, popupRequest);
-    openLogoutWindow(logoutWindow, popupWindow);
-    closeLogoutWindow(logoutCancelButton, popupWindow);
-    submitLogout(logoutSubmitButton);
-    lecturerInputFunction(lecturerInput, suggestionsPanelLecturer);
-};
+function toggleAddDrop(){
+    popupRequestWindow[0].classList.toggle('active');
+}
 
-//event listener to open request forms
-let openRequestForm = (requestButtons, popupRequest) => {
-    for (let i = 0; i < requestButtons.length; i++){
-        requestButtons[i].addEventListener('click', (event) => {
-            //grab the id of the clicked button
-            let id = parseInt(event.currentTarget.id);
-    
-            if (activePopupWindow === null){
-                //get the active window id
-                activePopupWindow = id;
-                popupRequest[id].className = 'popup-request-window visible';
-            }
-    
-        });
-    };
-};
+function toggleSubmission(){
+    popupRequestWindow[1].classList.toggle('active');
+}
 
-//event listener to close request forms
-//canceling a form won't refresh the page and input data will remain until the form being submitted
-let closeRequestForm = (cancelButtons, popupRequest) => {
-    for (let i = 0; i < cancelButtons.length; i++){
-        cancelButtons[i].addEventListener('click', (event) => {
-            //grab the id of the clicked cancel button
-            let id = parseInt(event.currentTarget.id);
-            activePopupWindow = null;
-            let formControl = popupRequest[id].querySelectorAll('.form-control');
-            formControl.forEach((div) => {
-                div.className = 'form-control';
-            });
-    
-            // clear the popup form when canceled
-    
-            popupRequest[id].className = 'popup-request-window';
-        });
-    };
-};
-
-//event listener to open logout window
-let openLogoutWindow = (logoutWindow, popupWindow) => {
-    if (logoutWindow !== null){
-        logoutWindow.addEventListener('click', (event) => {
-
-            if (activePopupWindow === null){
-                activePopupWindow = event.target.id;
-                popupWindow.className = 'popup-window visible';
-            }
-            
-        });
-    }
-};
-
-//event listener to close logout window
-let closeLogoutWindow = (logoutCancelButton, popupWindow) => {
-    if (logoutCancelButton !== null){
-        logoutCancelButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            activePopupWindow = null;
-            popupWindow.className = 'popup-window';
-        });
-    }
-};
-
-//event listener to submit logout
-let submitLogout = (logoutSubmitButton) => {
-    if (logoutSubmitButton !== null){
-        logoutSubmitButton.addEventListener('click', (event) => {
-            // loading animation
-            logoutSubmitButton.classList.toggle('loading');
-            window.location.href = '/logout';
-        });
-    }
-};
+function toggleRepeat(){
+    popupRequestWindow[2].classList.toggle('active');
+}
 
 //event listener to get lecturer input suggestions and change the appearance of a selected lecturer field
 let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
@@ -204,5 +136,4 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
     }
 };
 
-//call the main method
-popupMain();
+lecturerInputFunction(lecturerInput, suggestionsPanelLecturer);

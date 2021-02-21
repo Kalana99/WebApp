@@ -11,95 +11,87 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title><%=name %></title>
+    <title><%= name %></title>
 </head>
 
 <body>
+    <div class="navigation">
+        <ul class="nav">
+            <li class= "nav-tabs">
+                <a href="/threads">
+                    <button class="navBtn">
+                        <i class="material-icons">forum</i>
+                    </button>
+                </a>
+            </li>
+            <li class= "nav-tabs">
+                <button class="navBtn">
+                    <i class="material-icons">notifications_none</i>
+                </button>
+            </li>
+            <li class= "dropdown nav-tabs">
+                <button class="navBtn" onclick="dropSettings()">                         
+                    <i class="material-icons">brightness_low</i>
+                </button>
+                <div class= "dropdown-content">
+                    <a href="/EditProfile"> Edit profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/changePassword"> Change password</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/deleteAccount"> Delete account</a>
+                </div>
+            </li>
+            <li class="logout-button">
+                <button id="logout-popup" class="logout-popup" onclick="togglePopup()">
+                    <i class="material-icons log">power_settings_new</i>
+                </button>
+            </li>
+        </ul>
+    </div>
     <div class="container">
-        <header class="header-main">
-          <div class="home-icon">
-          </div>
-        </header>
         
-            <div class="row">
-                <div class="profile-div">
-                    <div class="photo">
-                        <img class="profile-pic" src="https://avatarfiles.alphacoders.com/242/242300.jpg"/>   
-                    </div>
-                    
-                    <div>
-                        <h4 class="name"><%= name %> </h4>
-                        <p class="info"><%= index %> </p>
-                        <p class="info"><%= phone %> </p>
-                        <p class="info"><%= email %> </p>
-                        <p class="info"><%= faculty %> </p>
-                    </div>
+        <div class="col">
+            <div class="profile-div">
+                <div class="photo">
+                    <img class="profile-pic" src="/resources/scarecrow.jpg"/>
+                    <h4 class="name"><%= name %> </h4>
                 </div>
-            </div>
-
-            <main>
-            <div class="navigation">
-                <ul class="nav">
-                    <li class= "nav-tabs">
-                        <a href="/threads">
-                            <button>
-                                <i class="material-icons">forum</i>
-                                <p>threads</p>
-                            </button>
-                        </a>
-                    </li>
-                    <li class= "nav-tabs">
-                        <a href="#">
-                            <button>
-                                <i class="material-icons">notifications_none</i>
-                                <p>Notifications</p>
-                            </button>
-                        </a>
-                    </li>
-                    <li class= "dropdown nav-tabs">
-                        <button >                         
-                            <i class="material-icons">brightness_low</i>
-                            <p>Settings</p>
-                        </button>
-                        <div class= "dropdown-content">
-                            <a href="/EditProfile"> Edit profile</a>
-                            <a href="/changePassword"> Change password</a>
-                            <a href="/deleteAccount"> Delete account</a>
-                        </div>
-                    </li>
-                    <li class="logout-button">
-                        <button id="logout-popup">
-                        <i class="material-icons log">power_settings_new</i>
-                        <p>Logout</p></button>
-                    </li>
-                </ul>
-                    
-                <%- include('./assets/partials/popup_logout.ejs') %>
                 
-            </div>
-            
-                <div class="request-tiles">
-
-                    <button class="open-button-request" id="0">
-                        <p class="button__text">Add/Drop Requests</p>
-                    </button>
-                    
-                    <%- include('./assets/partials/popup_addDrop.ejs') %>
-
-                    <button class="open-button-request" id="1">
-                        <p class="button__text">Submission Deadline</p>
-                    </button>
-                    
-                    <%- include('./assets/partials/popup_submission.ejs') %>
-
-                    <button class="open-button-request" id="2">
-                        <p class="button__text">Repeat Exams</p>
-                    </button>
-                    
-                    <%- include('./assets/partials/popup_repeatExam.ejs') %>
-
+                <div class="details">
+                    <p class="info"><%= index %> </p>
+                    <p class="info"><%= phone %> </p>
+                    <p class="info"><%= email %> </p>
+                    <p class="info"><%= faculty %> </p>
                 </div>
-            </main>
+            </div>
+        </div>
+
+        <main class="main-body">
+            
+            <%- include('./assets/partials/popup_logout.ejs') %>
+        
+            <div class="request-tiles">
+
+                <button class="open-button-request addDrop" id="0" onclick="toggleAddDrop()">
+                    <h4 class="button__text">Add/Drop Requests</h4>
+                </button>
+                
+                <%- include('./assets/partials/popup_addDrop.ejs') %>
+
+                <button class="open-button-request submission" id="1" onclick="toggleSubmission()">
+                    <h4 class="button__text">Submission Deadline</h4>
+                </button>
+                
+                <%- include('./assets/partials/popup_submission.ejs') %>
+
+                <button class="open-button-request repeat" id="2" onclick="toggleRepeat()">
+                    <h4 class="button__text">Repeat Exams</h4>
+                </button>
+                
+                <%- include('./assets/partials/popup_repeatExam.ejs') %>
+
+            </div>
+        </main>
     
 
     <%- include('./assets/partials/footer.ejs') %>
