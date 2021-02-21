@@ -18,10 +18,10 @@
             
             <h1>Sign Up</h1>
             
-            <form class="form" id="form">
+            <form class="form" action="/signup" method="POST" autocomplete="off" enctype="multipart/form-data" id="signUpForm">
                 <div class="form-control">
                     <label>Full Name :</label>
-                    <input type="text" name="username" class="nonEmpty signUp fullName" placeholder="Enter your full name" id="username">
+                    <input type="text" name="name" class="nonEmpty signUp fullName" placeholder="Enter your full name" id="username">
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -127,6 +127,10 @@
                         <option value="archi">Architecture</option>
                         <option value="bsn">Business</option>
                     </select>
+                </div>
+
+                <div class="form-control">
+                    <input type="file" accept="image/*" name="uploadedFile" class="file signUp" id="fileItem"/> 
                 </div>
 
                 <div class="form-control">

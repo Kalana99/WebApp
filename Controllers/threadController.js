@@ -3,6 +3,8 @@ const database = require('../database');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
+const archiver = require('archiver');
+const path = require('path');
 
 let threadsPerPage = 4;
 
@@ -64,6 +66,42 @@ module.exports.download_get = async (req, res) => {
     res.download('uploads/' + fileName);
 
 }
+
+module.exports.downloadDocuments = async (req, res) => {
+
+    let messageId = req.params.id;
+    let message = await db.collections.messages.findOne({_id: mongoose.Types.ObjectId(messageId)});
+    let fileNames = message.files;
+
+    const archive = archiver('zip');
+    archive.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+
+    //on stream closed we can end the request
+    archive.on('end', function() {
+        console.log('Archive wrote %d bytes', archive.pointer());
+    });
+
+    res.attachment('documents.zip');
+    let files = [];
+
+    for(let i = 0; i < fileNames.length; i++){
+        
+        files.push('uploads/' + fileNames[i]);
+
+    }
+
+    archive.pipe(res);
+
+    for(const i in files) {
+        archive.file(files[i], { name: path.basename(files[i]) });
+    }
+
+
+    archive.finalize();
+
+};
 
 module.exports.getThreadData_post = (req, res) => {
 

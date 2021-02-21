@@ -21,12 +21,30 @@ module.exports.signup_get = (req, res) => {
 };
 
 module.exports.signup_post = (req, res) => {
-    
-    //Save the incoming user object to the database
-    let id = database.addUser(req.body);
-    mail(req.body.email, 'signup', {id: id});
-    res.json({id});
 
+    let data = req.body;
+
+    data.type = req.body.type[0];
+    
+    if(req.body.fileName){
+        data['profilePic'] = req.body.fileName[0];
+    }
+    else{
+        if(data['gender'] === 'male'){
+            data['profilePic'] = "empty pro pic male.jpg";
+        }
+        else{
+            data['profilePic'] = "empty pro pic female.jpg";
+        }
+    }
+
+    delete data.confirmPsw;
+    delete data.fileName;
+    
+    // Save the user object to the database
+    let id = database.addUser(data);
+    mail(req.body.email, 'signup', {id: id});
+    res.redirect('/verifyemail/' + id);
 };
 
 module.exports.login_get = (req, res) => {
@@ -119,6 +137,18 @@ module.exports.userprofile_get = (req, res) => {
     });
         
 };
+
+module.exports.get_profilePic = (req, res) => {
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+            res.download('profilePics/' + user.profilePic);
+        });
+    });
+}
 
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1});
