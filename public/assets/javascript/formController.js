@@ -763,39 +763,17 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'signUp'){
 
-        data = {};
+        let formElement = document.querySelector('#signUpForm');
 
-        let isMale = querySelectorFrom('.gender', nonEmptyRadio)[0].checked;
-        let isStudent = querySelectorFrom('.type', nonEmptyRadio)[0].checked;
+        //creating hidden element
 
-        data['name']        = querySelectorFrom('.fullName', nonEmpty)[0].value;
-        data['index']       = querySelectorFrom('.index', index)[0].value;
-        data['email']       = querySelectorFrom('.newEmail', newEmail)[0].value;
-        data['birthday']    = querySelectorFrom('.birthday', nonEmpty)[0].value;
-        data['gender']      = isMale ? 'male' : 'female';
-        data['phone']       = querySelectorFrom('.phone', nonEmpty)[0].value;
-        data['password']    = querySelectorFrom('.psw', newPsw)[0].value;
-        data['question']    = question[0].value;
-        data['answer']      = question[1].value;
-        data['type']        = isStudent ? 'student' : 'staff';
-        data['faculty']     = querySelectorFrom('.faculty', normal)[0].value;
-        data['verified']    = false;
-
-        //post the data and redirect to verify page
-        fetch('/signup', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            window.location.href = '/verifyemail/' + data.id;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'type');
+        hiddenIdInput.setAttribute('value', 'signUp');
+        formElement.appendChild(hiddenIdInput);
+        
+        formElement.submit();
 
     }
 
@@ -810,7 +788,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         hiddenIdInput.setAttribute('name', 'type');
         hiddenIdInput.setAttribute('value', 'addDrop');
         formElement.appendChild(hiddenIdInput);
-
+        
         formElement.submit();
 
     }
@@ -865,52 +843,17 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
     else if(page === 'editProfile'){
 
-        data = {};
+        let formElement = document.querySelector('#EditProfileForm');
 
-        let nameNodes = querySelectorFrom('.userName', nonEmpty);
-        let indexNodes = querySelectorFrom('.index', index);
-        let phoneNodes = querySelectorFrom('.phone', nonEmpty);
-        let birthdayNodes = querySelectorFrom('.birthday', nonEmpty);
-        let genderNodes = querySelectorFrom('.gender', nonEmpty);
+        //creating hidden element
 
-        if (nameNodes.length > 0){
-            data['name'] = nameNodes[0].value;
-        }
-
-        if (indexNodes.length > 0){
-            data['index'] = indexNodes[0].value;
-        }
-
-        if (phoneNodes.length > 0){
-            data['phone'] = phoneNodes[0].value;
-        }
-
-        if (birthdayNodes.length > 0){
-            data['birthday'] = birthdayNodes[0].value;
-        }
-
-        if (genderNodes.length > 0){
-            if (genderNodes[0].checked){
-                data['gender'] = 'male';
-            }else{
-                data['gender'] = 'female';
-            }
-        }
+        let hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('type', 'hidden');
+        hiddenIdInput.setAttribute('name', 'type');
+        hiddenIdInput.setAttribute('value', 'EditProfile');
+        formElement.appendChild(hiddenIdInput);
         
-        fetch('/EditProfile', {
-            method: 'PUT', // or 'POST'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/userProfile';
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });  
+        formElement.submit();
     }
 
     else if(page === 'changePsw'){

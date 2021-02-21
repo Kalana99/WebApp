@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Message = require('../models/Message');
 let database = require('../database');
+const fs = require('fs');
 
 const mongoose = require('mongoose');
 const db = mongoose.connection;
@@ -13,26 +14,61 @@ module.exports.get_editProfile = (req, res) => {
     res.render('EditProfile');
 };
 
-module.exports.put_editProfile = (req, res) => {
+module.exports.post_editProfile = async (req, res) => {
+    
+    data = {};
 
-    if (JSON.stringify(req.body) === JSON.stringify({})){
+    if (req.body.username != null){
+        data['name'] = req.body.username;
+    }
+
+    if (req.body.index != null){
+        data['index'] = req.body.index;
+    }
+
+    if (req.body.phone != null){
+        data['phone'] = req.body.phone;
+    }
+
+    if (req.body.birthday != null){
+        data['birthday'] = req.body.birthday;
+    }
+
+    if (req.body.gender != null){
+        data['gender'] = 'male';
+    }
+
+    if(req.body.fileName != null){
+        data['profilePic'] = req.body.fileName[0];
+    }
+
+    if (JSON.stringify(data) === JSON.stringify({})){
         console.log("cannot find any data to change");
-        res.json({});
+        res.redirect('/userProfile');
     }
     else{
+
         const token = req.cookies.jwt;
 
         jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
             let id = decodedToken.id;
 
+            if(data['profilePic'] != null){
+                db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
+                    if(user.profilePic !== "empty pro pic male.jpg" && user.profilePic !== "empty pro pic female.jpg"){
+                        fs.unlink('profilePics/' + user.profilePic, (err) => {});
+                    }
+                });
+            }
+
             db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
-            {$set: req.body}, function(err){
+            {$set: data}, function(err){
                 if(err){
                     console.log(err);
                 }
                 else{
                     console.log("user data changed");
-                    res.json({});
+                    res.redirect('/userProfile');
                 }
             })
         });
@@ -78,8 +114,6 @@ module.exports.put_changePassword = (req, res) => {
 module.exports.get_deleteAccount = (req, res) => {
     res.render('delete_account');
 };
-
-let fs = require('fs');
 
 let deleteUnneededAccounts = async () => {
 

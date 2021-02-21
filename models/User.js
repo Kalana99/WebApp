@@ -16,6 +16,7 @@ const userSchema = new Schema({
     "type": String,
     "faculty": String,
     "department": String,
+    "profilePic": String,
     "verified": Boolean
 });
 

@@ -13,7 +13,7 @@
             
         <h1>Edit Profile</h1>
         
-        <form class="form" id="form">
+        <form class="form" action="/EditProfile" method="POST" autocomplete="off" enctype="multipart/form-data" id="EditProfileForm">
 
             <div class="content">
                 <div class="form-control">
@@ -78,6 +78,10 @@
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
+                </div>
+
+                <div class="form-control">
+                    <input type="file" accept="image/*" name="uploadedFile" class="file EditProfile" id="fileItem"/> 
                 </div>
 
                 <div>
