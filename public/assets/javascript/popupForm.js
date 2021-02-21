@@ -1,105 +1,40 @@
 let activePopupWindow           = null;             //to store the id of the currenly active window
 let lastSearchTime              = new Date();       //get the current date and time
+let popupRequestWindow          = document.querySelectorAll('.popup-request-window');
+let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
+// let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
 
-let popupMain = () => {
+function dropSettings(){
+    document.querySelector('.dropdown-content').classList.toggle('drop');
+}
 
-    let popupRequest                = document.querySelectorAll('.popup-request-window');   //get popup request forms
-    let requestButtons              = document.querySelectorAll(".open-button-request");    //get request buttons
-    let cancelButtons               = document.querySelectorAll('.close-button-request');   //get cancel buttons
-    let popupWindow                 = document.querySelector('#popup-window');              //get the button to open logout window
-    let logoutWindow                = document.querySelector('#logout-popup');              //get the logout window
-    let logoutCancelButton          = document.querySelector('#cancel_logout');             //get logout cancel button
-    let logoutSubmitButton          = document.querySelector('#submit_logout');             //get logout submit button
-    let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
-    let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
+function togglePopup(){
+    document.querySelector('.popup').classList.toggle('active');
+}
 
-    //uncomment and insert correct name to check if the elements are captured correctly
-    // console.log();
+function submitLogout(){
+    document.querySelector('.submit-logout').classList.toggle('loading');
+    window.location.href = '/logout';
+}
 
-    openRequestForm(requestButtons, popupRequest);
-    closeRequestForm(cancelButtons, popupRequest);
-    openLogoutWindow(logoutWindow, popupWindow);
-    closeLogoutWindow(logoutCancelButton, popupWindow);
-    submitLogout(logoutSubmitButton);
-    lecturerInputFunction(lecturerInput, suggestionsPanelLecturer);
-};
+function toggleAddDrop(){
+    popupRequestWindow[0].classList.toggle('active');
+}
 
-//event listener to open request forms
-let openRequestForm = (requestButtons, popupRequest) => {
-    for (let i = 0; i < requestButtons.length; i++){
-        requestButtons[i].addEventListener('click', (event) => {
-            //grab the id of the clicked button
-            let id = parseInt(event.currentTarget.id);
-    
-            if (activePopupWindow === null){
-                //get the active window id
-                activePopupWindow = id;
-                popupRequest[id].className = 'popup-request-window visible';
-            }
-    
-        });
-    };
-};
+function toggleSubmission(){
+    popupRequestWindow[1].classList.toggle('active');
+}
 
-//event listener to close request forms
-//canceling a form won't refresh the page and input data will remain until the form being submitted
-let closeRequestForm = (cancelButtons, popupRequest) => {
-    for (let i = 0; i < cancelButtons.length; i++){
-        cancelButtons[i].addEventListener('click', (event) => {
-            //grab the id of the clicked cancel button
-            let id = parseInt(event.currentTarget.id);
-            activePopupWindow = null;
-            let formControl = popupRequest[id].querySelectorAll('.form-control');
-            formControl.forEach((div) => {
-                div.className = 'form-control';
-            });
-    
-            // clear the popup form when canceled
-    
-            popupRequest[id].className = 'popup-request-window';
-        });
-    };
-};
-
-//event listener to open logout window
-let openLogoutWindow = (logoutWindow, popupWindow) => {
-    if (logoutWindow !== null){
-        logoutWindow.addEventListener('click', (event) => {
-
-            if (activePopupWindow === null){
-                activePopupWindow = event.target.id;
-                popupWindow.className = 'popup-window visible';
-            }
-            
-        });
-    }
-};
-
-//event listener to close logout window
-let closeLogoutWindow = (logoutCancelButton, popupWindow) => {
-    if (logoutCancelButton !== null){
-        logoutCancelButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            activePopupWindow = null;
-            popupWindow.className = 'popup-window';
-        });
-    }
-};
-
-//event listener to submit logout
-let submitLogout = (logoutSubmitButton) => {
-    if (logoutSubmitButton !== null){
-        logoutSubmitButton.addEventListener('click', (event) => {
-            // loading animation
-            logoutSubmitButton.classList.toggle('loading');
-            window.location.href = '/logout';
-        });
-    }
-};
+function toggleRepeat(){
+    popupRequestWindow[2].classList.toggle('active');
+}
 
 //event listener to get lecturer input suggestions and change the appearance of a selected lecturer field
-let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
+let lecturerInputFunction = async (lecturerInput) => {
     for (let i=0; i<lecturerInput.length; i++){
+
+        let suggestionPanel = document.createElement('div');
+        suggestionPanel.setAttribute('class', 'suggestions-lecturer');
 
         lecturerInput[i].addEventListener('keyup', async () => {
             
@@ -125,14 +60,18 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
                         lastSearchTime = data.time;
         
                         //suggestion panel should be empty at the beginning
-                        suggestionsPanelLecturer[i].innerHTML = '';
+                        // suggestionsPanelLecturer[i].innerHTML = '';
+
+                        suggestionPanel.innerHTML = '';
     
                         data.lecturers.forEach((suggested) => {
                             let option = document.createElement('option');
     
                             option.setAttribute('id', suggested.id);
                             option.innerText = suggested.index + " - " + suggested.name;
-                            suggestionsPanelLecturer[i].appendChild(option);
+                            suggestionPanel.appendChild(option);
+
+                            lecturerDiv.appendChild(suggestionPanel);
             
                             //add an event listener to every suggestion to get the value into the input field when clicked
                             option.addEventListener('click', (event) => {
@@ -148,7 +87,7 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
     
                                 lecturerInput[i].style.visibility = 'hidden';   //hide the lecturer input field
                                 lecturerInput[i].style.position = 'absolute';
-                                suggestionsPanelLecturer[i].innerHTML = '';     //empty the suggestion panel
+                                suggestionPanel.remove()    //empty the suggestion panel
     
                                 let selected = document.createElement('div');
                                 selected.setAttribute('class', 'selectedFinal');
@@ -156,18 +95,16 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
                                 selected.innerHTML = suggested.index + " - " + suggested.name;
                                 
                                 // a close button for selected lecturer
-                                let remove = document.createElement('button');
-                                remove.setAttribute('class', 'remove');
-                                remove.setAttribute('type', 'button');
-                                remove.innerText = 'x';
+                                let closeBtn = document.createElement('div');
+                                closeBtn.setAttribute('class', 'closeBtn');
+                                closeBtn.innerText = 'x';
     
-                                selected.appendChild(remove);
+                                selected.appendChild(closeBtn);
                                 lecturerDiv.appendChild(selected);
 
 
                                 //event listener to the remove button
-                                document.querySelector('.remove').addEventListener('click', (event) => {
-                                    // console.log('here');
+                                document.querySelector('.closeBtn').addEventListener('click', (event) => {
                                     selected.remove();                                  //remove 'selected' div
                                     lecturerInput[i].style.visibility = 'inherit';
                                     lecturerInput[i].style.position = 'relative';
@@ -178,7 +115,10 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
             
                             //make the suggestion panel empty if there's no input
                             if (input === '') {
-                                suggestionsPanelLecturer[i].innerHTML = '';  
+
+                                if (lecturerDiv.childElementCount > 1){
+                                    lecturerDiv.removeChild(lecturerDiv.lastChild);
+                                }
                             }
     
                             //select the first suggestion when enter is pressed
@@ -204,5 +144,27 @@ let lecturerInputFunction = async (lecturerInput, suggestionsPanelLecturer) => {
     }
 };
 
-//call the main method
-popupMain();
+lecturerInputFunction(lecturerInput);
+
+// ------------------------------------------------------------------------------
+
+let inputs = document.querySelectorAll( '.file' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	let label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if ( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			label.querySelector( 'span' ).innerHTML = fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+});

@@ -447,9 +447,12 @@ let validateSelected = async (selected) => {
     // console.log(selected);
     // console.log(selected.length);
     for (let i = 0; i < selected.length; i++){
-        let numOfChildElements = selected[i].parentElement.childElementCount;
+
         let input = selected[i].parentElement;
-        if (numOfChildElements === 2){
+
+        //if a lecturer is selected, then the last element in input would be s
+        //elected and its class name = selectedFinal
+        if (input.lastChild.className !== 'selectedFinal'){
             setError(input, 'You need to choose a lecturer');
             correct = false;
         }

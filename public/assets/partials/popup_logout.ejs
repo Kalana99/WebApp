@@ -1,14 +1,10 @@
-<!-- popup logout window -->
-<div class="popup-window" id="popup-window">
-    <div class="header">
-        <h2>Confirm Logout!</h2>
-    </div>
-    <div class="form-control-logout">
-        <button type="submit" id="submit_logout" class="submit-button-logout button">
+<div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" onclick="togglePopup()">&times;</div>
+        <h1>Confirm Logout!</h1>
+        <button class="submit-logout" onclick="submitLogout()">
             <span class="buttonText">Confirm</span>
-        </button>
-        <button type="submit" id="cancel_logout" class="close-button-logout button">
-            <span class="buttonText">Cancel</span>
         </button>
     </div>
 </div>
