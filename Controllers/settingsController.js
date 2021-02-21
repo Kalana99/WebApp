@@ -35,11 +35,16 @@ module.exports.post_editProfile = async (req, res) => {
     }
 
     if (req.body.gender != null){
-        data['gender'] = 'male';
+        data['gender'] = req.body.gender;
     }
 
     if(req.body.fileName != null){
         data['profilePic'] = req.body.fileName[0];
+        data['profilePic_uploaded'] = true;
+    }
+    else if(req.body.removeProfilePic === 'true'){
+        data['profilePic'] = "";
+        data['profilePic_uploaded'] = false;
     }
 
     if (JSON.stringify(data) === JSON.stringify({})){
@@ -53,22 +58,22 @@ module.exports.post_editProfile = async (req, res) => {
         jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
             let id = decodedToken.id;
 
-            if(data['profilePic'] != null){
+            if(data['profilePic'] != null || req.body.removeProfilePic == 'true'){
                 db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
-                    if(user.profilePic !== "empty pro pic male.jpg" && user.profilePic !== "empty pro pic female.jpg"){
+                    if(user.profilePic !== ""){
                         fs.unlink('profilePics/' + user.profilePic, (err) => {});
                     }
                 });
             }
 
             db.collections.users.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)},
-            {$set: data}, function(err){
+            {$set: data}, {returnOriginal: false}, function(err, user){
                 if(err){
                     console.log(err);
                 }
                 else{
                     console.log("user data changed");
-                    res.redirect('/userProfile');
+                    res.render('userProfile', user.value);
                 }
             })
         });

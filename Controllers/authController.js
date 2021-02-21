@@ -28,14 +28,11 @@ module.exports.signup_post = (req, res) => {
     
     if(req.body.fileName){
         data['profilePic'] = req.body.fileName[0];
+        data['profilePic_uploaded'] = true;
     }
     else{
-        if(data['gender'] === 'male'){
-            data['profilePic'] = "empty pro pic male.jpg";
-        }
-        else{
-            data['profilePic'] = "empty pro pic female.jpg";
-        }
+        data['profilePic_uploaded'] = false;
+        data['profilePic'] = "";
     }
 
     delete data.confirmPsw;
@@ -132,7 +129,6 @@ module.exports.userprofile_get = (req, res) => {
 
         db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
             res.render('userProfile', user);
-        
         });
     });
         
@@ -145,7 +141,17 @@ module.exports.get_profilePic = (req, res) => {
         let id = decodedToken.id;
 
         db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
-            res.download('profilePics/' + user.profilePic);
+            if(user.profilePic_uploaded){
+                res.download('profilePics/' + user.profilePic);
+            }
+            else{
+                if(user.gender == 'male'){
+                    res.download('profilePics/empty pro pic male.jpg');
+                }
+                else{
+                    res.download('profilePics/empty pro pic female.jpg');
+                }
+            }
         });
     });
 }
