@@ -252,15 +252,17 @@ body::-webkit-scrollbar-thumb {
 	opacity: 0;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 0.1px;
+  height: 0.1px;
 	overflow: hidden;
 	position: absolute;
-  cursor: pointer;
+  pointer-events: none;
 }
 
-.file + label {
+.inputFileDiv label {
   font-family: monospace;
   text-align: center;
+  justify-content: center;
   box-sizing: border-box;
   max-width: 260px;
   width: 100%;
@@ -270,9 +272,9 @@ body::-webkit-scrollbar-thumb {
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
-  display: inline-block;
+  display: flex;
   overflow: hidden;
-  padding: 5px;
+  padding: 2px;
   color: black;
   background-color: transparent;
   border: 1px solid lightgrey;
@@ -280,6 +282,17 @@ body::-webkit-scrollbar-thumb {
   margin-bottom: 10px;
 }
 
-.file + label * {
-  pointer-events: none;
+.inputFileDiv label:hover{
+  background: lightgrey;
+}
+
+.inputFileDiv label:active{
+  background: grey;
+  color: #fff;
+}
+
+.inputFileDiv .text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

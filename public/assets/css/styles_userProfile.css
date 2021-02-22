@@ -72,6 +72,7 @@ body{
   margin: 0;
   height: 90px;
   width: inherit;
+  z-index: 10;
   /* background: linear-gradient(to right, #00d4ff, #090979) !important; */
   /* opacity: 0.8; */
 }
@@ -150,7 +151,6 @@ body{
   margin-right: auto;
   opacity: 0.6;
   overflow: hidden;
-  position: relative;
   cursor: pointer;
 }
 
@@ -165,7 +165,6 @@ body{
   box-sizing: border-box;
   top: 100%;
   right: 80px;
-  z-index: 6;
   min-width: 10rem;
   width: 150px;
   margin: 0.125rem 0 0;
@@ -173,9 +172,7 @@ body{
   text-align: left;
   list-style: none;
   background-color: #fff;
-  background-clip: padding-box;
   display: none;
-  float: none;
   border: none;
   border-radius: 5px;
   box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
@@ -183,6 +180,7 @@ body{
   font-size: 0.9rem;
   margin-top: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .dropdown-content.drop{
@@ -192,7 +190,7 @@ body{
 .dropdown-content a{
   box-sizing: border-box;
   width: 100%;
-  clear: both;
+  /* clear: both; */
   font-weight: 400;
   text-align: inherit;
   border: 0;
@@ -212,10 +210,6 @@ body{
 .dropdown-content a:active{
   background: grey;
   color: white;
-}
-
-.dropdown-divider{
-  border-top: 1px solid lightgrey;
 }
 
 footer{
