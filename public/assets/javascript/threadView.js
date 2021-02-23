@@ -185,7 +185,7 @@ let initialize = (arr) => {
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
 
-    for (let item = arr.length-1; item >= 0; item--){
+    for (let item = 0; item < arr.length; item++){
         
         btnGroup.appendChild(createThreadElement(arr[item]));
 
@@ -217,10 +217,12 @@ let displayMessages = async (arr, msgId) => {
         msgContainer.appendChild(msg);
 
         //evidence
-        let documents = document.createElement('a');
-        documents.innerHTML = 'Download documents';
-        documents.href = '/downloadDocuments/' + arr[i]._id;
-        msgContainer.appendChild(documents);
+        if(arr[i].files.length > 0){
+            let documents = document.createElement('a');
+            documents.innerHTML = 'Download documents';
+            documents.href = '/downloadDocuments/' + arr[i]._id;
+            msgContainer.appendChild(documents);
+        }
 
         if (userId.id === person){
             msgContainer.setAttribute('class', 'reciever');

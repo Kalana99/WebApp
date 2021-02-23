@@ -234,6 +234,7 @@ module.exports.getThreadData_post = (req, res) => {
             }
 
             let numberOfPages = Math.ceil(searchedArray.length / threadsPerPage);
+            searchedArray.reverse();
             searchedArray = searchedArray.slice(skipValue, skipValue + threadsPerPage);
 
             let  addNameToArray = async () => {
