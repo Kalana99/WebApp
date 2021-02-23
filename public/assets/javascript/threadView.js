@@ -193,7 +193,7 @@ let initialize = (arr) => {
 
     //remove loading animation after all the threads are loaded
     loadingOverlay.style.display = 'none';
-
+    console.log('here');
 };
 
 //reply button group (reply, accept and decline)
@@ -290,10 +290,10 @@ let initializePage = () => {
     });
 
     //setting up the event listener for the reply cancel button
-    let replyCancelButton = document.querySelector('.close-button-request');
-    replyCancelButton.addEventListener('click', (event) => {
-        closePopup();
-    });
+    // let replyCancelButton = document.querySelector('.close-button-request');
+    // replyCancelButton.addEventListener('click', (event) => {
+    //     closePopup();
+    // });
 
     //setting the event listener for the accept button
     let acceptButton = document.getElementById('acceptButton');
@@ -365,7 +365,6 @@ let initializePage = () => {
         // }
         // do something
       });   
-
 };
 
 //page loading animation
