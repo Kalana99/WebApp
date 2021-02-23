@@ -92,6 +92,7 @@ body{
     margin-bottom: 8px;
     padding-bottom: 20px;
     position: relative;
+    align-content: center;
 }
 
 .form-control label{
