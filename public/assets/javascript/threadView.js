@@ -285,11 +285,11 @@ let initializePage = () => {
     initTablinkButtons();
 
     //setting the event listener for the reply button
-    let replyButton = document.querySelector('.replyBtn');
-    replyButton.addEventListener('click', (event) => {
-        popup_reply = document.querySelector('.popup-request-window');
-        popup_reply.className = 'popup-request-window visible';
-    });
+    // let replyButton = document.querySelector('.replyBtn');
+    // replyButton.addEventListener('click', (event) => {
+    //     popup_reply = document.querySelector('.popup-request-window');
+    //     popup_reply.className = 'popup-request-window visible';
+    // });
 
     //setting up the event listener for the reply cancel button
     // let replyCancelButton = document.querySelector('.close-button-request');

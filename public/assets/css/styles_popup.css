@@ -12,7 +12,7 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid orange;
 } */
 
-.popup-request-window .overlay {
+.popup-window .overlay {
   position:fixed;
   top:0px;
   left:0px;
@@ -23,7 +23,7 @@ body::-webkit-scrollbar-thumb {
   display: none;
 }
 
-.popup-request-window h1{
+.popup-window h1{
   margin: 0;
   margin-bottom: 20px;
   padding: 0;
@@ -33,18 +33,18 @@ body::-webkit-scrollbar-thumb {
   color: grey;
 }
 
-.popup-request-window .input-field{
+.popup-window .input-field{
   display: flex;
   flex-direction: row;
 }
 
-.popup-request-window .col{
+.popup-window .col{
   padding: 10px;
   margin: 0px;
   width: 50%;
 }
 
-.popup-request-window .col input, .popup-request-window .col textarea{
+.popup-window .col input, .popup-window .col textarea{
   border: 1px solid lightgrey;
   border-radius: 6px;
   display: block;
@@ -54,11 +54,11 @@ body::-webkit-scrollbar-thumb {
   outline: none;
 }
 
-/* .popup-request-window .divider{
+/* .popup-window .divider{
   border-right: 1px solid lightgrey;
 } */
 
-.popup-request-window .content {
+.popup-window .content {
   position:absolute;
   top:50%;
   left:50%;
@@ -75,7 +75,7 @@ body::-webkit-scrollbar-thumb {
   align-self: center;
 }
 
-.popup-request-window .close-btn {
+.popup-window .close-btn {
   cursor:pointer;
   position:absolute;
   right:20px;
@@ -92,11 +92,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .form-control{
-  margin-bottom: 8px;
-  padding-bottom: 20px;
   position: relative;
   color: white;
   border-radius: 20px;
+  margin-bottom: 20px;
+}
+.form-control.button{
+  margin-bottom: 0;
 }
 
 .form-control i{
@@ -132,12 +134,13 @@ body::-webkit-scrollbar-thumb {
 .submit{
   border: 1px solid #49798c;
   border-radius: 10px;
-  display: block;
+  display: inline-block;
   font-size: 18px;
   padding: 15px;
   width: 80%;
   cursor: pointer;
-  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   background: linear-gradient(to right, #84d9d2, #07cdae) !important;
@@ -145,7 +148,7 @@ body::-webkit-scrollbar-thumb {
   color: white;
   outline-style: none;
   position: relative;
-  bottom: 10px;
+  /* bottom: 10px; */
 }
 
 .submit:hover{
@@ -156,11 +159,11 @@ body::-webkit-scrollbar-thumb {
   background-color: #2d4642 ;
 }
 
-.popup-request-window.active .overlay {
+.popup-window.active .overlay {
   display: block;
 }
 
-.popup-request-window.active .content {
+.popup-window.active .content {
   transition:all 300ms ease-in-out;
   transform:translate(-50%,-50%) scale(1);
 }
@@ -225,7 +228,7 @@ body::-webkit-scrollbar-thumb {
   position: relative;
 }
 
-.popup-request-window .closeBtn {
+.popup-window .closeBtn {
   cursor: pointer;
   position: relative;
   right: 0;
@@ -279,7 +282,7 @@ body::-webkit-scrollbar-thumb {
   background-color: transparent;
   border: 1px solid lightgrey;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
 }
 
 .inputFileDiv label:hover{
@@ -295,4 +298,13 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* overide styles for logout window */
+.logout .content{
+  width: 350px;
+  height: 200px;
+}
+.logout .content h1{
+  margin-bottom: 60px;
 }

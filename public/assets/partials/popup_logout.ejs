@@ -1,10 +1,12 @@
-<div class="popup" id="popup-1">
+<div class="popup-window logout" id="popup-1">
     <div class="overlay"></div>
     <div class="content">
-        <div class="close-btn" onclick="togglePopup()">&times;</div>
         <h1>Confirm Logout!</h1>
-        <button class="submit-logout" onclick="submitLogout()">
-            <span class="buttonText">Confirm</span>
-        </button>
+        <div class="close-btn" onclick="toggleLogout()">&times;</div>
+        <div class="form-control">
+            <button class="submit-logout submit" onclick="submitLogout()">
+                <span class="buttonText">Confirm</span>
+            </button>
+        </div>
     </div>
 </div>

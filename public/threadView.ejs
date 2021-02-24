@@ -4,8 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles_threadView.css">
     <link rel="stylesheet" href="/css/styles_popup.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/loading_animations.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Thread View</title>
 </head>
 <body>
@@ -19,7 +21,7 @@
         </nav>
         <h1>REQUESTS</h1>
         <div class="reply-btn-group">
-            <button id="replyButton" class="replyBtn">Reply</button>
+            <button id="replyButton" class="replyBtn" onclick="toggleReply()">Reply</button>
             <button id="acceptButton" class="acceptBtn">Accept</button>
             <button id="declineButton" class="declineBtn">Decline</button>
         </div>
@@ -74,6 +76,7 @@
         </div>
     </section>
     <script src="/javascript/threadView.js"></script>
+    <script src="/javascript/popupForm.js"></script>
     <script src="/javascript/formController.js"></script>
     <footer><h2>Copyright</h2></footer>
 </body>

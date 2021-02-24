@@ -25,24 +25,34 @@ body{
   margin-top: 90px;
 }
 
+.photo{
+  /* make the height equal to the width */
+  width: 22vw;
+  height: 22vw;
+  margin-bottom: 15px;
+}
+
 .photo img{
+  width: 100%;
   display: block;
-  height: 300px;
-  width: 300px;
   border-radius: 100%;
   margin: auto;
 }
+
 .photo h4{
   display: block;
-  width: 100%;
+  width: fit-content;
   margin: auto;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.5vw;
   font-family: monospace;
 }
 
 .details{
   padding: 20px;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 .details p{
   display: block;
@@ -50,7 +60,7 @@ body{
   text-align: center;
   color: grey;
   font-family: monospace;
-  font-size: 1.4rem;
+  font-size: 1.4vw;
 }
 
 .main-body{
@@ -72,7 +82,7 @@ body{
   margin: 0;
   height: 90px;
   width: inherit;
-  z-index: 10;
+  z-index: 1;
   /* background: linear-gradient(to right, #00d4ff, #090979) !important; */
   /* opacity: 0.8; */
 }
@@ -218,4 +228,63 @@ footer{
   position: fixed;
   bottom: 0;
   left: inherit;
+}
+
+/* responsive */
+@media screen and (max-width: 1200px){
+  body{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .open-button-request{
+    height: 60%;
+    width: 70%;
+  }
+
+  .col{
+    width: 50%;
+  }
+
+  .photo h4{
+    font-size: 3vw;
+  }
+
+  .details p{
+    font-size: 2vw;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 666px){
+  .main-body{
+    margin-top: 0;
+  }
+  .col{
+    width: 100%;
+  }
+  .container{
+    position: fixed;
+    flex-direction: column;
+    width: 100%;
+  }
+  .profile-div{
+    display: flex;
+    height: 60%;
+  }
+  .photo h4{
+    font-size: 4vw;
+  }
+  .details p{
+    font-size: 3vw;
+    text-align: center;
+  }
+  .open-button-request{
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 500px){
+
 }
