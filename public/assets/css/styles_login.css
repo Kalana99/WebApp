@@ -222,6 +222,7 @@ a.link1:hover{
     border-right-style: none;
     border-bottom-style: solid;
     border-width: 2px;
+    font-weight: bold;
 
 }
 
