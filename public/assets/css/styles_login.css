@@ -211,6 +211,20 @@ a.link1:hover{
     align-items: center;
 }
 
+.left1{
+    position: absolute;
+    padding-bottom: 10px;
+    margin-left: 2%;
+    font-size: 30px;
+    margin-top: 37%;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-width: 2px;
+
+}
+
 .profile{
     margin-top: 15%;
 }
