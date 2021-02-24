@@ -220,7 +220,7 @@ a.link1:hover{
     border-top-style: none;
     border-left-style: none;
     border-right-style: none;
-    border-bottom-style: solid;
+    border-bottom-style: none;
     border-width: 2px;
     font-weight: bold;
 
