@@ -78,7 +78,7 @@ let getThreads = () => {
         initialize(threads);
       })
       .catch((error) => {
-        console.log(err);
+        console.log(error);
         window.location.href = '/login';
       });
       
@@ -192,7 +192,7 @@ let initialize = (arr) => {
     };
 
     //remove loading animation after all the threads are loaded
-    loadingOverlay.style.display = 'none';
+    // loadingOverlay.style.display = 'none';
     console.log('here');
 };
 

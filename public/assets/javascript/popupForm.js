@@ -148,6 +148,7 @@ function toggleRepeat(){
 
 function toggleReply(){
     popupWindow[0].classList.toggle('active');
+    // document.querySelector('.overlay').style.display = 'block';
 }
 
 // ------------------------------------------------------------------------------
