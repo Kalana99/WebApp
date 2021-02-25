@@ -11,12 +11,11 @@ body{
 }
 
 .container{
-    background-color:rgba(207,224,195,0.5);
+    background-color:rgba(207,224,195,0.3);
     border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     width: 450px;
     max-width: 100%;
-    opacity: 0.6;
     position: relative;
 }
 
@@ -36,6 +35,7 @@ body{
 
 .form{
     padding: 30px 40px;
+    opacity: 0.78;
 }
 
 .form-control{
