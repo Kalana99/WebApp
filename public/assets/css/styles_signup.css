@@ -117,7 +117,7 @@ body{
 }
 
 .button.signUp{
-    border: 2px solid #000000;
+    border: none;
     border-radius: 10px;
     display: block;
     font-size: 18px;
