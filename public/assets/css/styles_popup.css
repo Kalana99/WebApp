@@ -59,17 +59,17 @@ body::-webkit-scrollbar-thumb {
 } */
 
 .popup-window .content {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0);  
-  background:#fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0);  
+  background: #fff;
   width: 600px;
   height: 410px;
   z-index: 6;
   text-align:center;
-  padding:20px;
-  box-sizing:border-box;
+  padding: 20px;
+  box-sizing: border-box;
   font-family: monospace;
   border-radius: 10px;
   align-self: center;
