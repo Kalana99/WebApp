@@ -8,15 +8,15 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .container{
-    background-color:rgba(207,224,195,0.5);
+    background-color:rgba(207,224,195,0.3);
     border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 450px;
+    width: 35%;
     max-width: 100%;
-    opacity: 0.6;
     position: relative;
 }
 
@@ -35,7 +35,8 @@ body{
 }
 
 .form{
-    padding: 30px 40px;
+    padding: 20px 40px;
+    opacity: 0.78;
 }
 
 .form-control{
@@ -116,7 +117,7 @@ body{
 }
 
 .button.signUp{
-    border: 1px solid #49798c;
+    border: none;
     border-radius: 10px;
     display: block;
     font-size: 18px;
@@ -132,7 +133,7 @@ body{
 }
 
 .button.signUp:hover{
-    background-color: #70a9a1;
+    background-color: #01110f;
 }
 
 .button.signUp:active{   
@@ -144,7 +145,7 @@ body{
 }
 
 .main-body{
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(/resources/sam-knight-jhpL88kP7Y8-unsplash.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/sam-knight-jhpL88kP7Y8-unsplash.jpg);
     background-size: cover;
     width: 100%;
     height: 100%; 
@@ -164,4 +165,35 @@ body{
 h1{
     text-align: center;
     color:black;
+}
+@media only screen and (max-width: 1100px){
+    .container{
+        width:55%;
+        border-radius: 35px;
+
+    }
+    .form{
+        padding: 20px 30px;
+}
+
+@media only screen and (max-width: 780px){
+    .container{
+        width:70%;
+        border-radius: 35px;
+
+    }
+    .form{
+        padding: 20px 30px;
+}
+
+@media only screen and (max-width: 450px){
+
+    .container{
+        width:90%;
+        border-radius: 30px;
+
+    }
+    .form{
+        padding: 10px 20px;
+    }
 }
