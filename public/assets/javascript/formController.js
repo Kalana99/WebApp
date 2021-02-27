@@ -1,6 +1,7 @@
 // const { set } = require("mongoose");
 
 let correct = true;
+let sentPin = null;
 
 let main = async (page) => {
     correct = true;
@@ -17,9 +18,7 @@ let main = async (page) => {
     let newEmail            = document.querySelectorAll('.newEmail.' + page);
     let index               = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio       = document.querySelectorAll('.nonEmptyRadio.' + page);
-    let question            = document.querySelectorAll('.question.' + page);
     let forgotPswEmail      = document.querySelectorAll('.forgotPswEmail.' + page);
-    let forgotPswQuestion   = document.querySelectorAll('.forgotPswQuestion.' + page);
 
     //buttons that needs loading animation
     let button          = document.querySelector('.button.' + page);
@@ -62,11 +61,8 @@ let main = async (page) => {
     //validate suggestion fields
     await validateSelected(selected);
 
-    //validate secret question
-    await validateQuestion(question);
-
     //validate forgot password page
-    await validateForgotPassword(forgotPswQuestion, forgotPswEmail);
+    await validateForgotPassword(forgotPswEmail);
 
     //submit if correct
     if(correct){
@@ -75,7 +71,7 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail, forgotPswQuestion);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail);
     };
 };
 
@@ -462,49 +458,17 @@ let validateSelected = async (selected) => {
     }
 };
 
-//validate nonEmpty secret question
-let validateQuestion = async (question) => {
-    if (question.length !== 0){
-        let secretQuestion = question[0];
-        let secretAnswer = question[1];
-
-        //only check if the question and answer fields are blank
-
-        if (secretQuestion.value === ''){
-            setError(secretQuestion, 'Select a question');
-            correct = false;
-        }
-        else{
-            setSuccess(secretQuestion);
-            if (secretAnswer.value === ''){
-                setError(secretAnswer, 'Answer the question');
-                correct = false;
-            }
-            else{
-                setSuccess(secretAnswer);
-            }
-        }
-    }
-}
-
 //validate everything in forgot password
-let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
+let validateForgotPassword = async (forgotPswEmail) => {
 
     //backend validation
-    //get the email and send it to server to check is the relevant question and answer are correct
-    //and other normal frontend validations
 
     let emailState = null;
-    let questionState = null;
-    let answerState = null;
 
     for (let i = 0; i < forgotPswEmail.length; i++){
 
         let email           = forgotPswEmail[i];
         let emailValue      = email.value.trim();
-        let questionElement = forgotPswQuestion[0];
-        let answer          = forgotPswQuestion[1];
-        let answerValue     = answer.value.trim();
 
         if (emailValue === ''){
             emailState = "blank";
@@ -516,10 +480,9 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             let requestData = {};
 
             requestData['email'] = emailValue;
-            requestData['question'] = questionElement.value;
-            requestData['answer'] = answerValue;
+            localStorage.setItem('email', emailValue);
 
-            let response = await fetch('/getEmailAndQuestion', {
+            let response = await fetch('/getEmailandPin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -528,31 +491,10 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
             });
     
             data = await response.json();
+            sentPin = data.sentPin;
             
             if (data.emailExists){
                 emailState = "success";
-                if (data.questionState === null){
-                    questionState = "none";
-                }
-                else{
-                    if (data.questionState){
-                        questionState = "success";
-                        if (data.answerState === null){
-                            answerState = "none";
-                        }
-                        else{
-                            if (data.answerState){
-                                answerState = "success";
-                            }
-                            else{
-                                answerState = "error";
-                            }
-                        }
-                    }
-                    else{
-                        questionState = "error";
-                    }
-                }
             }
             else{
                 emailState = "error";
@@ -575,33 +517,75 @@ let validateForgotPassword = async (forgotPswQuestion, forgotPswEmail) => {
         }
         else if (emailState === 'success'){
             setSuccess(forgotPswEmail[i]);
-            if (questionState === 'none'){
-                setError(forgotPswQuestion[0], 'Select a question');
-                correct = false;
-            }
-            else if (questionState === 'error'){
-                setError(forgotPswQuestion[0], 'Wrong question');
-                correct = false;
-            }
-            else if (questionState === 'success'){
-                setSuccess(forgotPswQuestion[0]);
-                if (answerState === 'none'){
-                    setError(forgotPswQuestion[1], 'Answer the question');
-                    correct = false;
-                }
-                else if (answerState === 'error'){
-                    setError(forgotPswQuestion[1], 'Wrong answer');
-                    correct = false;
-                }
-                else{
-                    setSuccess(forgotPswQuestion[1]);
-                }
-            }
-            
+            let submitBtn = document.querySelector('#forgotPasswordSubmit');
+            let formControlBtn = submitBtn.parentElement;
+
+            submitBtn.style.display = 'none';
+
+            addPinSubmit(formControlBtn);
+
         }
 
     }
 };
+
+function addPinSubmit(formControlBtn){
+    let formControl = document.createElement('div');
+    formControl.setAttribute('class', 'form-control');
+    // add pincode input field
+    let pinInput = document.createElement('input');
+    pinInput.setAttribute('class', 'pinCode forgotPassword');
+    pinInput.setAttribute('type', 'text');
+    pinInput.setAttribute('name', 'pin');
+    pinInput.setAttribute('placeholder', 'Enter your pin');
+
+    formControl.appendChild(pinInput);
+
+    let successIcon = document.createElement('i');
+    successIcon.setAttribute('class', 'fa fa-check-circle');
+    let errorIcon = document.createElement('i');
+    errorIcon.setAttribute('class', 'fa fa-exclamation-circle');
+    let errorMsg = document.createElement('small');
+    errorMsg.innerText = 'Error message';
+
+    formControl.appendChild(successIcon);
+    formControl.appendChild(errorIcon);
+    formControl.appendChild(errorMsg);
+
+    // add formControl to the form
+    let form = document.querySelector('.form');
+    form.insertBefore(formControl, form.childNodes[2]);
+
+    // add pinsubmit button
+    let pinSubmitBtn = document.createElement('button');
+    pinSubmitBtn.setAttribute('type', 'button');
+    pinSubmitBtn.setAttribute('class', 'button forgotPassword');
+    pinSubmitBtn.setAttribute('id', 'pinSubmitBtn');
+    pinSubmitBtn.setAttribute('onclick', 'submitPin()');
+    let buttonText = document.createElement('span');
+    buttonText.setAttribute('class', 'buttonText');
+    buttonText.innerText = "Confirm";
+    pinSubmitBtn.appendChild(buttonText);
+    formControlBtn.appendChild(pinSubmitBtn);
+}
+
+function submitPin(){
+    let pinInput = document.querySelector('.pinCode.forgotPassword');
+    // let formControl = pinInput.parentElement;
+
+    let pin = pinInput.value;
+    
+    if (pin === ''){
+        setError(pinInput, 'Enter pin number');
+    }
+    else if (sentPin == pin){
+        setSuccess(pinInput);
+        window.location.href = '/forgotChangePsw';
+    }
+    else if (sentPin != pin){
+        setError(pinInput, 'Wrong pin number');
+    }
+}
 
 //-----------------------toggle password view------------------------------------------
 let toggleView      = document.querySelectorAll('.far');
@@ -768,7 +752,7 @@ addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, question, forgotPswEmail) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -919,20 +903,13 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
             });
     }
 
-    else if(page === 'forgotPassword'){
-        
-        email = forgotPswEmail[0].value;
-        localStorage.setItem('email', email);
-        window.location.href = '/forgotChangePsw';
-    }
-
     else if(page === 'forgotChangePsw'){
 
         data = {};
 
         data['new_password'] = newPsw[0].value;
         data['email']        = localStorage.getItem("email");
-
+        
         fetch('/forgotChangePsw', {
             method: 'PUT',
             headers: {

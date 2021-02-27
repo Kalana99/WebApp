@@ -62,33 +62,22 @@ module.exports.forgotPassword_get = (req, res) => {
 
 module.exports.forgotPassword_checkPost = (req, res) => {
 
-    let states = {};
+    let data = {};
 
-    states['emailExists']    = null;
-    states['questionState'] = null;
-    states['answerState']   = null;
+    data['emailExists']    = null;
 
     db.collections.users.findOne({email: req.body.email}).then(user => {
         
         if(user){
-            states['emailExists'] = true;
-            if(user.question === req.body.question){
-                states['questionState'] = true;
-                if(user.answer === req.body.answer){
-                    states['answerState'] = true;
-                }
-                else if(req.body.answer.length > 0){
-                    states['answerState'] = false;
-                }
-            }
-            else if(req.body.question !== "0"){
-                states['questionState'] = false;
-            }
+            data['emailExists'] = true;
+            sentPin = Math.floor(Math.random()*1000000)
+            mail(req.body.email, 'forgotPassword', {sentPin: sentPin});
+            data['sentPin'] = sentPin;
         }
         else{
-            states['emailExists'] = false;
+            data['emailExists'] = false;
         }
-        res.json(states);
+        res.json(data);
     });
 }
 

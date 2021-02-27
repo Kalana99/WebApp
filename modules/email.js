@@ -29,7 +29,15 @@ var transporter = nodemailer.createTransport({
         subject: 'Student Request System - UOM',
         text: 'You have succesfully created an account for the student request system of UOM. \nPlease click on the link below to verify your email address.\nhttp://localhost:3000/verify/'
              + additionalData.id + '\nAfterwards you can log in to the system.'
+      }
     }
+    else if(type === 'forgotPassword'){
+      data = {
+        from: serverEmail,
+        to: clientEmail,
+        subject: 'Verify your email..',
+        text: 'To recover your password, Enter following pincode in the field provided.\n' + additionalData.sentPin
+      }
     }
 
     transporter.sendMail(data , function(error, info){
