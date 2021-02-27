@@ -32,7 +32,7 @@ router.post('/login', authController.login_post);
 
 router.get('/forgotPassword', authController.forgotPassword_get);
 
-router.post('/getEmailAndQuestion', authController.forgotPassword_checkPost);
+router.post('/getEmailandPin', authController.forgotPassword_checkPost);
 
 router.get('/forgotChangePsw', authController.ForgotPassword_change_get);
 
