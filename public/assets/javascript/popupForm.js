@@ -1,33 +1,9 @@
 let activePopupWindow           = null;             //to store the id of the currenly active window
 let lastSearchTime              = new Date();       //get the current date and time
-let popupRequestWindow          = document.querySelectorAll('.popup-request-window');
+let popupWindow          = document.querySelectorAll('.popup-window');
 let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
+
 // let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
-
-function dropSettings(){
-    document.querySelector('.dropdown-content').classList.toggle('drop');
-}
-
-function togglePopup(){
-    document.querySelector('.popup').classList.toggle('active');
-}
-
-function submitLogout(){
-    document.querySelector('.submit-logout').classList.toggle('loading');
-    window.location.href = '/logout';
-}
-
-function toggleAddDrop(){
-    popupRequestWindow[0].classList.toggle('active');
-}
-
-function toggleSubmission(){
-    popupRequestWindow[1].classList.toggle('active');
-}
-
-function toggleRepeat(){
-    popupRequestWindow[2].classList.toggle('active');
-}
 
 //event listener to get lecturer input suggestions and change the appearance of a selected lecturer field
 let lecturerInputFunction = async (lecturerInput) => {
@@ -143,28 +119,71 @@ let lecturerInputFunction = async (lecturerInput) => {
         });
     }
 };
-
 lecturerInputFunction(lecturerInput);
+
+//settings dropdown list
+function dropSettings(){
+    document.querySelector('.dropdown-content').classList.toggle('drop');
+}
+
+//notifications dropdown list
+function dropNotifications(){
+    document.querySelector('.dropdown-notification').classList.toggle('drop');
+}
+
+function toggleLogout(){
+    popupWindow[0].classList.toggle('active');
+}
+
+function submitLogout(){
+    document.querySelector('.submit-logout').classList.toggle('loading');
+    window.location.href = '/logout';
+}
+
+function toggleAddDrop(){
+    popupWindow[1].classList.toggle('active');
+}
+
+function toggleSubmission(){
+    popupWindow[2].classList.toggle('active');
+}
+
+function toggleRepeat(){
+    popupWindow[3].classList.toggle('active');
+}
+
+function toggleReply(){
+    popupWindow[0].classList.toggle('active');
+    // document.querySelector('.overlay').style.display = 'block';
+}
 
 // ------------------------------------------------------------------------------
 
 let inputs = document.querySelectorAll( '.file' );
-Array.prototype.forEach.call( inputs, function( input )
-{
-	let label	 = input.nextElementSibling,
-		labelVal = label.innerHTML;
 
-	input.addEventListener( 'change', function( e )
-	{
-		var fileName = '';
-		if ( this.files && this.files.length > 1 )
-			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-		else
-			fileName = e.target.value.split( '\\' ).pop();
+inputs.forEach(input => {
+    let label = input.nextElementSibling;
+    let labelVal = label.innerHTML;
 
-		if( fileName )
-			label.querySelector( 'span' ).innerHTML = fileName;
-		else
-			label.innerHTML = labelVal;
-	});
+    label.addEventListener('click', () => {
+        input.click();
+    });
+
+    input.addEventListener('change', (event) => {
+        let fileName = '';
+
+        if (this.files && this.files.length > 1){
+            fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+        }
+        else{
+            fileName = event.target.value.split('\\').pop();
+        }
+
+        if (fileName){
+            label.querySelector('span').innerHTML = fileName;
+        }
+        else{
+            label.innerHTML = labelVal;
+        }
+    });
 });

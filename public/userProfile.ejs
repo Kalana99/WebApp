@@ -6,7 +6,6 @@
     
     <link rel="stylesheet" href="/css/styles_popup.css">
     <link rel="stylesheet" href="/css/styles_userProfile.css">
-    <link rel="stylesheet" href="/css/styles_logoutPopup.css">
     <link rel="stylesheet" href="/css/loading_animations.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -25,9 +24,16 @@
                 </a>
             </li>
             <li class= "nav-tabs">
-                <button class="navBtn">
+                <button class="navBtn" onclick="dropNotifications()">
                     <i class="material-icons">notifications_none</i>
                 </button>
+                <div class="dropdown-notification">
+                    <a href="#">Notification 1 2 3 4 5</a>
+                    <a href="#">Notification 2 3 4 5 6 7</a>
+                    <a href="#">Notification 3 4 5 6 7 8 9</a>
+                    <a href="#">Notification 4 5 6 7 8 9 10</a>
+                    <a href="#">Notification 5 6 7 8 9  10 11 12</a>
+                </div>
             </li>
             <li class= "dropdown nav-tabs">
                 <button class="navBtn" onclick="dropSettings()">                         
@@ -35,14 +41,12 @@
                 </button>
                 <div class= "dropdown-content">
                     <a href="/EditProfile"> Edit profile</a>
-                    <div class="dropdown-divider"></div>
                     <a href="/changePassword"> Change password</a>
-                    <div class="dropdown-divider"></div>
                     <a href="/deleteAccount"> Delete account</a>
                 </div>
             </li>
             <li class="logout-button">
-                <button id="logout-popup" class="logout-popup" onclick="togglePopup()">
+                <button id="logout-popup" class="logout-popup" onclick="toggleLogout()">
                     <i class="material-icons log">power_settings_new</i>
                 </button>
             </li>

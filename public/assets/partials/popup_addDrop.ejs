@@ -1,4 +1,4 @@
-<div class="popup-request-window">
+<div class="popup-window">
 
     <div class="overlay"></div>
 
@@ -57,14 +57,17 @@
 
                     <div class="inputFileDiv">
                         <input type="file" name="uploadedFile" class="file addDrop" id="fileItem" data-multiple-caption="{count} files selected" multiple/>
-                        <label for="file"><span>Choose a file</span></label>
+                        <label for="file">
+                            <i class="material-icons">file_upload</i>
+                            <span class="text">Choose a file</span>
+                        </label>
                     </div>
     
                 </div>
     
             </div>
 
-            <div class="form-control">
+            <div class="form-control button">
                 <button type="button" class="submit-button-request submit" id="addDropSubmitButton">
                     <span class="buttonText">submit</span>
                 </button>

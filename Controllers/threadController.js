@@ -217,7 +217,7 @@ module.exports.getThreadData_post = (req, res) => {
             //documents gets returned
             let skipValue = (req.body.pageNumber - 1) * threadsPerPage;
 
-            let cursor = db.collections.threads.find();
+            let cursor = db.collections.threads.find({$or: [{StaffID: id}, {studentID: id}]});
 
             let searchedArray = [];
                 
@@ -234,6 +234,7 @@ module.exports.getThreadData_post = (req, res) => {
             }
 
             let numberOfPages = Math.ceil(searchedArray.length / threadsPerPage);
+            searchedArray.reverse();
             searchedArray = searchedArray.slice(skipValue, skipValue + threadsPerPage);
 
             let  addNameToArray = async () => {

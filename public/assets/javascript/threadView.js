@@ -78,7 +78,7 @@ let getThreads = () => {
         initialize(threads);
       })
       .catch((error) => {
-        console.log(err);
+        console.log(error);
         window.location.href = '/login';
       });
       
@@ -185,15 +185,15 @@ let initialize = (arr) => {
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
 
-    for (let item = arr.length-1; item >= 0; item--){
+    for (let item = 0; item < arr.length; item++){
         
         btnGroup.appendChild(createThreadElement(arr[item]));
 
     };
 
     //remove loading animation after all the threads are loaded
-    loadingOverlay.style.display = 'none';
-
+    // loadingOverlay.style.display = 'none';
+    console.log('here');
 };
 
 //reply button group (reply, accept and decline)
@@ -217,10 +217,12 @@ let displayMessages = async (arr, msgId) => {
         msgContainer.appendChild(msg);
 
         //evidence
-        let documents = document.createElement('a');
-        documents.innerHTML = 'Download documents';
-        documents.href = '/downloadDocuments/' + arr[i]._id;
-        msgContainer.appendChild(documents);
+        if(arr[i].files.length > 0){
+            let documents = document.createElement('a');
+            documents.innerHTML = 'Download documents';
+            documents.href = '/downloadDocuments/' + arr[i]._id;
+            msgContainer.appendChild(documents);
+        }
 
         if (userId.id === person){
             msgContainer.setAttribute('class', 'reciever');
@@ -283,17 +285,17 @@ let initializePage = () => {
     initTablinkButtons();
 
     //setting the event listener for the reply button
-    let replyButton = document.querySelector('.replyBtn');
-    replyButton.addEventListener('click', (event) => {
-        popup_reply = document.querySelector('.popup-request-window');
-        popup_reply.className = 'popup-request-window visible';
-    });
+    // let replyButton = document.querySelector('.replyBtn');
+    // replyButton.addEventListener('click', (event) => {
+    //     popup_reply = document.querySelector('.popup-request-window');
+    //     popup_reply.className = 'popup-request-window visible';
+    // });
 
     //setting up the event listener for the reply cancel button
-    let replyCancelButton = document.querySelector('.close-button-request');
-    replyCancelButton.addEventListener('click', (event) => {
-        closePopup();
-    });
+    // let replyCancelButton = document.querySelector('.close-button-request');
+    // replyCancelButton.addEventListener('click', (event) => {
+    //     closePopup();
+    // });
 
     //setting the event listener for the accept button
     let acceptButton = document.getElementById('acceptButton');
@@ -365,7 +367,6 @@ let initializePage = () => {
         // }
         // do something
       });   
-
 };
 
 //page loading animation

@@ -1,30 +1,48 @@
-<div class="popup-request-window">
-    <form class="popup-form" action="/reply" method="POST" autocomplete="off" id="replyForm" enctype="multipart/form-data">
-        <header class="header-popup"><h2>Add/Drop Request</h2></header>
-        <div class="content">
+<div class="popup-window reply">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+
+        <h1>Reply</h1>
+
+        <div class="close-btn" onclick="toggleReply()">&times;</div>
+
+        <form class="popup-form" action="/reply" method="POST" autocomplete="off" id="replyForm" enctype="multipart/form-data">
+        
             <div class="input-field">
+    
+                <div class="col">
+    
+                    <div class="form-control">
+                        <!-- id = "textarea" -->
+                        <textarea name="message" rows="10" cols="5" placeholder="description" class="nonEmpty thread reply" id="nonEmpty reply"></textarea>
+                        <i class="fa fa-check-circle"></i>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+        
+                    <div class="inputFileDiv">
+                        <input type="file" name="uploadedFile" class="file thread reply" data-multiple-caption="{count} files selected" multiple/>
+                        <label for="file">
+                            <i class="material-icons">file_upload</i>
+                            <span class="text">Choose a file</span>
+                        </label>
+                    </div>
 
-                <div class="form-control">
-                    <!-- id = "textarea" -->
-                    <textarea name="message" rows="10" cols="5" placeholder="description" class="nonEmpty thread reply" id="nonEmpty reply"></textarea>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
+                    <div class="form-control">
+                        <button type="button" class="submit-button-request submit" id="replySubmitButton">
+                            <span class="buttonText">submit</span>
+                        </button>
+                    </div>
+    
                 </div>
-
-                <!-- append child to send evidence if the request type is submission deadline -->
-                <div>
-                    <br/>
-                    <input type="file" name="uploadedFile" class="file thread reply" multiple/> 
-                    <br /><br />
-                </div>
-
-                <div class="form-control">
-                    <button type="button" class="submit-button-request submit" id="replySubmitButton">submit</button>
-                    <button type="button" class="close-button-request cancel" id="replyCancelButton">cancel</button>
-                </div>
-
+    
+                
+    
             </div>
-        </div>
-    </form>
+        </form>
+
+    </div>
+
 </div>
