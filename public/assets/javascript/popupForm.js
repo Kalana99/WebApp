@@ -1,6 +1,6 @@
 let activePopupWindow           = null;             //to store the id of the currenly active window
 let lastSearchTime              = new Date();       //get the current date and time
-let popupWindow          = document.querySelectorAll('.popup-window');
+let popupWindow                 = document.querySelectorAll('.popup-window');
 let lecturerInput               = document.querySelectorAll('.lecturer');               //get lecturer input fields
 
 // let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
@@ -155,6 +155,10 @@ function toggleRepeat(){
 function toggleReply(){
     popupWindow[0].classList.toggle('active');
     // document.querySelector('.overlay').style.display = 'block';
+}
+
+function toggleConfirm(){
+    popupWindow[1].classList.toggle('active');
 }
 
 // ------------------------------------------------------------------------------

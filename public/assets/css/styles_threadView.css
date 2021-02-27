@@ -1,5 +1,5 @@
 *{
-    box-sizing: border-box;
+    font-family: monospace;
 }
 
 *:focus {
@@ -7,117 +7,212 @@
 }
 
 body{
-    background-color: #f5f5f5;
-    margin: 0px;
-    padding: 0px;
-    height: 90vh;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    margin: auto;
     width: 100%;
-}
-
-header{
-    background-color: grey;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 20px 40px;
+    height: 100%;
+    background-image: url(../resources/threadViewBackground.png);
 }
 
 .navigation{
-    overflow: hidden;
-    background-color: #333;
-}
-
-.navigation-list{
-    margin: 0px;
-    padding: 0px;
-    list-style-type: none;
-}
-
-.navigation-list a{
-    float: left;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 90px;
+    position: fixed;
     display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    
+    background: linear-gradient(to right, #42275a, #734b6d);
+    /* background: whitesmoke; */
+    width: 100%;
+    opacity: 0.7;
 }
 
-.navigation-list a:hover{
-    background-color: #ddd;
+.sidePanel,
+.nav{
+    box-sizing: border-box;
+    box-shadow: none;
+    display: flex;
+    width: auto;
+    list-style-type: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: fit-content;
+    height: 60px;
+    position: relative;
+    line-height: normal;
+    float: right;
+}
+
+.sidePanel{
+    float: left;
+}
+
+.sidePanel li,
+.nav li{
+    display: flex;
+    padding: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 60px;
+}
+
+.sidePanel button,
+.navBtn{
+    border: none;
+    padding: auto;
+    background: transparent;
+    color: lightgrey;
+    width: 70px;
+    height: 60px;
+    cursor: pointer;
+    justify-content: center;
+    outline: none;
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sidePanel button{
+    width: fit-content;
+}
+
+.sidePanel button:hover,
+.nav button:hover{
+    background: lightgrey;
     color: black;
 }
 
-section{
+.sidePanel button:active,
+.nav button:active{
+    outline: none;
+    background: grey;
+    color: white;
+    border: none;
+}
+
+.main-body{
+    top: 90px;
+    position: relative;
     display: flex;
-    background: whitesmoke;
     padding: 20px 5px;
-    display: flex;
+    transition: margin-left .5s; 
 }
 
 .column{
     margin: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px;
     height: 500px;
     max-height: 100%;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
     max-width: 100%;
-    display: flex;
-    flex-direction: column;
+    opacity: 0.8;
+    border-radius: 10px;
+    background-image: url(../resources/background-test.jpg);
+    position: relative;
+    overflow: hidden;
+    /* box-shadow: -4px 4px 5px -1px rgba(0,0,0,0.75); */
+    /* background-color: grey; */
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
 .column.left{
-    width: 35%;
-    background: whitesmoke;
-    margin-left: 20px;
+    width: 30%;
+    margin-right: 2px;
+    /* background: linear-gradient(90deg, #757474 0%, #464646 49%, #080808 100%); */
+}
+
+.search-bar{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
     position: relative;
 }
 
 .search-bar input[type=text]{
-    float: left;
+    /* float: left; */
     display: inline;
     padding: 6px;
-    border: none;
-    margin: 2px 0 8px 0;
+    border: 1px solid lightgrey;
+    margin: auto;
     font-size: 15px;
-    width: 80%;
+    width: 500px;
     position: relative;
+    border-radius: 10px;
 }
 
 .searchButton{
-    float: left;
-    display: inline;
-    padding: 6px;
-    margin-right: 16px;
-    margin-top: 2px;
-    margin-bottom: 6px;
-    margin-left: 0;
+    position: absolute;
+    top: 18px;
+    right: 5px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 5px;
+}
+.searchButton:hover{
+    background: whitesmoke;
 }
 
-.tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: fit-content;
-    height: fit-content;
+.tab{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, #bdc3c7 , #2c3e50);
+    overflow-x: hidden;
+    padding-top: 60px;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+.tab .closebtn{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+.tab a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.tab a:hover{
+    color: black;
 }
 
 .tab button {
     display: block;
-    background-color: inherit;
-    color: black;
+    background: transparent;
+    color: #fff;
     padding: 22px 16px;
-    width: 90px;
+    width: 100%;
     border: none;
     outline: none;
     text-align: left;
     cursor: pointer;
+    font-size: 1.2rem;
     transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
     background-color: #ddd;
+    color: black;
 }
 
 /* Create an active/current "tab button" class */
@@ -128,6 +223,9 @@ section{
 
 .column.right{
     width: 60%;
+    border-radius: 10px;
+    margin-left: 2px;
+    /* background: linear-gradient(90deg, #080808 0%, #464646 40%, #757474 100%); */
 }
 
 .buttoncontainer{
@@ -139,34 +237,58 @@ section{
     max-height: 85%;
 }
 
+.buttoncontainer::-webkit-scrollbar{
+    width: 0;
+}
+
 .message-list-item{
     position: relative;
 }
 
+.btn-group{
+    margin-top: 15px;
+}
+
 .btn-group button {
-    background-color: #f3eeeaa8; /* Green background */
-    border: 1px solid #454945; /* Green border */
+    background-color: #fff; /* Green background */
+    border: none;
+    border-top: 1px solid grey; /* Green border */
     color: black; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     width: 100%; /* Set a width if needed */
+    height: 60px;
     display: block; /* Make the buttons appear below each other */
     text-align: left;
+    font-family: monospace;
+}
+
+.btn-group .item{
+    margin: 1px;
+    display: inline-block;
+}
+
+.btn-group .item.sender{
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+.btn-group .item.date{
+    float: right;
+}
+.btn-group .type{
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .btn-group button:first-child{
     border-radius: 10px 10px 0 0;
+    border-top: none;
 }
 
 .btn-group button:last-child{
     border-radius: 0 0 10px 10px;
 }
 
-.btn-group button:not(:last-child) {
-    border-bottom: none; /* Prevent double borders */
-}
-
-/* Add a background color on hover */
 .btn-group button:hover {
     background-color: lightgrey;
 }
@@ -176,9 +298,20 @@ section{
     color: white;
 }
 
+.reply-btn-group{
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+}
+.replyBtns{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
 .reply-btn-group button{
-    color: black;
-    border: 1px solid #454945;
+    color: whitesmoke;
+    border: none;
     border-radius: 10px;
     overflow: hidden;
     padding: 10px;
@@ -188,16 +321,34 @@ section{
     display: inline-block;
     text-align: center;
     visibility: hidden;
-}
-
-.acceptBtn{
-    background: #3ba532;
-}
-.declineBtn{
-    background: #e01833;
+    font-size: 1.3rem;
+    position: relative;
 }
 .replyBtn{
-    background: #9da19b;
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+}
+.acceptBtn{
+    background: linear-gradient(to right, #02aab0, #00cdac);
+}
+.declineBtn{
+    background: linear-gradient(to right, #ff512f , #dd2476);
+}
+
+.replyBtn:hover{
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+}
+.acceptBtn:hover{
+    background: linear-gradient(to right, #00cdac, #02aab0);
+}
+.declineBtn:hover{
+    background: linear-gradient(to right, #dd2476 , #ff512f);
+}
+
+.acceptBtn:active,
+.declineBtn:active,
+.replyBtn:active{
+    top: 2px;
+    right: 2px;
 }
 
 .reply-btn-group.visible button{
@@ -213,14 +364,41 @@ section{
     bottom: 0px;
     max-height: 30px;
     left: 0;
-    margin-left: 10px;
-    padding: 1px;
+    padding: 3px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    margin: 5px auto 5px auto;
+}
+.pageNav .pageNavContents{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pageNav .page{
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.pageNav .pageNavBtn{
+    background: transparent;
+    border-radius: 50%;
+    border: none;
+}
+.pageNav .pageNavBtn:hover{
+    background: lightgrey;
 }
 
 .pageNav a {
     text-decoration: none;
-    display: inline-block;
-    padding: 4px 8px;
+    display: flex;
+    padding: 6px;
+    margin: 4px;
 }
 
 .pageNav a:hover {
@@ -228,22 +406,8 @@ section{
     color: black;
 }
 
-.previous {
-    background-color: #697769;
-    color: white;
-}
-
-.next {
-    background-color: #697769;
-    color: white;
-}
-
-.round {
-    border-radius: 10;
-}
-
 #pageSelector{
-    background: rgb(245, 245, 245, 0.5);
+    background: transparent;
     border: none;
     color: black;
     line-height: inherit;
@@ -255,10 +419,14 @@ section{
   /* --------------------------------------------- */
 
 footer{
-    background-color: whitesmoke;
-    border-top: 1px solid #f0f0f0;
+    background: transparent;
+    border: none;
     padding: 20px 40px;  
-    text-align: center;
+    text-align: left;
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
 }
 
 .msg-group{
@@ -266,11 +434,12 @@ footer{
     flex-direction: column;
     margin: 3px;
     padding: 4px;
-}
-
-.item{
-    margin: 1px;
-    display: inline-block;
+    height: fit-content;
+    max-height: 85%;
+    top: 0;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 /* ----------------thread msg display styles------------------------- */
@@ -279,33 +448,71 @@ footer{
     margin: 5px;
     padding: 5px;
     height: fit-content;
-    width: 100%;
-    max-height: 150px;
-    background-color: #91aafc85;
+    width: 97%;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    max-width: 100%;
+    /* max-width: 100%; */
     position: relative;
     float: right;
     text-align: right;
+    font-size: 1.2rem;
+    color: #111;
 }
 
 .msg-group .sender{
     margin: 5px;
     padding: 5px;
     height: fit-content;
-    width: 100%;
-    max-height: 150px;
-    background-color: #88eb7ba2;
+    width: 97%;
+    background: linear-gradient(to right, #cc2b5e, #753a88);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    max-width: 100%;
+    /* max-width: 100%; */
     position: relative;
     float: left;
     text-align: left;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.msg-group a{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    height: fit-content;
+    width: 195px;
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 5px;
+    margin-top: 8px;
+    color: #111;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg-group .reciever a{
+    float: right;
+}
+
+.msg-group a:hover{
+    background: lightgrey;
+}
+
+.msg-group a:active{
+    background: darkgrey;
+    color: #fff;
+}
+
+.msg-group span{
+    background: transparent;
+    top: 0;
+    margin: 3px;
 }
 
 /* displayed msg container is a p tag inside a div */
-p{
+/* p{
     margin: 0px;
-}
+} */

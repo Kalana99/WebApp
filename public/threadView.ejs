@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,40 +11,72 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Thread View</title>
 </head>
+
 <body>
-    <header>
+
+    <header class="header">
         <nav class="navigation">
-            <ul class="navigation-list">
-                <li><a href="/userprofile">Home</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+
+            <ul class="sidePanel">
+                <li>
+                    <div class="filterMenu">
+                        <button type="button" class="openbtn" onclick="openNav()">&#9776; Filter Menu</button>
+                    </div>
+                </li>
             </ul>
+
+            <ul class="nav">
+                <li>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search.." class="searchText">
+                        <button type="button" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <a href="/userprofile">
+                        <button class="navBtn">
+                            Home
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <button class="navBtn">
+                            Contact
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <button class="navBtn">
+                            About
+                        </button>
+                    </a>
+                </li>
+            </ul>
+
         </nav>
-        <h1>REQUESTS</h1>
-        <div class="reply-btn-group">
-            <button id="replyButton" class="replyBtn" onclick="toggleReply()">Reply</button>
-            <button id="acceptButton" class="acceptBtn">Accept</button>
-            <button id="declineButton" class="declineBtn">Decline</button>
-        </div>
+
+    </header>
+
+    <section class="main-body">
 
         <%- include('./assets/partials/popup_reply.ejs') %>
 
-    </header>
-    <section>
+        <%- include('./assets/partials/popup_confirm.ejs') %>
+
         <div class="tab">
+            <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
             <button class="tablinks" id="all">All</button>
             <button class="tablinks" id="active">Active</button>
             <button class="tablinks" id="accepted">Accepted</button>
             <button class="tablinks" id="declined">Declined</button>
             <button class="tablinks" id="unread">Unread</button>
         </div>
+        
         <div class="column left">
-            <div class="search-bar">
-                <input type="text" placeholder="Search.." class="searchText">
-                <button type="button" class="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
             <div class="buttonContainer">
                 <!-- loading animation -->
                 <!-- <div class="overlay">
@@ -59,25 +92,55 @@
                     </div>
                 </div>
             </div>
+
             <div class="pageNav">
-                <button id="leftButton"><</button>
-                <input type="text" id="pageSelector">
-                <span id="divider">/</span>
-                <span id="numOfPages">1</span>
-                <button id="rightButton">></button>
+                <div class="pageNavContents">
+                    <button id="leftButton" class="pageNavBtn left"><</button>
+
+                    <div class="page">
+                        <input type="text" id="pageSelector">
+                        <span id="divider">/</span>
+                        <span id="numOfPages"></span>
+                    </div>
+                    
+                    <button id="rightButton" class="pageNavBtn right">></button>
+                </div>
             </div>
+
         </div>
+
         <div class="column right">
             <div class="message-list">
                 <div class="msg-group">
                     <!-- messages in threads will appear here via js-->
                 </div>
             </div>
+
+            <div class="reply-btn-group">
+                <ul class="replyBtns">
+                    <li>
+                        <button id="replyButton" class="replyBtn btn" onclick="toggleReply()">Reply</button>
+                    </li>
+                    <li>
+                        <button id="acceptButton" class="acceptBtn btn" onclick="toggleConfirm()">Accept</button>
+                    </li>
+                    <li>
+                        <button id="declineButton" class="declineBtn btn" onclick="toggleConfirm()">Decline</button>
+                    </li>
+                    
+                </ul>
+            </div>
+
         </div>
+
     </section>
+
     <script src="/javascript/threadView.js"></script>
     <script src="/javascript/popupForm.js"></script>
     <script src="/javascript/formController.js"></script>
-    <footer><h2>Copyright</h2></footer>
+    
+    <%- include('./assets/partials/footer.ejs') %>
+
 </body>
+
 </html>

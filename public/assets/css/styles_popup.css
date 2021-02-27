@@ -301,10 +301,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* overide styles for logout window */
+.confirm .content,
 .logout .content{
   width: 350px;
   height: 200px;
 }
+.confirm .content h1,
 .logout .content h1{
   margin-bottom: 60px;
 }

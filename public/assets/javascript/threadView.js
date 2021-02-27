@@ -1,5 +1,6 @@
 let print = console.log;
 let threads;
+let status = null;
 let threadId = null;
 let pageNumber = 1;
 let threadsPerPage = 4;
@@ -12,6 +13,16 @@ let filter = {
 };
 
 let msgGroup = document.querySelector('.msg-group');
+
+function openNav(){
+    document.querySelector('.tab').style.width = "150px";
+    document.querySelector('.main-body').style.marginLeft = "90px";
+}
+
+function closeNav(){
+    document.querySelector('.tab').style.width = "0";
+    document.querySelector('.main-body').style.marginLeft = "0";
+}
 
 let initNav = () => {
 
@@ -219,8 +230,15 @@ let displayMessages = async (arr, msgId) => {
         //evidence
         if(arr[i].files.length > 0){
             let documents = document.createElement('a');
-            documents.innerHTML = 'Download documents';
+            let spanText = document.createElement('span');
+            spanText.innerHTML = 'Download documents';
             documents.href = '/downloadDocuments/' + arr[i]._id;
+            let downloadIcon = document.createElement('span');
+            downloadIcon.setAttribute('class', 'material-icons');
+            downloadIcon.innerText = 'download';
+            documents.appendChild(downloadIcon);
+            documents.appendChild(spanText);
+
             msgContainer.appendChild(documents);
         }
 
@@ -277,6 +295,27 @@ let initTablinkButtons = () => {
 
 };
 
+function submitConfirm(){
+    data = {
+        'threadId': threadId,
+        'status': status
+    }
+
+    fetch('/acceptOrDeclineRequest', {
+    method: 'POST', // or 'PUT'
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+}
 
 let initializePage = () => {
 
@@ -301,52 +340,14 @@ let initializePage = () => {
     let acceptButton = document.getElementById('acceptButton');
     if(acceptButton != null)
         acceptButton.addEventListener('click', (event) => {
-
-            data = {
-                'threadId': threadId,
-                'status': 'accepted'
-            }
-
-            fetch('/acceptOrDeclineRequest', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                location.reload();
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
+            status = 'accepted';
         });
 
     //setting the event listener for the decline button
     let declineButton = document.getElementById('declineButton');
     if(declineButton != null)
         declineButton.addEventListener('click', (event) => {
-
-        data = {
-            'threadId': threadId,
-            'status': 'declined'
-        }
-
-        fetch('/acceptOrDeclineRequest', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            location.reload();
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+            status = 'declined';
     });
 
     //  setting the keypress event listener for the search bar and a click listener
