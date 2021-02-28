@@ -184,8 +184,7 @@ body{
   font-family: monospace;
   box-sizing: border-box;
   left: 90px;
-  min-width: 10rem;
-  width: 150px;
+  width: 180px;
   margin: 0.125rem 0 0;
   color: black;
   text-align: left;
