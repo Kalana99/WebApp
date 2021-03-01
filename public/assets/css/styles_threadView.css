@@ -219,6 +219,11 @@ body{
 .tab button.active {
     background-color: #ccc;
 }
+
+.tab .selectedTablink{
+    background-color: #ddd;
+    color: black;
+}
   
 
 .column.right{
