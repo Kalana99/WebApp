@@ -95,11 +95,27 @@ let getThreads = () => {
       
 };
 
-let createThreadElement = (thread) => {
+let createThreadElement = async (thread) => {
 
     //create and set attributes to the elements
     let msgButton = document.createElement('button');
     msgButton.setAttribute('id', thread._id);
+
+    if(thread.status == 'accepted')
+        msgButton.className = 'accepted';
+
+    else if(thread.status == 'declined')
+        msgButton.className = 'declined';
+
+    else{
+        userType = (await (await fetch('/getUserType')).json()).type;
+        
+        if(userType == 'staff' && thread.staffUnread == true)
+            msgButton.className = 'notRead';
+
+        else if(userType == 'student' && thread.studentUnread == true)
+            msgButton.className = 'notRead';
+    }
 
     let msgDiv = document.createElement('div');
     msgDiv.setAttribute('class', 'msg-div');
@@ -207,14 +223,14 @@ let createThreadElement = (thread) => {
 let loadingOverlay = document.querySelector('.overlay');
 
 //initialize button group
-let initialize = (arr) => {
+let initialize = async (arr) => {
     //button group
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
 
     for (let item = 0; item < arr.length; item++){
         
-        btnGroup.appendChild(createThreadElement(arr[item]));
+        btnGroup.appendChild(await createThreadElement(arr[item]));
 
     };
 
