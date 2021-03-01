@@ -110,10 +110,7 @@ let createThreadElement = async (thread) => {
     else{
         userType = (await (await fetch('/getUserType')).json()).type;
         
-        if(userType == 'staff' && thread.staffUnread == true)
-            msgButton.classList.add('notRead');
-
-        else if(userType == 'student' && thread.studentUnread == true)
+        if((userType == 'staff' && thread.staffUnread == true) || (userType == 'student' && thread.studentUnread == true))
             msgButton.classList.add('notRead');
     }
 
