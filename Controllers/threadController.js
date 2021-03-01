@@ -399,9 +399,17 @@ module.exports.getUnread_get = (req, res) => {
         db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(async user => {
             
             let cursor = db.collections.threads.find({$or:[{StaffID: id}, {studentID: id}]});
-            console.log(cursor.count);
+            let exists = false;
+            while(await cursor.hasNext()){
+                let thread = await cursor.next();
+                
+                if(user.type == 'staff' && thread.staffUnread == true || user.type == 'student' && thread.studentUnread == true){
+                    exists = true
+                    break;
+                }
+            }
 
-            res.json({unreadExists: true})``;
+            res.json({unreadExists: exists});
 
         });
     });

@@ -97,6 +97,8 @@ let getThreads = () => {
 
 let createThreadElement = async (thread) => {
 
+    let unread = false;
+
     //create and set attributes to the elements
     let msgButton = document.createElement('button');
     msgButton.setAttribute('id', thread._id);
@@ -110,8 +112,10 @@ let createThreadElement = async (thread) => {
     else{
         userType = (await (await fetch('/getUserType')).json()).type;
         
-        if((userType == 'staff' && thread.staffUnread == true) || (userType == 'student' && thread.studentUnread == true))
+        if((userType == 'staff' && thread.staffUnread == true) || (userType == 'student' && thread.studentUnread == true)){
             msgButton.classList.add('notRead');
+            unread = true;
+        }
     }
 
     let msgDiv = document.createElement('div');
@@ -166,6 +170,13 @@ let createThreadElement = async (thread) => {
     //add an event listener
     msgButton.addEventListener('click', (event) => {
 
+        //if the thread is unread, make it not unread
+        if(unread){
+            event.currentTarget.classList.remove('notRead');
+            unread = false;
+            
+        }
+
         //get the selected button and deselect it
         //and select the selected button
 
@@ -191,7 +202,7 @@ let createThreadElement = async (thread) => {
                 })
                 .then(response => response.json())
                 .then(data => {
-
+                    processUnreadTablink();
                     //set the reply and accept, decline buttons according to user type
                     //after that displat the message and the buttons together
                     fetch('/getUserType')
@@ -206,7 +217,7 @@ let createThreadElement = async (thread) => {
 
                 })
                 .catch((error) => {
-                console.error('Error:', error);
+                    console.error('Error:', error);
                 });
 
                 break;
@@ -319,7 +330,7 @@ let setTablinkClassName = (tablinkElement) => {
     tablinkElement.classList.add('selectedTablink');
 }
 
-let initTablinkButtons = () => {
+let initTablinkButtons = async () => {
     //add eventlisteners to tablink buttons
     let tablinks = document.querySelectorAll('.tablinks');
 
@@ -335,11 +346,19 @@ let initTablinkButtons = () => {
 
     });
 
-    let unreadTablink = document.querySelector('#unread');
-    // unreadExists = (await (await fetch('/getUnread')).json()).unreadExists;
-    // console.log(unreadExists);
+    processUnreadTablink();
 
 };
+
+let processUnreadTablink = async () => {
+    let unreadTablink = document.querySelector('#unread');
+    let unreadExists = (await (await fetch('/getUnread')).json()).unreadExists;
+    
+    if(unreadExists)
+        unreadTablink.classList.add('unreadExists');
+    else
+        unreadTablink.classList.remove('unreadExists');
+}
 
 function submitConfirm(){
     data = {
