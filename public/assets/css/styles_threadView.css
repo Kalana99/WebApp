@@ -250,17 +250,42 @@ body{
 }
 
 .btn-group button {
-    background-color: #fff; /* Green background */
+    background-color: #fff;
     border: none;
-    border-top: 1px solid grey; /* Green border */
-    color: black; /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    width: 100%; /* Set a width if needed */
+    border-top: 1px solid grey;
+    color: black;
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 100%;
     height: 60px;
-    display: block; /* Make the buttons appear below each other */
+    display: block;
     text-align: left;
     font-family: monospace;
+    position: relative;
+}
+
+.btn-group button .material-icons{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+.btn-group.accepted button .material-icons.accepted{
+    visibility: visible;
+    color: #2ecc71;
+}
+
+.btn-group.declined button .material-icons.declined{
+    visibility: visible;
+    color: #e74c3c;
+}
+
+.btn-group.notRead button .material-icons.notRead{
+    visibility: visible;
+    color: #e74c3c;
 }
 
 .btn-group .item{

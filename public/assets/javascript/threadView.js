@@ -125,6 +125,18 @@ let createThreadElement = (thread) => {
     let smallType = document.createElement('small');
     smallType.innerText = thread.type;
 
+    let iconAccepted = document.createElement('span');
+    iconAccepted.setAttribute('class', 'material-icons accepted');
+    iconAccepted.innerText = 'check_circle';
+
+    let iconDeclined = document.createElement('span');
+    iconDeclined.setAttribute('class', 'material-icons declined');
+    iconDeclined.innerText = 'unpublished';
+
+    let iconNotRead = document.createElement('span');
+    iconNotRead.setAttribute('class', 'material-icons notRead');
+    iconNotRead.innerText = 'mark_chat_unread';
+
     //append items in order and create the button group
     msgButton.appendChild(msgDiv);
     msgDiv.appendChild(divSender);
@@ -133,6 +145,10 @@ let createThreadElement = (thread) => {
     divDate.appendChild(smallDate);
     msgDiv.appendChild(divType);
     divType.appendChild(smallType);
+
+    msgButton.appendChild(iconAccepted);
+    msgButton.appendChild(iconDeclined);
+    msgButton.appendChild(iconNotRead);
 
     //add an event listener
     msgButton.addEventListener('click', (event) => {
