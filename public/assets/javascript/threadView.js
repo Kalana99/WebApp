@@ -253,6 +253,12 @@ let initialize = async (arr) => {
 //reply button group (reply, accept and decline)
 let replyButtons = document.querySelector('.reply-btn-group');
 
+// function to keep the scroll bar at the bottom of a div
+async function updateScroll(){
+    let msgGroup = document.querySelector('.msg-group');
+    msgGroup.scrollTop = msgGroup.scrollHeight;
+}
+
 // function to display the messages of the selected thread
 let displayMessages = async (arr, msgId) => {
 
@@ -293,6 +299,9 @@ let displayMessages = async (arr, msgId) => {
         }
 
         msgGroup.appendChild(msgContainer);
+
+        // keep the scrollbar at the bottom when messages are displayed
+        updateScroll();
     }
 
     
