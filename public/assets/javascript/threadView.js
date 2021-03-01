@@ -102,19 +102,19 @@ let createThreadElement = async (thread) => {
     msgButton.setAttribute('id', thread._id);
 
     if(thread.status == 'accepted')
-        msgButton.className = 'accepted';
+        msgButton.classList.add('accepted');
 
     else if(thread.status == 'declined')
-        msgButton.className = 'declined';
+        msgButton.classList.add('declined');
 
     else{
         userType = (await (await fetch('/getUserType')).json()).type;
         
         if(userType == 'staff' && thread.staffUnread == true)
-            msgButton.className = 'notRead';
+            msgButton.classList.add('notRead');
 
         else if(userType == 'student' && thread.studentUnread == true)
-            msgButton.className = 'notRead';
+            msgButton.classList.add('notRead');
     }
 
     let msgDiv = document.createElement('div');
