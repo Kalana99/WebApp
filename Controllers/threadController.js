@@ -6,7 +6,7 @@ const db = mongoose.connection;
 const archiver = require('archiver');
 const path = require('path');
 
-let threadsPerPage = 4;
+let threadsPerPage = 8;
 
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {

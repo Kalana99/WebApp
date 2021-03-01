@@ -3,7 +3,7 @@ let threads;
 let status = null;
 let threadId = null;
 let pageNumber = 1;
-let threadsPerPage = 4;
+let threadsPerPage = 8;
 let numberOfPages = 0;
 
 let filter = {
@@ -95,11 +95,24 @@ let getThreads = () => {
       
 };
 
-let createThreadElement = (thread) => {
+let createThreadElement = async (thread) => {
 
     //create and set attributes to the elements
     let msgButton = document.createElement('button');
     msgButton.setAttribute('id', thread._id);
+
+    if(thread.status == 'accepted')
+        msgButton.classList.add('accepted');
+
+    else if(thread.status == 'declined')
+        msgButton.classList.add('declined');
+
+    else{
+        userType = (await (await fetch('/getUserType')).json()).type;
+        
+        if((userType == 'staff' && thread.staffUnread == true) || (userType == 'student' && thread.studentUnread == true))
+            msgButton.classList.add('notRead');
+    }
 
     let msgDiv = document.createElement('div');
     msgDiv.setAttribute('class', 'msg-div');
@@ -207,14 +220,14 @@ let createThreadElement = (thread) => {
 let loadingOverlay = document.querySelector('.overlay');
 
 //initialize button group
-let initialize = (arr) => {
+let initialize = async (arr) => {
     //button group
     let btnGroup = document.getElementsByClassName('btn-group')[0];
     btnGroup.innerHTML = '';
 
     for (let item = 0; item < arr.length; item++){
         
-        btnGroup.appendChild(createThreadElement(arr[item]));
+        btnGroup.appendChild(await createThreadElement(arr[item]));
 
     };
 
@@ -293,6 +306,15 @@ let displayBtn = (type, status) => {
     }
 };
 
+let setTablinkClassName = (tablinkElement) => {
+
+    let tablinks = document.querySelectorAll('.tablinks');
+    tablinks.forEach(tablink => {
+        tablink.className = tablink.className.replace(' selectedTablink', '');
+    });
+
+    tablinkElement.className += ' selectedTablink';
+}
 
 let initTablinkButtons = () => {
     //add eventlisteners to tablink buttons
@@ -304,6 +326,7 @@ let initTablinkButtons = () => {
             replyButtons.className = 'reply-btn-group';
             pageNumber = 1;
             filter.status = event.currentTarget.getAttribute('id');
+            setTablinkClassName(event.currentTarget);
             getThreads();
         });
 
