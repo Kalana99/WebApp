@@ -309,6 +309,7 @@ let displayBtn = (type, status) => {
 
     if(status == 'accepted' || status == 'declined'){
         replyButtons.className = 'reply-btn-group';
+        replyButton.className = 'replyBtn';
     }
 
     else if (type === 'staff'){
