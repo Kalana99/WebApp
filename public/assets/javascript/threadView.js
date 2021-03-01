@@ -310,10 +310,10 @@ let setTablinkClassName = (tablinkElement) => {
 
     let tablinks = document.querySelectorAll('.tablinks');
     tablinks.forEach(tablink => {
-        tablink.className = tablink.className.replace(' selectedTablink', '');
+        tablink.classList.remove('selectedTablink');
     });
 
-    tablinkElement.className += ' selectedTablink';
+    tablinkElement.classList.add('selectedTablink');
 }
 
 let initTablinkButtons = () => {
