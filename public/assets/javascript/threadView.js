@@ -3,7 +3,7 @@ let threads;
 let status = null;
 let threadId = null;
 let pageNumber = 1;
-let threadsPerPage = 4;
+let threadsPerPage = 8;
 let numberOfPages = 0;
 
 let filter = {
@@ -277,6 +277,15 @@ let displayBtn = (type, status) => {
     }
 };
 
+let setTablinkClassName = (tablinkElement) => {
+
+    let tablinks = document.querySelectorAll('.tablinks');
+    tablinks.forEach(tablink => {
+        tablink.className = tablink.className.replace(' selectedTablink', '');
+    });
+
+    tablinkElement.className += ' selectedTablink';
+}
 
 let initTablinkButtons = () => {
     //add eventlisteners to tablink buttons
@@ -288,6 +297,7 @@ let initTablinkButtons = () => {
             replyButtons.className = 'reply-btn-group';
             pageNumber = 1;
             filter.status = event.currentTarget.getAttribute('id');
+            setTablinkClassName(event.currentTarget);
             getThreads();
         });
 
