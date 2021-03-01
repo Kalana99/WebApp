@@ -389,3 +389,20 @@ module.exports.getStaff_post = (req, res) => {
 
     
 };
+
+module.exports.getUnread_get = (req, res) => {
+    const token = req.cookies.jwt;
+
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+        let id = decodedToken.id;
+
+        db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(async user => {
+            
+            let cursor = db.collections.threads.find({$or:[{StaffID: id}, {studentID: id}]});
+            console.log(cursor.count);
+
+            res.json({unreadExists: true})``;
+
+        });
+    });
+}

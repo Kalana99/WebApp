@@ -38,4 +38,6 @@ router.get('/download/:fileName', threadController.download_get);
 
 router.get('/downloadDocuments/:id', threadController.downloadDocuments);
 
+router.get('/getUnread', threadController.getUnread_get);
+
 module.exports = router;

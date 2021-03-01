@@ -170,11 +170,14 @@ let createThreadElement = async (thread) => {
         //and select the selected button
 
         let selectedButton = document.querySelector('.selected.threads');
-        if(selectedButton)
-            selectedButton.setAttribute('class', '');
+        if(selectedButton){
+            selectedButton.classList.remove('selected');
+            selectedButton.classList.remove('threads');
+        }
 
         threadId = event.currentTarget.id;
-        event.currentTarget.setAttribute('class', 'selected threads');
+        event.currentTarget.classList.add('selected');
+        event.currentTarget.classList.add('threads');
         
         for(let i = 0; i < threads.length; i++){
             if(threads[i]._id === threadId){
@@ -331,6 +334,10 @@ let initTablinkButtons = () => {
         });
 
     });
+
+    let unreadTablink = document.querySelector('#unread');
+    // unreadExists = (await (await fetch('/getUnread')).json()).unreadExists;
+    // console.log(unreadExists);
 
 };
 
