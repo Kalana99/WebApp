@@ -273,17 +273,17 @@ body{
     visibility: hidden;
 }
 
-.btn-group.accepted button .material-icons{
+.btn-group button.accepted .material-icons.accepted{
     visibility: visible;
     color: #2ecc71;
 }
 
-.btn-group.declined button .material-icons{
+.btn-group button.declined .material-icons.declined{
     visibility: visible;
     color: #e74c3c;
 }
 
-.btn-group.notRead button .material-icons{
+.btn-group button.notRead .material-icons.notRead{
     visibility: visible;
     color: #e74c3c;
 }

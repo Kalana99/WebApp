@@ -139,15 +139,15 @@ let createThreadElement = async (thread) => {
     smallType.innerText = thread.type;
 
     let iconAccepted = document.createElement('span');
-    iconAccepted.setAttribute('class', 'material-icons');
+    iconAccepted.setAttribute('class', 'material-icons accepted');
     iconAccepted.innerText = 'check_circle';
 
     let iconDeclined = document.createElement('span');
-    iconDeclined.setAttribute('class', 'material-icons');
+    iconDeclined.setAttribute('class', 'material-icons declined');
     iconDeclined.innerText = 'unpublished';
 
     let iconNotRead = document.createElement('span');
-    iconNotRead.setAttribute('class', 'material-icons');
+    iconNotRead.setAttribute('class', 'material-icons notRead');
     iconNotRead.innerText = 'mark_chat_unread';
 
     //append items in order and create the button group
