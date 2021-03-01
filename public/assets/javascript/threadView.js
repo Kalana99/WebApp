@@ -22,23 +22,7 @@ function openNav(){
 function closeNav(){
     document.querySelector('.tab').style.width = "0";
     document.querySelector('.main-body').style.marginLeft = "0";
-    
-    // close the dropdown list when the side panel closes
-    let dropdownList = document.querySelector('.dropdown-container');
-
-    if (dropdownList.classList.contains('active')){
-        dropdownList.classList.toggle('active');
-    }
 }
-
-let dropdownFunction = () => {
-    let dropdown = document.querySelector('.tablinksDropdown');
-
-    dropdown.addEventListener('click', (event) => {
-        dropdownContainer = dropdown.nextElementSibling;
-        dropdownContainer.classList.toggle('active');
-    });
-};
 
 let initNav = () => {
 
@@ -413,7 +397,6 @@ let initializePage = () => {
     getThreads();
     leftRightInit();
     initTablinkButtons();
-    dropdownFunction();
 
     //setting the event listener for the reply button
     // let replyButton = document.querySelector('.replyBtn');
