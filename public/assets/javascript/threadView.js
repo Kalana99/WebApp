@@ -347,6 +347,9 @@ let initTablinkButtons = async () => {
     tablinks.forEach(tablinkButton => {
         
         tablinkButton.addEventListener('click', event => {
+
+            if()
+
             replyButtons.className = 'reply-btn-group';
             pageNumber = 1;
             filter.status = event.currentTarget.getAttribute('id');
