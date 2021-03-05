@@ -592,6 +592,11 @@ let inputDP = document.querySelector('.fileEditProfile');
 
 function editProfilePic(){
     inputDP.click();
+
+    inputDP.onchange = function(event){
+        let formElement = document.querySelector('#EditProfileForm');
+        formElement.submit();
+    }
 }
 
 //-----------------------toggle password view------------------------------------------
@@ -858,14 +863,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
 
         let formElement = document.querySelector('#EditProfileForm');
 
-        //creating hidden element
-
-        let hiddenIdInput = document.createElement('input');
-        hiddenIdInput.setAttribute('type', 'hidden');
-        hiddenIdInput.setAttribute('name', 'type');
-        hiddenIdInput.setAttribute('value', 'EditProfile');
-        formElement.appendChild(hiddenIdInput);
-        
         formElement.submit();
     }
 
