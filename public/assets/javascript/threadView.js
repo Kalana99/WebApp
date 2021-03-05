@@ -230,9 +230,6 @@ let createThreadElement = async (thread) => {
 
 };
 
-//loading animation overlay
-let loadingOverlay = document.querySelector('.overlay');
-
 //initialize button group
 let initialize = async (arr) => {
     //button group
@@ -262,11 +259,17 @@ async function updateScroll(){
 // function to display the messages of the selected thread
 let displayMessages = async (arr, msgId) => {
 
+    // display loading animation until the messages are loaded
+    document.querySelector('.bouncer').classList.toggle('active');
+
     msgGroup.innerHTML = '';
 
     let response = await fetch('/getUserId');
 
     let userId = await response.json();
+
+    // remove the loading animation when messages are loaded
+    document.querySelector('.bouncer').classList.toggle('active');
     
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
@@ -302,6 +305,7 @@ let displayMessages = async (arr, msgId) => {
 
         // keep the scrollbar at the bottom when messages are displayed
         updateScroll();
+
     }
 
     
