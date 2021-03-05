@@ -16,14 +16,7 @@
 <body>
     <div class="navigation">
         <ul class="nav">
-            <li class= "nav-tabs">
-                <a href="/threads">
-                    <button class="navBtn">
-                        <i class="material-icons">forum</i>
-                    </button>
-                </a>
-            </li>
-            <li class= "nav-tabs">
+            <!-- <li class= "nav-tabs">
                 <button class="navBtn" onclick="dropNotifications()">
                     <i class="material-icons">notifications_none</i>
                 </button>
@@ -34,7 +27,7 @@
                     <a href="#">Notification 4 5 6 7 8 9 10</a>
                     <a href="#">Notification 5 6 7 8 9  10 11 12</a>
                 </div>
-            </li>
+            </li> -->
             <li class= "dropdown nav-tabs">
                 <button class="navBtn" onclick="dropSettings()">                         
                     <i class="material-icons">brightness_low</i>
@@ -74,6 +67,14 @@
         <main class="main-body">
             
             <%- include('./assets/partials/popup_logout.ejs') %>
+
+            <div class="threadView">
+                <a href="/threads">
+                    <button class="open-button-threadView">
+                        <h4 class="button_text">Thread View</h4>
+                    </button>
+                </a>
+            </div>
         
             <div class="request-tiles">
 
@@ -96,6 +97,7 @@
                 <%- include('./assets/partials/popup_repeatExam.ejs') %>
 
             </div>
+
         </main>
     
 

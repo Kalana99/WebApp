@@ -139,7 +139,8 @@ body{
   border: none;
 }
 
-.request-tiles{
+.request-tiles,
+.threadView{
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -150,7 +151,12 @@ body{
   margin-left: auto;
 }
 
-.open-button-request{
+.threadView a{
+  text-decoration: none;
+}
+
+.open-button-request,
+.open-button-threadView{
   text-align: center;
   font-size: 2rem;
   font-family: monospace;
@@ -164,8 +170,8 @@ body{
   /* background: linear-gradient(to right, #84d9d2, #07cdae) !important; */
   border: none;
   outline: none;
-  height: 350px;
-  width: 250px;
+  height: 150px;
+  width: 300px;
   position: relative;
   margin: 20px;
   opacity: 0.8;
@@ -173,7 +179,17 @@ body{
   cursor: pointer;
 }
 
-.open-button-request:active{
+.open-button-threadView{
+  width: 980px;
+  text-decoration: none;
+}
+
+.open-button-request.staff{
+  display: none;
+}
+
+.open-button-request:active,
+.open-button-threadView:active{
   top: 2px;
   right: 2px;
   outline: none;
