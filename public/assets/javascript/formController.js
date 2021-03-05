@@ -587,6 +587,13 @@ function submitPin(){
     }
 }
 
+// profile picture edit function
+let inputDP = document.querySelector('.fileEditProfile');
+
+function editProfilePic(){
+    inputDP.click();
+}
+
 //-----------------------toggle password view------------------------------------------
 let toggleView      = document.querySelectorAll('.far');
 
