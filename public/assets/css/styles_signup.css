@@ -62,17 +62,8 @@ body{
    border-bottom: 2px solid black;
 }
 
-.file{
-   border:none;
-   color: #373636;
-   font-weight: 450;
-   display: block;
-   font-size: 14px;
-   padding: 10px;
-   width: 100%;
-   outline: none;
-   background-color: transparent;
-
+#fileItem{
+    border-bottom: none;
 }
 
 .form-control select{
