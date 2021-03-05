@@ -12,7 +12,7 @@ body{
 }
 
 .container{
-    background-color:rgba(207,224,195,0.3);
+    background-color:rgba(255,255,255,0.5);
     border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     width: 35%;
@@ -27,7 +27,6 @@ body{
     border-radius: 20px;
     text-align: center;
     opacity:0.95;
-
 }
 
 .header h2{
@@ -43,24 +42,35 @@ body{
     margin-bottom: 8px;
     padding-bottom: 20px;
     position: relative;
-    color: white;
+    color: black;
+    font-size: 17px;
     border-radius: 20px;
-}
-
-.form-control label{
-    display: inline-block;
-    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .form-control input{
-    /*border: 2px solid #f0f0f0;*/
-    border:none;
-    border-radius: 6px;
-    display: block;
-    font-size: 14px;
-    padding: 10px;
-    width: 100%;
-    outline: none;
+   /*border: 2px solid #f0f0f0;*/
+   border:none;
+   color: #373636;
+   font-weight: 450;
+   display: block;
+   font-size: 14px;
+   padding: 10px;
+   width: 100%;
+   outline: none;
+   background-color: transparent;
+   border-bottom: 2px solid black;
+}
+
+#fileItem{
+    border-bottom: none;
+}
+
+.form-control select{
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    
+
 }
 
 .form-control input[name="gender"], input[name="type"]{
@@ -145,19 +155,19 @@ body{
 }
 
 .main-body{
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/sam-knight-jhpL88kP7Y8-unsplash.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/ben-neale-sQQf8Ao3dpk-unsplash.jpg);
     background-size: cover;
     width: 100%;
     height: 100%; 
 }
 
-.faculty{
+.faculty,.question{
     border-style: none;
     border-collapse: collapse;
     outline: none;
     font-size: 14px;
     color: #666666;
-    border-radius: 6px;
+   
     padding: 10px;
     width: 100%
 }
