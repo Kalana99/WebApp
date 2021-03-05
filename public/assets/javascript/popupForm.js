@@ -6,6 +6,16 @@ let lecturerInput               = document.querySelectorAll('.lecturer');       
 // let suggestionsPanelLecturer    = document.querySelectorAll('.suggestions-lecturer');   //get lecturer suggestion panels
 
 //event listener to get lecturer input suggestions and change the appearance of a selected lecturer field
+
+//staff and student user profiles
+let requestButtons = document.querySelector('.request-tiles');
+requestButtons.classList.add('staff');
+
+let getUserType = async () => {
+    
+};
+
+
 let lecturerInputFunction = async (lecturerInput) => {
     for (let i=0; i<lecturerInput.length; i++){
 
