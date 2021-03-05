@@ -189,6 +189,7 @@ body{
 
 .threadViewContainer{
   height: 40%;
+  width: 100%;
 }
 
 .request-tiles{
@@ -204,12 +205,12 @@ body{
 	max-width: 100%;
 	margin: 20px;
 	overflow: hidden;
-	width: 830px;
+	width: 100%;
   height: 90%;
   position: relative;
 }
 .request{
-	width: 250px;
+	width: 30%;
   flex-direction: column;
   height: 100%;
 }
@@ -305,8 +306,8 @@ body{
   border-radius: 50%;
   border: 6px solid white;
   background: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
-  top: 90px;
-  left: 155px;
+  top: 25%;
+  left: 60%;
   font-size: 2rem;
 }
 .request .image-avatar i{
@@ -322,49 +323,6 @@ body{
 .request.repeat .image-avatar{
   background: linear-gradient(to right, #185a9d, #43cea2);
 }
-
-/* .threadView a{
-  text-decoration: none;
-}
-
-.open-button-request,
-.open-button-threadView{
-  text-align: center;
-  font-size: 2rem;
-  font-family: monospace;
-  font-weight: initial;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  border-radius: 20px;
-  color: black !important;
-  background-image: url(../resources/abstract_smooth_wave_background_vector_grapihic_art_569579.jpg);
-  border: none;
-  outline: none;
-  height: 150px;
-  width: 300px;
-  position: relative;
-  margin: 20px;
-  opacity: 0.8;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.open-button-threadView{
-  width: 980px;
-  text-decoration: none;
-}
-
-.request-tiles.staff{
-  display: none;
-}
-
-.open-button-request:active,
-.open-button-threadView:active{
-  top: 2px;
-  right: 2px;
-  outline: none;
-} */
 
 .request-tiles.staff{
   display: none;
@@ -420,20 +378,6 @@ body{
   color: white;
 }
 
-/* dropdown-notification style overrides */
-/* .dropdown-notification{
-  width: 350px;
-  max-width: 350px;
-  max-height: 150px;
-  overflow: scroll;
-  overflow-x: hidden;
-  right: 140px;
-} */
-
-/* .dropdown-notification::-webkit-scrollbar{
-  width: 0;
-} */
-
 footer{
   display: inline-block;
   width: 100%;
@@ -441,4 +385,25 @@ footer{
   bottom: 0;
   left: inherit;
   background: transparent;
+}
+
+/* ---------------------------------------STAFF--------------------------------------------------- */
+
+.staff .main-body{
+  width: 30%;
+  height: 90%;
+}
+.staff .column{
+  margin: 0;
+  width: 70%;
+}
+.staff .request{
+  display: none;
+}
+.staff .threadViewContainer{
+  height: 100%;
+}
+.staff .threadView{
+  height: 100%;
+  width: 100%;
 }

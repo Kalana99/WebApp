@@ -9,7 +9,7 @@ let lecturerInput               = document.querySelectorAll('.lecturer');       
 
 //staff and student user profiles
 window.addEventListener('load', async event => {
-    let requestButtons = document.querySelector('.request-tiles');
+    let body = document.querySelector('body');
 
     let getUserType = async () => {
     
@@ -20,7 +20,7 @@ window.addEventListener('load', async event => {
     let type = await getUserType();
     
     if(type == 'staff'){
-        requestButtons.classList.add('staff');
+        body.classList.add('staff');
     }
 });
 
