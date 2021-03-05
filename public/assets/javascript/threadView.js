@@ -170,6 +170,10 @@ let createThreadElement = async (thread) => {
     //add an event listener
     msgButton.addEventListener('click', (event) => {
 
+        msgGroup.innerHTML = '';
+        // display loading animation until the messages are loaded
+        document.querySelector('.bouncer').classList.toggle('active');
+
         //if the thread is unread, make it not unread
         if(unread){
             event.currentTarget.classList.remove('notRead');
@@ -258,11 +262,6 @@ async function updateScroll(){
 
 // function to display the messages of the selected thread
 let displayMessages = async (arr, msgId) => {
-
-    // display loading animation until the messages are loaded
-    document.querySelector('.bouncer').classList.toggle('active');
-
-    msgGroup.innerHTML = '';
 
     let response = await fetch('/getUserId');
 
