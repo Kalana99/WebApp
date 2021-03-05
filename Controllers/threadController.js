@@ -123,14 +123,14 @@ module.exports.getThreadData_post = (req, res) => {
             if(filter.status == 'unread'){
 
             }
-            else if(filter.status != 'all')
+            else if(filter.status != 'allStatus')
                 searchQuery['status'] = filter.status;
 
-            if(filter.type != 'all')
+            if(filter.type != 'allReqType')
                 searchQuery['type'] = filter.type;
 
             let filterThreads = async (thread, filter) => {
-
+                console.log(filter);
                 let string = filter.string.toLowerCase();
                 let searchWords = string.split(' ');
 
@@ -146,14 +146,14 @@ module.exports.getThreadData_post = (req, res) => {
                     if(user.type == 'staff' && !thread.staffUnread){
                         return false;
                     }
-                    filter.status = 'all';
+                    filter.status = 'allStatus';
                 }
 
-                if(filter.type != 'all' && thread.type != filter.type){
+                if(filter.type != 'allReqType' && thread.type != filter.type){
                     return false;
                 }
 
-                if(filter.status != 'all' && thread.status != filter.status){
+                if(filter.status != 'allStatus' && thread.status != filter.status){
                     return false;
                 }
                 //if we come here, that means the thread is inside the filters

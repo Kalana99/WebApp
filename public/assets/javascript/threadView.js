@@ -8,8 +8,8 @@ let numberOfPages = 0;
 
 let filter = {
     string: '',
-    status: 'all',
-    type: 'all'
+    status: 'allStatus',
+    type: 'allReqType'
 };
 
 let msgGroup = document.querySelector('.msg-group');
@@ -66,8 +66,14 @@ let leftRightInit = () => {
     });
 };
 
+//reply button group (reply, accept and decline)
+let replyButtons = document.querySelector('.reply-btn-group');
+let replyButton = document.querySelector('.replyBtn');
+
 let getThreads = () => {
 
+    replyButton.className = 'replyBtn';
+    replyButtons.className = 'reply-btn-group';
 
     msgGroup.innerHTML = '';
 
@@ -244,11 +250,8 @@ let initialize = async (arr) => {
 
     //remove loading animation after all the threads are loaded
     // loadingOverlay.style.display = 'none';
-    console.log('here');
 };
 
-//reply button group (reply, accept and decline)
-let replyButtons = document.querySelector('.reply-btn-group');
 
 // function to keep the scroll bar at the bottom of a div
 async function updateScroll(){
@@ -319,11 +322,13 @@ let closePopup = () => {
 }
 
 let displayBtn = (type, status) => {
-
+    
     if(status == 'accepted' || status == 'declined'){
         replyButtons.className = 'reply-btn-group';
         replyButton.className = 'replyBtn';
     }
+
+    
 
     else if (type === 'staff'){
         replyButtons.className = 'reply-btn-group visible';
@@ -336,12 +341,25 @@ let displayBtn = (type, status) => {
 
 let setTablinkClassName = (tablinkElement) => {
 
-    let tablinks = document.querySelectorAll('.tablinks');
-    tablinks.forEach(tablink => {
-        tablink.classList.remove('selectedTablink');
-    });
+    if(tablinkElement.classList.contains('status')){
+        let tablinks = document.querySelectorAll('.tablinks.status');
+        tablinks.forEach(tablink => {
+            tablink.classList.remove('selectedTablink');
+        });
 
-    tablinkElement.classList.add('selectedTablink');
+        tablinkElement.classList.add('selectedTablink');
+        tablinkElement.classList.add('status');
+    }
+
+    if(tablinkElement.classList.contains('reqType')){
+        let tablinks = document.querySelectorAll('.tablinks.reqType');
+        tablinks.forEach(tablink => {
+            tablink.classList.remove('selectedTablink');
+        });
+
+        tablinkElement.classList.add('selectedTablink');
+        tablinkElement.classList.add('reqType');
+    }
 }
 
 let initTablinkButtons = async () => {
@@ -351,12 +369,27 @@ let initTablinkButtons = async () => {
     tablinks.forEach(tablinkButton => {
         
         tablinkButton.addEventListener('click', event => {
-
-            
-
-            replyButtons.className = 'reply-btn-group';
+     
             pageNumber = 1;
-            filter.status = event.currentTarget.getAttribute('id');
+
+            let eventFilter = event.currentTarget.getAttribute('id');
+
+            if(eventFilter == 'allStatus'
+            || eventFilter == 'active'
+            || eventFilter == 'accepted'
+            || eventFilter == 'declined'
+            || eventFilter == 'unread'){
+                filter.status = eventFilter;
+            }
+
+            else if(eventFilter == 'allReqType'
+            || eventFilter == 'addDrop'
+            || eventFilter == 'submission'
+            || eventFilter == 'repeat'){
+                filter.type = eventFilter;
+            }
+
+            console.log(filter);
             setTablinkClassName(event.currentTarget);
             getThreads();
         });
