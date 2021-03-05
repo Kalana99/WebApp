@@ -1,8 +1,13 @@
 body{
   position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
   /* background: linear-gradient(4deg, rgba(143,160,162,1) 0%, rgba(15,79,96,1) 100%); */
   background-image: url(../resources/background-test.jpg);
@@ -11,15 +16,18 @@ body{
 .container{
   box-sizing: border-box;
   display: flex;
-  flex-direction:column;
-  /* height: 100%; */
+  flex-direction: row;
+  position: relative;
+  margin-left: 100px;
+  height: 100%;
   /* width: 100%; */
 }
 
 .column{
   /* background: radial-gradient(circle, rgba(92,202,143,1) 12%, rgba(9,126,103,1) 100%); */
   background-image: url(../resources/profile-background.jpg);
-  width: 65%;
+  width: 40%;
+  height: 90%;
   padding: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -33,6 +41,9 @@ body{
   align-items: center;
   padding-left: auto;
   padding-right: auto;
+  position: relative;
+  border-radius: 100%;
+  display: block;
 }
 
 .photo img{
@@ -43,7 +54,32 @@ body{
   margin: auto;
 }
 
-.photo h4{
+.photo .editProfilePic{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  border-radius: 50%;
+  border: 6px solid white;
+  background: #fff;
+  font-size: 1.5rem;
+  left: 60%;
+  bottom: 10px;
+  cursor: pointer;
+  display: none;
+  opacity: 0.8;
+}
+.photo .editProfilePic i{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.photo:hover .editProfilePic{
+  display: block;
+}
+
+.details h4{
   display: block;
   width: fit-content;
   margin: auto;
@@ -72,7 +108,7 @@ body{
   box-shadow: whitesmoke;
   padding: 0;
   margin: 0;
-  width: 100%;
+  width: 65%;
   align-items: center;
   /* background: linear-gradient(to right, #ffbf96, #fe7096) !important; */
 }
@@ -140,7 +176,7 @@ body{
 }
 
 .request-tiles,
-.threadView{
+.threadViewContainer{
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -151,7 +187,143 @@ body{
   margin-left: auto;
 }
 
-.threadView a{
+.threadViewContainer{
+  height: 40%;
+}
+
+.request-tiles{
+  height: 50%;
+}
+
+.threadView,
+.request{
+  background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	width: 830px;
+  height: 90%;
+  position: relative;
+}
+.request{
+	width: 250px;
+  flex-direction: column;
+  height: 100%;
+}
+
+.threadView h6{
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.threadView h2,
+.request h2{
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.threadView .preview,
+.request .preview{
+  background: linear-gradient(to right, #06beb6, #48b1bf);
+	color: #fff;
+	padding: 30px;
+	max-width: 300px;
+}
+.request .preview{
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  height: 135px;
+}
+.request.submission .preview{
+  background: linear-gradient(to right, #d66d75, #e29587);
+}
+.request.repeat .preview{
+  background: linear-gradient(to right, #43cea2, #185a9d);
+}
+
+.threadView .info{
+  padding: 30px;
+	position: relative;
+	width: 100%;
+}
+.request .info{
+  padding: 10px;
+  position: relative;
+  height: inherit;
+  padding-top: 15px;
+}
+
+.open-button-threadView,
+.open-button-request{
+  background: linear-gradient(to right, #614385, #516395);
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 12px 25px;
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+.open-button-request{
+  bottom: 10px;
+  right: 10px;
+  box-shadow: none;
+}
+
+.open-button-threadView:hover,
+.open-button-request:hover{
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #516395, #614385);
+}
+
+.open-button-threadView:active,
+.open-button-request:active{
+  outline: none;
+  background: linear-gradient(to right, #614385, #516395);
+  bottom: 28px;
+	right: 28px;
+}
+.open-button-request:active{
+  bottom: 8px;
+  right: 8px;
+}
+
+.request .image-avatar{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  border-radius: 50%;
+  border: 6px solid white;
+  background: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
+  top: 90px;
+  left: 155px;
+  font-size: 2rem;
+}
+.request .image-avatar i{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.request.submission .image-avatar{
+  background: linear-gradient(to right, #e29587, #d66d75);
+}
+.request.repeat .image-avatar{
+  background: linear-gradient(to right, #185a9d, #43cea2);
+}
+
+/* .threadView a{
   text-decoration: none;
 }
 
@@ -167,7 +339,6 @@ body{
   border-radius: 20px;
   color: black !important;
   background-image: url(../resources/abstract_smooth_wave_background_vector_grapihic_art_569579.jpg);
-  /* background: linear-gradient(to right, #84d9d2, #07cdae) !important; */
   border: none;
   outline: none;
   height: 150px;
@@ -193,6 +364,10 @@ body{
   top: 2px;
   right: 2px;
   outline: none;
+} */
+
+.request-tiles.staff{
+  display: none;
 }
 
 .dropdown-content{
@@ -265,63 +440,5 @@ footer{
   position: fixed;
   bottom: 0;
   left: inherit;
+  background: transparent;
 }
-
-/* responsive */
-/* @media screen and (max-width: 1200px){
-  body{
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 1000px){
-  .open-button-request{
-    height: 60%;
-    width: 70%;
-  }
-
-  .col{
-    width: 50%;
-  }
-
-  .photo h4{
-    font-size: 3vw;
-  }
-
-  .details p{
-    font-size: 2vw;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 666px){
-  .main-body{
-    margin-top: 0;
-  }
-  .col{
-    width: 100%;
-  }
-  .container{
-    position: fixed;
-    flex-direction: column;
-    width: 100%;
-  }
-  .profile-div{
-    display: flex;
-    height: 60%;
-  }
-  .photo h4{
-    font-size: 4vw;
-  }
-  .details p{
-    font-size: 3vw;
-    text-align: center;
-  }
-  .open-button-request{
-    margin-top: 20px;
-  }
-}
-
-@media screen and (max-width: 500px){
-
-} */

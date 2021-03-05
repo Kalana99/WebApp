@@ -45,17 +45,22 @@
             </li>
         </ul>
     </div>
+
     <div class="container">
-        
-        <!-- class="col" -->
+
         <div class="column">
             <div class="profile-div">
                 <div class="photo">
                     <img class="profile-pic" src="/getProfilePic"/>
-                    <h4 class="name"><%= name %> </h4>
+                    <div class="editProfilePic" onclick="editProfilePic()">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                    </div>
+                    <!-- this is hidden by styles in popup.css -->
+                    <input type="file" accept="image/*" name="uploadedFile" class="fileEditProfile" id="fileItem"/> 
                 </div>
                 
                 <div class="details">
+                    <h4 class="name"><%= name %> </h4>
                     <p class="info"><%= index %> </p>
                     <p class="info"><%= phone %> </p>
                     <p class="info"><%= email %> </p>
@@ -68,32 +73,84 @@
             
             <%- include('./assets/partials/popup_logout.ejs') %>
 
-            <div class="threadView">
-                <a href="/threads">
-                    <button class="open-button-threadView">
-                        <h4 class="button_text">Thread View</h4>
-                    </button>
-                </a>
+            <div class="threadViewContainer">
+                <div class="threadView">
+                    <div class="preview">
+                        <h6>Staff</h6>
+                        <h2>Thread View</h2>
+                    </div>
+                    <div class="info">
+                        <h2>View your Threads</h2>
+                        <h6>Click Continue to view the requests made by students</h6>
+                        <a href="/threads">
+                            <button class="open-button-threadView">
+                                <span class="button_text">Continue</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
         
             <div class="request-tiles">
 
-                <button class="open-button-request addDrop" id="0" onclick="toggleAddDrop()">
-                    <h4 class="button__text">Add/Drop Requests</h4>
-                </button>
-                
-                <%- include('./assets/partials/popup_addDrop.ejs') %>
+                <div class="request addDrop">
 
-                <button class="open-button-request submission" id="1" onclick="toggleSubmission()">
-                    <h4 class="button__text">Submission Deadline</h4>
-                </button>
-                
-                <%- include('./assets/partials/popup_submission.ejs') %>
+                    <div class="image-avatar">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    </div>
 
-                <button class="open-button-request repeat" id="2" onclick="toggleRepeat()">
-                    <h4 class="button__text">Repeat Exams</h4>
-                </button>
-                
+                    <div class="preview">
+                        <h2>ADD / DROP</h2>
+                    </div>
+                    <div class="info">
+                        <h2>Need to change the module!!</h2>
+                        <h6>Fill out a request to change the module</h6>
+                        <button class="open-button-request addDrop" id="0" onclick="toggleAddDrop()">
+                            <span class="button__text">Request</span>
+                        </button>
+                    </div>
+                </div>
+
+                <%- include('./assets/partials/popup_addDrop.ejs') %> 
+
+                <div class="request submission">
+
+                    <div class="image-avatar">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="preview">
+                        <h2>SUBMISSION DEADLINE</h2>
+                    </div>
+                    <div class="info">
+                        <h2>Lorem ipsum dolor imet!!</h2>
+                        <h6>Fill out a request to blah blah blah</h6>
+                        <button class="open-button-request submission" id="1" onclick="toggleSubmission()">
+                            <span class="button__text">Request</span>
+                        </button>
+                    </div>
+                </div>
+
+                <%- include('./assets/partials/popup_submission.ejs') %> 
+
+                <div class="request repeat">
+
+                    <div class="image-avatar">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="preview">
+                        <h2>EXAM REPEAT</h2>
+                    </div>
+                    <div class="info">
+                        <h2>Lorem ipsum dolor sit amet!!</h2>
+                        <h6>Fill out a request to blah blah blah</h6>
+                        <button class="open-button-request repeat" id="2" onclick="toggleRepeat()">
+                            <span class="button__text">Request</span>
+                        </button>
+                    </div>
+                </div>
+
                 <%- include('./assets/partials/popup_repeatExam.ejs') %>
 
             </div>

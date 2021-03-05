@@ -251,7 +251,8 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
-.file{
+.file,
+.fileEditProfile{
 	opacity: 0;
   top: 0;
   left: 0;
