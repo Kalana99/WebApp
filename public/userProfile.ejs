@@ -55,8 +55,10 @@
                     <div class="editProfilePic" onclick="editProfilePic()">
                         <i class="fa fa-camera" aria-hidden="true"></i>
                     </div>
-                    <!-- this is hidden by styles in popup.css -->
-                    <input type="file" accept="image/*" name="uploadedFile" class="fileEditProfile" id="fileItem"/> 
+                    <form class="form" action="/EditProfile" method="POST" autocomplete="off" enctype="multipart/form-data" id="EditProfileForm">
+                        <!-- this is hidden by styles in popup.css -->
+                        <input type="file" accept="image/*" name="uploadedFile" class="fileEditProfile" id="fileItem"/>
+                    </form>
                 </div>
                 
                 <div class="details">
