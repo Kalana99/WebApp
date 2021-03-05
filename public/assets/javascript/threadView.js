@@ -352,7 +352,7 @@ let initTablinkButtons = async () => {
         
         tablinkButton.addEventListener('click', event => {
 
-            if()
+            
 
             replyButtons.className = 'reply-btn-group';
             pageNumber = 1;

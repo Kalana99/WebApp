@@ -8,12 +8,21 @@ let lecturerInput               = document.querySelectorAll('.lecturer');       
 //event listener to get lecturer input suggestions and change the appearance of a selected lecturer field
 
 //staff and student user profiles
-let requestButtons = document.querySelector('.request-tiles');
-requestButtons.classList.add('staff');
+window.addEventListener('load', async event => {
+    let requestButtons = document.querySelector('.request-tiles');
 
-let getUserType = async () => {
+    let getUserType = async () => {
     
-};
+        let type = (await(await fetch('/getUserType')).json()).type;
+        return type;
+    };
+    
+    let type = await getUserType();
+    
+    if(type == 'staff'){
+        requestButtons.classList.add('staff');
+    }
+});
 
 
 let lecturerInputFunction = async (lecturerInput) => {
