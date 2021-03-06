@@ -44,8 +44,10 @@ body{
     position: relative;
     color: black;
     font-size: 17px;
-    
     font-weight: bold;
+    
+}
+.form1{
     overflow: hidden;
 }
 
@@ -57,14 +59,19 @@ body{
    font-weight: 450;
    display: block;
    font-size: 14px;
-   padding-top: 20px;
+   padding: 10px;
    width: 100%;
-   height: 100%;
    outline: none;
    background-color: transparent;
+   border-bottom: 1px solid black;
 }
 
-.form-control label{
+.form1 input{
+    height: 100%;
+    font-weight: 525;
+}
+
+.form1 label{
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -74,15 +81,18 @@ body{
     border-bottom: 1px solid black;
 }
 
-.radio{
-    padding-top: 10px;
+/*.radio{
+    display: inline-flex !important;
+    border-bottom: none !important;
+    border:1px solid black;
+    align-items: center;
+    margin-right: 10px;
 }
-
 .radio2{
     padding-bottom: 10px;
-}
+}*/
 
-.form-control label::after{
+.form1 label::after{
     content: "";
     position: absolute;
     left: 0px;
@@ -91,7 +101,7 @@ body{
     width: 100%;
     border-bottom: 3px solid #1f363d;
     transform: translateX(-100%);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 
 }
 
@@ -102,23 +112,23 @@ body{
     transition: all 0.3s ease;
 }
 
-.form-control input:focus + .label-name .content-name, 
-.form-control input:not(:placeholder-shown)+ .label-name .content-name{  
+.form1 input:focus + .label-name .content-name, 
+.form1 input:not(:placeholder-shown)+ .label-name .content-name{  
 
-    transform: translateY(-130%);
+    transform: translateY(-150%);
     font-size: 14px;
     color: #1f363d;
 }
 
-.form-control input:focus +.label-name::after, 
-.form-control input:valid +.label-name::after{
+.form1 input:focus +.label-name::after, 
+.form1 input:not(:placeholder-shown) +.label-name::after{
     transform: translateX(0%);
 }
 
 
 .form-control select{
     background-color: transparent;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     
 
 }
@@ -176,54 +186,13 @@ body{
     color: #e74c3c;
     visibility: visible;
 }
+.form-control select{
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    
 
-.radio.success  input{
-    border-color: #2ecc71;
 }
 
-.radio.error input{
-    border-color: #e74c3c;
-}
-
-.radio i{
-    position: absolute;
-    bottom: 30px;
-    right: 5px;
-    visibility: hidden;
-}
-
-.radio.success i.fa-check-circle{
-    bottom: 0;
-    left: 0;
-    visibility: visible;
-    color: #2ecc71;
-}
-
-.radio.error i.fa-exclamation-circle{
-    bottom: 0;
-    left: 0;
-    visibility: visible;
-    color: #e74c3c;
-}
-
-.radio i.far{
-    z-index: 10;
-    color: black;
-    cursor: pointer;
-    visibility: visible;
-}
-
-.radio small{
-    visibility: hidden;
-    position: absolute;
-    bottom: 0px;
-    left: 20px;
-}
-
-.radio.error small{
-    color: #e74c3c;
-    visibility: visible;
-}
 
 .button.signUp{
     border: none;
@@ -253,6 +222,9 @@ body{
     transition: all 0.2s;
 }
 
+.file1{
+    border-bottom: none !important;
+}
 .main-body{
     background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/ben-neale-sQQf8Ao3dpk-unsplash.jpg);
     background-size: cover;
