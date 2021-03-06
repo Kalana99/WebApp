@@ -40,13 +40,15 @@ body{
 
 .form-control{
     margin-bottom: 8px;
-    padding-bottom: 20px;
+    padding-top: 10px;
     position: relative;
     color: black;
     font-size: 17px;
-    border-radius: 20px;
+    
     font-weight: bold;
+    overflow: hidden;
 }
+
 
 .form-control input{
    /*border: 2px solid #f0f0f0;*/
@@ -55,16 +57,64 @@ body{
    font-weight: 450;
    display: block;
    font-size: 14px;
-   padding: 10px;
+   padding-top: 20px;
    width: 100%;
+   height: 100%;
    outline: none;
    background-color: transparent;
-   border-bottom: 2px solid black;
 }
 
-#fileItem{
-    border-bottom: none;
+.form-control label{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid black;
 }
+
+.radio{
+    padding-top: 10px;
+}
+
+.radio2{
+    padding-bottom: 10px;
+}
+
+.form-control label::after{
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #1f363d;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+
+}
+
+.content-name{
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.form-control input:focus + .label-name .content-name, 
+.form-control input:not(:placeholder-shown)+ .label-name .content-name{  
+
+    transform: translateY(-130%);
+    font-size: 14px;
+    color: #1f363d;
+}
+
+.form-control input:focus +.label-name::after, 
+.form-control input:valid +.label-name::after{
+    transform: translateX(0%);
+}
+
 
 .form-control select{
     background-color: transparent;
@@ -78,7 +128,8 @@ body{
     width: 20px;
 }
 
-.form-control.success input{
+
+.form-control.success  input{
     border-color: #2ecc71;
 }
 
@@ -122,6 +173,54 @@ body{
 }
 
 .form-control.error small{
+    color: #e74c3c;
+    visibility: visible;
+}
+
+.radio.success  input{
+    border-color: #2ecc71;
+}
+
+.radio.error input{
+    border-color: #e74c3c;
+}
+
+.radio i{
+    position: absolute;
+    bottom: 30px;
+    right: 5px;
+    visibility: hidden;
+}
+
+.radio.success i.fa-check-circle{
+    bottom: 0;
+    left: 0;
+    visibility: visible;
+    color: #2ecc71;
+}
+
+.radio.error i.fa-exclamation-circle{
+    bottom: 0;
+    left: 0;
+    visibility: visible;
+    color: #e74c3c;
+}
+
+.radio i.far{
+    z-index: 10;
+    color: black;
+    cursor: pointer;
+    visibility: visible;
+}
+
+.radio small{
+    visibility: hidden;
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+}
+
+.radio.error small{
     color: #e74c3c;
     visibility: visible;
 }
