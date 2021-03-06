@@ -120,13 +120,13 @@ body{
     transform: translateY(-150%);
     font-size: 14px;
     color: #1f363d;
-    background-color: transparent;
+    
 }
 
 .form1 input:focus +.label-name::after, 
 .form1 input:not(:placeholder-shown) +.label-name::after{
     transform: translateX(0%);
-    background-color: transparent;
+    
 }
 
 
