@@ -20,7 +20,7 @@
             <h1>Sign Up</h1>
             
             <form class="form" action="/signup" method="POST" autocomplete="off" enctype="multipart/form-data" id="signUpForm">
-                <div class="form-control">
+                <div class="form-control form1">
                     <input type="text" name="name" class="nonEmpty signUp fullName" id="username" placeholder=" " >
                     <label for="name" class="label-name">
                         <span class="content-name">Full Name</span>
@@ -30,7 +30,7 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
+                <div class="form-control form1">
                     
                     <input type="text" name="index" class="index signUp" placeholder=" " id="index">
                     <label for="index" class="label-name">
@@ -41,7 +41,7 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
+                <div class="form-control form1">
                     
                     <input type="email" name="email" class="newEmail signUp" placeholder=" " id="email">
                     <label for="email" class="label-name">
@@ -54,27 +54,28 @@
 
 
                 <div class="form-control">
-                    
+                    <label>Birthday : </label>
                     <input type="date" id="birthday" class="nonEmpty signUp birthday" name="birthday">
-                    <label for="birthday" class="label-name">
-                        <span class="content-name">Birthday </span>
+                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+
+                <div class="form-control Radio">
+                    <label class="radio" for="male">
+                    <input type="radio" name="gender" class="nonEmptyRadio signUp gender" value="male" id="male">
+                    Male
+                    </label>
+                    <label class="radio" for="female">
+                    <input type="radio" name="gender" value="female" id="female">
+                    Female
                     </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
-                    <input type="radio" name="gender" class="nonEmptyRadio signUp gender" value="male" id="male">
-                    <label class="radio" for="male">Male</label>
-                    <input type="radio" name="gender" value="female" id="female">
-                    <label class="radio" for="female">Female</label>
-                    <i class="fa fa-check-circle"></i>
-                    <i class="fa fa-exclamation-circle"></i>
-                    <small>Error message</small>
-                </div>
-
-                <div class="form-control">
+                <div class="form-control form1">
                     
                     <input type="text" name="phone" class="nonEmpty signUp phone" placeholder=" " id="phone">
                     <label for="phone" class="label-name">
@@ -85,7 +86,7 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
+                <div class="form-control form1">
                     
                     <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder=" ">
                     <label for="password" class="label-name">
@@ -97,7 +98,7 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
+                <div class="form-control form1">
                     
                     <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder=" ">
                     <label for="confirmPsw" class="label-name">
@@ -109,7 +110,7 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control">
+                <div class="form-control Radio">
                     <input type="radio" name="type" class="nonEmptyRadio signUp type" value="student" id="student">
                     <label for="Student">Student</label>
                     <input type="radio" name="type" value="staff" id="staff">
@@ -129,8 +130,8 @@
                     </select>
                 </div>
 
-                <div class="form-control">
-                    <input type="file" accept="image/*" name="uploadedFile" class="file signUp" id="fileItem"/> 
+                <div class="form-control ">
+                    <input type="file" accept="image/*" name="uploadedFile" class="file signUp file1" id="fileItem"/> 
                 </div>
 
                 <div class="form-control">
