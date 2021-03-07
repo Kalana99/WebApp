@@ -39,8 +39,8 @@ body{
 }
 
 .form-control{
-    margin-bottom: 8px;
-    padding-bottom: 20px;
+    margin-bottom: 4px;
+    padding: 15px;
     position: relative;
     color: black;
     font-size: 17px;
@@ -52,14 +52,14 @@ body{
    /*border: 2px solid #f0f0f0;*/
    border:none;
    color: #373636;
-   font-weight: 450;
+   font-weight: 520;
    display: block;
-   font-size: 14px;
+   font-size: 14.7px;
    padding: 10px;
    width: 100%;
    outline: none;
    background: transparent;
-   border-bottom: 2px solid black;
+   border-bottom: 1.5px solid black;
    transition: all .7s;
 }
 .form-control input:-webkit-autofill { 
@@ -76,14 +76,14 @@ body{
 
 .form-control .form-label{
     position: absolute;
-    transform: translateY(-1.8em);
+    transform: translateY(-1.6em);
     transform-origin: 0 0;
     transition: all .3s;
 }
 
 .form-control input:focus + .form-label,
 .form-control input:not(:placeholder-shown) + .form-label{
-    transform: translateY(-2.7em) scale(0.8);
+    transform: translateY(-2.9em) scale(0.8);
 }
 
 #fileItem{
