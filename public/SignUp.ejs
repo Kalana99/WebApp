@@ -20,33 +20,25 @@
             <h1>Sign Up</h1>
             
             <form class="form" action="/signup" method="POST" autocomplete="off" enctype="multipart/form-data" id="signUpForm">
-                <div class="form-control form1">
-                    <input type="text" name="name" class="nonEmpty signUp fullName" id="username" placeholder=" " >
-                    <label for="name" class="label-name">
-                        <span class="content-name">Full Name</span>
-                    </label>
+                <div class="form-control">
+                    <input type="text" name="name" class="nonEmpty signUp fullName" placeholder="Enter your full name" id="username">
+                    <label class="form-label">Full Name :</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control form1">
-                    
-                    <input type="text" name="index" class="index signUp" placeholder=" " id="index">
-                    <label for="index" class="label-name">
-                        <span class="content-name">Index Number</span>
-                    </label>
+                <div class="form-control">
+                    <input type="text" name="index" class="index signUp" placeholder="Enter your index number" id="index">
+                    <label class="form-label">Index Number : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control form1">
-                    
-                    <input type="email" name="email" class="newEmail signUp" placeholder=" " id="email">
-                    <label for="email" class="label-name">
-                        <span class="content-name">Email Address</span>
-                    </label>
+                <div class="form-control">
+                    <input type="email" name="email" class="newEmail signUp" placeholder="Enter your email" id="email">
+                    <label class="form-label">Email Address : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -61,56 +53,43 @@
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control Radio">
-                    <label class="radio" for="male">
+                <div class="form-control">
                     <input type="radio" name="gender" class="nonEmptyRadio signUp gender" value="male" id="male">
-                    Male
-                    </label>
-                    <label class="radio" for="female">
+                    <label for="male">Male</label>
                     <input type="radio" name="gender" value="female" id="female">
-                    Female
-                    </label>
+                    <label for="female">Female</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control form1">
-                    
-                    <input type="text" name="phone" class="nonEmpty signUp phone" placeholder=" " id="phone">
-                    <label for="phone" class="label-name">
-                        <span class="content-name">Telephone Number</span>
-                    </label>
+                <div class="form-control">
+                    <input type="text" name="phone" class="nonEmpty signUp phone" placeholder="Add your Telephone number" id="phone">
+                    <label class="form-label">Telephone Number : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control form1">
-                    
-                    <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder=" ">
-                    <label for="password" class="label-name">
-                        <span class="content-name">Password</span>
-                    </label>
+                <div class="form-control">
+                    <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder="Enter your password">
+                    <label class="form-label">Password :</label>
                     <i class="far fa-eye" id="togglePassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control form1">
-                    
-                    <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder=" ">
-                    <label for="confirmPsw" class="label-name">
-                        <span class="content-name">Confirm Password</span>
-                    </label>
+                <div class="form-control">
+                    <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder="Confirm your password">
+                    <label class="form-label">Confirm Password : </label>
                     <i class="far fa-eye" id="toggleConfirmPassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
                 </div>
 
-                <div class="form-control Radio">
+                <div class="form-control">
                     <input type="radio" name="type" class="nonEmptyRadio signUp type" value="student" id="student">
                     <label for="Student">Student</label>
                     <input type="radio" name="type" value="staff" id="staff">
@@ -130,8 +109,8 @@
                     </select>
                 </div>
 
-                <div class="form-control ">
-                    <input type="file" accept="image/*" name="uploadedFile" class="file signUp file1" id="fileItem"/> 
+                <div class="form-control">
+                    <input type="file" accept="image/*" name="uploadedFile" class="file signUp" id="fileItem"/> 
                 </div>
 
                 <div class="form-control">
