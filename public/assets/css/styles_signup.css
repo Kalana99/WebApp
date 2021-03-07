@@ -66,6 +66,10 @@ body{
    border-bottom: 1px solid black;
 }
 
+.form-control input:-webkit-autofill{
+    -webkit-background-clip: text;
+}
+
 .form1 input{
     height: 100%;
     font-weight: 525;
