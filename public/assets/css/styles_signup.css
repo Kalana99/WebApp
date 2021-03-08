@@ -59,7 +59,7 @@ body{
    width: 100%;
    outline: none;
    background: transparent;
-   border-bottom: 1.5px solid black;
+   border-bottom: 2px solid black;
    transition: all .7s;
 }
 .form-control input:-webkit-autofill { 
