@@ -59,8 +59,8 @@ body{
    width: 100%;
    outline: none;
    background: transparent;
-   border-bottom: 2px solid black;
-   transition: all .7s;
+   border-bottom: 2.3px solid black;
+   transition: all .3s;
 }
 .form-control input:-webkit-autofill { 
     -webkit-background-clip: text;
@@ -68,7 +68,13 @@ body{
 .form-control input:focus{
     box-shadow: none;
     outline: none;
-    border-color: orange;
+    border-color: #4E8975;
+}
+.form-control select:focus{
+    box-shadow: none;
+    outline: none;
+    
+    border-color:#4E8975;
 }
 .form-control input::placeholder{
     color: transparent;
@@ -93,6 +99,7 @@ body{
 .form-control select{
     background-color: transparent;
     border-bottom: 2px solid black;
+    transition: all .3s;
 }
 
 .form-control input[name="gender"], input[name="type"]{
