@@ -870,7 +870,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     else if(page === 'signUp'){
 
         let formElement = document.querySelector('#signUpForm');
-        
+        console.log(formElement);
         formElement.submit();
 
     }
