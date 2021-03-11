@@ -392,7 +392,6 @@ let initTablinkButtons = async () => {
                 filter.type = eventFilter;
             }
 
-            console.log(filter);
             setTablinkClassName(event.currentTarget);
             getThreads();
             msgGroup.innerHTML = "<span>No thread is selected</span>";
