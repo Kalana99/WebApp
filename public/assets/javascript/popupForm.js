@@ -140,7 +140,7 @@ let lecturerInputFunction = async (lecturerInput) => {
 };
 lecturerInputFunction(lecturerInput);
 
-//settings dropdown list
+//settings dropdown list`
 function dropSettings(){
     document.querySelector('.dropdown-content').classList.toggle('drop');
 }

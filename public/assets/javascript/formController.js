@@ -17,7 +17,8 @@ let main = async (page) => {
     let existingEmail       = document.querySelectorAll('.existingEmail.' + page);
     let newEmail            = document.querySelectorAll('.newEmail.' + page);
     let index               = document.querySelectorAll('.index.' + page);
-    let nonEmptyRadio       = document.querySelectorAll('.nonEmptyRadio.' + page);
+    let nonEmptyRadioGender = document.querySelectorAll('.nonEmptyRadio.gender.' + page);
+    let nonEmptyRadioType   = document.querySelectorAll('.nonEmptyRadio.type.' + page);
     let forgotPswEmail      = document.querySelectorAll('.forgotPswEmail.' + page);
     let contactEmail        = document.querySelectorAll('.contactEmail.' + page);
 
@@ -34,7 +35,8 @@ let main = async (page) => {
     // console.log(existingEmail);
     // console.log(newEmail);
     // console.log(index);
-    // console.log(nonEmptyRadio);
+    // console.log(nonEmptyRadioGender);
+    // console.log(nonEmptyRadioType);
     // console.log(question);
     // console.log(forgotPswEmail);
 
@@ -55,8 +57,11 @@ let main = async (page) => {
     //validate index
     await validateIndex(index);
 
-    //validate nonEmptyRadio
-    await validateNonEmptyRadio(nonEmptyRadio);
+    //validate nonEmptyRadio gender
+    await validateNonEmptyRadioGender(nonEmptyRadioGender);
+
+    // validate nonEmptyRadio type
+    await validateNonEmptyRadioType(nonEmptyRadioType);
 
     //validate suggestion fields
     await validateSelected(selected);
@@ -410,9 +415,39 @@ let validateIndex = async (index) => {
     }
 };
 
-//validate nonEmptyRadio
-let validateNonEmptyRadio = async (radio) => {
+//validate nonEmptyRadio gender
+let validateNonEmptyRadioGender = async (radio) => {
 
+    let radioState = 'unchecked';
+
+    for (let i = 0; i < radio.length; i++){
+        let radioBtn = radio[i]
+        let errMsg = 'Choose a ' + radioBtn.name;
+
+        let parentElement = radioBtn.parentElement;
+        //get all options relevant to radioBtn
+        let radioBtnList = parentElement.querySelectorAll('input');
+
+        //check if at least one radio button is checked from a group
+        for (let j = 0; j < radioBtnList.length; j++){
+            if (radioBtnList[j].checked){
+                radioState = 'checked';
+                break;
+            }
+        }
+
+        if (radioState === 'checked'){
+            setSuccess(radioBtn);
+        }
+        else{
+            setError(radioBtn, errMsg);
+            correct = false;
+        }
+    }
+};
+
+// validate nonEmptyRadio type
+let validateNonEmptyRadioType = async (radio) => {
     let radioState = 'unchecked';
 
     for (let i = 0; i < radio.length; i++){

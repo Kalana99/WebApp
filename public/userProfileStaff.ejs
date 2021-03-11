@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="/css/styles_popup.css">
-    <link rel="stylesheet" href="/css/styles_userProfile.css">
+    <link rel="stylesheet" href="/css/styles_userProfile_staff.css">
     <link rel="stylesheet" href="/css/loading_animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -16,18 +16,6 @@
 <body>
     <div class="navigation">
         <ul class="nav">
-            <!-- <li class= "nav-tabs">
-                <button class="navBtn" onclick="dropNotifications()">
-                    <i class="material-icons">notifications_none</i>
-                </button>
-                <div class="dropdown-notification">
-                    <a href="#">Notification 1 2 3 4 5</a>
-                    <a href="#">Notification 2 3 4 5 6 7</a>
-                    <a href="#">Notification 3 4 5 6 7 8 9</a>
-                    <a href="#">Notification 4 5 6 7 8 9 10</a>
-                    <a href="#">Notification 5 6 7 8 9  10 11 12</a>
-                </div>
-            </li> -->
             <li class= "dropdown nav-tabs">
                 <button class="navBtn">                         
                     <i class="material-icons">brightness_low</i>
@@ -72,17 +60,18 @@
         </div>
 
         <main class="main-body">
-            
+
             <%- include('./assets/partials/popup_logout.ejs') %>
 
             <div class="threadViewContainer">
                 <div class="threadView">
                     <div class="preview">
+                        <h6>Staff</h6>
                         <h2>Thread View</h2>
                     </div>
                     <div class="info">
                         <h2>View your Threads</h2>
-                        <h6>Click Continue to view the requests associated to you</h6>
+                        <h6>Click Continue to view the requests made by students</h6>
                         <a href="/threads">
                             <button class="open-button-threadView">
                                 <span class="button_text">Continue</span>
@@ -90,67 +79,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        
-            <div class="request-tiles">
-
-                <div class="request addDrop">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>ADD / DROP</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Second thoughts on a module?</h2>
-                        <button class="open-button-request addDrop" id="0" onclick="toggleAddDrop()">
-                            <span class="button__text">Requst for a change</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_addDrop.ejs') %> 
-
-                <div class="request submission">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>SUBMISSION DEADLINE</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Missed your deadline?</h2>
-                        <button class="open-button-request submission" id="1" onclick="toggleSubmission()">
-                            <span class="button__text">Request to extend</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_submission.ejs') %> 
-
-                <div class="request repeat">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>REPEAT EXAM</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Missed an exam?</h2>
-                        <button class="open-button-request repeat" id="2" onclick="toggleRepeat()">
-                            <span class="button__text">Request to re-take</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_repeatExam.ejs') %>
-
             </div>
 
         </main>
@@ -160,6 +88,6 @@
     </div>
 
     <script src="/javascript/popupForm.js"></script>
-    <script src="javascript/formController.js"></script>
+    <script src="/javascript/formController.js"></script>
 </body>
 </html>

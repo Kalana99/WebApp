@@ -14,6 +14,27 @@ body{
   font-family: 'Ubuntu', sans-serif;
 }
 
+/* ---------------------------------------STAFF--------------------------------------------------- */
+
+.staff .main-body{
+  width: 30%;
+  height: 90%;
+}
+.staff .column{
+  margin: 0;
+  width: 70%;
+}
+.staff .request{
+  display: none;
+}
+.staff .threadViewContainer{
+  height: 100%;
+}
+.staff .threadView{
+  height: 100%;
+  width: 100%;
+}
+
 .container{
   box-sizing: border-box;
   display: flex;
@@ -165,6 +186,16 @@ body{
 }
 
 .nav button:hover{
+  background: lightgrey;
+  color: black;
+}
+.nav .navBtn:hover + .dropdown-content{
+  display: block;
+}
+.dropdown-content:hover{
+  display: block;
+}
+.dropdown-content:hover .navBtn{
   background: lightgrey;
   color: black;
 }
@@ -351,10 +382,6 @@ body{
   font-family: 'Ubuntu', sans-serif;
 }
 
-.dropdown-content.drop{
-  display: block;
-}
-
 .dropdown-content a{
   box-sizing: border-box;
   width: 100%;
@@ -387,25 +414,4 @@ footer{
   bottom: 0;
   left: inherit;
   background: transparent;
-}
-
-/* ---------------------------------------STAFF--------------------------------------------------- */
-
-.staff .main-body{
-  width: 30%;
-  height: 90%;
-}
-.staff .column{
-  margin: 0;
-  width: 70%;
-}
-.staff .request{
-  display: none;
-}
-.staff .threadViewContainer{
-  height: 100%;
-}
-.staff .threadView{
-  height: 100%;
-  width: 100%;
 }

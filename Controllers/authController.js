@@ -122,7 +122,10 @@ module.exports.userprofile_get = (req, res) => {
         let id = decodedToken.id;
 
         db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)}).then(user => {
-            res.render('userProfile', user);
+            if(user.type === 'student')
+                res.render('userProfile', user);
+            else
+                res.render('userProfileStaff', user);
         });
     });
         

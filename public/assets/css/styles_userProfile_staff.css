@@ -1,0 +1,328 @@
+body{
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+    min-width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    /* background: linear-gradient(4deg, rgba(143,160,162,1) 0%, rgba(15,79,96,1) 100%); */
+    background-image: url(../resources/background-test.jpg);
+    font-family: 'Ubuntu', sans-serif;
+  }
+  
+  .container{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-left: 100px;
+    height: 100%;
+    /* width: 100%; */
+  }
+  
+  .column{
+    /* background: radial-gradient(circle, rgba(92,202,143,1) 12%, rgba(9,126,103,1) 100%); */
+    background-image: url(../resources/profile-background.jpg);
+    width: 70%;
+    height: 90%;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 1px 5px 7px 1px rgba(187, 187, 181, 0.7);
+    border-radius: 10px;
+  }
+  
+  .photo{
+    width: 100%;
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    position: relative;
+    border-radius: 100%;
+    display: block;
+  }
+  
+  .photo img{
+    width: 200px;
+    height: 200px;
+    display: block;
+    border-radius: 100%;
+    margin: auto;
+  }
+  
+  .photo .editProfilePic{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    border: 6px solid white;
+    background: #fff;
+    font-size: 1.5rem;
+    left: 60%;
+    bottom: 10px;
+    cursor: pointer;
+    display: none;
+    opacity: 0.8;
+  }
+  .photo .editProfilePic i{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .photo:hover .editProfilePic{
+    display: block;
+  }
+  
+  .details h4{
+    display: block;
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+    font-size: 2.5vw;
+    font-family: monospace;
+  }
+  
+  .details{
+    padding: 20px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .details p{
+    display: block;
+    margin: 10px;
+    text-align: center;
+    color: grey;
+    font-family: monospace;
+    font-size: 1.4vw;
+  }
+  
+  .main-body{
+    box-sizing: border-box;
+    box-shadow: whitesmoke;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    width: 30%;
+    height: 90%;
+    /* background: linear-gradient(to right, #ffbf96, #fe7096) !important; */
+  }
+  
+  .navigation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 90px;
+    z-index: 1;
+    background: linear-gradient(to right, #00d4ff, #090979) !important;
+    /* opacity: 0.6; */
+  }
+  
+  .nav{
+    box-sizing: border-box;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    width: inherit;
+    height: fit-content;
+    position: relative;
+    line-height: normal;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+  }
+  
+  .nav li{
+    display: flex;
+    padding: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 60px;
+  }
+  
+  .navBtn, .logout-popup{
+    border: none;
+    padding: auto;
+    background: transparent;
+    color: white;
+    width: 90px;
+    height: 60px;
+    cursor: pointer;
+    justify-content: center;
+    outline: none;
+  }
+  
+  .nav button:hover{
+    background: lightgrey;
+    color: black;
+  }
+  .nav .navBtn:hover + .dropdown-content{
+    display: block;
+  }
+  .dropdown-content:hover{
+    display: block;
+  }
+  .dropdown-content:hover .navBtn{
+    background: lightgrey;
+    color: black;
+  }
+  
+  .nav button:active{
+    outline: none;
+    background: grey;
+    color: white;
+    border: none;
+  }
+
+  .threadViewContainer{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    width: fit-content;
+    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: 100%;
+  }
+  
+  .request-tiles{
+    height: 50%;
+  }
+  
+  .threadView{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    max-width: 100%;
+    margin: 20px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .threadView h6{
+      opacity: 0.6;
+      margin: 0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+  }
+  
+  .threadView h2{
+      letter-spacing: 1px;
+      margin: 10px 0;
+  }
+  
+  .threadView .preview{
+    background: linear-gradient(to right, #06beb6, #48b1bf);
+      color: #fff;
+      padding: 30px;
+      max-width: 300px;
+  }
+  .threadView .info{
+    padding: 30px;
+      position: relative;
+      width: 100%;
+  }
+  
+  .open-button-threadView{
+    background: linear-gradient(to right, #614385, #516395);
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 25px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+  }
+  
+  .open-button-threadView:hover{
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, #516395, #614385);
+  }
+  
+  .open-button-threadView:active{
+    outline: none;
+    background: linear-gradient(to right, #614385, #516395);
+    bottom: 28px;
+    right: 28px;
+  }
+  
+  .dropdown-content{
+    font-family: monospace;
+    box-sizing: border-box;
+    left: 90px;
+    width: 180px;
+    margin: 0.125rem 0 0;
+    color: black;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    display: none;
+    border: none;
+    border-radius: 0 10px 10px;
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    font-size: 0.9rem;
+    margin-top: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+  }
+  
+  /* .dropdown-content.drop{
+    display: block;
+  } */
+  
+  .dropdown-content a{
+    box-sizing: border-box;
+    width: 100%;
+    /* clear: both; */
+    font-weight: 400;
+    text-align: inherit;
+    border: 0;
+    text-decoration: none;
+    flex-direction: row;
+    font-size: 1rem;
+    display: flex !important;
+    margin-bottom: 0;
+    padding: 11px 13px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content a:hover{
+    background: lightgrey;
+  }
+  
+  .dropdown-content a:active{
+    background: grey;
+    color: white;
+  }
+  
+  footer{
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: inherit;
+    background: transparent;
+  }
