@@ -107,7 +107,7 @@ body{
   margin: auto;
   text-align: center;
   font-size: 2.5vw;
-  font-family: monospace;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .details{
@@ -123,6 +123,7 @@ body{
   color: grey;
   font-family: monospace;
   font-size: 1.4vw;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .main-body{
