@@ -388,7 +388,6 @@ let initTablinkButtons = async () => {
                 filter.type = eventFilter;
             }
 
-            console.log(filter);
             setTablinkClassName(event.currentTarget);
             getThreads();
         });
@@ -482,6 +481,8 @@ let initializePage = () => {
         // }
         // do something
       });   
+
+    
 };
 
 //page loading animation
