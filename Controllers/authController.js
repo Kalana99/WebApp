@@ -26,6 +26,7 @@ module.exports.signup_post = (req, res) => {
 
     delete data.confirmPsw;
     
+    
     // Save the user object to the database
     let id = database.addUser(data);
     mail(req.body.email, 'signup', {id: id});
