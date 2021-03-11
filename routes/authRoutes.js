@@ -34,6 +34,8 @@ router.get('/contact', authController.contacts_get);
 
 router.post('/contact', authController.contact_post);
 
+router.get('/about', authController.about_get);
+
 router.get('/forgotPassword', authController.forgotPassword_get);
 
 router.post('/getEmailandPin', authController.forgotPassword_checkPost);

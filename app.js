@@ -50,7 +50,7 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 let local = "mongodb://localhost/StudentRequestSystemDatabase";
 let atlas = 'mongodb+srv://akash:1234@nodetuts.wxb9o.mongodb.net/StudentRequestSystem?retryWrites=true&w=majority';
-mongoose.connect(local , {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(atlas , {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
         app.listen(process.env.PORT || 3000); 
         console.log('You are listening to port 3000'); 

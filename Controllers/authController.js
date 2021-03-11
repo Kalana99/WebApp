@@ -59,6 +59,10 @@ module.exports.contact_post = (req, res) => {
     res.json({});
 }
 
+module.exports.about_get = (req, res) => {
+    res.render('about');
+};
+
 module.exports.forgotPassword_get = (req, res) => {
     res.render('forgotPassword');
 }
