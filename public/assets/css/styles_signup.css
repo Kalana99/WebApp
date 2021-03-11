@@ -166,7 +166,7 @@ body{
     width: 80%;
     cursor: pointer;
     margin: auto;
-    background-color:#1f363d;
+    background-color:#70a9a1;
     opacity: 2;
     color: white;
     outline-style: none;
@@ -174,7 +174,7 @@ body{
 }
 
 .button.signUp:hover{
-    background-color: #01110f;
+    background-color: #40798c;
 }
 
 .button.signUp:active{   
