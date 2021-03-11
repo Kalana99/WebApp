@@ -385,7 +385,6 @@ body{
 .dropdown-content a{
   box-sizing: border-box;
   width: 100%;
-  /* clear: both; */
   font-weight: 400;
   text-align: inherit;
   border: 0;
