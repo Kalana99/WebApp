@@ -24,8 +24,6 @@ module.exports.signup_post = (req, res) => {
 
     let data = req.body;
 
-    data.type = req.body.type[0];
-
     delete data.confirmPsw;
     
     // Save the user object to the database
