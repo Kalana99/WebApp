@@ -79,7 +79,7 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, contactEmail);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadioGender, nonEmptyRadioType, forgotPswEmail, contactEmail);
     };
 };
 
@@ -833,7 +833,7 @@ addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, contactEmail) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadioGender, nonEmptyRadioType, forgotPswEmail, contactEmail) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
