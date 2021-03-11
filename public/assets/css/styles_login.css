@@ -10,7 +10,7 @@ body{
     margin: 0;
     padding:0;
     font-family: 'Ubuntu', sans-serif;
-    background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.2)),url(../resources/pexels-henry-&-co-2341290.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.1)),url(../resources/pexels-henry-&-co-2341290.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
