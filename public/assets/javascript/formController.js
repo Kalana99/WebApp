@@ -817,14 +817,6 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
     else if(page === 'signUp'){
 
         let formElement = document.querySelector('#signUpForm');
-
-        //creating hidden element
-
-        let hiddenIdInput = document.createElement('input');
-        hiddenIdInput.setAttribute('type', 'hidden');
-        hiddenIdInput.setAttribute('name', 'type');
-        hiddenIdInput.setAttribute('value', 'signUp');
-        formElement.appendChild(hiddenIdInput);
         
         formElement.submit();
 

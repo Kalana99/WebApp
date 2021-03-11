@@ -25,18 +25,8 @@ module.exports.signup_post = (req, res) => {
     let data = req.body;
 
     data.type = req.body.type[0];
-    
-    if(req.body.fileName){
-        data['profilePic'] = req.body.fileName[0];
-        data['profilePic_uploaded'] = true;
-    }
-    else{
-        data['profilePic_uploaded'] = false;
-        data['profilePic'] = "";
-    }
 
     delete data.confirmPsw;
-    delete data.fileName;
     
     // Save the user object to the database
     let id = database.addUser(data);
