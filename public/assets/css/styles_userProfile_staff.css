@@ -27,11 +27,9 @@ body{
   .column{
     /* background: radial-gradient(circle, rgba(92,202,143,1) 12%, rgba(9,126,103,1) 100%); */
     background-image: url(../resources/profile-background.jpg);
-    width: 40%;
+    width: 70%;
     height: 90%;
     padding: 20px;
-    margin-left: auto;
-    margin-right: auto;
     box-sizing: border-box;
     box-shadow: 1px 5px 7px 1px rgba(187, 187, 181, 0.7);
     border-radius: 10px;
@@ -135,7 +133,7 @@ body{
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    width: 70%;
+    width: inherit;
     height: fit-content;
     position: relative;
     line-height: normal;
@@ -143,7 +141,6 @@ body{
     margin-left: auto;
     margin-right: auto;
     align-items: center;
-    margin: 0;
   }
   
   .nav li{
@@ -198,11 +195,6 @@ body{
     margin-right: auto;
     margin-left: auto;
     height: 100%;
-  }
-  
-  .threadViewContainer{
-    height: 40%;
-    width: 100%;
   }
   
   .request-tiles{
@@ -334,24 +326,3 @@ body{
     left: inherit;
     background: transparent;
   }
-  
-  /* ---------------------------------------STAFF--------------------------------------------------- */
-  
-  /* .staff .main-body{
-    width: 30%;
-    height: 90%;
-  } */
-  /* .staff .column{
-    margin: 0;
-    width: 70%;
-  } */
-  /* .staff .request{
-    display: none;
-  }
-  .staff .threadViewContainer{
-    height: 100%;
-  }
-  .staff .threadView{
-    height: 100%;
-    width: 100%;
-  } */
