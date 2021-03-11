@@ -11,6 +11,7 @@ body{
   overflow-x: hidden;
   /* background: linear-gradient(4deg, rgba(143,160,162,1) 0%, rgba(15,79,96,1) 100%); */
   background-image: url(../resources/background-test.jpg);
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .container{
@@ -347,6 +348,7 @@ body{
   margin-top: 0;
   padding: 0;
   overflow: hidden;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .dropdown-content.drop{
