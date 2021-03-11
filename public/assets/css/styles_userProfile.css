@@ -168,6 +168,16 @@ body{
   background: lightgrey;
   color: black;
 }
+.nav .navBtn:hover + .dropdown-content{
+  display: block;
+}
+.dropdown-content:hover{
+  display: block;
+}
+.dropdown-content:hover .navBtn{
+  background: lightgrey;
+  color: black;
+}
 
 .nav button:active{
   outline: none;
@@ -351,9 +361,9 @@ body{
   font-family: 'Ubuntu', sans-serif;
 }
 
-.dropdown-content.drop{
+/* .dropdown-content.drop{
   display: block;
-}
+} */
 
 .dropdown-content a{
   box-sizing: border-box;
@@ -391,7 +401,7 @@ footer{
 
 /* ---------------------------------------STAFF--------------------------------------------------- */
 
-.staff .main-body{
+/* .staff .main-body{
   width: 30%;
   height: 90%;
 }
@@ -408,4 +418,4 @@ footer{
 .staff .threadView{
   height: 100%;
   width: 100%;
-}
+} */

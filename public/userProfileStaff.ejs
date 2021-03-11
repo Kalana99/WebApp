@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="/css/styles_popup.css">
-    <link rel="stylesheet" href="/css/styles_userProfile.css">
+    <link rel="stylesheet" href="/css/styles_userProfile_staff.css">
     <link rel="stylesheet" href="/css/loading_animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -16,18 +16,6 @@
 <body>
     <div class="navigation">
         <ul class="nav">
-            <!-- <li class= "nav-tabs">
-                <button class="navBtn" onclick="dropNotifications()">
-                    <i class="material-icons">notifications_none</i>
-                </button>
-                <div class="dropdown-notification">
-                    <a href="#">Notification 1 2 3 4 5</a>
-                    <a href="#">Notification 2 3 4 5 6 7</a>
-                    <a href="#">Notification 3 4 5 6 7 8 9</a>
-                    <a href="#">Notification 4 5 6 7 8 9 10</a>
-                    <a href="#">Notification 5 6 7 8 9  10 11 12</a>
-                </div>
-            </li> -->
             <li class= "dropdown nav-tabs">
                 <button class="navBtn">                         
                     <i class="material-icons">brightness_low</i>
@@ -72,8 +60,6 @@
         </div>
 
         <main class="main-body">
-            
-            <%- include('./assets/partials/popup_logout.ejs') %>
 
             <div class="threadViewContainer">
                 <div class="threadView">
@@ -91,70 +77,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        
-            <div class="request-tiles">
-
-                <div class="request addDrop">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>ADD / DROP</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Need to change the module!!</h2>
-                        <h6>Fill out a request to change the module</h6>
-                        <button class="open-button-request addDrop" id="0" onclick="toggleAddDrop()">
-                            <span class="button__text">Request</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_addDrop.ejs') %> 
-
-                <div class="request submission">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>SUBMISSION DEADLINE</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Lorem ipsum dolor imet!!</h2>
-                        <h6>Fill out a request to blah blah blah</h6>
-                        <button class="open-button-request submission" id="1" onclick="toggleSubmission()">
-                            <span class="button__text">Request</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_submission.ejs') %> 
-
-                <div class="request repeat">
-
-                    <div class="image-avatar">
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="preview">
-                        <h2>EXAM REPEAT</h2>
-                    </div>
-                    <div class="info">
-                        <h2>Lorem ipsum dolor sit amet!!</h2>
-                        <h6>Fill out a request to blah blah blah</h6>
-                        <button class="open-button-request repeat" id="2" onclick="toggleRepeat()">
-                            <span class="button__text">Request</span>
-                        </button>
-                    </div>
-                </div>
-
-                <%- include('./assets/partials/popup_repeatExam.ejs') %>
-
             </div>
 
         </main>
