@@ -30,6 +30,10 @@ router.get('/login', authController.login_get);
 
 router.post('/login', authController.login_post);
 
+router.get('/contact', authController.contacts_get);
+
+router.post('/contact', authController.contact_post);
+
 router.get('/forgotPassword', authController.forgotPassword_get);
 
 router.post('/getEmailandPin', authController.forgotPassword_checkPost);

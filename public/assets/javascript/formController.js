@@ -19,6 +19,7 @@ let main = async (page) => {
     let index               = document.querySelectorAll('.index.' + page);
     let nonEmptyRadio       = document.querySelectorAll('.nonEmptyRadio.' + page);
     let forgotPswEmail      = document.querySelectorAll('.forgotPswEmail.' + page);
+    let contactEmail        = document.querySelectorAll('.contactEmail.' + page);
 
     //buttons that needs loading animation
     let button          = document.querySelector('.button.' + page);
@@ -36,7 +37,6 @@ let main = async (page) => {
     // console.log(nonEmptyRadio);
     // console.log(question);
     // console.log(forgotPswEmail);
-    // console.log(forgotPswQuestion);
 
     //validate nonEmpty
     await validateNonEmpty(nonEmpty);
@@ -64,6 +64,9 @@ let main = async (page) => {
     //validate forgot password page
     await validateForgotPassword(forgotPswEmail);
 
+    //validate contact email
+    await validateContactEmail(contactEmail);
+
     //submit if correct
     if(correct){
         //loading animation for buttons
@@ -71,7 +74,7 @@ let main = async (page) => {
             button.classList.toggle('loading');
         }
 
-        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail);
+        await finalize(page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, contactEmail);
     };
 };
 
@@ -529,6 +532,37 @@ let validateForgotPassword = async (forgotPswEmail) => {
     }
 };
 
+let validateContactEmail = async (emailInput) => {
+    //state --> 'blank', 'success', 'error', notAnEmail'.
+    let emailState;
+
+    for (let i=0; i<emailInput.length; i++){
+        let email = emailInput[i];
+        let emailValue = email.value.trim();
+
+        if (emailValue === ''){
+            emailState = "blank";
+        }
+        else if (! await (isEmail(emailValue))){
+            emailState = 'notAnEmail'
+        }
+
+        //calling setError and setSuccess according to email state
+        if (emailState === 'blank'){
+            setError(email, 'Email cannot be blank');
+            correct = false;
+        }
+        else if (emailState === 'notAnEmail'){
+            setError(email, 'Not a valid Email');
+            correct = false;
+        }
+        else if (emailState === 'success'){
+            setSuccess(email);
+        }
+        
+    }
+};
+
 function addPinSubmit(formControlBtn){
     let formControl = document.createElement('div');
     formControl.setAttribute('class', 'form-control');
@@ -764,7 +798,7 @@ addEditListeners(editButtons);
 
 // ---------------------------------------------------------------------------------------
 
-const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail) => {
+const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, existingEmail, newEmail, index, nonEmptyRadio, forgotPswEmail, contactEmail) => {
     if(page === 'login'){
         email = existingEmail[0].value;
 
@@ -777,6 +811,25 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         });
         let data = await response.json();
         window.location.href = '/userProfile';
+    }
+
+    else if(page === 'contact'){
+
+        let data = {};
+
+        data['concern'] = nonEmpty[0].value;
+        data['email']   = contactEmail[0].value;
+
+        let response = await fetch('/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        resData = await response.json();
+        window.location.href = '/login';
     }
 
     else if(page === 'signUp'){
@@ -941,6 +994,13 @@ let setEventListeners = () => {
     if(loginSubmitButton)
         loginSubmitButton.addEventListener('click', event => {
             main('login');
+        });
+    
+    //contact event listener
+    contactSubmitButton = document.getElementById('contactSubmit');
+    if(contactSubmitButton)
+        contactSubmitButton.addEventListener('click', event => {
+            main('contact');
         });
 
     //signUp event listener

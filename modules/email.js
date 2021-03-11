@@ -39,6 +39,14 @@ var transporter = nodemailer.createTransport({
         text: 'To recover your password, Enter following pincode in the field provided.\n' + additionalData.sentPin
       }
     }
+    else if(type === 'contact'){
+      data = {
+        from: serverEmail,
+        to: clientEmail,
+        subject: 'My Concern...',
+        text: additionalData.concern + '\n' + 'Respond to: ' + additionalData.senderEmail
+      }
+    }
 
     transporter.sendMail(data , function(error, info){
         if (error) {

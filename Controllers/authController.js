@@ -46,6 +46,21 @@ module.exports.login_post = (req, res) => {
     })
 };
 
+module.exports.contacts_get = (req, res) => {
+    res.render('contact');
+};
+
+module.exports.contact_post = (req, res) => {
+    
+    concern = req.body.concern;
+    senderEmail = req.body.email;
+    serverEmail = "uom.studentrequestsystem@gmail.com";
+
+    mail(serverEmail, "contact", {senderEmail: senderEmail, concern: concern});
+
+    res.json({});
+}
+
 module.exports.forgotPassword_get = (req, res) => {
     res.render('forgotPassword');
 }

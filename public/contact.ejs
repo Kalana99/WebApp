@@ -15,16 +15,25 @@
 
         <div class="form-control">
             <label for="contact">Tell us your concern </label>
-            <textarea name="contact" id="contact" cols="30" rows="10" ></textarea>   
+            <textarea name="concern" class="nonEmpty contact concern" id="concern" cols="30" rows="10" ></textarea>
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>  
         </div>
 
         <div class="form-control">
             <label for="email">Your email address</label>
-            <input type="email" name="email" class="email" id="email" placeholder="Enter your Email">
-            
+            <input type="email" name="email" class="contactEmail contact" id="email" placeholder="Enter your Email">
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
 
-        
+        <div class="form-control">
+            <button id="contactSubmit" type="button" class="button contact">
+                <span class="buttonText">Confirm</span>
+            </button>
+        </div>
 
     </div>
     <script src="/javascript/formController.js"></script>
