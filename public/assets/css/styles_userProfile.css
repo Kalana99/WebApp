@@ -16,7 +16,7 @@ body{
 
 /* ---------------------------------------STAFF--------------------------------------------------- */
 
-.staff .main-body{
+/* .staff .main-body{
   width: 30%;
   height: 90%;
 }
@@ -33,7 +33,7 @@ body{
 .staff .threadView{
   height: 100%;
   width: 100%;
-}
+} */
 
 .container{
   box-sizing: border-box;
@@ -132,6 +132,7 @@ body{
   padding: 0;
   margin: 0;
   width: 65%;
+  height: 90%;
   align-items: center;
   /* background: linear-gradient(to right, #ffbf96, #fe7096) !important; */
 }
@@ -215,7 +216,7 @@ body{
   flex-direction: row;
   box-sizing: border-box;
   align-items: center;
-  width: fit-content;
+  width: 100%;
   margin: 0;
   margin-right: auto;
   margin-left: auto;
@@ -223,11 +224,10 @@ body{
 
 .threadViewContainer{
   height: 40%;
-  width: 100%;
 }
 
 .request-tiles{
-  height: 50%;
+  height: 60%;
 }
 
 .threadView,
@@ -268,10 +268,11 @@ body{
 	color: #fff;
 	padding: 30px;
 	max-width: 300px;
+  height: auto;
 }
 .request .preview{
   background: linear-gradient(to right, #56ab2f, #a8e063);
-  height: 135px;
+  height: 25%;
 }
 .request.submission .preview{
   background: linear-gradient(to right, #d66d75, #e29587);
@@ -288,8 +289,8 @@ body{
 .request .info{
   padding: 10px;
   position: relative;
-  height: inherit;
-  padding-top: 15px;
+  height: 75%;
+  /* padding-top: 15px; */
 }
 
 .open-button-threadView,
@@ -358,10 +359,6 @@ body{
   background: linear-gradient(to right, #185a9d, #43cea2);
 }
 
-.request-tiles.staff{
-  display: none;
-}
-
 .dropdown-content{
   font-family: monospace;
   box-sizing: border-box;
@@ -415,4 +412,58 @@ footer{
   bottom: 0;
   left: inherit;
   background: transparent;
+}
+
+@media only screen and (max-width: 1400px){
+  .request .open-button-request{
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 1275px){
+  .request-tiles{
+    flex-direction: column;
+  }
+  .request{
+    flex-direction: row;
+    width: 95%;
+    height: 90%;
+  }
+  .request .preview{
+    padding: 20px;
+    height: auto;
+    width: 30%;
+  }
+  .request .info{
+    padding: 30px;
+    height: auto;
+    width: 70%;
+  }
+  .request .image-avatar{
+    display: none;
+  }
+  .request h2{
+    font-size: 0.9rem;
+    margin: 5px;
+  }
+}
+
+@media only screen and (max-width: 1245px){
+  .column{
+    flex-direction: row;
+  }
+  .container{
+    flex-direction: column;
+  }
+  .column,
+  .main-body{
+    width: 100%;
+  }
+  .request-tiles{
+    height: 80%;
+    width: 100%;
+  }
+  .threadView{
+    margin: 10px;
+  }
 }
