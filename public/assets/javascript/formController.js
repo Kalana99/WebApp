@@ -657,6 +657,7 @@ function submitPin(){
 }
 
 function focusLabel(element){
+    // console.log("clicked");
     let formControl = element.parentElement;
     formControl.querySelector('input').focus();
 }
