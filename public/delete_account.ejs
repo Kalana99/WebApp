@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/deleteAcc_styles.css">
+
+    <!-- button loading animation -->
+    <link rel="stylesheet" href="/css/loading_animations.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Delete Account</title>
 </head>
@@ -12,26 +17,33 @@
         <header class="header">
             <h1>Delete Account</h1>
         </header>
+
+        <div class="img">
+                <img class="profile" src="resources/rubbish-bin.png">
+                
+        </div>
         
         <form action="deleteAccount" class="form" id="form">
             <div class="form-control">
-                <label for="email">Enter your email</label>
+                
                 <input type="email" name="email" class="existingEmail deleteAccount" id="email" placeholder="Enter your email" required>
+                <label for="email" class="form-label">Enter your email</label>
                 <i class="fa fa-check-circle"></i>
                 <i class="fa fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
     
             <div class="form-control">
-                <label for="password">Enter your password</label>
+                
                 <input type="password" name="password" class="existingPsw deleteAccount" id="password" placeholder="Enter your password" required>
+                <label for="password" class="form-label">Enter your password</label>
                 <i class="fa fa-check-circle"></i>
                 <i class="fa fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
     
             <div class="form-control">
-                <button type="button" id="deleteAccountSubmit" class="button deleteAccountSubmit">
+                <button type="button" id="deleteAccountSubmit" class="button deleteAccount">
                     <span class="buttonText">Confirm</span>
                 </button>
             </div>

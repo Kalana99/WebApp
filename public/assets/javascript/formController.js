@@ -656,6 +656,11 @@ function submitPin(){
     }
 }
 
+function focusLabel(element){
+    let formControl = element.parentElement;
+    formControl.querySelector('input').focus();
+}
+
 // profile picture edit function
 let inputDP = document.querySelector('.fileEditProfile');
 

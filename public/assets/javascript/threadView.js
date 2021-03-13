@@ -71,6 +71,8 @@ let replyButtons = document.querySelector('.reply-btn-group');
 let replyButton = document.querySelector('.replyBtn');
 
 let getThreads = () => {
+    // loading page open
+    document.querySelector('.bouncer.left').classList.toggle('active');
 
     replyButton.className = 'replyBtn';
     replyButtons.className = 'reply-btn-group';
@@ -92,6 +94,10 @@ let getThreads = () => {
         threads = data.array;
         numberOfPages = data.numberOfPages;
         initNav();
+
+        // loading page close
+        document.querySelector('.bouncer.left').classList.toggle('active');
+
         initialize(threads);
       })
       .catch((error) => {
@@ -178,7 +184,7 @@ let createThreadElement = async (thread) => {
 
         msgGroup.innerHTML = '';
         // display loading animation until the messages are loaded
-        document.querySelector('.bouncer').classList.toggle('active');
+        document.querySelector('.bouncer.right').classList.toggle('active');
 
         //if the thread is unread, make it not unread
         if(unread){
@@ -252,8 +258,6 @@ let initialize = async (arr) => {
 
     };
 
-    //remove loading animation after all the threads are loaded
-    // loadingOverlay.style.display = 'none';
 };
 
 
@@ -271,7 +275,7 @@ let displayMessages = async (arr, msgId) => {
     let userId = await response.json();
 
     // remove the loading animation when messages are loaded
-    document.querySelector('.bouncer').classList.toggle('active');
+    document.querySelector('.bouncer.right').classList.toggle('active');
     
     for (let i=0; i < arr.length; i++){
         let person = arr[i].from;
@@ -390,6 +394,7 @@ let initTablinkButtons = async () => {
 
             setTablinkClassName(event.currentTarget);
             getThreads();
+            msgGroup.innerHTML = "<span>No thread is selected</span>";
         });
 
     });
@@ -482,6 +487,7 @@ let initializePage = () => {
         // do something
       });   
 
+    msgGroup.innerHTML = "<span>No thread is selected</span>";
     
 };
 
