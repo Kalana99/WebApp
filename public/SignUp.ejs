@@ -20,9 +20,10 @@
             <h1>Sign Up</h1>
             
             <form class="form" action="/signup" method="POST" autocomplete="off" enctype="multipart/form-data" id="signUpForm">
+                
                 <div class="form-control">
                     <input type="text" name="name" class="nonEmpty signUp fullName" placeholder="Enter your full name" id="username">
-                    <label class="form-label">Full Name :</label>
+                    <label class="form-label" onclick="focusLabel(this)">Full Name :</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -30,7 +31,7 @@
 
                 <div class="form-control">
                     <input type="text" name="index" class="index signUp" placeholder="Enter your index number" id="index">
-                    <label class="form-label">Index Number : </label>
+                    <label class="form-label" onclick="focusLabel(this)">Index Number : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -38,7 +39,7 @@
 
                 <div class="form-control">
                     <input type="email" name="email" class="newEmail signUp" placeholder="Enter your email" id="email">
-                    <label class="form-label">Email Address : </label>
+                    <label class="form-label" onclick="focusLabel(this)">Email Address : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -65,7 +66,7 @@
 
                 <div class="form-control">
                     <input type="text" name="phone" class="nonEmpty signUp phone" placeholder="Add your Telephone number" id="phone">
-                    <label class="form-label">Telephone Number : </label>
+                    <label class="form-label" onclick="focusLabel(this)">Telephone Number : </label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>
@@ -73,7 +74,7 @@
 
                 <div class="form-control">
                     <input type="password" name="password" class="newPsw signUp psw" id="password" placeholder="Enter your password">
-                    <label class="form-label">Password :</label>
+                    <label class="form-label" onclick="focusLabel(this)">Password :</label>
                     <i class="far fa-eye" id="togglePassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -82,7 +83,7 @@
 
                 <div class="form-control">
                     <input type="password" name="confirmPsw" class="newPsw signUp confirm" id="c_psw" placeholder="Confirm your password">
-                    <label class="form-label">Confirm Password : </label>
+                    <label class="form-label" onclick="focusLabel(this)">Confirm Password : </label>
                     <i class="far fa-eye" id="toggleConfirmPassword"></i>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
@@ -91,9 +92,9 @@
 
                 <div class="form-control">
                     <input type="radio" name="type" class="nonEmptyRadio signUp type" value="student" id="student">
-                    <label for="Student">Student</label>
+                    <label for="student">Student</label>
                     <input type="radio" name="type" value="staff" id="staff">
-                    <label for="Staff">Staff</label>
+                    <label for="staff">Staff</label>
                     <i class="fa fa-check-circle"></i>
                     <i class="fa fa-exclamation-circle"></i>
                     <small>Error message</small>

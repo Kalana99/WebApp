@@ -88,7 +88,8 @@ body{
 }
 
 .form-control input:focus + .form-label,
-.form-control input:not(:placeholder-shown) + .form-label{
+.form-control input:not(:placeholder-shown) + .form-label,
+.form-control input:-webkit-autofill + .form-label{
     transform: translateY(-2.9em) scale(0.8);
 }
 
