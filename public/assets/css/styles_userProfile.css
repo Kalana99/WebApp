@@ -360,7 +360,7 @@ body{
 }
 
 .dropdown-content{
-  font-family: monospace;
+  
   box-sizing: border-box;
   left: 90px;
   width: 200px;
@@ -384,7 +384,7 @@ body{
 .dropdown-content a{
   box-sizing: border-box;
   width: 100%;
-  font-weight: 400;
+  font-weight: 590;
   text-align: inherit;
   border: 0;
   text-decoration: none;
@@ -394,6 +394,7 @@ body{
   margin-bottom: 0;
   padding: 11px 13px;
   cursor: pointer;
+  color: #0f3443;
 }
 
 .dropdown-content a:hover{

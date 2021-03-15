@@ -1,5 +1,5 @@
 *{
-    font-family: monospace;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 *:focus {
@@ -32,8 +32,9 @@ body{
     height: 90px;
     position: fixed;
     display: block;
-    background: linear-gradient(to right, #42275a, #734b6d);
+    /*background: linear-gradient(to right, #42275a, #734b6d);*/
     /* background: whitesmoke; */
+    background-color: #0f3443;
     width: 100%;
     opacity: 0.7;
 }
