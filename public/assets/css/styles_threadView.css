@@ -10,7 +10,8 @@
     width: 10px;
 }
 ::-webkit-scrollbar-thumb{
-    background: linear-gradient(#bdc3c7 , #2c3e50);
+    /*background: linear-gradient(#bdc3c7 , #2c3e50);*/
+    background: #40798c;
     border-radius: 6px;
 }
 
@@ -21,7 +22,11 @@ body{
     margin: auto;
     width: 100%;
     height: 100%;
-    background-image: url(../resources/threadViewBackground.png);
+    /*background-image: url(../resources/soft-cloudy-is-gradient-pastel-abstract-sky-background-sweet-color_6529-1434.jpg);*/
+    background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url(../resources/pexels-henry-&-co-2341290.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .navigation{
@@ -36,7 +41,7 @@ body{
     /* background: whitesmoke; */
     background-color: #0f3443;
     width: 100%;
-    opacity: 0.7;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .sidePanel,
@@ -74,14 +79,16 @@ body{
     padding: auto;
     background: transparent;
     color: lightgrey;
-    width: 70px;
+    width: 80px;
     height: 60px;
     cursor: pointer;
     justify-content: center;
     outline: none;
-    font-family: monospace;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all .3s;
+    
 }
 
 .sidePanel button{
@@ -90,8 +97,9 @@ body{
 
 .sidePanel button:hover,
 .nav button:hover{
-    background: lightgrey;
-    color: black;
+    /*background: lightgrey;*/
+    color: white;
+    font-size: 1.15rem;
 }
 
 .sidePanel button:active,
@@ -115,15 +123,16 @@ body{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    height: 500px;
+    height: 515px;
     max-height: 100%;
     box-sizing: border-box;
     max-width: 100%;
-    opacity: 0.8;
+    /*opacity: 0.8;*/
     border-radius: 10px;
     background-image: url(../resources/background-test.jpg);
     position: relative;
     overflow: hidden;
+    margin-top: 3%;
     /* box-shadow: -4px 4px 5px -1px rgba(0,0,0,0.75); */
     /* background-color: grey; */
     /* display: flex; */
@@ -132,7 +141,7 @@ body{
 
 .column.left{
     width: 30%;
-    margin-right: 2px;
+    margin-right: 3px;
     /* background: linear-gradient(90deg, #757474 0%, #464646 49%, #080808 100%); */
 }
 
@@ -146,13 +155,13 @@ body{
 .search-bar input[type=text]{
     /* float: left; */
     display: inline;
-    padding: 6px;
+    padding: 9px;
     border: 1px solid lightgrey;
     margin: auto;
     font-size: 15px;
     width: 500px;
     position: relative;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .searchButton{
@@ -161,13 +170,14 @@ body{
     right: 5px;
     background: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 30%;
     margin-top: auto;
     margin-bottom: auto;
     padding: 5px;
 }
 .searchButton:hover{
     background: whitesmoke;
+    
 }
 
 .tab{
@@ -176,7 +186,8 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    background: linear-gradient(to right, #bdc3c7 , #2c3e50);
+    background: linear-gradient(to right, #40798c ,#1f363d);
+    /*background: #40798c;*/
     overflow-x: hidden;
     padding-top: 60px;
     z-index: 1;
@@ -190,12 +201,14 @@ body{
     font-size: 36px;
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 .tab a{
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
+    font-weight: 500;
     color: #818181;
     display: block;
     transition: 0.3s;
@@ -214,9 +227,10 @@ body{
     outline: none;
     text-align: left;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: 0.3s;
     position: relative;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .tab .material-icons{
@@ -290,7 +304,7 @@ body{
     height: 60px;
     display: block;
     text-align: left;
-    font-family: monospace;
+    font-family: 'Ubuntu', sans-serif;
     position: relative;
 }
 
@@ -336,12 +350,12 @@ body{
 }
 
 .btn-group button:first-child{
-    border-radius: 10px 10px 0 0;
+    /*border-radius: 10px 10px 0 0;*/
     border-top: none;
 }
 
 .btn-group button:last-child{
-    border-radius: 0 0 10px 10px;
+    /*border-radius: 0 0 10px 10px;*/
 }
 
 .btn-group button:hover {
