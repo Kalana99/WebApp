@@ -26,12 +26,12 @@ body{
   
   .column{
     /* background: radial-gradient(circle, rgba(92,202,143,1) 12%, rgba(9,126,103,1) 100%); */
-    background-image: url(../resources/profile-background.jpg);
+    background-image: url(../resources/pexels-henry-&-co-2341290.jpg);
     width: 70%;
     height: 90%;
     padding: 20px;
     box-sizing: border-box;
-    box-shadow: 1px 5px 7px 1px rgba(187, 187, 181, 0.7);
+    box-shadow: 3px 5px 7px 3px rgba(169,169,169,0.9);
     border-radius: 10px;
   }
   
@@ -84,7 +84,8 @@ body{
     margin: auto;
     text-align: center;
     font-size: 2.5vw;
-    font-family: monospace;
+    font-family: 'Ubuntu', sans-serif;
+
   }
   
   .details{
@@ -98,7 +99,7 @@ body{
     margin: 10px;
     text-align: center;
     color: grey;
-    font-family: monospace;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 1.4vw;
   }
   
@@ -123,7 +124,8 @@ body{
     height: 100%;
     width: 90px;
     z-index: 1;
-    background: linear-gradient(to right, #00d4ff, #090979) !important;
+    /*background: linear-gradient(to right, #00d4ff, #090979) !important;*/
+    background: #0f3443 ;
     /* opacity: 0.6; */
   }
   
@@ -268,10 +270,10 @@ body{
   }
   
   .dropdown-content{
-    font-family: monospace;
+    
     box-sizing: border-box;
     left: 90px;
-    width: 180px;
+    width: 200px;
     margin: 0.125rem 0 0;
     color: black;
     text-align: left;
@@ -297,7 +299,7 @@ body{
     box-sizing: border-box;
     width: 100%;
     /* clear: both; */
-    font-weight: 400;
+    font-weight: 590;
     text-align: inherit;
     border: 0;
     text-decoration: none;
@@ -307,6 +309,7 @@ body{
     margin-bottom: 0;
     padding: 11px 13px;
     cursor: pointer;
+    color: #0f3443;
   }
   
   .dropdown-content a:hover{
