@@ -29,7 +29,7 @@ body::-webkit-scrollbar-thumb {
   padding: 0;
   top: 0;
   left: 0;
-  font-family: monospace;
+  font-family: 'Ubuntu', sans-serif;
   color: grey;
 }
 
@@ -52,6 +52,7 @@ body::-webkit-scrollbar-thumb {
   padding: 10px;
   width: 100%;
   outline: none;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* .popup-window .divider{
@@ -73,6 +74,7 @@ body::-webkit-scrollbar-thumb {
   font-family: monospace;
   border-radius: 10px;
   align-self: center;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .popup-window .close-btn {
@@ -133,9 +135,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .submit{
-  border: 1px solid #49798c;
+  border: none;
   border-radius: 10px;
   display: inline-block;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 18px;
   padding: 15px;
   width: 80%;
@@ -144,19 +147,23 @@ body::-webkit-scrollbar-thumb {
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
-  background: linear-gradient(to right, #84d9d2, #07cdae);
+  /*background: linear-gradient(to right, #84d9d2, #07cdae);*/
+  background:#70a9a1;
   opacity: 2;
   color: white;
   outline-style: none;
   position: relative;
+  transition: all .3s;
 }
 
 .submit:hover{
-  background: linear-gradient(to right, #07cdae, #84d9d2);
+  /*background: linear-gradient(to right, #07cdae, #84d9d2);*/
+  background-color: #60918a;
 }
 
 .submit:active{   
-  background: linear-gradient(to right, #324c4a, #08ddbc);
+  /*background: linear-gradient(to right, #324c4a, #08ddbc);*/
+  background-color: #1f363d;
 }
 
 .popup-window.active .overlay {
@@ -171,6 +178,7 @@ body::-webkit-scrollbar-thumb {
 .suggestions-lecturer{
   box-sizing: border-box;
   box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
+  font-family: 'Ubuntu', sans-serif;
   position: absolute;
   width: inherit;
   min-width: 260px;
@@ -184,8 +192,7 @@ body::-webkit-scrollbar-thumb {
   z-index: 10;
   cursor: pointer;
   text-align: left;
-  font-size: 1.1rem;
-  border-radius: 10px;
+  font-size: 0.8rem;
   background: white;
   overflow: hidden;
   overflow: scroll;
@@ -209,7 +216,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .selectedFinal{
-  font-family: monospace;
+  font-family: 'Ubuntu', sans-serif;
   color: #222;
   font-size: inherit;
   cursor: default;
@@ -264,7 +271,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .inputFileDiv label {
-  font-family: monospace;
+  font-family: 'Ubuntu', sans-serif;
   text-align: center;
   justify-content: center;
   box-sizing: border-box;
