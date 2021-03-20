@@ -70,17 +70,18 @@ body{
     width: 80%;
     cursor: pointer;
     margin: auto;
-    background-color: #70a9a1;
+    background-color: #2d4642;
     opacity: 2;
     color: white;
     outline-style: none;
     position: relative;
     bottom: 0px;
     margin-top: 15%;
+    transition: all 0.2s;
 }
 
 .button.login:hover{
-    background-color: #60918a;
+    background-color: #1f363d;
 }
 
 .button.login:active{    
