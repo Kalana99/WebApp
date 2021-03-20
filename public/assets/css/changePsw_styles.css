@@ -137,14 +137,3 @@ body{
 .buttonText{
     transition: all 0.2s;
 }
-
-.forgotPswQuestion{
-    border-style: none;
-    border-collapse: collapse;
-    outline: none;
-    font-size: 14px;
-    color: #666666;
-    border-radius: 6px;
-    padding: 10px;
-    width: 100%
-}
