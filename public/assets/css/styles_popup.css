@@ -55,10 +55,6 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Ubuntu', sans-serif;
 }
 
-/* .popup-window .divider{
-  border-right: 1px solid lightgrey;
-} */
-
 .popup-window .content {
   position: fixed;
   top: 50%;
