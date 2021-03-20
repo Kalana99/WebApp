@@ -8,55 +8,104 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(/resources/cassie-boca-gFyy2Po7T-k-unsplash.jpg);
-    background-size: cover;
-    width: 100%;
-    height: 100%; 
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .container{
-    background-color:rgba(207,224,195,0.5);
+    background-color:rgba(255,255,255,0.5);
     border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 450px;
+    width: 35%;
     max-width: 100%;
-    opacity: 0.8;
     position: relative;
-    padding: 20px;
 }
 
-.header h1{
+.header{
+    background-color: #70a9a1;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+    border-radius: 20px;
     text-align: center;
-    color:black;
+    opacity:0.95;
+}
+
+.header h2{
+    margin: 0px;
 }
 
 .form{
-    padding: 30px 40px;
+    padding: 20px 40px;
+    opacity: 0.78;
 }
 
 .form-control{
-    margin-bottom: 8px;
-    padding-bottom: 20px;
+    margin-bottom: 4px;
+    padding: 14.5px;
     position: relative;
-    color: white;
-    border-radius: 20px;
-}
-
-.form-control label{
-    display: inline-block;
-    margin-bottom: 10px;
     color: black;
+    font-size: 17px;
+    border-radius: 20px;
+    font-weight: bold;
 }
 
-.form-control input,
-.form-control textarea{
-    border:none;
-    border-radius: 6px;
-    display: block;
-    font-size: 14px;
-    padding: 10px;
-    width: 100%;
+.form-control input{
+   /*border: 2px solid #f0f0f0;*/
+   border:none;
+   color: #373636;
+   font-weight: 520;
+   display: block;
+   font-size: 14.7px;
+   padding: 7px;
+   width: 100%;
+   outline: none;
+   background: transparent;
+   border-bottom: 2.3px solid black;
+   transition: all .3s;
+}
+.form-control input:-webkit-autofill { 
+    -webkit-background-clip: text;
+}
+.form-control input:focus{
+    box-shadow: none;
     outline: none;
+    border-color: #4E8975;
+}
+.form-control select:focus{
+    box-shadow: none;
+    outline: none;
+    
+    border-color:#4E8975;
+}
+.form-control input::placeholder{
+    color: transparent;
+}
+
+.form-control .form-label{
+    position: absolute;
+    transform: translateY(-1.6em);
+    transform-origin: 0 0;
+    transition: all .3s;
+}
+
+.form-control input:focus + .form-label,
+.form-control input:not(:placeholder-shown) + .form-label,
+.form-control input:-webkit-autofill + .form-label{
+    transform: translateY(-2.9em) scale(0.8);
+}
+
+#fileItem{
+    border-bottom: none;
+}
+
+.form-control select{
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    transition: all .3s;
+}
+
+.form-control input[name="gender"], input[name="type"]{
+    display: inline-block;
+    width: 20px;
 }
 
 .form-control.success input{
@@ -88,6 +137,13 @@ body{
     color: #e74c3c;
 }
 
+.form-control i.far{
+    z-index: 10;
+    color: black;
+    cursor: pointer;
+    visibility: visible;
+}
+
 .form-control small{
     visibility: hidden;
     position: absolute;
@@ -100,8 +156,10 @@ body{
     visibility: visible;
 }
 
-.button{
-    border: 1px solid #49798c;
+
+
+.button.signUp{
+    border: none;
     border-radius: 10px;
     display: block;
     font-size: 18px;
@@ -109,25 +167,76 @@ body{
     width: 80%;
     cursor: pointer;
     margin: auto;
-    background-color:#1f363d;
+    background-color:#70a9a1;
     opacity: 2;
     color: white;
     outline-style: none;
     position: relative;
-
 }
 
-.button:hover{
-    background-color: #70a9a1;
+.button.signUp:hover{
+    background-color: #40798c;
 }
 
-.button:active{   
+.button.signUp:active{   
     background-color: #2d4642 ;
-}
-.button.edit:active{
-    color: white;
 }
 
 .buttonText{
     transition: all 0.2s;
+}
+
+.main-body{
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/pexels-min-an-1353938.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%; 
+}
+
+.faculty,.question{
+    border-style: none;
+    border-collapse: collapse;
+    outline: none;
+    font-size: 14px;
+    color: #666666;
+   
+    padding: 10px;
+    width: 100%
+}
+
+h1{
+    text-align: center;
+    color:black;
+}
+@media only screen and (max-width: 1100px){
+    .container{
+        width:55%;
+        border-radius: 35px;
+
+    }
+    .form{
+        padding: 20px 30px;
+    }
+}
+
+@media only screen and (max-width: 780px){
+    .container{
+        width:70%;
+        border-radius: 35px;
+
+    }
+    .form{
+        padding: 20px 30px;
+    }
+}
+
+@media only screen and (max-width: 450px){
+
+    .container{
+        width:90%;
+        border-radius: 30px;
+    }
+    .form{
+        padding: 10px 20px;
+    }
 }

@@ -212,13 +212,6 @@ a{
     color:rgb(31,54,61);
 }
 
-/* .button{
-    position: absolute;
-    bottom: 5%;
-    width: 60%;
-    transform:translate(20%,0%);
-} */
-
 .links{
     
     margin-top: 10%;
@@ -279,7 +272,20 @@ a.link1:hover{
     margin-top: 15%;
 }
 
-.det{
-    position: absolute;
+footer{
+    position: fixed;
     bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+footer a{
+    margin: 10px;
+    padding: 10px;
+    text-decoration: none;
+}
+footer span{
+    pointer-events: none;
 }
