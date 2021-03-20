@@ -581,6 +581,9 @@ let validateContactEmail = async (emailInput) => {
         else if (! await (isEmail(emailValue))){
             emailState = 'notAnEmail'
         }
+        else{
+            emailState = 'success';
+        }
 
         //calling setError and setSuccess according to email state
         if (emailState === 'blank'){
@@ -603,12 +606,19 @@ function addPinSubmit(formControlBtn){
     formControl.setAttribute('class', 'form-control');
     // add pincode input field
     let pinInput = document.createElement('input');
+    let pinLabel = document.createElement('label');
     pinInput.setAttribute('class', 'pinCode forgotPassword');
     pinInput.setAttribute('type', 'text');
     pinInput.setAttribute('name', 'pin');
     pinInput.setAttribute('placeholder', 'Enter your pin');
+    pinInput.setAttribute('id', 'pinInput');
+
+    pinLabel.setAttribute('class', 'form-label');
+    pinLabel.setAttribute('for', 'pinInput');
+    pinLabel.innerText = 'Pin Code:';
 
     formControl.appendChild(pinInput);
+    formControl.appendChild(pinLabel);
 
     let successIcon = document.createElement('i');
     successIcon.setAttribute('class', 'fa fa-check-circle');
@@ -865,6 +875,7 @@ const finalize = async (page, nonEmpty, normal, selected, existingPsw, newPsw, e
         });
 
         resData = await response.json();
+        window.alert("Your issue has been reported to administration");
         window.location.href = '/login';
     }
 
