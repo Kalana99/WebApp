@@ -241,7 +241,8 @@ body{
   }
   
   .open-button-threadView{
-    background: linear-gradient(to right, #614385, #516395);
+    /*background: linear-gradient(to right, #614385, #516395);*/
+    background-image: linear-gradient(to left,#40798c,#70a9a1,#40798c);
     border: 0;
     border-radius: 50px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -255,16 +256,19 @@ body{
     cursor: pointer;
     outline: none;
     overflow: hidden;
+    background-size: 200%;
+    transition: all 0.8s;
   }
   
   .open-button-threadView:hover{
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to right, #516395, #614385);
+    /*background: linear-gradient(to right, #516395, #614385);*/
+    background-position: right;
   }
   
   .open-button-threadView:active{
     outline: none;
-    background: linear-gradient(to right, #614385, #516395);
+    /*background: linear-gradient(to right, #614385, #516395);*/
     bottom: 28px;
     right: 28px;
   }

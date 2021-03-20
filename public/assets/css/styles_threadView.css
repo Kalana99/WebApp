@@ -1,5 +1,5 @@
 *{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Hind Guntur', sans-serif;
 }
 
 *:focus {
@@ -285,6 +285,7 @@ body{
     overflow-x: hidden;
     scroll-behavior: smooth;
     max-height: 85%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .message-list-item{
@@ -336,7 +337,7 @@ body{
 
 .btn-group .item{
     margin: 1px;
-    display: inline-block;
+    display: flex;
 }
 
 .btn-group .item.sender{
@@ -407,21 +408,25 @@ body{
     background-color:#1f363d;
 }
 .acceptBtn{
-    background: linear-gradient(to right, #02aab0, #00cdac);
+    /* background: linear-gradient(to right, #02aab0, #00cdac); */
+    background-color: #40798c;
 }
 .declineBtn{
-    background: linear-gradient(to right, #ff512f , #dd2476);
+    /* background: linear-gradient(to right, #ff512f , #dd2476); */
+    background-color: #70a9a1;
 }
 
 .replyBtn:hover{
     /*background: linear-gradient(to right, #2c3e50, #bdc3c7);*/
-    background: #40798c;
+    background: #9ec1a3;
 }
 .acceptBtn:hover{
-    background: linear-gradient(to right, #00cdac, #02aab0);
+    /* background: linear-gradient(to right, #00cdac, #02aab0); */
+    background: #9ec1a3;
 }
 .declineBtn:hover{
-    background: linear-gradient(to right, #dd2476 , #ff512f);
+    /* background: linear-gradient(to right, #dd2476 , #ff512f); */
+    background: #9ec1a3;
 }
 
 .acceptBtn:active,
