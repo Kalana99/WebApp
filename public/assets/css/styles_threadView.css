@@ -338,14 +338,14 @@ body{
 }
 
 .btn-group .item.sender{
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     margin-bottom: 3px;
 }
 .btn-group .item.date{
     float: right;
 }
 .btn-group .type{
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 500;
 }
 
@@ -392,15 +392,17 @@ body{
     padding: 10px;
     margin: 5px;
     cursor: pointer;
-    width: 100px;
+    width: 115px;
     display: inline-block;
     text-align: center;
     visibility: hidden;
-    font-size: 1.3rem;
+    font-size: 1.0rem;
     position: relative;
+    transition: all .3s;
 }
 .replyBtn{
-    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    /*background: linear-gradient(to right, #bdc3c7, #2c3e50);*/
+    background-color:#1f363d;
 }
 .acceptBtn{
     background: linear-gradient(to right, #02aab0, #00cdac);
@@ -410,7 +412,8 @@ body{
 }
 
 .replyBtn:hover{
-    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+    /*background: linear-gradient(to right, #2c3e50, #bdc3c7);*/
+    background: #40798c;
 }
 .acceptBtn:hover{
     background: linear-gradient(to right, #00cdac, #02aab0);
@@ -422,8 +425,8 @@ body{
 .acceptBtn:active,
 .declineBtn:active,
 .replyBtn:active{
-    top: 2px;
-    right: 2px;
+    top: 1px;
+    right: 1px;
 }
 
 .reply-btn-group.visible button{
