@@ -8,7 +8,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/1567799.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/watercolour-1325656_1920.jpg);
     background-size: cover;
     width: 100%;
     height: 100%; 
@@ -45,7 +45,7 @@ body{
 }
 
 .form-control{
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     padding-bottom: 20px;
     margin-left: 2%;
     position: relative;
@@ -140,21 +140,22 @@ body{
     width: 80%;
     cursor: pointer;
     margin: auto;
-    background-color:#60918a;
+    background-color:#2d4642;
     opacity: 2;
     color: white;
     outline-style: none;
     position: relative;
     margin-top: 8%;
+    transition: all 0.3s;
 
 }
 
 .button:hover{
-    background-color: #40798c;
+    background-color: #1f363d;
 }
 
 .button:active{   
-    background-color: #2d4642 ;
+    background-color: #49798c ;
 }
 .button.edit:active{
     color: white;

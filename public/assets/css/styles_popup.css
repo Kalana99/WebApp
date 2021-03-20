@@ -148,7 +148,7 @@ body::-webkit-scrollbar-thumb {
   margin-left: auto;
   margin-right: auto;
   /*background: linear-gradient(to right, #84d9d2, #07cdae);*/
-  background:#70a9a1;
+  background:#2d4642;
   opacity: 2;
   color: white;
   outline-style: none;
@@ -158,12 +158,12 @@ body::-webkit-scrollbar-thumb {
 
 .submit:hover{
   /*background: linear-gradient(to right, #07cdae, #84d9d2);*/
-  background-color: #60918a;
+  background-color: #1f363d;
 }
 
 .submit:active{   
   /*background: linear-gradient(to right, #324c4a, #08ddbc);*/
-  background-color: #1f363d;
+  background-color: #49798c;
 }
 
 .popup-window.active .overlay {
