@@ -141,7 +141,7 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Ubuntu', sans-serif;
   font-size: 18px;
   padding: 15px;
-  width: 80%;
+  width: 75%;
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -311,12 +311,13 @@ body::-webkit-scrollbar-thumb {
 /* overide styles for logout window */
 .confirm .content,
 .logout .content{
-  width: 350px;
-  height: 200px;
+  width: 500px;
+  height: 350px;
 }
-.confirm .content h1,
-.logout .content h1{
-  margin-bottom: 60px;
+.confirm .content h2,
+.logout .content h2{
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
 /* overide styles for reply window in thread view */
@@ -328,4 +329,7 @@ body::-webkit-scrollbar-thumb {
 }
 .reply .inputFileDiv label{
   max-width: 100%;
+}
+.img{
+  margin-bottom: 17%;
 }
