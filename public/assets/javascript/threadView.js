@@ -152,7 +152,16 @@ let createThreadElement = async (thread) => {
     divType.setAttribute('class', 'type');
 
     let smallType = document.createElement('small');
-    smallType.innerText = thread.type;
+    //set thread type 
+    if(thread.type == 'addDrop'){
+        smallType.innerText = 'Add/Drop request';
+    }
+    else if(thread.type == 'submission'){
+        smallType.innerText = 'Deadline extenstion request';
+    }
+    else if(thread.type == 'repeat'){
+        smallType.innerText = 'Exam repeat request';
+    }
 
     let iconAccepted = document.createElement('span');
     iconAccepted.setAttribute('class', 'material-icons accepted');

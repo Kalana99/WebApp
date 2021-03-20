@@ -19,7 +19,7 @@ module.exports.submitRequests_post = (req, res) => {
 
     const token = req.cookies.jwt;
 
-    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', (err, decodedToken) => {
+    jwt.verify(token, 'esghsierhgoisio43jh5294utjgft*/*/4t*4et490wujt4*/w4t*/t4', async (err, decodedToken) => {
         
         let id = decodedToken.id;
 
@@ -50,7 +50,19 @@ module.exports.submitRequests_post = (req, res) => {
             messageObject['files'] = [];
 
         let messageId = database.addMessage(messageObject);
-        data['messageID_list'] = [messageId];
+
+        //create the main message for add/drop requests
+        let user = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)});
+        let message2;
+        if(bodyData.type == 'repeat' || bodyData.type == 'submission'){
+            message2 = (user.name + ' has a request regarding the module ' + bodyData.module);
+        }
+        else{
+            message2 = (user.name + ' requested the module ' + bodyData.module + ' to be changed to ' + bodyData.requiredModule);
+        }
+        let messageId2 = database.addMessage({'from': id, 'text': message2});
+
+        data['messageID_list'] = [messageId2, messageId];
 
         database.addThread(data);
         res.redirect('/userProfile');
@@ -130,7 +142,6 @@ module.exports.getThreadData_post = (req, res) => {
                 searchQuery['type'] = filter.type;
 
             let filterThreads = async (thread, filter) => {
-                console.log(filter);
                 let string = filter.string.toLowerCase();
                 let searchWords = string.split(' ');
 
