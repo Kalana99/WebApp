@@ -55,10 +55,10 @@ module.exports.submitRequests_post = (req, res) => {
         let user = await db.collections.users.findOne({_id: mongoose.Types.ObjectId(id)});
         let message2;
         if(bodyData.type == 'repeat' || bodyData.type == 'submission'){
-            message2 = (user.name + ' has a request regarding the module ' + bodyData.module);
+            message2 = ('Module: ' + bodyData.module);
         }
         else{
-            message2 = (user.name + ' requested the module ' + bodyData.module + ' to be changed to ' + bodyData.requiredModule);
+            message2 = ('Current Module: ' + bodyData.module + '\nRequired Module: ' + bodyData.requiredModule);
         }
         let messageId2 = database.addMessage({'from': id, 'text': message2});
 

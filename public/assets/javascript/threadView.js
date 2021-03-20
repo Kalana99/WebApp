@@ -316,6 +316,10 @@ let displayMessages = async (arr, msgId) => {
             msgContainer.setAttribute('class', 'sender');
         }
 
+        if(i == 0){
+            msgContainer.setAttribute('class', 'firstMessage');
+        }
+
         msgGroup.appendChild(msgContainer);
 
         // keep the scrollbar at the bottom when messages are displayed
