@@ -93,6 +93,28 @@ async function isEmail(email){
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
+async function isPhoneNumber(phone){
+    //RegExr phone number validation
+    let phoneno = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+    if(phone.value.match(phoneno)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+async function isPassword(password){
+    // RegExr password validation
+    let psw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (password.value.match(psw)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 //login validation front and back
 let validateExistingEmailAndPassword = async (emailInput, pswInput) => {
 
@@ -325,12 +347,22 @@ let validateNonEmpty = async (nonEmpty) => {
         let name = fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
         let errMsg = name + " cannot be blank";
 
-        if (input.value !== ''){
-            setSuccess(input);
-        }
-        else{
+        if (input.value == ''){
             setError(input, errMsg);
             correct = false;
+        }
+        else if (input.name == 'phone'){
+            if (await isPhoneNumber(input)){
+                console.log("here");
+                setSuccess(input);
+            }
+            else{
+                setError(input, 'invalid format');
+                correct = false;
+            }
+        }
+        else{
+            setSuccess(input);
         }
     }
 };
@@ -343,6 +375,10 @@ let validateNewPassword = async (oldPsw, psw) => {
 
         if (newPswField.value === ''){
             setError(newPswField, 'Password cannot be blank');
+            correct = false;
+        }
+        else if (! await isPassword(newPswField)){
+            setError(newPswField, 'Invalid password format');
             correct = false;
         }
         //check if there is an old password field
