@@ -231,6 +231,7 @@ body{
     transition: 0.3s;
     position: relative;
     font-family: 'Ubuntu', sans-serif;
+    
 }
 
 .tab .material-icons{
@@ -266,6 +267,7 @@ body{
 
 .tab .dropdown-container{
     margin-top: 30px;
+    
 }
 
 .column.right{

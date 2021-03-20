@@ -294,11 +294,13 @@ body{
 
 .open-button-threadView,
 .open-button-request{
-  background: linear-gradient(to right, #614385, #516395);
+  /*background: linear-gradient(to right, #614385, #516395);*/
+  /*background: linear-gradient(to right, #40798c, #70a9a1);*/
+  background-image: linear-gradient(to left,#40798c,#70a9a1,#40798c);
 	border: 0;
 	border-radius: 50px;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-	color: #fff;
+	color: 	white;
 	font-size: 16px;
 	padding: 12px 25px;
 	position: absolute;
@@ -308,6 +310,8 @@ body{
   cursor: pointer;
   outline: none;
   overflow: hidden;
+  background-size: 200%;
+  transition: all 0.8s;
 }
 .open-button-request{
   bottom: 10px;
@@ -318,13 +322,16 @@ body{
 .open-button-threadView:hover,
 .open-button-request:hover{
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to right, #516395, #614385);
+  background-position: right;
+  /*background: linear-gradient(to right, #516395, #614385);*/
+  /*background: linear-gradient(to right, #70a9a1, #40798c);*/
 }
 
 .open-button-threadView:active,
 .open-button-request:active{
   outline: none;
-  background: linear-gradient(to right, #614385, #516395);
+  /*background: linear-gradient(to right, #614385, #516395);*/
+  background: #9ec1a3;
   bottom: 28px;
 	right: 28px;
 }

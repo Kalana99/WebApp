@@ -8,7 +8,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/1567799.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/watercolour-1325656_1920.jpg);
     background-size: cover;
     width: 100%;
     height: 100%; 
@@ -100,10 +100,11 @@ body{
 }
 
 .form-control input:focus + .form-label,
-.form-control input:not(:placeholder-shown) + .form-label{
+.form-control input:not(:placeholder-shown) + .form-label,
+.form-control input:-webkit-autofill + .form-label{
     transform: translateY(-2.9em) scale(0.8);
-    
 }
+
 .form-control.success input{
     border-color: #2ecc71;
 }
@@ -162,7 +163,7 @@ body{
     width: 70%;
     cursor: pointer;
     margin: auto;
-    background-color:#60918a;
+    background-color:#2d4642;
     opacity: 2;
     color: white;
     outline-style: none;
@@ -170,6 +171,7 @@ body{
     font-family: 'Ubuntu', sans-serif;
     bottom: 0;
     margin-top: 10%;
+    transition: all 0.2s;
 
 
 }
@@ -180,11 +182,11 @@ body{
 }
 
 .button:hover{
-    background-color: #40798c;
+    background-color: #1f363d;
 }
 
 .button:active{   
-    background-color: #60918a;
+    background-color: #49798c;
 }
 .button:active{
     color: white;
