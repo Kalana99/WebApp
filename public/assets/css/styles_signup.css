@@ -156,7 +156,10 @@ body{
     visibility: visible;
 }
 
-
+.pswHint{
+    position: relative;
+    left: 15px;
+}
 
 .button.signUp{
     border: none;
