@@ -29,13 +29,13 @@ h1{
     left: 50%;
     transform: translate(-50%,-50%);  
     background: #fff;
-    width: 45%;
+    width: 40%;
     height: fit-content;
     z-index: 6;
     text-align:center;
     padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     box-sizing: border-box;
     border-radius: 15px;
     align-self: center;
@@ -120,7 +120,7 @@ h1{
     display: block;
     font-size: 18px;
     padding: 15px;
-    width: 70%;
+    width: 65%;
     cursor: pointer;
     margin: auto;
     background-color:#2d4642;
