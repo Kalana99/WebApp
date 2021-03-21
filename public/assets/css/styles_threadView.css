@@ -582,7 +582,7 @@ footer{
     flex-direction: row;
     text-decoration: none;
     height: fit-content;
-    width: 195px;
+    width: fit-content;
     background: #fff;
     border: none;
     border-radius: 10px;
