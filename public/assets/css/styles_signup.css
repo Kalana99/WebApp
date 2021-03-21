@@ -159,6 +159,13 @@ body{
 .pswHint{
     position: relative;
     left: 15px;
+    color: white;
+    font-weight: 500;
+    
+
+}
+.extra{
+    margin-top: 2% !important;
 }
 
 .button.signUp{
