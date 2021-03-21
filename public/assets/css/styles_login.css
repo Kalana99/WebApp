@@ -144,6 +144,7 @@ body{
     transform: translateY(-1.6em);
     transform-origin: 0 0;
     transition: all .3s;
+    font-weight: 600;
 }
 
 .form-control input:focus + .form-label,
