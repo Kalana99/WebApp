@@ -29,7 +29,7 @@ h1{
     left: 50%;
     transform: translate(-50%,-50%);  
     background: #fff;
-    width: 600px;
+    width: 45%;
     height: fit-content;
     z-index: 6;
     text-align:center;
@@ -37,8 +37,7 @@ h1{
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
-    font-family: monospace;
-    border-radius: 10px;
+    border-radius: 15px;
     align-self: center;
     font-family: 'Ubuntu', sans-serif;
     border: 1px solid lightgrey;
@@ -122,19 +121,20 @@ h1{
     width: 70%;
     cursor: pointer;
     margin: auto;
-    background-color:#70a9a1;
+    background-color:#2d4642;
     opacity: 2;
     color: white;
     outline-style: none;
     position: relative;
+    transition: all 0.2s;
 }
 
-.button.contact:hover{
-    background-color: #40798c;
+.button:hover{
+    background-color: #1f363d;
 }
 
-.button.contact:active{   
-    background-color: #2d4642 ;
+.button:active{   
+    background-color: #49798c ;
 }
 
 .buttonText{

@@ -6,7 +6,7 @@ body{
     min-height: 100vh;
     margin: 0;
     font-family: 'Ubuntu', sans-serif;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)),url(../resources/website-design-background.png);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(../resources/website-design-background.png);
     background-size: cover;
     color: lightgrey;
 }
