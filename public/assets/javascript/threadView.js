@@ -74,6 +74,9 @@ let getThreads = () => {
     // loading page open
     document.querySelector('.bouncer.left').classList.toggle('active');
 
+    console.log(filter);
+    console.log("here");
+
     replyButton.className = 'replyBtn';
     replyButtons.className = 'reply-btn-group';
 
@@ -92,6 +95,7 @@ let getThreads = () => {
       .then(response => response.json())
       .then(data => {
         threads = data.array;
+        console.log(threads);
         numberOfPages = data.numberOfPages;
         initNav();
 

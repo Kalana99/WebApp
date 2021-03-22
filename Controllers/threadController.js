@@ -133,13 +133,15 @@ module.exports.getThreadData_post = (req, res) => {
             }
 
             if(filter.status == 'unread'){
-
+                
             }
             else if(filter.status != 'allStatus')
                 searchQuery['status'] = filter.status;
 
             if(filter.type != 'allReqType')
                 searchQuery['type'] = filter.type;
+
+            
 
             let filterThreads = async (thread, filter) => {
                 let string = filter.string.toLowerCase();
